@@ -17,3 +17,6 @@
   +数据库配置文件夹:config  
   参考了组内gameNaming的写法，完成了jdbc的连接部分的编写与JUnit测试
   \\TO DO:添加dataLabel类与其测试类的说明
+#2015.9.14 第四次提交
+  修改了create_table.sql：在建立数据表时添加了utf-8设定
+  修改了数据库名称:netease_gdas-->label_netease_gdas
