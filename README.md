@@ -13,10 +13,10 @@
   按数据库设计说明变更了数据库sql脚本：create_table.sql<br/>
   \\TO DO:修改设计思维导图
 #2015.9.14 第三次提交
-  +开始编写数据库操作封装部分:netease_gdas
-  +数据库配置文件夹:config  
-  参考了组内gameNaming的写法，完成了jdbc的连接部分的编写与JUnit测试
-  \\TO DO:添加dataLabel类与其测试类的说明
+  +开始编写数据库操作封装部分:netease_gdas<br/>
+  +数据库配置文件夹:config<br/>
+  参考了组内gameNaming的写法，完成了jdbc的连接部分的编写与JUnit测试<br/>
+  \\TO DO:添加dataLabel类与其测试类的说明<br/>
 #2015.9.14 第四次提交
-  修改了create_table.sql：在建立数据表时添加了utf-8设定
-  修改了数据库名称:netease_gdas-->label_netease_gdas
+  修改了create_table.sql：在建立数据表时添加了utf-8设定<br/>
+  修改了数据库名称:netease_gdas-->label_netease_gdas<br/>
