@@ -34,6 +34,7 @@ create table if not exists label_ods
      date_id int(11) not null,
      game_id int(11) not null,
      source_id bigint(11) not null,
+	 source_name varchar(255),
      comment_id bigint(11) not null,
      sentence_index int(11) not null,
      concept_id bigint(11) not null,

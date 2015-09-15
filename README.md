@@ -20,3 +20,6 @@
 #2015.9.14 第四次提交
   修改了create_table.sql：在建立数据表时添加了utf-8设定<br/>
   修改了数据库名称:netease_gdas-->label_netease_gdas<br/>
+#2015.9.15 第五次提交
+  修改了create_table.sql：添加了source_name<br/>
+  +SQLHelper.java: 封装了大厅和标注的基本数据库操作<br/>
