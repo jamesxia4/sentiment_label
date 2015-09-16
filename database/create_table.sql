@@ -1,5 +1,5 @@
-create database netease_gdas;
-USE netease_gdas;
+create database label_netease_gdas;
+USE label_netease_gdas;
 
 CREATE TABLE IF NOT EXISTS label_user
 (
@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS label_user
 	num_finished_task BIGINT(11) NOT NULL,
 	total_labeled BIGINT(11) NOT NULL,
 	INDEX(total_labeled)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS label_task
 (
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS label_task
 	start_time DATETIME NOT NULL,
 	end_time DATETIME NOT NULL,
 	INDEX(end_time)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 create table if not exists label_user_task
 (
@@ -26,7 +26,7 @@ create table if not exists label_user_task
     num_effective int(11),
     progress int(11) not null,
     Primary key(task_id,user_id)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 create table if not exists label_ods
 (
@@ -34,7 +34,6 @@ create table if not exists label_ods
      date_id int(11) not null,
      game_id int(11) not null,
      source_id bigint(11) not null,
-	 source_name varchar(255),
      comment_id bigint(11) not null,
      sentence_index int(11) not null,
      concept_id bigint(11) not null,
@@ -46,5 +45,6 @@ create table if not exists label_ods
      is_relevent int(11),
      task_id bigint(11) not null,
      user_id varchar(255) not null,
+	 is_useful int(11),
      Primary key(ods_sentence_id,task_id,user_id)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
