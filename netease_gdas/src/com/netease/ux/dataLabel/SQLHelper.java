@@ -248,6 +248,7 @@ public class SQLHelper {
 	 * @param is_relevent 语句情感是否与特征无关
 	 * @return 执行update操作后返回的rowCount, -1为异常
 	 */
+	//TO DO:考虑task内实现事务
 	public int updateLabelItem(Integer user_id,Integer task_id,Integer ods_sentence_id,Float sentiment,Integer is_conflict,Integer is_relevent){
 		String sqlStmt="update label_ods set (sentiment ='%f',is_conflict='%d',is_relevent='%d',user_id='%d') "
 				+"where ods_sentence_id='%d' and task_id='%d';";
@@ -261,6 +262,62 @@ public class SQLHelper {
 			return -1;
 		}
 	}
+	
+	/**
+	 * 根据用户id输出所有已完成任务的kappa和有效标注数量
+	 * @param user_id 用户id
+	 * @return
+	 */
+	public ResultSet getFinishedTask(Integer user_id){
+		String sqlStmt="select task_id, kappa, num_effective from "
+				+" (select * from label_user_task where progress=200) where user_id='%d';";
+		sqlStmt=String.format(sqlStmt, user_id);
+		try{
+			ResultSet rs=queryExecutor(sqlStmt);
+			return rs;
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
+	/**
+	 * 在提交任务时根据UserId和TaskId更新对应项的progress
+	 * @param user_id
+	 * @param task_id
+	 * @return rowCount,异常时返回-1
+	 */
+	public int updateProgressByUserIdAndTaskId(Integer user_id,Integer task_id){
+		String sqlStmt="update label_user_task set progress=200 where user_id='%d' and task_id='%d'";
+		sqlStmt=String.format(sqlStmt, user_id,task_id);
+		try{
+			int rowCount=updateExecutor(sqlStmt);
+			return rowCount;
+		}
+		catch (SQLException e){
+			e.printStackTrace();
+			return -1;
+		}
+	}
+	
+	/**
+	 * 遍历同task_id的标注项，选出有效项目
+	 * 标准：三人标注一致，且is_conflict!=1, is_relevent=1
+	 * @param task_id
+	 * @return
+	 */
+	public int updateNumEffectiveByTaskId(Integer task_id){
+		String sqlStmtPositive="select *, count(sentiment) from label_ods where task_id ='%d' and sentiment = 1 ";
+		String sqlStmtNeutral="select *,"
+		//http://zhidao.baidu.com/question/68619324.html
+		sqlStmt=String.format(sqlStmt, task_id);
+		
+		return -1;
+	}
+	
+	
 	
 	
 }
