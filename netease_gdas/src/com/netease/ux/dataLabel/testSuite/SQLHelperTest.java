@@ -38,5 +38,7 @@ public class SQLHelperTest extends TestCase{
 		assertNull(testSQL.SQLInfo("123123123"));
 		System.out.println("In test--SQLHelper SQLInfo");
 	}
+	
+	
 
 }

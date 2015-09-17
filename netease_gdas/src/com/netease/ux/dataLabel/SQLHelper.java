@@ -6,6 +6,8 @@
  */
 package com.netease.ux.dataLabel;
 
+import com.netease.ux.dataLabel.Config;
+
 import java.io.*;
 import java.util.*;
 import java.lang.*;
@@ -28,9 +30,10 @@ import java.sql.Statement;
 //www.cnblog.com/lingiu/p/3468464.html
 import java.util.Properties; 
 
-
+import org.apache.log4j.Logger;
 
 public class SQLHelper {
+	private static Logger logger = Logger.getLogger(SQLHelper.class);
 	private Properties dbProp;
 	private String dbDriver="";
 	private String dbUrl="";
@@ -94,15 +97,18 @@ public class SQLHelper {
 		}
 		catch (SQLTimeoutException e){
 			System.out.println("Error in connect_db:");
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return false;
 		}
 		catch (SQLException e){
 			System.out.println("Error in connect_db:SQLException");
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return false;
 		}
 		catch (Exception e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return false;
 		}
@@ -154,6 +160,7 @@ public class SQLHelper {
 			return rs;
 		}
 		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return null;
 		}
@@ -173,6 +180,7 @@ public class SQLHelper {
 			return rs;
 		}
 		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return null;
 		}
@@ -192,26 +200,48 @@ public class SQLHelper {
 			return rs;
 		}
 		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return null;
 		}
 	}
 	
 	/**
-	 * 查看用户当前已领的任务
+	 * 查询用户的某个任务的进度
 	 * @param task_id 任务id
-	 * @param user_id 用户id
 	 * @return ResultSet: row=[task_id,progress]
 	 */
-	public ResultSet getTaskInfoByTaskIdAndUserId(Integer task_id,Integer user_id){
+	public ResultSet getTaskInfoByTaskId(Integer task_id,Integer user_id){
 		String sqlStmt="select task_id,progress from label_user_task where "
-				+"task_id='%d' and user_id='%d' order by task_id desc;";
+				+"task_id='%d' and user_id='%d';";
 		sqlStmt=String.format(sqlStmt, task_id,user_id);
 		try{
 			ResultSet rs=queryExecutor(sqlStmt);
 			return rs;
 		}
 		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * 查看用户当前已领且未完成的任务
+	 * @param task_id 任务id
+	 * @param user_id 用户id
+	 * @return ResultSet: row=[task_id,progress]
+	 */
+	public ResultSet getTaskInfoByTaskIdAndUserId(Integer task_id,Integer user_id){
+		String sqlStmt="select task_id,progress from label_user_task where "
+				+"task_id='%d' and user_id='%d' and progress<200 order by task_id desc;";
+		sqlStmt=String.format(sqlStmt,task_id,user_id);
+		try{
+			ResultSet rs=queryExecutor(sqlStmt);
+			return rs;
+		}
+		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return null;
 		}
@@ -225,7 +255,7 @@ public class SQLHelper {
 	 */
 	public ResultSet getAllLabelItem(Integer task_id){
 		String sqlStmt="select ods_sentence_id, source_name,concept name, "
-				+"src_content, content, sentiment, is_conflict, is_relevent "
+				+"content, src_content, sentiment, is_conflict, is_relevent "
 				+"from label_ods where task_id='%d';";
 		sqlStmt=String.format(sqlStmt, task_id);
 		try{
@@ -233,6 +263,7 @@ public class SQLHelper {
 			return rs;
 		}
 		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return null;
 		}
@@ -248,7 +279,6 @@ public class SQLHelper {
 	 * @param is_relevent 语句情感是否与特征无关
 	 * @return 执行update操作后返回的rowCount, -1为异常
 	 */
-	//TO DO:考虑task内实现事务
 	public int updateLabelItem(Integer user_id,Integer task_id,Integer ods_sentence_id,Float sentiment,Integer is_conflict,Integer is_relevent){
 		String sqlStmt="update label_ods set (sentiment ='%f',is_conflict='%d',is_relevent='%d',user_id='%d') "
 				+"where ods_sentence_id='%d' and task_id='%d';";
@@ -258,29 +288,10 @@ public class SQLHelper {
 			return rowCount;
 		}
 		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return -1;
 		}
-	}
-	
-	/**
-	 * 根据用户id输出所有已完成任务的kappa和有效标注数量
-	 * @param user_id 用户id
-	 * @return
-	 */
-	public ResultSet getFinishedTask(Integer user_id){
-		String sqlStmt="select task_id, kappa, num_effective from "
-				+" (select * from label_user_task where progress=200) where user_id='%d';";
-		sqlStmt=String.format(sqlStmt, user_id);
-		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
-		}
-		catch(SQLException e){
-			e.printStackTrace();
-			return null;
-		}
-		
 	}
 	
 	/**
@@ -290,34 +301,144 @@ public class SQLHelper {
 	 * @return rowCount,异常时返回-1
 	 */
 	public int updateProgressByUserIdAndTaskId(Integer user_id,Integer task_id){
-		String sqlStmt="update label_user_task set progress=200 where user_id='%d' and task_id='%d'";
+		String sqlStmt="update label_user_task set progress=200 where user_id='%d' and task_id='%d';";
 		sqlStmt=String.format(sqlStmt, user_id,task_id);
 		try{
 			int rowCount=updateExecutor(sqlStmt);
 			return rowCount;
 		}
 		catch (SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return -1;
+		}
+	}
+	
+	
+	/**
+	 * 在某个task_id下所有标注员提交后遍历同task_id的标注项，选出有效项目
+	 * 标准：三人标注一致，且is_conflict!=1, is_relevent=1
+	 * @param task_id
+	 * @return rowCount,异常时返回-1
+	 */
+	//要用临时表
+	//http://stackoverflow.com/questions/45494/mysql-error-1093-cant-specify-target-table-for-update-in-from-clause
+	public int updateNumEffectiveByTaskId(Integer task_id){
+		String sqlStmt="update label_ods set is_useful=0 where ods_sentence_id=(select ods_sentence_id FROM (select * from label_ods) as tmpTable "
+				+ "where task_id='%d' and is_conflict=0 and is_relevent=1 group by ods_sentence_id having count(distinct sentiment)>1) and task_id='%d';";
+		//http://zhidao.baidu.com/question/68619324.html
+		sqlStmt=String.format(sqlStmt, task_id);
+		try{
+			int rowCount=updateExecutor(sqlStmt);
+			return rowCount;
+		}
+		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return -1;
 		}
 	}
 	
 	/**
-	 * 遍历同task_id的标注项，选出有效项目
-	 * 标准：三人标注一致，且is_conflict!=1, is_relevent=1
-	 * @param task_id
-	 * @return
+	 * 提交后根据用户任务中的progress更新toal_labeled
+	 * @param user_id 用户id
+	 * @return rowCount,异常时返回-1
 	 */
-	public int updateNumEffectiveByTaskId(Integer task_id){
-		String sqlStmtPositive="select *, count(sentiment) from label_ods where task_id ='%d' and sentiment = 1 ";
-		String sqlStmtNeutral="select *,"
-		//http://zhidao.baidu.com/question/68619324.html
-		sqlStmt=String.format(sqlStmt, task_id);
+	public int updateUserTotalLabeled(Integer user_id){
+		String sqlStmt="update label_user set total_labeled=total_labeled+200 where user_id='%d';";
+		sqlStmt=String.format(sqlStmt, user_id);
+		try{
+			int rowCount=updateExecutor(sqlStmt);
+			return rowCount;
+		}
+		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return -1;
+		}
+	}
+	
+	/**
+	 * 根据用户id输出所有已完成任务的kappa和有效标注数量
+	 * @param user_id 用户id
+	 * @return ResultSet: row=[task_id, kappa, num_effective]
+	 */
+	//TODO 计算Kappa
+	public ResultSet getFinishedTask(Integer user_id){
+		String sqlStmt="select task_id, kappa, num_effective from "
+				+"where user_id='%d' and progress=200 order by task_id;";
+		sqlStmt=String.format(sqlStmt, user_id);
+		try{
+			ResultSet rs=queryExecutor(sqlStmt);
+			return rs;
+		}
+		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return null;
+		}
 		
-		return -1;
+	}
+	
+	/**
+	 * 输出标注量排行榜
+	 * @return ResultSet: row=[user_id,total_labeled]
+	 */
+	public ResultSet getLabelRank(){
+		String sqlStmt="select * from label_user order by total_labeled;";
+		try{
+			ResultSet rs=queryExecutor(sqlStmt);
+			return rs;
+		}
+		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * 计算指定任务的一致性参数
+	 * @param task_id, 任务id
+	 * @return rowCount, -1为异常
+	 */
+	public int updateKappaByTaskId(Integer task_id, Integer user_id){
+		String sqlStmt="update label_user_task set kappa='%f' where task_id='%d' and user_id='%d';";
+		sqlStmt=String.format(sqlStmt, 1.0,task_id,user_id);
+		try{
+			int rowCount=updateExecutor(sqlStmt);
+			return rowCount;
+		}
+		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return -1;
+		}
 	}
 	
 	
+	/*******************
+	 * 辅助性查询
+	 *******************/
+	
+	/**
+	 * 返回给定任务下所有标注员id
+	 * @param task_id
+	 * @return ResultSet rs: row[task_id,user_id]
+	 */
+	public ResultSet getAllUserIdByTaskId(Integer task_id){
+		String sqlStmt="select task_id, user_id from label_user_task where task_id='%d' order by user_id";
+		sqlStmt=String.format(sqlStmt, task_id);
+		try{
+			ResultSet rs=queryExecutor(sqlStmt);
+			return rs;
+		}
+		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 	
 }
