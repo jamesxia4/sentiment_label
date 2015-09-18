@@ -4,8 +4,6 @@ USE label_netease_gdas;
 CREATE TABLE IF NOT EXISTS label_user
 (
 	user_id varchar(255) NOT NULL PRIMARY KEY,
-	num_current_task BIGINT(11) NOT NULL,
-	num_finished_task BIGINT(11) NOT NULL,
 	total_labeled BIGINT(11) NOT NULL,
 	INDEX(total_labeled)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -37,6 +35,7 @@ create table if not exists label_ods
      comment_id bigint(11) not null,
      sentence_index int(11) not null,
      concept_id bigint(11) not null,
+	 source_name varchar(255),
      concept_name varchar(255),
      src_content varchar(3000),
      content varchar(500),
