@@ -33,7 +33,7 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 
 public class SQLHelper {
-	private static Logger logger = Logger.getLogger(SQLHelper.class);
+	public static Logger logger = Logger.getLogger(SQLHelper.class);
 	private Properties dbProp;
 	private String dbDriver="";
 	private String dbUrl="";
@@ -211,7 +211,7 @@ public class SQLHelper {
 	 * @param task_id 任务id
 	 * @return ResultSet: row=[task_id,progress]
 	 */
-	public ResultSet getTaskInfoByTaskId(Integer task_id,String user_id){
+	public ResultSet getTaskInfoByTaskIdAndUserId(Integer task_id,String user_id){
 		String sqlStmt="select task_id,progress from label_user_task where "
 				+"task_id=%d and user_id='%s';";
 		sqlStmt=String.format(sqlStmt, task_id,user_id);
@@ -363,7 +363,6 @@ public class SQLHelper {
 	 * @param user_id 用户id
 	 * @return ResultSet: row=[task_id, kappa, num_effective]
 	 */
-	//TODO 计算Kappa
 	public ResultSet getFinishedTask(String user_id,Integer task_size){
 		String sqlStmt="select task_id, kappa, num_effective from "
 				+"where user_id='%s' and progress=%d order by task_id;";
@@ -490,13 +489,48 @@ public class SQLHelper {
 	 * 计算某个任务的Pbar
 	 * @param task_id
 	 * @param task_size
-	 * @return
+	 * @return sum:Pbar
 	 */
 	public float calculatePbarByTaskId(Integer task_id,Integer task_size){
-		String sqlStmt="";
-		sqlStmt=String.format(sqlStmt, task_size,task_id);
-		return (float)0.0;
+		String sqlStmt="select tmp.ods_sentence_id,sum(POW(tmp.sum1,2)) from"
+				+ " (select ods_sentence_id,sentiment,count(*) as sum1 from label_ods where task_id =%d "
+				+ "group by ods_sentence_id,sentiment) as tmp group by ods_sentence_id;";
+		sqlStmt=String.format(sqlStmt, task_id);
+		try{
+			ResultSet rs=queryExecutor(sqlStmt);
+			Float sum=(float)0.0;
+			while(rs.next()){
+				Float sqrSum=rs.getFloat(2);
+				sqrSum=sqrSum-3;
+				sqrSum=sqrSum*(1/(3*(3-1)));
+				sum=sum+sqrSum;
+			}
+			sum=sum/(float)task_size;
+			return sum;
+		}
+		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return (float)0.0;
+		}
 	}
+	
+	/**
+	 * 根据pe和pbar计算kappa
+	 * @param task_id
+	 * @param task_size
+	 * @return kappa
+	 */
+	public float calculateFleissKappa(Integer task_id,Integer task_size){
+		float pe=(float)0.0;
+		float pbar=(float)0.0;
+		pe=calculatePeByTaskId(task_id,task_size);
+		pbar=calculatePbarByTaskId(task_id,task_size);
+		float kappa=(float)0.0;
+		kappa=(pbar-pe)/(1-pe);
+		return kappa;
+	}
+	
 	/**
 	 * 更新某个标注员指定任务的一致性参数
 	 * @param task_id, 任务id
