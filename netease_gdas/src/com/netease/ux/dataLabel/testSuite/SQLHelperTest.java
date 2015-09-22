@@ -29,7 +29,7 @@ public class SQLHelperTest extends TestCase{
 		assertEquals("biubiubiu",testSQL.SQLInfo("dbPassword"));
 		assertEquals("jdbc:mysql://localhost:3306/label_netease_gdas_test?useUnicode=True&characterEncoding=utf-8",testSQL.SQLInfo("dbUrl"));
 		assertEquals("True",testSQL.SQLInfo("connection"));
-		System.out.println("In test--SQLHelper Constructor\n");
+/*		System.out.println("In test--SQLHelper Constructor\n");*/
 	}
 
 	@Test
@@ -42,7 +42,7 @@ public class SQLHelperTest extends TestCase{
 		assertEquals("jdbc:mysql://localhost:3306/label_netease_gdas_test?useUnicode=True&characterEncoding=utf-8",testSQL.SQLInfo("dbUrl"));
 		assertEquals("True",testSQL.SQLInfo("connection"));
 		assertNull(testSQL.SQLInfo("123123123"));
-		System.out.println("In test--SQLHelper SQLInfo");
+/*		System.out.println("In test--SQLHelper SQLInfo");*/
 	}
 	
 	@Test
@@ -52,12 +52,11 @@ public class SQLHelperTest extends TestCase{
 		try{
 			ResultSet rs=testSQL.queryExecutor("select task_id, start_time, end_time from label_task;");
 			rs.last();
-			System.out.println(rs.getRow());
+/*			System.out.println(rs.getRow());*/
 		}
 		catch(SQLException e){
 			e.printStackTrace();
 		}
-		System.out.println("In test--SQLHelper queryExecutor");
 	}
 	
 	@Test
@@ -86,7 +85,6 @@ public class SQLHelperTest extends TestCase{
 			testSQL.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 		}
-		System.out.println("In test--SQLHelper getLobbyAllTasks");
 	}
 	
 	@Test
@@ -139,10 +137,12 @@ public class SQLHelperTest extends TestCase{
 		SQLHelper testSQL=new SQLHelper(mysqlConfig);
 		try{
 			ResultSet rs=testSQL.getTaskInfoByTaskIdAndUserId(1, "James");
-			int taskid=rs.getInt(1);
-			int curProgress=rs.getInt(2);
-			assertEquals(1,taskid);
-			assertEquals(200,curProgress);
+			while(rs.next()){
+				int taskid=rs.getInt(1);
+				int curProgress=rs.getInt(2);
+				assertEquals(1,taskid);
+				assertEquals(200,curProgress);
+			}
 		}
 		catch(SQLException e){
 			testSQL.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
@@ -156,11 +156,10 @@ public class SQLHelperTest extends TestCase{
 		Config mysqlConfig=new Config("D:/config/dbConfig.cfg");
 		SQLHelper testSQL=new SQLHelper(mysqlConfig);
 		try{
-			ResultSet rs=testSQL.getUnfinishedTaskInfoByUserId("John",200);
-			int taskid=rs.getInt(1);
-			int curProgress=rs.getInt(2);
-			assertEquals(2,taskid);
-			assertEquals(0,curProgress);
+			ResultSet rs=testSQL.getUnfinishedTaskInfoByUserId("James",200);
+			rs.last();
+			assertEquals(2,rs.getInt(1));
+			assertEquals(0,rs.getInt(2));
 		}
 		catch(SQLException e){
 			testSQL.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
@@ -173,7 +172,7 @@ public class SQLHelperTest extends TestCase{
 		Config mysqlConfig=new Config("D:/config/dbConfig.cfg");
 		SQLHelper testSQL=new SQLHelper(mysqlConfig);
 		try{
-			ResultSet rs=testSQL.getAllLabelItem(1,"1");
+			ResultSet rs=testSQL.getAllLabelItem(1,"James");
 			rs.last();
 			assertEquals(5,rs.getInt(1));
 			assertEquals("百度贴吧",rs.getString(2));
@@ -194,13 +193,17 @@ public class SQLHelperTest extends TestCase{
 	public void testInsertLabelItem(){
 		Config mysqlConfig=new Config("D:/config/dbConfig.cfg");
 		SQLHelper testSQL=new SQLHelper(mysqlConfig);
-		try{
-			
-		}
-		catch(SQLException e){
-			testSQL.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-		}
+		int rowCount=testSQL.insertLabelItem("James",1,1,(float)1.0,0,1);
+/*			ResultSet rs=testSQL.getAllLabelItem(1, "James");
+			rs.next();
+			assertEquals(1,rs.getInt(1));
+			assertEquals("百度贴吧",rs.getString(2));
+			assertEquals("画面",rs.getString(3));
+			assertEquals("但是这个游戏画面真烂",rs.getString(4));
+			assertEquals("查狗真好玩，但是这个游戏画面真烂",rs.getString(5));
+			assertEquals(1.0,rs.getFloat(6));
+			assertEquals(0,rs.getInt(7));
+			assertEquals(1,rs.getInt(8));*/
 		
 	}
 

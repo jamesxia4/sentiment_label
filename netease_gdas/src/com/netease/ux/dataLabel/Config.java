@@ -25,7 +25,7 @@ public class Config {
 		try{
 			FileInputStream inputConfig=new FileInputStream(configFilePath);
 			dbProp.load(inputConfig);
-			System.out.println("Loading Config..Complete\n");
+/*			System.out.println("Loading Config..Complete\n");*/
 		}
 		catch(FileNotFoundException e){
 			e.printStackTrace();

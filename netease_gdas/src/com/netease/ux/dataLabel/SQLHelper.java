@@ -91,7 +91,7 @@ public class SQLHelper {
 	private boolean connect_db(){
 		try{
 			Class.forName(dbDriver);
-			System.out.println("Connecting to database...\n");
+/*			System.out.println("Connecting to database...\n");*/
 			conn = DriverManager.getConnection(dbUrl,dbUsername,dbPassword);
 			return true;
 		}
@@ -130,7 +130,7 @@ public class SQLHelper {
 	 * @throws SQLException
 	 */
 	public ResultSet queryExecutor(String sqlToExecute) throws SQLException{
-		System.out.println("Creating Statement...");
+/*		System.out.println("Creating Statement...");*/
 		stmt=conn.createStatement();
 		ResultSet rs = stmt.executeQuery(sqlToExecute);
 		return rs;
@@ -143,7 +143,7 @@ public class SQLHelper {
 	 * @throws SQLException
 	 */
 	public int updateExecutor(String sqlToExecute) throws SQLException{
-		System.out.println("Creating Statement...");
+/*		System.out.println("Creating Statement...");*/
 		stmt=conn.createStatement();
 		int rowCount=stmt.executeUpdate(sqlToExecute);
 		return rowCount;
@@ -256,7 +256,7 @@ public class SQLHelper {
 	public ResultSet getAllLabelItem(Integer task_id,String user_id){
 		String sqlStmt="select ods_sentence_id, source_name,concept_name, "
 				+"content, src_content, sentiment, is_conflict, is_relevent "
-				+"from label_ods where task_id=%d and user_id='%s';";
+				+"from label_ods_src where task_id=%d and user_id='%s';";
 		sqlStmt=String.format(sqlStmt, task_id,user_id);
 		try{
 			ResultSet rs=queryExecutor(sqlStmt);
@@ -281,18 +281,35 @@ public class SQLHelper {
 	 */
 	public int insertLabelItem(String user_id,Integer task_id,Integer ods_sentence_id,Float sentiment,Integer is_conflict,Integer is_relevent){
 		String sqlStmtSrc="select * from label_ods_src where ods_sentence_id=%d and task_id=%d";
-		String sqlStmtTgt="Insert into label_ods values "
-				+ "(ods_sentence_id=%d,date_id=%,game_id=%d,source_id=%d,comment_id=%d,sentence_index=%d,concept_id=%d,"
+		
+		String sqlStmtTgt="Insert into label_ods_rst values "
+				+ "(ods_sentence_id=%d,date_id=%d,game_id=%d,source_id=%d,comment_id=%d,sentence_index=%d,concept_id=%d,"
 				+ "source_name='%s',concept_name='%s',src_content='%s',content='%s',"
-				+ "sentiment =%f,is_conflict=%d,is_relevent=%d,task_id='%s',user_id='%s') "
-				+ "where ods_sentence_id=%d and task_id=%d;";
-		sqlStmtSrc=String.format(sqlStmtSrc, ods_sentence_id,task_id);
+				+ "sentiment =%f,is_conflict=%d,is_relevent=%d,task_id=%d,user_id='%s',is_useful=1);";
+		sqlStmtSrc=String.format(sqlStmtSrc,ods_sentence_id,task_id);
 
 		try{
 			ResultSet rs=queryExecutor(sqlStmtSrc);
 			while(rs.next()){
-				sqlStmtTgt=String.format(sqlStmtTgt,ods_sentence_id,rs.getInt(2),rs.getInt(3),rs.getInt(4),rs.getInt(5),rs.getInt(6),rs.getInt(7),
+				System.out.println(rs.getInt(2));
+				System.out.println(rs.getInt(3));
+				System.out.println(rs.getInt(4));
+				System.out.println(rs.getInt(5));
+				System.out.println(rs.getInt(6));
+				System.out.println(rs.getInt(7));
+				System.out.println(rs.getString(8));
+				System.out.println(rs.getString(9));
+				System.out.println(rs.getString(10));
+				System.out.println(rs.getString(11));
+				System.out.println(sentiment);
+				System.out.println(is_conflict);
+				System.out.println(is_relevent);
+				System.out.println(task_id);
+				System.out.println(user_id);
+				
+				sqlStmtTgt=String.format(sqlStmtTgt,rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getInt(4),rs.getInt(5),rs.getInt(6),rs.getInt(7),
 						rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),sentiment,is_conflict,is_relevent,task_id,user_id);
+				System.out.println(sqlStmtTgt);
 				int rowCount=updateExecutor(sqlStmtTgt);
 				return rowCount;
 			}
@@ -335,7 +352,7 @@ public class SQLHelper {
 	//在MySQL中,Update语句中的表如果同时被此条语句select,要用临时表做替换 ,否则报1093
 	//http://stackoverflow.com/questions/45494/mysql-error-1093-cant-specify-target-table-for-update-in-from-clause
 	public int updateNumEffectiveByTaskId(Integer task_id){
-		String sqlStmt="update label_ods set is_useful=0 where ods_sentence_id=(select ods_sentence_id FROM (select * from label_ods) as tmpTable "
+		String sqlStmt="update label_ods_rst set is_useful=0 where ods_sentence_id=(select ods_sentence_id FROM (select * from label_ods) as tmpTable "
 				+ "where task_id=%d group by ods_sentence_id having count(distinct sentiment)>1);";
 		//http://zhidao.baidu.com/question/68619324.html
 		sqlStmt=String.format(sqlStmt, task_id);
