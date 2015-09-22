@@ -137,8 +137,71 @@ public class SQLHelperTest extends TestCase{
 	public void testGetTaskInfoByTaskIdAndUserId(){
 		Config mysqlConfig=new Config("D:/config/dbConfig.cfg");
 		SQLHelper testSQL=new SQLHelper(mysqlConfig);
+		try{
+			ResultSet rs=testSQL.getTaskInfoByTaskIdAndUserId(1, "James");
+			int taskid=rs.getInt(1);
+			int curProgress=rs.getInt(2);
+			assertEquals(1,taskid);
+			assertEquals(200,curProgress);
+		}
+		catch(SQLException e){
+			testSQL.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+		}
 		
 	}
 	
+	@Test
+	public void testGetUnfinishedTaskInfoByUserId(){
+		Config mysqlConfig=new Config("D:/config/dbConfig.cfg");
+		SQLHelper testSQL=new SQLHelper(mysqlConfig);
+		try{
+			ResultSet rs=testSQL.getUnfinishedTaskInfoByUserId("John",200);
+			int taskid=rs.getInt(1);
+			int curProgress=rs.getInt(2);
+			assertEquals(2,taskid);
+			assertEquals(0,curProgress);
+		}
+		catch(SQLException e){
+			testSQL.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+		}
+	}
+	
+/*	@Test
+	public void testGetAllLabelItem(){
+		Config mysqlConfig=new Config("D:/config/dbConfig.cfg");
+		SQLHelper testSQL=new SQLHelper(mysqlConfig);
+		try{
+			ResultSet rs=testSQL.getAllLabelItem(1,"1");
+			rs.last();
+			assertEquals(5,rs.getInt(1));
+			assertEquals("百度贴吧",rs.getString(2));
+			assertEquals("画面",rs.getString(3));
+			assertEquals("这个游戏画面真好15",rs.getString(4));
+			assertEquals("查狗真好玩,这个游戏画面真好15",rs.getString(5));
+			assertEquals(1.0,rs.getFloat(6));
+			assertEquals(0,rs.getInt(7));
+			assertEquals(1,rs.getInt(8));
+		}
+		catch(SQLException e){
+			testSQL.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+		}
+	}*/
+	
+	@Test
+	public void testInsertLabelItem(){
+		Config mysqlConfig=new Config("D:/config/dbConfig.cfg");
+		SQLHelper testSQL=new SQLHelper(mysqlConfig);
+		try{
+			
+		}
+		catch(SQLException e){
+			testSQL.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+		}
+		
+	}
 
 }

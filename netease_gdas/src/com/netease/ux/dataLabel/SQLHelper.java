@@ -33,7 +33,7 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 
 public class SQLHelper {
-	public static Logger logger = Logger.getLogger(SQLHelper.class);
+	public Logger logger = Logger.getLogger(SQLHelper.class);
 	private Properties dbProp;
 	private String dbDriver="";
 	private String dbUrl="";
@@ -232,10 +232,10 @@ public class SQLHelper {
 	 * @param user_id 用户id
 	 * @return ResultSet: row=[task_id,progress]
 	 */
-	public ResultSet getTaskInfoByTaskIdAndUserId(Integer task_id,String user_id,Integer task_size){
+	public ResultSet getUnfinishedTaskInfoByUserId(String user_id,Integer task_size){
 		String sqlStmt="select task_id,progress from label_user_task where "
-				+"task_id=%d and user_id='%s' and progress<%d order by task_id desc;";
-		sqlStmt=String.format(sqlStmt,task_id,user_id,task_size);
+				+"user_id='%s' and progress<%d order by task_id desc;";
+		sqlStmt=String.format(sqlStmt,user_id,task_size);
 		try{
 			ResultSet rs=queryExecutor(sqlStmt);
 			return rs;
@@ -253,11 +253,11 @@ public class SQLHelper {
 	 * @return ResultSet: row=[ods_sentence_id, source_name,concept name,
 	 *		src_content, content, sentiment, is_conflict, is_relevent]
 	 */
-	public ResultSet getAllLabelItem(Integer task_id){
+	public ResultSet getAllLabelItem(Integer task_id,String user_id){
 		String sqlStmt="select ods_sentence_id, source_name,concept_name, "
 				+"content, src_content, sentiment, is_conflict, is_relevent "
-				+"from label_ods where task_id=%d;";
-		sqlStmt=String.format(sqlStmt, task_id);
+				+"from label_ods where task_id=%d and user_id='%s';";
+		sqlStmt=String.format(sqlStmt, task_id,user_id);
 		try{
 			ResultSet rs=queryExecutor(sqlStmt);
 			return rs;
@@ -279,13 +279,24 @@ public class SQLHelper {
 	 * @param is_relevent 语句情感是否与特征无关
 	 * @return 执行update操作后返回的rowCount, -1为异常
 	 */
-	public int updateLabelItem(String user_id,Integer task_id,Integer ods_sentence_id,Float sentiment,Integer is_conflict,Integer is_relevent){
-		String sqlStmt="update label_ods set (sentiment =%f,is_conflict=%d,is_relevent=%d,user_id='%s') "
-				+"where ods_sentence_id=%d and task_id=%d;";
-		sqlStmt=String.format(sqlStmt, sentiment,is_conflict,is_relevent,user_id,ods_sentence_id,task_id);
+	public int insertLabelItem(String user_id,Integer task_id,Integer ods_sentence_id,Float sentiment,Integer is_conflict,Integer is_relevent){
+		String sqlStmtSrc="select * from label_ods_src where ods_sentence_id=%d and task_id=%d";
+		String sqlStmtTgt="Insert into label_ods values "
+				+ "(ods_sentence_id=%d,date_id=%,game_id=%d,source_id=%d,comment_id=%d,sentence_index=%d,concept_id=%d,"
+				+ "source_name='%s',concept_name='%s',src_content='%s',content='%s',"
+				+ "sentiment =%f,is_conflict=%d,is_relevent=%d,task_id='%s',user_id='%s') "
+				+ "where ods_sentence_id=%d and task_id=%d;";
+		sqlStmtSrc=String.format(sqlStmtSrc, ods_sentence_id,task_id);
+
 		try{
-			int rowCount=updateExecutor(sqlStmt);
-			return rowCount;
+			ResultSet rs=queryExecutor(sqlStmtSrc);
+			while(rs.next()){
+				sqlStmtTgt=String.format(sqlStmtTgt,ods_sentence_id,rs.getInt(2),rs.getInt(3),rs.getInt(4),rs.getInt(5),rs.getInt(6),rs.getInt(7),
+						rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),sentiment,is_conflict,is_relevent,task_id,user_id);
+				int rowCount=updateExecutor(sqlStmtTgt);
+				return rowCount;
+			}
+			return -1;
 		}
 		catch(SQLException e){
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
@@ -314,7 +325,7 @@ public class SQLHelper {
 		}
 	}
 	
-	
+	@Deprecated
 	/**
 	 * 在某个task_id下所有标注员提交后遍历同task_id的标注项，选出有效项目
 	 * 标准：三人标注一致，且is_conflict!=1, is_relevent=1
@@ -327,6 +338,27 @@ public class SQLHelper {
 		String sqlStmt="update label_ods set is_useful=0 where ods_sentence_id=(select ods_sentence_id FROM (select * from label_ods) as tmpTable "
 				+ "where task_id=%d group by ods_sentence_id having count(distinct sentiment)>1);";
 		//http://zhidao.baidu.com/question/68619324.html
+		sqlStmt=String.format(sqlStmt, task_id);
+		try{
+			int rowCount=updateExecutor(sqlStmt);
+			return rowCount;
+		}
+		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return -1;
+		}
+	}
+	
+	/**
+	 * 在某个task_id下所有标注员提交后遍历同task_id的标注项，选出有效项目
+	 * 标准：三人标注一致，且is_conflict!=1, is_relevent=1
+	 * @param task_id
+	 * @return rowCount,异常时返回-1
+	 */
+	public int getEffectiveSentenceIdByTaskId(Integer task_id){
+		String sqlStmt="select ods_sentence_id FROM (select * from label_ods) as tmpTable "
+				+ "where task_id=%d group by ods_sentence_id having count(distinct sentiment)>1;";
 		sqlStmt=String.format(sqlStmt, task_id);
 		try{
 			int rowCount=updateExecutor(sqlStmt);
