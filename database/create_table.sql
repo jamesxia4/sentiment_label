@@ -26,7 +26,7 @@ create table if not exists label_user_task
     Primary key(task_id,user_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-create table if not exists label_ods
+create table if not exists label_ods_src
 (
 	 ods_sentence_id bigint(11) not null,
      date_id int(11) not null,
@@ -37,13 +37,29 @@ create table if not exists label_ods
      concept_id bigint(11) not null,
 	 source_name varchar(255),
      concept_name varchar(255),
+	 content varchar(500),
      src_content varchar(3000),
-     content varchar(500),
+     task_id bigint(11) not null,
+     Primary key(ods_sentence_id,task_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+create table if not exists label_ods_rst
+(
+	 ods_sentence_id bigint(11) not null,
+     date_id int(11) not null,
+     game_id int(11) not null,
+     source_id bigint(11) not null,
+     comment_id bigint(11) not null,
+     sentence_index int(11) not null,
+     concept_id bigint(11) not null,
+	 source_name varchar(255),
+     concept_name varchar(255),
+	 content varchar(500),
+     src_content varchar(3000),
      sentiment float,
      is_conflict int(11),
      is_relevent int(11),
      task_id bigint(11) not null,
      user_id varchar(255) not null,
-	 is_useful int(11),
      Primary key(ods_sentence_id,task_id,user_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
