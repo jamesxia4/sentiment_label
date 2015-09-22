@@ -167,44 +167,122 @@ public class SQLHelperTest extends TestCase{
 		}
 	}
 	
-/*	@Test
-	public void testGetAllLabelItem(){
-		Config mysqlConfig=new Config("D:/config/dbConfig.cfg");
-		SQLHelper testSQL=new SQLHelper(mysqlConfig);
-		try{
-			ResultSet rs=testSQL.getAllLabelItem(1,"James");
-			rs.last();
-			assertEquals(5,rs.getInt(1));
-			assertEquals("百度贴吧",rs.getString(2));
-			assertEquals("画面",rs.getString(3));
-			assertEquals("这个游戏画面真好15",rs.getString(4));
-			assertEquals("查狗真好玩,这个游戏画面真好15",rs.getString(5));
-			assertEquals(1.0,rs.getFloat(6));
-			assertEquals(0,rs.getInt(7));
-			assertEquals(1,rs.getInt(8));
-		}
-		catch(SQLException e){
-			testSQL.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-		}
-	}*/
+	
 	
 	@Test
 	public void testInsertLabelItem(){
 		Config mysqlConfig=new Config("D:/config/dbConfig.cfg");
 		SQLHelper testSQL=new SQLHelper(mysqlConfig);
-		int rowCount=testSQL.insertLabelItem("James",1,1,(float)1.0,0,1);
-/*			ResultSet rs=testSQL.getAllLabelItem(1, "James");
-			rs.next();
+		try{
+			int rowCount=testSQL.insertLabelItem("James",1,1,(float)1.0,0,1);
+			ResultSet rs=testSQL.getAllLabelItem(1,"James");
+			rs.last();
 			assertEquals(1,rs.getInt(1));
 			assertEquals("百度贴吧",rs.getString(2));
 			assertEquals("画面",rs.getString(3));
-			assertEquals("但是这个游戏画面真烂",rs.getString(4));
-			assertEquals("查狗真好玩，但是这个游戏画面真烂",rs.getString(5));
-			assertEquals(1.0,rs.getFloat(6));
+			assertEquals("这个游戏画面好糟糕",rs.getString(4));
+			assertEquals("这个游戏画面好糟糕，但是易于上手",rs.getString(5));
+			assertEquals((float)1.0,rs.getFloat(6));
 			assertEquals(0,rs.getInt(7));
-			assertEquals(1,rs.getInt(8));*/
+			assertEquals(1,rs.getInt(8));
+			testSQL.updateExecutor("delete from label_ods_rst where 1;");
+		}
+		catch(SQLException e){
+			testSQL.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+		}
 		
 	}
+	
+	@Test
+	public void testGetAllLabelItem(){
+		Config mysqlConfig=new Config("D:/config/dbConfig.cfg");
+		SQLHelper testSQL=new SQLHelper(mysqlConfig);
+		try{
+			int rowCount=testSQL.insertLabelItem("James",1,1,(float)1.0,0,1);
+			ResultSet rs=testSQL.getAllLabelItem(1,"James");
+			rs.last();
+			assertEquals(1,rs.getInt(1));
+			assertEquals("百度贴吧",rs.getString(2));
+			assertEquals("画面",rs.getString(3));
+			assertEquals("这个游戏画面好糟糕",rs.getString(4));
+			assertEquals("这个游戏画面好糟糕，但是易于上手",rs.getString(5));
+			assertEquals((float)1.0,rs.getFloat(6));
+			assertEquals(0,rs.getInt(7));
+			assertEquals(1,rs.getInt(8));
+			testSQL.updateExecutor("delete from label_ods_rst where 1;");
+		}
+		catch(SQLException e){
+			testSQL.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testUpdateProgressByUserIdAndTaskId(){
+		Config mysqlConfig=new Config("D:/config/dbConfig.cfg");
+		SQLHelper testSQL=new SQLHelper(mysqlConfig);
+		try{
+			int rowCount=testSQL.updateProgressByUserIdAndTaskId("Mary",1,200);
+			ResultSet rs=testSQL.getTaskInfoByTaskIdAndUserId(1,"Mary");
+			rs.next();
+			int progress=rs.getInt(2);
+			assertEquals(200,progress);
+		}
+		catch (SQLException e){
+			testSQL.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testUpdateUserTotalLabeled(){
+		Config mysqlConfig=new Config("D:/config/dbConfig.cfg");
+		SQLHelper testSQL=new SQLHelper(mysqlConfig);
+		try{
+			int rowCount=testSQL.updateUserTotalLabeled("Mary",200);
+			ResultSet rs=testSQL.queryExecutor("select total_labeled from label_user where user_id='Mary';");
+			rs.next();
+			int total_labeled=rs.getInt(1);
+			assertEquals(400,total_labeled);
+			testSQL.updateExecutor("update label_user set total_labeled=200 where user_id='Mary';");
+		}
+		catch (SQLException e){
+			testSQL.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+		}
+	}
 
+	@Test
+	public void testGetFinishedTask(){
+		Config mysqlConfig=new Config("D:/config/dbConfig.cfg");
+		SQLHelper testSQL=new SQLHelper(mysqlConfig);
+		try{
+			ResultSet rs=testSQL.getFinishedTask("Mary", 200);
+			rs.last();
+/*			System.out.println(rs.getRow());*/
+			assertEquals((float)0.7,rs.getFloat(3));
+			assertEquals(130,rs.getInt(4));
+		}
+		catch (SQLException e){
+			testSQL.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testGetLabelRank(){
+		Config mysqlConfig=new Config("D:/config/dbConfig.cfg");
+		SQLHelper testSQL=new SQLHelper(mysqlConfig);
+		try{
+			ResultSet rs=testSQL.getLabelRank();
+			rs.next();
+			assertEquals("Thomas",rs.getString(1));
+			assertEquals(600,rs.getInt(2));
+		}
+		catch (SQLException e){
+			testSQL.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+		}
+	}
 }

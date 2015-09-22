@@ -187,6 +187,25 @@ public class SQLHelper {
 	}
 	
 	/**
+	 * 返回指定任务下所有标注员id
+	 * @param task_id
+	 * @return ResultSet rs: row[task_id,user_id]
+	 */
+	public ResultSet getAllUserIdByTaskId(Integer task_id){
+		String sqlStmt="select task_id, user_id from label_user_task where task_id=%d;";
+		sqlStmt=String.format(sqlStmt, task_id);
+		try{
+			ResultSet rs=queryExecutor(sqlStmt);
+			return rs;
+		}
+		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
 	 * 查询指定任务的介绍信息（开始、结束时间）
 	 * @param task_id 任务id
 	 * @return ResultSet: row=[task_id,start_time,end_time]
@@ -256,7 +275,7 @@ public class SQLHelper {
 	public ResultSet getAllLabelItem(Integer task_id,String user_id){
 		String sqlStmt="select ods_sentence_id, source_name,concept_name, "
 				+"content, src_content, sentiment, is_conflict, is_relevent "
-				+"from label_ods_src where task_id=%d and user_id='%s';";
+				+"from label_ods_rst where task_id=%d and user_id='%s';";
 		sqlStmt=String.format(sqlStmt, task_id,user_id);
 		try{
 			ResultSet rs=queryExecutor(sqlStmt);
@@ -283,33 +302,16 @@ public class SQLHelper {
 		String sqlStmtSrc="select * from label_ods_src where ods_sentence_id=%d and task_id=%d";
 		
 		String sqlStmtTgt="Insert into label_ods_rst values "
-				+ "(ods_sentence_id=%d,date_id=%d,game_id=%d,source_id=%d,comment_id=%d,sentence_index=%d,concept_id=%d,"
-				+ "source_name='%s',concept_name='%s',src_content='%s',content='%s',"
-				+ "sentiment =%f,is_conflict=%d,is_relevent=%d,task_id=%d,user_id='%s',is_useful=1);";
+				+ "(%d,%d,%d,%d,%d,%d,%d,"
+				+ "'%s','%s','%s','%s',"
+				+ "%f,%d,%d,%d,'%s');";
 		sqlStmtSrc=String.format(sqlStmtSrc,ods_sentence_id,task_id);
-
 		try{
 			ResultSet rs=queryExecutor(sqlStmtSrc);
 			while(rs.next()){
-				System.out.println(rs.getInt(2));
-				System.out.println(rs.getInt(3));
-				System.out.println(rs.getInt(4));
-				System.out.println(rs.getInt(5));
-				System.out.println(rs.getInt(6));
-				System.out.println(rs.getInt(7));
-				System.out.println(rs.getString(8));
-				System.out.println(rs.getString(9));
-				System.out.println(rs.getString(10));
-				System.out.println(rs.getString(11));
-				System.out.println(sentiment);
-				System.out.println(is_conflict);
-				System.out.println(is_relevent);
-				System.out.println(task_id);
-				System.out.println(user_id);
-				
 				sqlStmtTgt=String.format(sqlStmtTgt,rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getInt(4),rs.getInt(5),rs.getInt(6),rs.getInt(7),
 						rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),sentiment,is_conflict,is_relevent,task_id,user_id);
-				System.out.println(sqlStmtTgt);
+/*				System.out.println(sqlStmtTgt);*/
 				int rowCount=updateExecutor(sqlStmtTgt);
 				return rowCount;
 			}
@@ -367,6 +369,7 @@ public class SQLHelper {
 		}
 	}
 	
+	@Deprecated
 	/**
 	 * 在某个task_id下所有标注员提交后遍历同task_id的标注项，选出有效项目
 	 * 标准：三人标注一致，且is_conflict!=1, is_relevent=1
@@ -413,8 +416,7 @@ public class SQLHelper {
 	 * @return ResultSet: row=[task_id, kappa, num_effective]
 	 */
 	public ResultSet getFinishedTask(String user_id,Integer task_size){
-		String sqlStmt="select task_id, kappa, num_effective from "
-				+"where user_id='%s' and progress=%d order by task_id;";
+		String sqlStmt="select * from label_user_task where user_id='%s' and progress=%d order by task_id;";
 		sqlStmt=String.format(sqlStmt, user_id,task_size);
 		try{
 			ResultSet rs=queryExecutor(sqlStmt);
@@ -433,7 +435,7 @@ public class SQLHelper {
 	 * @return ResultSet: row=[user_id,total_labeled]
 	 */
 	public ResultSet getLabelRank(){
-		String sqlStmt="select * from label_user order by total_labeled;";
+		String sqlStmt="select * from label_user order by total_labeled desc;";
 		try{
 			ResultSet rs=queryExecutor(sqlStmt);
 			return rs;
@@ -449,7 +451,7 @@ public class SQLHelper {
 	 * 标注一致性计算
 	 *********************************************************/
 	
-	
+	@Deprecated
 	/**
 	 * 计算一对标注员之间在某个任务上标注结果一致的个数
 	 * select count(*) from 
@@ -598,30 +600,5 @@ public class SQLHelper {
 			return -1;
 		}
 	}
-	
-	
-	/*********************************************************
-	 * 辅助性查询
-	 *********************************************************/
-	
-	/**
-	 * 返回给定任务下所有标注员id
-	 * @param task_id
-	 * @return ResultSet rs: row[task_id,user_id]
-	 */
-	public ResultSet getAllUserIdByTaskId(Integer task_id){
-		String sqlStmt="select task_id, user_id from label_user_task where task_id=%d order by user_id";
-		sqlStmt=String.format(sqlStmt, task_id);
-		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	
+
 }
