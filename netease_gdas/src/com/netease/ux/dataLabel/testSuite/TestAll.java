@@ -1,6 +1,5 @@
 /**
  * 网易游戏GDAS系统 数据标注模块 测试脚本
- * @author hzxiayuanfang@corp.netease.com
  * @version 0.1
  * @2015-09-14
  */

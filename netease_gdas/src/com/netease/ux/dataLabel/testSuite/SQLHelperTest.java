@@ -1,6 +1,5 @@
 /**
  * 数据库操作封装 单元测试
- * @author hzxiayuanfang@corp.netease.com
  * @version 0.1
  * @2015-09-14
  */
@@ -285,4 +284,16 @@ public class SQLHelperTest extends TestCase{
 			e.printStackTrace();
 		}
 	}
+	
+/*	@Test
+	public void testCalculateKappaByTaskId(){
+		Config mysqlConfig=new Config("D:/config/dbConfig.cfg");
+		SQLHelper testSQL=new SQLHelper(mysqlConfig);
+		float pe=testSQL.calculatePeByTaskId(5,200);
+		float pbar=testSQL.calculatePbarByTaskId(5,200);
+		float kappa=testSQL.calculateFleissKappa(5, 200);
+		System.out.println(pe);
+		System.out.println(pbar);
+		System.out.println(kappa);
+	}*/
 }
