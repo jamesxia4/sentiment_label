@@ -415,7 +415,7 @@ public class SQLHelper {
 	 * @return ResultSet: row=[task_id, kappa, num_effective]
 	 */
 	public ResultSet getFinishedTask(String user_id,Integer task_size){
-		String sqlStmt="select * from label_user_task where user_id='%s' and progress=%d order by task_id;";
+		String sqlStmt="select task_id, kappa, num_effective from label_user_task where user_id='%s' and progress=%d order by task_id;";
 		sqlStmt=String.format(sqlStmt, user_id,task_size);
 		try{
 			ResultSet rs=queryExecutor(sqlStmt);
@@ -464,9 +464,9 @@ public class SQLHelper {
 	public ResultSet getNumberOfAgreementBetweenTwoUserOnTask(Integer task_id, String user_id_1,String user_id_2){
 		String sqlStmt=
 				"select count(*) from "+
-		"((select * from label_ods where task_id=%d and user_id = '%s') as task_1_1) "+
+		"((select * from label_ods_rst where task_id=%d and user_id = '%s') as task_1_1) "+
 	    "inner join "+
-		"((select * from label_ods where task_id=%d and user_id = '%s') as task_1_2) "+
+		"((select * from label_ods_rst where task_id=%d and user_id = '%s') as task_1_2) "+
 	    "on task_1_1.sentiment=task_1_2.sentiment and task_1_1.ods_sentence_id=task_1_2.ods_sentence_id;";
 		
 		sqlStmt=String.format(sqlStmt,task_id,user_id_1,task_id,user_id_2);
@@ -490,22 +490,25 @@ public class SQLHelper {
 	public float calculatePeByTaskId(Integer task_id,Integer task_size){
 		String sqlStmtPos="select sum(tmp.cnt)/%d/3 "
 				+"from "
-				+"(select ods_sentence_id,count(user_id) as cnt from label_ods "
+				+"(select ods_sentence_id,count(user_id) as cnt from label_ods_rst "
 				+" where task_id=%d and sentiment=1.0 group by ods_sentence_id "
 				+" order by ods_sentence_id) as tmp;";
 		String sqlStmtNeg="select sum(tmp.cnt)/%d/3 "
 				+"from "
-				+"(select ods_sentence_id,count(user_id) as cnt from label_ods "
+				+"(select ods_sentence_id,count(user_id) as cnt from label_ods_rst "
 				+" where task_id=%d and sentiment=-1.0 group by ods_sentence_id "
 				+" order by ods_sentence_id) as tmp;";
 		String sqlStmtNeu="select sum(tmp.cnt)/%d/3 "
 				+"from "
-				+"(select ods_sentence_id,count(user_id) as cnt from label_ods "
+				+"(select ods_sentence_id,count(user_id) as cnt from label_ods_rst "
 				+" where task_id=%d and sentiment=0.0 group by ods_sentence_id "
 				+" order by ods_sentence_id) as tmp;";
 		sqlStmtPos=String.format(sqlStmtPos,task_size,task_id);
 		sqlStmtNeg=String.format(sqlStmtNeg,task_size,task_id);
 		sqlStmtNeu=String.format(sqlStmtNeu,task_size,task_id);
+/*		System.out.println(sqlStmtPos);
+		System.out.println(sqlStmtNeg);
+		System.out.println(sqlStmtNeu);*/
 		try{
 			ResultSet rsPos=queryExecutor(sqlStmtPos);
 			ResultSet rsNeg=queryExecutor(sqlStmtNeg);
@@ -543,16 +546,20 @@ public class SQLHelper {
 	 */
 	public float calculatePbarByTaskId(Integer task_id,Integer task_size){
 		String sqlStmt="select tmp.ods_sentence_id,sum(POW(tmp.sum1,2)) from"
-				+ " (select ods_sentence_id,sentiment,count(*) as sum1 from label_ods where task_id =%d "
+				+ " (select ods_sentence_id,sentiment,count(*) as sum1 from label_ods_rst where task_id =%d "
 				+ "group by ods_sentence_id,sentiment) as tmp group by ods_sentence_id;";
 		sqlStmt=String.format(sqlStmt, task_id);
+/*		System.out.println(sqlStmt);*/
 		try{
 			ResultSet rs=queryExecutor(sqlStmt);
 			Float sum=(float)0.0;
+/*			rs.last();
+			System.out.println("row:"+rs.getRow());*/
 			while(rs.next()){
-				Float sqrSum=rs.getFloat(2);
-				sqrSum=sqrSum-3;
-				sqrSum=sqrSum*(1/(3*(3-1)));
+				Float sqrSum=(float)rs.getInt(2);
+				sqrSum=sqrSum-(float)3.0;
+				sqrSum=sqrSum*(float)(1.0/(6.0));
+/*				System.out.println(sqrSum);*/
 				sum=sum+sqrSum;
 			}
 			sum=sum/(float)task_size;

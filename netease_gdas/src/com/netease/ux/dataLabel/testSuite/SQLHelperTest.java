@@ -184,7 +184,7 @@ public class SQLHelperTest extends TestCase{
 			assertEquals((float)1.0,rs.getFloat(6));
 			assertEquals(0,rs.getInt(7));
 			assertEquals(1,rs.getInt(8));
-			testSQL.updateExecutor("delete from label_ods_rst where 1;");
+			testSQL.updateExecutor("delete from label_ods_rst where ods_sentence_id=1 and task_id=1;");
 		}
 		catch(SQLException e){
 			testSQL.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
@@ -209,7 +209,7 @@ public class SQLHelperTest extends TestCase{
 			assertEquals((float)1.0,rs.getFloat(6));
 			assertEquals(0,rs.getInt(7));
 			assertEquals(1,rs.getInt(8));
-			testSQL.updateExecutor("delete from label_ods_rst where 1;");
+			testSQL.updateExecutor("delete from label_ods_rst where ods_sentence_id=1 and task_id=1;");
 		}
 		catch(SQLException e){
 			testSQL.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
@@ -260,8 +260,8 @@ public class SQLHelperTest extends TestCase{
 			ResultSet rs=testSQL.getFinishedTask("Mary", 200);
 			rs.last();
 /*			System.out.println(rs.getRow());*/
-			assertEquals((float)0.7,rs.getFloat(3));
-			assertEquals(130,rs.getInt(4));
+			assertEquals((float)0.7,rs.getFloat(2));
+			assertEquals(130,rs.getInt(3));
 		}
 		catch (SQLException e){
 			testSQL.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
@@ -285,15 +285,33 @@ public class SQLHelperTest extends TestCase{
 		}
 	}
 	
-/*	@Test
+	@Test
 	public void testCalculateKappaByTaskId(){
 		Config mysqlConfig=new Config("D:/config/dbConfig.cfg");
 		SQLHelper testSQL=new SQLHelper(mysqlConfig);
 		float pe=testSQL.calculatePeByTaskId(5,200);
 		float pbar=testSQL.calculatePbarByTaskId(5,200);
 		float kappa=testSQL.calculateFleissKappa(5, 200);
-		System.out.println(pe);
 		System.out.println(pbar);
+		System.out.println(pe);
 		System.out.println(kappa);
-	}*/
+	}
+	
+	@Test
+	public void  testUpdateKappaByTaskId(){
+		Config mysqlConfig=new Config("D:/config/dbConfig.cfg");
+		SQLHelper testSQL=new SQLHelper(mysqlConfig);
+		try{
+			int rowCount=testSQL.updateKappaByTaskId(5,"John",testSQL.calculateFleissKappa(5, 200));
+			ResultSet rs=testSQL.getFinishedTask("John", 200);
+			rs.next();
+			assertEquals(5,rs.getInt(1));
+			System.out.println(rs.getFloat(2));
+			assertEquals(144,rs.getInt(3));
+		}
+		catch (SQLException e){
+			testSQL.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+		}
+	}
 }
