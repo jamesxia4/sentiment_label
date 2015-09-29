@@ -306,7 +306,7 @@ public class SQLHelperTest extends TestCase{
 			ResultSet rs=testSQL.getFinishedTask("John", 200);
 			rs.next();
 			assertEquals(5,rs.getInt(1));
-			System.out.println(rs.getFloat(2));
+/*			System.out.println(rs.getFloat(2));*/
 			assertEquals(144,rs.getInt(3));
 		}
 		catch (SQLException e){
