@@ -11,8 +11,15 @@ import java.sql.Timestamp;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Iterator;
+import java.util.Map;
+
 import java.util.ArrayList;
+import java.util.List;
+
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 public class DataLabel {
 	private SQLHelper dbHelper=null;
@@ -24,8 +31,8 @@ public class DataLabel {
 	/**任务大厅 罗列任务名和起止日期
 	 * @return HashMap<Integer任务id,String起止日期>
 	 */
-	public HashMap<Integer,String> getLobbyAllTaskNamesAndDates(){
-		HashMap<Integer,String> taskNamesAndDates=new HashMap<Integer,String>();
+	public HashMap<Integer,String> getLobbyAllTaskIdAndDates(){
+		HashMap<Integer,String> taskIdAndDates=new HashMap<Integer,String>();
 		try{
 			ResultSet rs=dbHelper.getLobbyAllTasks();
 			while(rs.next()){
@@ -37,20 +44,20 @@ public class DataLabel {
 				String sTS=startTime.toString();
 				String eTS=endTime.toString();
 				startDateAndEndDate=sTS+"--"+eTS;
-				taskNamesAndDates.put(task_id, startDateAndEndDate);
+				taskIdAndDates.put(task_id, startDateAndEndDate);
 			}
-			return taskNamesAndDates;
+			return taskIdAndDates;
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
-			return taskNamesAndDates;
+			return taskIdAndDates;
 		}
 	}
 	
 	/**任务大厅 罗列任务名和进度
 	 * @return HashMap<Integer任务id,String三人进度>
 	 */
-	public HashMap<Integer,String> getAllTaskIdAndProgress(){
+	public HashMap<Integer,String> getLobbyAllTaskIdAndProgress(){
 		HashMap<Integer,String> taskIdAndProgress=new HashMap<Integer,String>();
 		try{
 			ResultSet rs_src=dbHelper.queryExecutor("select task_id from label_task order by task_id;");
@@ -70,6 +77,60 @@ public class DataLabel {
 			e.printStackTrace();
 			return taskIdAndProgress;
 		}
+	}
+	
+	/**
+	 * 任务大厅：获取所有任务id
+	 * @return List<Integer> 任务id
+	 */
+	public List<Integer> getAllTaskId(){
+		List<Integer> taskIdList=new ArrayList<Integer>();
+		try{
+			String sqlStmt="select task_id from label_task order by task_id;";
+			ResultSet rs=dbHelper.queryExecutor(sqlStmt);
+			while(rs.next()){
+				taskIdList.add(rs.getInt(1));
+			}
+			return taskIdList;
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * 任务大厅：以Json格式输出任务id与信息
+	 * @return {1:["2015-09-16 16:02:00-2015-09-17 16:02:00","0/200 200/200 200/200"]}
+	 */
+	public JSONObject getLobbyAllTaskInfo(){
+		List<Integer> taskIdList=new ArrayList<Integer>();
+		List<String[]> infoList=new ArrayList<String[]>();
+		HashMap<Integer,String> taskIdAndDates=getLobbyAllTaskIdAndDates();
+		HashMap<Integer,String> taskIdAndProgress=getLobbyAllTaskIdAndProgress();
+		
+		//用entryset遍历效率更高，如果用keyset遍历，实际遍历了两次，
+		//一次是iterator,一次是用取出的key找value
+		//entryset直接一次取出放入entry,快一倍
+		Iterator iterDates=taskIdAndDates.entrySet().iterator();
+		Iterator iterProgress=taskIdAndDates.entrySet().iterator();
+		
+		while(iterDates.hasNext() && iterProgress.hasNext()){
+			String[] datesAndProgress=new String[2];
+			Map.Entry entryDates=(Map.Entry) iterDates.next();
+			Map.Entry entryProgress=(Map.Entry) iterProgress.next();
+			Object date=entryDates.getValue();
+			Object progress=entryProgress.getValue();
+			datesAndProgress[0]=(String)date;
+			datesAndProgress[1]=(String)progress;
+			infoList.add(datesAndProgress);
+		}
+		
+		Map<Integer,String[]> taskIdAndInfo = new HashMap<Integer,String[]>();
+		for(int i=0;i<taskIdList.size();i++){
+			taskIdAndInfo.put(taskIdList.get(i),infoList.get(i));
+		}
+		return JSONObject.fromObject(taskIdAndInfo);
 	}
 	
 	/**任务描述 罗列起止日期
@@ -97,6 +158,7 @@ public class DataLabel {
 		}
 		
 	}
+	
 	/**任务描述 罗列人员名与各自进度
 	 * @return HashMap<String用户名,String进度>
 	 */
