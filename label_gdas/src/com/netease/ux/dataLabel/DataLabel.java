@@ -53,7 +53,7 @@ public class DataLabel {
 	public HashMap<Integer,String> getAllTaskIdAndProgress(){
 		HashMap<Integer,String> taskIdAndProgress=new HashMap<Integer,String>();
 		try{
-			ResultSet rs_src=dbHelper.queryExecutor("select task_id from label_task order by task_id");
+			ResultSet rs_src=dbHelper.queryExecutor("select task_id from label_task order by task_id;");
 			while(rs_src.next()){
 				Integer task_id=rs_src.getInt(1);
 				ResultSet rs=dbHelper.getProgressByTaskId(task_id);
@@ -73,10 +73,30 @@ public class DataLabel {
 	}
 	
 	/**任务描述 罗列起止日期
-	 * 
+	 * @return String起始日期-截止日期
 	 */
-	//TODO: 任务描述：起止日期
-	
+	public String getDatesByTaskId(Integer task_id){
+		String dates="";
+		try{
+			String sqlStmt="select start_time,end_time from label_task where task_id=%d;";
+			sqlStmt=String.format(sqlStmt, task_id);
+			ResultSet rs=dbHelper.queryExecutor(sqlStmt);
+			
+			while(rs.next()){
+				Timestamp startTime=rs.getTimestamp(2);
+				Timestamp endTime=rs.getTimestamp(3);
+				String sTS=startTime.toString();
+				String eTS=endTime.toString();
+				dates=sTS+"--"+eTS;
+			}
+			return dates;
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+			return dates;
+		}
+		
+	}
 	/**任务描述 罗列人员名与各自进度
 	 * @return HashMap<String用户名,String进度>
 	 */
@@ -98,4 +118,6 @@ public class DataLabel {
 			return userIdAndProgress;
 		}
 	}
+	
+
 }
