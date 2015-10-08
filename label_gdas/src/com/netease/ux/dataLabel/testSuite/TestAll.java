@@ -14,6 +14,7 @@ public class TestAll extends TestSuite{
 	public static Test suite(){
 		TestSuite suite=new TestSuite("Sample Test");
 		suite.addTestSuite(SQLHelperTest.class);
+		suite.addTestSuite(DataLabelTest.class);
 		return suite;
 	}
 	

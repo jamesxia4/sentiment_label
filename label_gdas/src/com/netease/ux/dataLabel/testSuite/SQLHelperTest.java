@@ -66,16 +66,16 @@ public class SQLHelperTest extends TestCase{
 		try{
 			rs.last();
 			int rowCount=rs.getRow();
-			assertEquals(13,rowCount);
+			assertEquals(5,rowCount);
 			int taskid=rs.getInt(1);
 			Timestamp startTime=rs.getTimestamp(2);
 			Timestamp endTime=rs.getTimestamp(3);
-			String strStartTime="2015-09-16 16:12:00";
+			String strStartTime="2015-09-16 16:04:00";
 			Timestamp sTs=Timestamp.valueOf(strStartTime);
-			String strEndTime="2015-09-17 16:12:00";
+			String strEndTime="2015-09-17 16:04:00";
 			Timestamp eTs=Timestamp.valueOf(strEndTime);
 			
-			assertEquals(13,taskid);
+			assertEquals(5,taskid);
 			assertEquals(sTs,startTime);
 			assertEquals(eTs,endTime);
 		}
@@ -110,15 +110,15 @@ public class SQLHelperTest extends TestCase{
 		Config mysqlConfig=new Config("D:/config/dbConfig.cfg");
 		SQLHelper testSQL=new SQLHelper(mysqlConfig);
 		try{
-			ResultSet rs=testSQL.getTaskInfoByTaskId(13);
+			ResultSet rs=testSQL.getTaskInfoByTaskId(5);
 			rs.last();
 			Integer getTaskId=rs.getInt(1);
 			Timestamp getStartTime=rs.getTimestamp(2);
 			Timestamp getEndTime=rs.getTimestamp(3);
-			Integer taskid=13;
-			String strStartTime="2015-09-16 16:12:00";
+			Integer taskid=5;
+			String strStartTime="2015-09-16 16:04:00";
 			Timestamp sTs=Timestamp.valueOf(strStartTime);
-			String strEndTime="2015-09-17 16:12:00";
+			String strEndTime="2015-09-17 16:04:00";
 			Timestamp eTs=Timestamp.valueOf(strEndTime);
 			assertEquals(taskid,getTaskId);
 			assertEquals(sTs,getStartTime);

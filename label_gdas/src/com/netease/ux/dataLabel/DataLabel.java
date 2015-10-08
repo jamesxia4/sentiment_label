@@ -67,7 +67,7 @@ public class DataLabel {
 				String taskProgress;
 				while(rs.next()){
 					Integer usrProgress=rs.getInt(2);
-					taskProgress=usrProgress.toString()+"/200 ";
+					taskProgress=usrProgress.toString()+"/200";
 					taskIdAndProgress.put(task_id, taskProgress);
 				}
 			}
@@ -83,13 +83,15 @@ public class DataLabel {
 	 * 任务大厅：获取所有任务id
 	 * @return List<Integer> 任务id
 	 */
-	public List<Integer> getAllTaskId(){
-		List<Integer> taskIdList=new ArrayList<Integer>();
+	public List<String> getAllTaskId(){
+		List<String> taskIdList=new ArrayList<String>();
 		try{
 			String sqlStmt="select task_id from label_task order by task_id;";
 			ResultSet rs=dbHelper.queryExecutor(sqlStmt);
 			while(rs.next()){
-				taskIdList.add(rs.getInt(1));
+				Integer task_id=rs.getInt(1);
+				String str_task_id=task_id.toString();
+				taskIdList.add(str_task_id);
 			}
 			return taskIdList;
 		}
@@ -101,10 +103,10 @@ public class DataLabel {
 	
 	/**
 	 * 任务大厅：以Json格式输出任务id与信息
-	 * @return {1:["2015-09-16 16:02:00-2015-09-17 16:02:00","0/200 200/200 200/200"]}
+	 * @return {"1":["2015-09-16 16:00:00.0--2015-09-17 16:00:00.0","200/200 "]}
 	 */
 	public JSONObject getLobbyAllTaskInfo(){
-		List<Integer> taskIdList=new ArrayList<Integer>();
+		List<String> taskIdList=getAllTaskId();
 		List<String[]> infoList=new ArrayList<String[]>();
 		HashMap<Integer,String> taskIdAndDates=getLobbyAllTaskIdAndDates();
 		HashMap<Integer,String> taskIdAndProgress=getLobbyAllTaskIdAndProgress();
@@ -113,7 +115,7 @@ public class DataLabel {
 		//一次是iterator,一次是用取出的key找value
 		//entryset直接一次取出放入entry,快一倍
 		Iterator iterDates=taskIdAndDates.entrySet().iterator();
-		Iterator iterProgress=taskIdAndDates.entrySet().iterator();
+		Iterator iterProgress=taskIdAndProgress.entrySet().iterator();
 		
 		while(iterDates.hasNext() && iterProgress.hasNext()){
 			String[] datesAndProgress=new String[2];
@@ -123,10 +125,12 @@ public class DataLabel {
 			Object progress=entryProgress.getValue();
 			datesAndProgress[0]=(String)date;
 			datesAndProgress[1]=(String)progress;
+/*			System.out.println(datesAndProgress[0]);
+			System.out.println(datesAndProgress[1]);*/
 			infoList.add(datesAndProgress);
 		}
 		
-		Map<Integer,String[]> taskIdAndInfo = new HashMap<Integer,String[]>();
+		Map<String,String[]> taskIdAndInfo = new HashMap<String,String[]>();
 		for(int i=0;i<taskIdList.size();i++){
 			taskIdAndInfo.put(taskIdList.get(i),infoList.get(i));
 		}
@@ -162,22 +166,26 @@ public class DataLabel {
 	/**任务描述 罗列人员名与各自进度
 	 * @return HashMap<String用户名,String进度>
 	 */
-	public HashMap<String,String> getAllUserProgressByTaskId(Integer task_id){
-		HashMap<String,String> userIdAndProgress=new HashMap<String,String>();
+	public JSONObject getAllUserProgressByTaskId(Integer task_id){
+		Map<String,String> userIdAndProgress=new HashMap<String,String>();
 		try{
 			ResultSet rs=dbHelper.getProgressByTaskId(task_id);
+			rs.last();
+			System.out.println(rs.getRow());
+			rs=dbHelper.getProgressByTaskId(task_id);
 			while(rs.next()){
 				String userId=rs.getString(1);
 				String taskProgress;
 				Integer usrProgress=rs.getInt(2);
-				taskProgress=usrProgress.toString()+"/200 ";
+				taskProgress=usrProgress.toString()+"/200";
 				userIdAndProgress.put(userId, taskProgress);
 			}
-			return userIdAndProgress;
+			return JSONObject.fromObject(userIdAndProgress);
 		}
 		catch(SQLException e){
+			
 			e.printStackTrace();
-			return userIdAndProgress;
+			return null;
 		}
 	}
 	

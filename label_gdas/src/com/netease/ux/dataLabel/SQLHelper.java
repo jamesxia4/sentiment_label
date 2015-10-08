@@ -153,7 +153,7 @@ public class SQLHelper {
 	 * @return ResultSet: row=[task_id, start_time, end_time]
 	 */
 	public ResultSet getLobbyAllTasks(){
-		String sqlStmt="select task_id, start_time, end_time from label_task order by task id;";
+		String sqlStmt="select task_id, start_time, end_time from label_task order by task_id;";
 		try{
 			ResultSet rs=queryExecutor(sqlStmt);
 			return rs;
