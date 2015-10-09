@@ -172,7 +172,7 @@ public class SQLHelper {
 	 */
 	public ResultSet getProgressByTaskId(Integer task_id){
 		String sqlStmt="select user_id,progress from label_user_task where "
-				+"task_id =%d order by user_id desc;";
+				+"task_id =%d order by user_id;";
 		sqlStmt=String.format(sqlStmt, task_id);
 		try{
 			ResultSet rs=queryExecutor(sqlStmt);
@@ -227,6 +227,7 @@ public class SQLHelper {
 	/**
 	 * 查询用户的某个任务的进度
 	 * @param task_id 任务id
+	 * @param user_id 用户id
 	 * @return ResultSet: row=[task_id,progress]
 	 */
 	public ResultSet getTaskInfoByTaskIdAndUserId(Integer task_id,String user_id){
@@ -252,7 +253,7 @@ public class SQLHelper {
 	 */
 	public ResultSet getUnfinishedTaskInfoByUserId(String user_id,Integer task_size){
 		String sqlStmt="select task_id,progress from label_user_task where "
-				+"user_id='%s' and progress<%d order by task_id desc;";
+				+"user_id='%s' and progress<%d order by task_id;";
 		sqlStmt=String.format(sqlStmt,user_id,task_size);
 		try{
 			ResultSet rs=queryExecutor(sqlStmt);

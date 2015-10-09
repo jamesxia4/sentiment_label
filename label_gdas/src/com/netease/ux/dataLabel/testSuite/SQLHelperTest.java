@@ -96,7 +96,7 @@ public class SQLHelperTest extends TestCase{
 			String userid=rs.getString(1);
 			Integer getProgress=rs.getInt(2);
 			Integer setProgress=200;
-			assertEquals("James",userid);
+			assertEquals("Mary",userid);
 			assertEquals(setProgress,getProgress);
 		}
 		catch(SQLException e){
@@ -157,7 +157,7 @@ public class SQLHelperTest extends TestCase{
 		try{
 			ResultSet rs=testSQL.getUnfinishedTaskInfoByUserId("James",200);
 			rs.last();
-			assertEquals(2,rs.getInt(1));
+			assertEquals(5,rs.getInt(1));
 			assertEquals(0,rs.getInt(2));
 		}
 		catch(SQLException e){

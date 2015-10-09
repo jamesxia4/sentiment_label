@@ -49,6 +49,7 @@ public class DataLabel {
 			return taskIdAndDates;
 		}
 		catch (SQLException e) {
+			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return taskIdAndDates;
 		}
@@ -63,17 +64,22 @@ public class DataLabel {
 			ResultSet rs_src=dbHelper.queryExecutor("select task_id from label_task order by task_id;");
 			while(rs_src.next()){
 				Integer task_id=rs_src.getInt(1);
+/*				System.out.println("    "+task_id.toString());*/
 				ResultSet rs=dbHelper.getProgressByTaskId(task_id);
-				String taskProgress;
+				String taskProgress="";
 				while(rs.next()){
 					Integer usrProgress=rs.getInt(2);
-					taskProgress=usrProgress.toString()+"/200";
-					taskIdAndProgress.put(task_id, taskProgress);
+					taskProgress=taskProgress+usrProgress.toString()+"/200 ";
+/*					System.out.println(taskProgress);*/
+
 				}
+				taskProgress=taskProgress.trim();
+				taskIdAndProgress.put(task_id, taskProgress);
 			}
 			return taskIdAndProgress;
 		}
 		catch(SQLException e){
+			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return taskIdAndProgress;
 		}
@@ -96,6 +102,7 @@ public class DataLabel {
 			return taskIdList;
 		}
 		catch(SQLException e){
+			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return null;
 		}
@@ -148,8 +155,8 @@ public class DataLabel {
 			ResultSet rs=dbHelper.queryExecutor(sqlStmt);
 			
 			while(rs.next()){
-				Timestamp startTime=rs.getTimestamp(2);
-				Timestamp endTime=rs.getTimestamp(3);
+				Timestamp startTime=rs.getTimestamp(1);
+				Timestamp endTime=rs.getTimestamp(2);
 				String sTS=startTime.toString();
 				String eTS=endTime.toString();
 				dates=sTS+"--"+eTS;
@@ -157,6 +164,7 @@ public class DataLabel {
 			return dates;
 		}
 		catch(SQLException e){
+			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return dates;
 		}
@@ -164,15 +172,15 @@ public class DataLabel {
 	}
 	
 	/**任务描述 罗列人员名与各自进度
-	 * @return HashMap<String用户名,String进度>
+	 * @return JSON:{"James":"200/200","John":"0/200","Mary":"200/200"}
 	 */
 	public JSONObject getAllUserProgressByTaskId(Integer task_id){
 		Map<String,String> userIdAndProgress=new HashMap<String,String>();
 		try{
-			ResultSet rs=dbHelper.getProgressByTaskId(task_id);
+/*			ResultSet rs=dbHelper.getProgressByTaskId(task_id);
 			rs.last();
-			System.out.println(rs.getRow());
-			rs=dbHelper.getProgressByTaskId(task_id);
+			System.out.println(rs.getRow());*/
+			ResultSet rs=dbHelper.getProgressByTaskId(task_id);
 			while(rs.next()){
 				String userId=rs.getString(1);
 				String taskProgress;
@@ -183,7 +191,69 @@ public class DataLabel {
 			return JSONObject.fromObject(userIdAndProgress);
 		}
 		catch(SQLException e){
-			
+			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**已领任务 罗列当前用户已领任务时间与进度
+	 * @return JSON:{"2":["2015-09-16 16:01:00.0--2015-09-17 16:01:00.0","0/200"]}
+	 */
+	public JSONObject getTakenTaskTimeAndProgress(String user_id){
+		Map<String,String[]> takenTaskTimeAndProgress=new HashMap<String,String[]>();
+		try{
+			List<String> taskId=new ArrayList<String>();
+			List<String[]> taskInfo=new ArrayList<String[]>();
+			ResultSet rs=dbHelper.getUnfinishedTaskInfoByUserId(user_id, 200);
+			while(rs.next()){
+				taskId.add(((Integer)rs.getInt(1)).toString());
+				ResultSet rs_info=dbHelper.getTaskInfoByTaskId(rs.getInt(1));
+				ResultSet rs_progress=dbHelper.getTaskInfoByTaskIdAndUserId(rs.getInt(1), user_id);
+				
+				String[] task_info=new String[2];
+				while(rs_info.next() && rs_progress.next()){
+					Timestamp startTime=rs_info.getTimestamp(2);
+					Timestamp endTime=rs_info.getTimestamp(3);
+					String sTS=startTime.toString();
+					String eTS=endTime.toString();
+					task_info[0]=sTS+"--"+eTS;
+					
+					Integer usrProgress=rs_progress.getInt(2);
+					task_info[1]=usrProgress.toString()+"/200";
+					taskInfo.add(task_info);
+				}
+			}
+			for(int i=0;i<taskInfo.size();i++){
+				takenTaskTimeAndProgress.put(taskId.get(i), taskInfo.get(i));
+			}
+			return JSONObject.fromObject(takenTaskTimeAndProgress);
+		}
+		catch(SQLException e){
+			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public JSONObject getAllFinishedTaskInfo(String user_id){
+		Map<String,String[]> finishedTaskInfo=new HashMap<String,String[]>();
+		try{
+			ResultSet rs=dbHelper.getFinishedTask(user_id, 200);
+			List<String> taskId=new ArrayList<String>();
+			List<String[]> taskInfo=new ArrayList<String[]>();
+			String sqlStmt="select task_id from label_user_task where progress=200 and user_id='%s';";
+			sqlStmt=String.format(sqlStmt,user_id);
+			while(rs.next()){
+				
+			}
+			for(int i=0;i<taskId.size();i++){
+				finishedTaskInfo.put(taskId.get(i),taskInfo.get(i));
+			}
+			return JSONObject.fromObject(finishedTaskInfo);
+		}
+		catch(SQLException e){
+			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return null;
 		}

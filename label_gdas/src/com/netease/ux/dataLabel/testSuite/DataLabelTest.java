@@ -46,7 +46,7 @@ public class DataLabelTest extends TestCase{
 		}
 	}
 	
-/*	@Test
+	@Test
 	public void testGetLobbyAllTaskIdAndProgress(){
 		DataLabel testLogicLayer=new DataLabel();
 		HashMap<Integer,String> taskIdAndProgress=testLogicLayer.getLobbyAllTaskIdAndProgress();
@@ -54,29 +54,39 @@ public class DataLabelTest extends TestCase{
 		while(iterProgress.hasNext()){
 			Map.Entry entryProgress=(Map.Entry) iterProgress.next();
 			Object progress=entryProgress.getValue();
-			System.out.println((String)progress);
+/*			System.out.println((String)progress);*/
 		}
-	}*/
+	}
 	
 	@Test
 	public void testGetLobbyAllTaskInfo() {
 		DataLabel testLogicLayer=new DataLabel();
 		JSONObject testObject=testLogicLayer.getLobbyAllTaskInfo();
-/*		System.out.println(testObject.toString());*/
+		System.out.println(testObject.toString());
 	}
 	
 	@Test
-	public void TestGetDatesByTaskId(){
+	public void testGetDatesByTaskId(){
 		DataLabel testLogicLayer=new DataLabel();
 		String testDate=testLogicLayer.getDatesByTaskId(1);
 		assertEquals("2015-09-16 16:00:00.0--2015-09-17 16:00:00.0",testDate);
 	}
 	
 	@Test 
-	public void TestGetAllUserProgressByTaskId(){
+	public void testGetAllUserProgressByTaskId(){
 		DataLabel testLogicLayer=new DataLabel();
 		JSONObject testObject=testLogicLayer.getAllUserProgressByTaskId(1);
 		System.out.println(testObject.toString());
 	}
+	
+	@Test
+	public void testGetTakenTaskTimeAndProgress(){
+		DataLabel testLogicLayer=new DataLabel();
+		JSONObject testObject=testLogicLayer.getTakenTaskTimeAndProgress("James");
+		System.out.println(testObject.toString());
+	}
+	
+
+	
 }
 
