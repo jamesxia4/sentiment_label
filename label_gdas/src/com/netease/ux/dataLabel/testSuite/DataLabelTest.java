@@ -86,7 +86,19 @@ public class DataLabelTest extends TestCase{
 		System.out.println(testObject.toString());
 	}
 	
-
+	@Test
+	public void testGetAllFinishedTaskInfo(){
+		DataLabel testLogicLayer=new DataLabel();
+		JSONObject testObject=testLogicLayer.getAllFinishedTaskInfo("Mary");
+		System.out.println(testObject.toString());
+	}
+	
+	@Test
+	public void testGetAllRank(){
+		DataLabel testLogicLayer=new DataLabel();
+		JSONArray testObject=testLogicLayer.getAllRank();
+		System.out.println(testObject.toString());
+	}
 	
 }
 

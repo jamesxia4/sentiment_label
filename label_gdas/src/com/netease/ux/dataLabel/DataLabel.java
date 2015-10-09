@@ -236,16 +236,35 @@ public class DataLabel {
 		}
 	}
 	
+	//TODO JSON输出标注项
+	//TODO JSON输入写数据库
+	
+	/**
+	 * 已完成任务：以JSON格式输出任务标注一致性以及有效条数
+	 * @param user_id
+	 * @return JSON:{"1":["2015-09-16 16:00:00.0--2015-09-17 16:00:00.0"}
+	 */
 	public JSONObject getAllFinishedTaskInfo(String user_id){
 		Map<String,String[]> finishedTaskInfo=new HashMap<String,String[]>();
 		try{
 			ResultSet rs=dbHelper.getFinishedTask(user_id, 200);
 			List<String> taskId=new ArrayList<String>();
 			List<String[]> taskInfo=new ArrayList<String[]>();
-			String sqlStmt="select task_id from label_user_task where progress=200 and user_id='%s';";
-			sqlStmt=String.format(sqlStmt,user_id);
 			while(rs.next()){
+				taskId.add(((Integer)rs.getInt(1)).toString());
+				String[] task_info=new String[3];
 				
+				ResultSet rs_info=dbHelper.getTaskInfoByTaskId(rs.getInt(1));
+				while(rs_info.next()){
+					Timestamp startTime=rs_info.getTimestamp(2);
+					Timestamp endTime=rs_info.getTimestamp(3);
+					String sTS=startTime.toString();
+					String eTS=endTime.toString();
+					task_info[0]=sTS+"--"+eTS;
+				}
+				task_info[1]=((Float)rs.getFloat(2)).toString();
+				task_info[2]=((Integer)rs.getInt(3)).toString(); 
+				taskInfo.add(task_info);
 			}
 			for(int i=0;i<taskId.size();i++){
 				finishedTaskInfo.put(taskId.get(i),taskInfo.get(i));
@@ -259,5 +278,23 @@ public class DataLabel {
 		}
 	}
 	
-
+	/**
+	 * 输出排行榜
+	 * @return JSONArray:["Thomas","Carter","Mary","John","James"]
+	 */
+	public JSONArray getAllRank(){
+		List<String> rankCollection=new ArrayList<String>();
+		try{
+			ResultSet rs=dbHelper.getLabelRank();
+			while(rs.next()){
+				rankCollection.add(rs.getString(1));
+			}
+			return JSONArray.fromObject(rankCollection);
+		}
+		catch(SQLException e){
+			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
