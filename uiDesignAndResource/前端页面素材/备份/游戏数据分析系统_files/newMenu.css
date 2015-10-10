@@ -1,0 +1,101 @@
+html,body {
+    height:100%;
+}
+
+
+#subject_field_menu {font-size: 14px; font-family: Arial, '微软雅黑';background: #333544;color: #ffffff;height: 100%;width: 215px;clear: left;float: left;line-height: 36px;}
+
+div#subject_field_menu div.searchBar {
+    padding: 0px;
+    margin: 10px auto;
+    width: 195px;
+    position: relative;
+    z-index: 999;
+}
+
+#subject_field_menu div.searchBar input {
+    width: 175px;    
+    height: 23px;    
+    line-height: 23px;
+    padding: 0px 3px;    
+    border: 1px solid #464854;    
+    border-radius: 5px;
+    outline: none;    
+    background: #fff url('../image/nav/nav_search.png') no-repeat 156px;
+}
+
+div.searchBar .searchResult {
+    position: absolute;
+    width: 180px;
+    border-radius: 5px;
+    margin-top: 0px;
+    padding-bottom: 5px;
+    font-size: 14px;
+    background-color: white;border: 1px solid #d8d8d8;
+    z-index: -1;
+    top: 26px;
+}
+
+
+div#body_layout_center {
+    background-color: #333544;
+}
+#subject_field_menu div.menuItem span.newMarker {font-family:"iconfont-new";font-size: 13px;/* float:left; */color: #FF3333;vertical-align: top;left: 1px;position: relative;margin: 0px;top: -6px;}
+
+#subject_field_menu div.menuSubject {height:33px; line-height: 33px;color: white; padding-left: 5px;}
+#subject_field_menu div.menuSubject:hover {background: transparent; color: #32BBFF; cursor: pointer}
+#subject_field_menu div.menuSubject span.title {cursor: pointer; width: auto; max-width: 154px; display: inline-block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;font-weight: normal; float: left;margin-left: 5px;}
+#subject_field_menu div.menuSubject span.bullet {display: inherit;width: auto;height: auto;background: transparent;border-radius: inherit;margin: auto; float:inherit;}
+#subject_field_menu div.menuSubject.menuStoreUp span.bullet {display: inherit;width: auto;margin: auto;border-radius: inherit;height: auto;}
+#subject_field_menu div.menuSubject.menuStoreUp span.bullet:after {content: inherit; float: inherit; margin-left: auto; margin-top: auto}
+#subject_field_menu div.menuSubject.menuClose {/* color: white; */}
+#subject_field_menu div.menuSubject.menuClose:hover {background:transparent; color: #32BBFF; }
+#subject_field_menu div.menuSubject.menuClose.current:hover {/* background:#2f7ed8; */ /* color:#ffffff; */ }
+#subject_field_menu div.menuSubject.current {/* background: #2f7ed8; *//* color: #fff; */}
+#subject_field_menu div.menuSubject.menuClose span.bullet {background: transparent; float:inherit;}
+#subject_field_menu div.menuSubject.menuClose span.title{float: inherit;}
+#subject_field_menu div.menuSubject:hover span.bullet {background:transparent}
+#subject_field_menu div.menuSubject.current span.bullet {background: transparent;}
+#subject_field_menu div.menuSubject.menuClose span.title{float: left;}
+#subject_field_menu div.menuSubject.menuClose span.switch {width: 26px; height: 26px;display: inline-block; /* margin:3px 10px 0px 0px */}
+#subject_field_menu div.menuSubject.menuClose span.switch:after {display: none;}
+#subject_field_menu div.menuSubject.menuClose span.switch {background: url("../image/icon-gray.png") no-repeat left top; background-position: left -467px; float: left;}
+#subject_field_menu div.menuSubject span.switch {width: 26px; height: 26px;display: inline-block; margin: 3px 0px 0px 0px;}
+#subject_field_menu div.menuSubject span.switch {background: url("../image/icon-gray.png") no-repeat left top; background-position: left -233px; float: left;}
+#subject_field_menu div.menuSubject span.switch:after {display: none;}
+#subject_field_menu div.menuList  {background: #1e202d; padding: 6px 0px;}
+#subject_field_menu div.menuList.menuClose  {display:none;}
+#subject_field_menu div.menuItem {height:33px; line-height: 33px;}
+#subject_field_menu div.menuItem:hover {background:transparent; color:inherit; }
+#subject_field_menu div.menuItem:hover span.title a {color: inherit;}
+#subject_field_menu div.menuList span.title {margin-left: 50px;padding-left: 0px;font-size: 12px;}
+#subject_field_menu div.menuList div.menuItem {height: 32px; line-height: 32px;/* background: #1e202d; */}
+#subject_field_menu div.menuList div.menuItem span.bullet {display: inherit; width: auto;}
+#subject_field_menu div.menuItem.active {background: #464859; color:#fff;}
+#subject_field_menu div.menuItem.active > span.bullet {background: transparent}
+#subject_field_menu div.menuItem span.title {cursor: pointer; width: auto; max-width: 165px;display: inline-block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; }
+
+#subject_field_menu div.menuItem span.title a{text-decoration : none;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; max-width: 145px;display: inline-block;color: white;}
+#subject_field_menu div.menuItem span.title:hover a {color: #32BBFF;}
+#subject_field_menu div.menuItem:not(.active):hover span.bullet {background: transparent;}
+#subject_field_menu div.menuItem.active span.title a {color: #32BBFF;}
+#subject_field_menu div.menuItem span.switch {font-size:20px;}
+#subject_field_menu .subjectDividerDiv > div.menuItem span.bullet {display: inherit;width: auto;height: auto;background: transparent;border-radius: inherit;margin: auto;float:inherit;}
+#subject_field_menu .subjectDividerDiv >  div.menuItem span.bullet {background: transparent; width: auto; height: auto; float:inherit;overflow: inherit; }
+
+#subject_field_menu .subjectDividerDiv >  div.menuItem {padding-left: 35px;margin-left: 0px;}
+#subject_field_menu  > div.menuItem {padding-left: 35px;margin-left: 0px;font-size: 14px;}
+#subject_field_menu .subjectDividerDiv >  div.menuItem span.title{height: 33px; font-weight: normal; max-width: 154px}
+
+#subject_field_menu div.menuList.menuStoreUp div.menuItem:hover span.switch {cursor: pointer; width: 23px;}
+#subject_field_menu div.menuList.menuStoreUp div.menuItem span.switch:hover {color: #FF6600;}
+#subject_field_menu div.menuList.menuStoreUp div.menuItem:hover span.switch:after  {content: "×"; float: right;margin-right: 17px;height: 30px; display: inline-block;}
+#subject_field_menu div.menuList.menuStoreUp div.menuItem span.title a  {max-width: 140px;}
+
+#subject_field_menu div.menuSubject.menuStoreUp span.bullet:after
+{  display:none; content: inherit;
+    float: inherit;
+    margin-left: auto;
+}
+
+#subject_field_menu div.menuDivider {border-bottom: 1px solid #515151;  margin: 7px 0;}

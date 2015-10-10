@@ -1,0 +1,26 @@
+
+/*日期控件额外css*/
+div.tool_date {width:800px;}
+
+/**游戏排行榜表格css**/
+table.ranktable {border:solid 1px #e6e6e6;border-spacing:0;table-layout:fixed;width: 100%;}
+table.ranktable a {text-decoration:none;}
+table.ranktable tr {height:42px;border:0;}
+table.ranktable tr th,
+table.ranktable tr td {border:0;border-top:solid 1px #e6e6e6;}
+table.ranktable tr th {background:#e6e6e6;max-width:330px;}
+table.ranktable th.rank, 
+table.ranktable tr td.rank {width:65px; text-align:center;}
+table.ranktable tr th.game,
+table.ranktable tr td.game {max-width:330px;}
+table.ranktable tr td:nth-child(2n) {background:#e3f3fe;}
+table.ranktable tr td div.main-info {width:90%;float:left;}
+table.ranktable tr td div.main-info,
+table.ranktable tr td div.main-info a {color:#2b2b2b;font-size:14px;}
+table.ranktable div.item-info{padding:0; padding-left:10px;float: left;width: 66%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;line-height: 42px;}
+table.ranktable tr td div.main-info span {display:block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+table.ranktable tr td div.pull-right {padding:0; max-width:10%; width:20px; float:right;padding-right: 20px;vertical-align: middle;display: inline-block;line-height: 42px;}
+table.ranktable tr td div.var-info,
+table.ranktable tr td div.var-info a {color:#aaaaaa;font-size:14px;}
+table.ranktable .change-down{color:#cb8a89;}
+table.ranktable .change-up{color:#92cd82;}

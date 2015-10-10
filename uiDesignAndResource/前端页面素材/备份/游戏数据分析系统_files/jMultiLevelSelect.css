@@ -1,0 +1,112 @@
+/**
+ * jMultiLevelSelect
+ * 
+**/
+.multilevelfloat { display:inline-block;margin:5px 0; width : 400px;}
+.multilevelfloat > span { width : 85px;display: inline-block; margin-top: 5px; margin-bottom: 5px;margin-right: 5px;float:left;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+.multilevelselect_head {height: 35px;border: 1px solid #2f7ed8;border-bottom: 0;padding: 4px;background-color: #eeeeee;}
+.multilevelselect_head span {cursor: pointer;color: #2f7ed8;padding-right: 10px;padding-top: 9px;float: right;}
+.multilevelselect_head span:hover {color:#8abef8;}
+.multilevelselect_container {position: absolute;z-index: 1012;border: 0;font-family: "微软雅黑";height: auto; width: 595px;}
+.multilevelselect_container span {cursor: pointer;}
+.multilevelselect_container span:hover {text-decoration: none;}
+.multilevelselect_container label {color:#616161;font-size: 14px;padding-top:5px;padding-bottom:5px;}
+
+.hiddenClass {display:none;}
+
+.multilevelselect_content {background-color: white;border-left: 1px solid #2f7ed8;border-right: 1px solid #2f7ed8;clear:both;min-height:300px;max-height:300px;}
+.multilevelselect_toplevel { width:210px;overflow:auto;min-height:300px;max-height:300px;float:left;border-right: 2px solid #dddddd;}
+
+/*Menu Style*/
+.multilevelselect_menuItem  {
+	height:32px;
+	/* line-height:32px; */
+	display:block;
+	cursor:pointer;
+}
+ 
+/* .multilevelselect_menuItem_selected {background:#2f7ed8; color:#fff;} */
+.multilevelselect_menuItem span {
+	padding: 0;
+	/* height: 32px; *//* line-height: 32px; */
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	/* display: inline-block; */
+}
+
+.multilevelselect_menuItem span::before {
+}
+.multilevelselect_menuItem:hover {background:#8abef8; color:#fff;}
+.multilevelselect_menuItem span.multilevelselect_menuItem_selected { color:#2f7ed8;font-weight:bold;}
+
+.multilevelselect_menuItem span.multilevelselect_menuItem_span_selected_has_child {background:url(./node_opened.png) no-repeat left;padding-left:10px;}
+.multilevelselect_menuItem span.multilevelselect_menuItem_span_has_child {background:url(./node_closed.png) no-repeat left;padding-left:10px;}
+
+/*leaf node*/
+.multilevelselect_leaflevel_content {
+	min-height:300px;
+	max-height:300px;
+	display:block;
+/* 	float:right; */
+/* 	width:378px; */
+	overflow-y:auto;
+	padding:0px 5px;
+}
+.multilevelselect_leaflevel_content span.singleselect {
+	width: 170px;
+	height: 32px;
+	line-height: 32px;
+	vertical-align: middle;
+	display: inline-block;
+	color: #616161;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	padding-left: 5px;}
+.multilevelselect_leaflevel_content span.singleselect:hover{background:#8abef8; color:#fff;}
+.multilevelselect_leaflevel_content span.singleselect.multilevelselect_span_selected {background:#2f7ed8;color: #ffffff;}
+.multilevelselect_leaflevel_content span.multiselect {
+	width: 155px;
+	padding-left: 20px;
+	height: 20px;
+	line-height: 20px;
+	vertical-align: middle;
+	display: inline-block;
+	color: #616161;
+/* 	border:0;border-left:20px;border-image:url(../../image/checkbox-unchecked.png) 0 0 0 20; */
+	background:url(../../image/checkbox-unchecked.png) no-repeat left center;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;}
+.multilevelselect_leaflevel_content span.multiselect:hover{color:#8abef8;}
+.multilevelselect_leaflevel_content span.multiselect.multilevelselect_span_selected {
+/* 	border:0;border-left:20px;border-image:url(../../image/checkbox-checked.png) 0 0 0 20;color: #8abef8; */
+	padding-left: 20px;
+	background:url(../../image/checkbox-checked.png) no-repeat left center;
+	color:#2f7ed8;}
+.multilevelselect_search_input {width: 198px;height: 24px;padding: 3px;border: 1px solid #d8d8d8;outline: none;background: #fff url('../../image/mobile_game_search.png') no-repeat 180px;} 
+.multilevelselect_search {display:none;}
+.multilevelselect_clear {display:none;}
+.multilevelselect_foot {border: 1px solid #2f7ed8;border-top: 0;text-align: right;line-height: 35px;background-color: #eeeeee;padding-right:10px;}
+.multilevelselect_tips {display:none;display:block;color:#cc0000;width:300px;float:left;}
+.multilevelselect_container .multilevelselect_close {margin: 5px;
+	width: 109px;
+	height: 32px;
+	font-size: 16px;
+	border: 1px solid #2F7ED8;
+	display: inline-block;
+	text-align: center;
+	padding: 0;
+	cursor: pointer;
+	background: #2F7ED8;
+	color: white;font-family: "微软雅黑";}
+.multilevelselect_container .multilevelselect_close:hover {border: 1px solid #8ABEF8;background: #8ABEF8;}
+
+
+input.menuitem_checkall {
+    /* display: inline-block; */
+    /* height: 32px; */
+    margin: 0px 5px;
+    /* vertical-align: middle; */
+}

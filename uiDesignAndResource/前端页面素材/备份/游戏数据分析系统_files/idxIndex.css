@@ -1,0 +1,29 @@
+
+	#body_layout_center .BigFrameBody div.searchBar {float:left; padding: 2px;}
+/* 	#body_layout_center .BigFrameBody div.searchBar input.searchBar {width:146px; padding-left: 2px;} */
+	
+	#body_layout_center .BigFrameBody div.searchBar input {width: 170px;}
+	#body_layout_center .BigFrameBody div.searchBar .searchResult {position: absolute;width: 175px;margin-top: 3px;padding-bottom: 5px;background-color: white;border: 1px solid #b1b1b1;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;}
+	#body_layout_center .BigFrameBody div.searchBar .searchResult span {display: block;height: 27px;padding-left: 10px;line-height: 27px;font-size: 14px;color: #a7a7a7;cursor: pointer;}
+	#body_layout_center .BigFrameBody div.searchBar .searchResult span:hover {color: #006097;background: url("../image/IDXList-sub-2.png") no-repeat scroll 0 0;}
+	#body_layout_center .BigFrameBody div.searchBar .searchResult p {color: #a7a7a7;margin: 5px;}
+			
+	#body_layout_center .BigFrameBody ul.IDXFrameFirstList,
+	#body_layout_center .BigFrameBody ul.IDXFrameSecondList {padding:0; margin:0; width:180px; }
+	#body_layout_center .BigFrameBody ul.IDXFrameFirstList li,
+	#body_layout_center .BigFrameBody ul.IDXFrameSecondList li {padding-left:10px; overflow:hidden; white-space:nowrap;text-overflow:ellipsis;list-style-type:none; cursor:pointer;}
+	#body_layout_center .BigFrameBody ul.IDXFrameFirstList {font-size:16px; color:#616161; float:left; line-height:36px; clear:left; }
+	#body_layout_center .BigFrameBody ul.IDXFrameFirstList li.IDXSubjectLiSwitch {background:url("../image/IDXList-closed-1.png") no-repeat scroll 0 0; }
+	#body_layout_center .BigFrameBody ul.IDXFrameFirstList li.IDXSubjectLiSwitch:hover {background:url("../image/IDXList-closed-2.png") no-repeat scroll 0 0; }
+	#body_layout_center .BigFrameBody ul.IDXFrameFirstList li.IDXSubjectLiSwitch.active {background:url("../image/IDXList-closed-3.png") no-repeat scroll 0 0; }
+	#body_layout_center .BigFrameBody ul.IDXFrameFirstList li.IDXSubjectLiSwitch.opened {background:url("../image/IDXList-opened-1.png") no-repeat scroll 0 0; }
+	#body_layout_center .BigFrameBody ul.IDXFrameFirstList li.IDXSubjectLiSwitch.opened:hover {background:url("../image/IDXList-opened-2.png") no-repeat scroll 0 0; }
+	#body_layout_center .BigFrameBody ul.IDXFrameFirstList li.IDXSubjectLiSwitch.opened.active {background:url("../image/IDXList-opened-3.png") no-repeat scroll 0 0; }
+	#body_layout_center .BigFrameBody ul.IDXFrameFirstList li.IDXSubjectLiPanal {padding:0; display:none; }
+	#body_layout_center .BigFrameBody ul.IDXFrameSecondList {font-size:14px; color:#a7a7a7; line-height:27px; }
+	#body_layout_center .BigFrameBody ul.IDXFrameSecondList li {background:url("../image/IDXList-sub-1.png") no-repeat scroll 0 0; }
+	#body_layout_center .BigFrameBody ul.IDXFrameSecondList li:hover {background:url("../image/IDXList-sub-2.png") no-repeat scroll 0 0; }
+	#body_layout_center .BigFrameBody ul.IDXFrameSecondList li.active {background:url("../image/IDXList-sub-3.png") no-repeat scroll 0 0; color:#006097; }
+	#body_layout_center .BigFrameBody .IDXDisplayErea {min-height:500px; margin-left:180px; padding:10px; background-color:#ececec; padding-bottom: 80px; }
+	#body_layout_center .BigFrameBody .IDXDisplayErea .classDivWide {border-radius:5px; border:1px solid #b1b1b1;} 
+	

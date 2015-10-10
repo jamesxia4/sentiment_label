@@ -1,0 +1,39 @@
+/**
+ * jMultiSelect
+ * 
+**/
+
+.multiselect_head {height: 35px;border: 1px solid #2f7ed8;border-bottom: 0;padding: 4px;background-color: #eeeeee;}
+.multiselect_head span {cursor: pointer;color: #2f7ed8;padding-right: 10px;padding-top: 9px;float: right;}
+.multiselect_container {width:610px;position: absolute;z-index:1012;border:0;font-family: "微软雅黑";}
+.multiselect_container span {cursor: pointer;}
+.multiselect_container span:hover {text-decoration: none;}
+.multiselect_container label {color:#616161;font-size: 14px;padding-top:5px;padding-bottom:5px;}
+.multiselect_div_selected {padding:5px;min-height:30px;max-height:100px;overflow-y:scroll;}
+.multiselect_div_total {padding:5px;max-height:200px;overflow-y:scroll;}
+.multiselect_div_total_ajax {padding:5px;max-height:200px;overflow-y:scroll;}
+.hiddenClass {display:none;}
+.multiselect_content {background-color: white;border-left: 1px solid #2f7ed8;border-right: 1px solid #2f7ed8;padding:5px;clear:both;}
+/* .multiselect_container button {width: 52px;height: 27px;padding: 0;border: 0;margin: 0;vertical-align: middle;cursor: pointer;color: #a09f9f;border-radius: 5px;} */
+.multiselect_content span {width: 170px;line-height: 20px;vertical-align: middle;margin-bottom: 1px;margin-top: 1px;display: block;float: left;color: #616161;background:url(../../image/checkbox-unchecked.png) no-repeat;padding-left: 20px}
+.multiselect_content span:hover {background-color:#c9deeb;}
+.multiselect_div_selected span {border-image:url(../../image/checkbox-checked.png) 0 0 0 20;background:url(../../image/checkbox-checked.png) no-repeat\0;background:url(../../image/checkbox-checked.png) no-repeat\9;}
+.multiselect_div_total span.multiselect_span_selected {background:url(../../image/checkbox-checked.png) no-repeat;padding-left: 20px}
+.multiselect_search_input {width: 198px;height: 24px;padding: 3px;border: 1px solid #d8d8d8;outline: none;background: #fff url('../../image/mobile_game_search.png') no-repeat 180px;}
+.multiselect_panel_ctrl {clear:right;}
+.multiselect_search {display:none;}
+.multiselect_clear {display:none;}
+.multiselect_panel_ctrl span {padding-right:10px;}
+.multiselect_container .multiselect_close {margin: 5px;
+    width: 109px;
+    height: 32px;
+    font-size: 16px;
+    border: 1px solid #2F7ED8;
+    display: inline-block;
+    text-align: center;
+    padding: 0;
+    cursor: pointer;
+    background: #2F7ED8;
+    color: white;font-family: 微软雅黑;}
+.multiselect_container .multiselect_close:hover {border: 1px solid #8ABEF8;background: #8ABEF8;}
+.multiselect_foot {border: 1px solid #2f7ed8;border-top: 0;text-align: right;line-height: 35px;background-color: #eeeeee;}
