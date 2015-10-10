@@ -100,5 +100,12 @@ public class DataLabelTest extends TestCase{
 		System.out.println(testObject.toString());
 	}
 	
+	@Test
+	public void testGetAllItemToLabel(){
+		DataLabel testLogicLayer=new DataLabel();
+		JSONObject testObject=testLogicLayer.getAllItemToLabel((Integer)1);
+/*		System.out.println(testObject.toString());*/
+	}
+	
 }
 

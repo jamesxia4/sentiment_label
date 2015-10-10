@@ -38,7 +38,6 @@ public class SQLHelper {
 	private String dbUrl="";
 	private String dbUsername="";
 	private String dbPassword="";
-	private boolean isConnected=false;
 	
 	private Connection conn=null;
 	private Statement stmt=null;
@@ -53,7 +52,7 @@ public class SQLHelper {
 		dbUrl=dbProp.getProperty("dbUrl");
 		dbUsername=dbProp.getProperty("dbUsername");
 		dbPassword=dbProp.getProperty("dbPassword");
-		isConnected=connect_db();
+
 	}
 	
 	/**
@@ -73,14 +72,6 @@ public class SQLHelper {
 		}
 		else if(inputKey=="dbPassword"){
 			return dbPassword;
-		}
-		else if(inputKey=="connection"){
-			if (isConnected){
-				return "True";
-			}
-			else{
-				return "False";
-			}
 		}
 		else{
 			return null;
@@ -117,8 +108,14 @@ public class SQLHelper {
 	 * 关闭数据库链接
 	 * @throws SQLException
 	 */
-	public void close() throws SQLException{
-		conn.close();
+	public void close(){
+		try{
+			conn.close();
+		}
+		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -129,6 +126,7 @@ public class SQLHelper {
 	 * @throws SQLException
 	 */
 	public ResultSet queryExecutor(String sqlToExecute) throws SQLException{
+		connect_db();
 /*		System.out.println("Creating Statement...");*/
 		stmt=conn.createStatement();
 		ResultSet rs = stmt.executeQuery(sqlToExecute);
@@ -142,6 +140,7 @@ public class SQLHelper {
 	 * @throws SQLException
 	 */
 	public int updateExecutor(String sqlToExecute) throws SQLException{
+		connect_db();
 /*		System.out.println("Creating Statement...");*/
 		stmt=conn.createStatement();
 		int rowCount=stmt.executeUpdate(sqlToExecute);
@@ -267,12 +266,33 @@ public class SQLHelper {
 	}
 	
 	/**
-	 * 标注页所有条目罗列
+	 * 标注页所有未标注条目罗列
+	 * @param task_id
+	 * @return ResultSet: row=[ods_sentence_id, source_name,concept name,
+	 *		src_content, content]
+	 */
+	public ResultSet getAllItemToLabel(Integer task_id){
+		String sqlStmt="select ods_sentence_id, source_name,concept_name, "
+				+"content, src_content from label_ods_src where task_id=%d;";
+		sqlStmt=String.format(sqlStmt, task_id);
+		try{
+			ResultSet rs=queryExecutor(sqlStmt);
+			return rs;
+		}
+		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * 标注页所有已标注条目罗列
 	 * @param task_id
 	 * @return ResultSet: row=[ods_sentence_id, source_name,concept name,
 	 *		src_content, content, sentiment, is_conflict, is_relevent]
 	 */
-	public ResultSet getAllLabelItem(Integer task_id,String user_id){
+	public ResultSet getAllLabeledItem(Integer task_id,String user_id){
 		String sqlStmt="select ods_sentence_id, source_name,concept_name, "
 				+"content, src_content, sentiment, is_conflict, is_relevent "
 				+"from label_ods_rst where task_id=%d and user_id='%s';";

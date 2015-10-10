@@ -27,7 +27,6 @@ public class SQLHelperTest extends TestCase{
 		assertEquals("root",testSQL.SQLInfo("dbUsername"));
 		assertEquals("biubiubiu",testSQL.SQLInfo("dbPassword"));
 		assertEquals("jdbc:mysql://localhost:3306/label_netease_gdas_test?useUnicode=True&characterEncoding=utf-8",testSQL.SQLInfo("dbUrl"));
-		assertEquals("True",testSQL.SQLInfo("connection"));
 /*		System.out.println("In test--SQLHelper Constructor\n");*/
 	}
 
@@ -39,7 +38,6 @@ public class SQLHelperTest extends TestCase{
 		assertEquals("root",testSQL.SQLInfo("dbUsername"));
 		assertEquals("biubiubiu",testSQL.SQLInfo("dbPassword"));
 		assertEquals("jdbc:mysql://localhost:3306/label_netease_gdas_test?useUnicode=True&characterEncoding=utf-8",testSQL.SQLInfo("dbUrl"));
-		assertEquals("True",testSQL.SQLInfo("connection"));
 		assertNull(testSQL.SQLInfo("123123123"));
 /*		System.out.println("In test--SQLHelper SQLInfo");*/
 	}
@@ -174,7 +172,7 @@ public class SQLHelperTest extends TestCase{
 		SQLHelper testSQL=new SQLHelper(mysqlConfig);
 		try{
 			int rowCount=testSQL.insertLabelItem("James",1,1,(float)1.0,0,1);
-			ResultSet rs=testSQL.getAllLabelItem(1,"James");
+			ResultSet rs=testSQL.getAllLabeledItem(1,"James");
 			rs.last();
 			assertEquals(1,rs.getInt(1));
 			assertEquals("百度贴吧",rs.getString(2));
@@ -199,7 +197,7 @@ public class SQLHelperTest extends TestCase{
 		SQLHelper testSQL=new SQLHelper(mysqlConfig);
 		try{
 			int rowCount=testSQL.insertLabelItem("James",1,1,(float)1.0,0,1);
-			ResultSet rs=testSQL.getAllLabelItem(1,"James");
+			ResultSet rs=testSQL.getAllLabeledItem(1,"James");
 			rs.last();
 			assertEquals(1,rs.getInt(1));
 			assertEquals("百度贴吧",rs.getString(2));

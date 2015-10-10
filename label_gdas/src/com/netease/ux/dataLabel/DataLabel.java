@@ -46,10 +46,12 @@ public class DataLabel {
 				startDateAndEndDate=sTS+"--"+eTS;
 				taskIdAndDates.put(task_id, startDateAndEndDate);
 			}
+			dbHelper.close();
 			return taskIdAndDates;
 		}
 		catch (SQLException e) {
 			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			dbHelper.close();
 			e.printStackTrace();
 			return taskIdAndDates;
 		}
@@ -76,10 +78,12 @@ public class DataLabel {
 				taskProgress=taskProgress.trim();
 				taskIdAndProgress.put(task_id, taskProgress);
 			}
+			dbHelper.close();
 			return taskIdAndProgress;
 		}
 		catch(SQLException e){
 			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			dbHelper.close();
 			e.printStackTrace();
 			return taskIdAndProgress;
 		}
@@ -99,10 +103,12 @@ public class DataLabel {
 				String str_task_id=task_id.toString();
 				taskIdList.add(str_task_id);
 			}
+			dbHelper.close();
 			return taskIdList;
 		}
 		catch(SQLException e){
 			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			dbHelper.close();
 			e.printStackTrace();
 			return null;
 		}
@@ -141,6 +147,7 @@ public class DataLabel {
 		for(int i=0;i<taskIdList.size();i++){
 			taskIdAndInfo.put(taskIdList.get(i),infoList.get(i));
 		}
+		dbHelper.close();
 		return JSONObject.fromObject(taskIdAndInfo);
 	}
 	
@@ -161,10 +168,12 @@ public class DataLabel {
 				String eTS=endTime.toString();
 				dates=sTS+"--"+eTS;
 			}
+			dbHelper.close();
 			return dates;
 		}
 		catch(SQLException e){
 			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			dbHelper.close();
 			e.printStackTrace();
 			return dates;
 		}
@@ -188,10 +197,12 @@ public class DataLabel {
 				taskProgress=usrProgress.toString()+"/200";
 				userIdAndProgress.put(userId, taskProgress);
 			}
+			dbHelper.close();
 			return JSONObject.fromObject(userIdAndProgress);
 		}
 		catch(SQLException e){
 			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			dbHelper.close();
 			e.printStackTrace();
 			return null;
 		}
@@ -227,16 +238,51 @@ public class DataLabel {
 			for(int i=0;i<taskInfo.size();i++){
 				takenTaskTimeAndProgress.put(taskId.get(i), taskInfo.get(i));
 			}
+			dbHelper.close();
 			return JSONObject.fromObject(takenTaskTimeAndProgress);
 		}
 		catch(SQLException e){
 			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			dbHelper.close();
 			e.printStackTrace();
 			return null;
 		}
 	}
 	
-	//TODO JSON输出标注项
+	/**
+	 * 输出标注页所有标注项信息
+	 * @param task_id 标注任务id
+	 * @return JSONObject
+	 */
+	public JSONObject getAllItemToLabel(Integer task_id){
+		Map<String,String[]> labelItemList=new HashMap<String,String[]>();
+		try{
+			ResultSet rs=dbHelper.getAllItemToLabel(task_id);
+			List<String> sentences=new ArrayList<String>();
+			List<String[]> sentenceInfo=new ArrayList<String[]>();
+			while(rs.next()){
+				sentences.add(((Integer)rs.getInt(1)).toString());
+				String[] sentence_info=new String[4];
+				sentence_info[0]=rs.getString(2);
+				sentence_info[1]=rs.getString(3);
+				sentence_info[2]=rs.getString(4);
+				sentence_info[3]=rs.getString(5);
+				sentenceInfo.add(sentence_info);
+			}
+/*			System.out.println(sentences.size());*/
+			for(int i=0;i<sentences.size();i++){
+				labelItemList.put(sentences.get(i),sentenceInfo.get(i));
+			}
+			dbHelper.close();
+			return JSONObject.fromObject(labelItemList);
+		}
+		catch(SQLException e){
+			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			dbHelper.close();
+			e.printStackTrace();
+			return null;
+		}
+	}
 	//TODO JSON输入写数据库
 	
 	/**
@@ -269,10 +315,12 @@ public class DataLabel {
 			for(int i=0;i<taskId.size();i++){
 				finishedTaskInfo.put(taskId.get(i),taskInfo.get(i));
 			}
+			dbHelper.close();
 			return JSONObject.fromObject(finishedTaskInfo);
 		}
 		catch(SQLException e){
 			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			dbHelper.close();
 			e.printStackTrace();
 			return null;
 		}
@@ -289,10 +337,12 @@ public class DataLabel {
 			while(rs.next()){
 				rankCollection.add(rs.getString(1));
 			}
+			dbHelper.close();
 			return JSONArray.fromObject(rankCollection);
 		}
 		catch(SQLException e){
 			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			dbHelper.close();
 			e.printStackTrace();
 			return null;
 		}
