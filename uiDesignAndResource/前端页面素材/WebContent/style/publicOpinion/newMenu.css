@@ -21,7 +21,7 @@ div#subject_field_menu div.searchBar {
     border: 1px solid #464854;    
     border-radius: 5px;
     outline: none;    
-    background: #fff url('../image/nav/nav_search.png') no-repeat 156px;
+    background: #fff url('../../image/nav/nav_search.png') no-repeat 156px;
 }
 
 div.searchBar .searchResult {
@@ -35,7 +35,6 @@ div.searchBar .searchResult {
     z-index: -1;
     top: 26px;
 }
-
 
 div#body_layout_center {
     background-color: #333544;
@@ -59,9 +58,9 @@ div#body_layout_center {
 #subject_field_menu div.menuSubject.menuClose span.title{float: left;}
 #subject_field_menu div.menuSubject.menuClose span.switch {width: 26px; height: 26px;display: inline-block; /* margin:3px 10px 0px 0px */}
 #subject_field_menu div.menuSubject.menuClose span.switch:after {display: none;}
-#subject_field_menu div.menuSubject.menuClose span.switch {background: url("../image/icon-gray.png") no-repeat left top; background-position: left -467px; float: left;}
+#subject_field_menu div.menuSubject.menuClose span.switch {background: url("../../image/icon-gray.png") no-repeat left top; background-position: left -467px; float: left;}
 #subject_field_menu div.menuSubject span.switch {width: 26px; height: 26px;display: inline-block; margin: 3px 0px 0px 0px;}
-#subject_field_menu div.menuSubject span.switch {background: url("../image/icon-gray.png") no-repeat left top; background-position: left -233px; float: left;}
+#subject_field_menu div.menuSubject span.switch {background: url("../../image/icon-gray.png") no-repeat left top; background-position: left -233px; float: left;}
 #subject_field_menu div.menuSubject span.switch:after {display: none;}
 #subject_field_menu div.menuList  {background: #1e202d; padding: 6px 0px;}
 #subject_field_menu div.menuList.menuClose  {display:none;}
