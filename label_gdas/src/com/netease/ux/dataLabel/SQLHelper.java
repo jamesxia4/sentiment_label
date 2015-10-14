@@ -147,6 +147,7 @@ public class SQLHelper {
 		return rowCount;
 	}
 	
+	@Deprecated
 	/**
 	 * 任务大厅罗列所有任务
 	 * @return ResultSet: row=[task_id, start_time, end_time]
@@ -164,6 +165,28 @@ public class SQLHelper {
 		}
 	}
 	
+	
+	/**
+	 * 任务大厅罗列所有任务(新)
+	 * @param task_group 任务组
+	 * @return ResultSet: row=[task_id, timediff, task_title,description]
+	 */
+	public ResultSet getLobbyAllTasks(Integer task_group){
+		String sqlStmt="select task_group,task_id,TIMESTAMPDIFF(day,NOW(),end_time),"
+				+ "task_title,description from label_task where task_group=%d order by task_id;";
+		sqlStmt=String.format(sqlStmt,task_group);
+		try{
+			ResultSet rs=queryExecutor(sqlStmt);
+			return rs;
+		}
+		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@Deprecated
 	/**
 	 * 查询指定任务的所有人员进度
 	 * @param task_id 任务id
@@ -185,6 +208,28 @@ public class SQLHelper {
 	}
 	
 	/**
+	 * 查询指定任务的所有人员进度(新)
+	 * @param task_id 任务id
+	 * @param task_group 任务组
+	 * @return ResultSet: row= [user_id, progress]
+	 */
+	public ResultSet getProgressByTaskId(Integer task_id,Integer task_group){
+		String sqlStmt="select user_id,progress from label_user_task where "
+				+"task_id =%d and task_group =%d order by user_id;";
+		sqlStmt=String.format(sqlStmt, task_id,task_group);
+		try{
+			ResultSet rs=queryExecutor(sqlStmt);
+			return rs;
+		}
+		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@Deprecated
+	/**
 	 * 返回指定任务下所有标注员id
 	 * @param task_id
 	 * @return ResultSet rs: row[task_id,user_id]
@@ -203,6 +248,27 @@ public class SQLHelper {
 		}
 	}
 	
+	/**
+	 * 返回指定任务下所有标注员id(新)
+	 * @param task_id 任务id
+	 * @param task_group 任务组
+	 * @return ResultSet rs: row[task_id,user_id]
+	 */
+	public ResultSet getAllUserIdByTaskId(Integer task_id,Integer task_group){
+		String sqlStmt="select task_id, user_id from label_user_task where task_id=%d and task_group=%d;";
+		sqlStmt=String.format(sqlStmt,task_id,task_group);
+		try{
+			ResultSet rs=queryExecutor(sqlStmt);
+			return rs;
+		}
+		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@Deprecated
 	/**
 	 * 查询指定任务的介绍信息（开始、结束时间）
 	 * @param task_id 任务id
@@ -224,6 +290,28 @@ public class SQLHelper {
 	}
 	
 	/**
+	 * 查询指定任务的介绍信息(新)
+	 * @param task_id 任务id
+	 * @param task_group 任务组
+	 * @return ResultSet: row=[task_id,timediff,title,description]
+	 */
+	public ResultSet getTaskInfoByTaskId(Integer task_id,Integer task_group){
+		String sqlStmt="select task_id,TIMESTAMPDIFF(day,NOW(),end_time),title,description from label_task where "
+				+"task_id=%d and task_group=%d";
+		sqlStmt=String.format(sqlStmt,task_id,task_group);
+		try{
+			ResultSet rs=queryExecutor(sqlStmt);
+			return rs;
+		}
+		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@Deprecated
+	/**
 	 * 查询用户的某个任务的进度
 	 * @param task_id 任务id
 	 * @param user_id 用户id
@@ -244,9 +332,32 @@ public class SQLHelper {
 		}
 	}
 	
+	
+	/**
+	 * 查询用户的某个任务的进度
+	 * @param task_id 任务id
+	 * @param task_group 任务组id
+	 * @param user_id 用户id
+	 * @return ResultSet: row=[task_id,progress]
+	 */
+	public ResultSet getTaskInfoByTaskIdAndUserId(Integer task_id,Integer task_group,String user_id){
+		String sqlStmt="select task_id,progress from label_user_task where "
+				+"task_id=%d and task_group=%d and user_id='%s';";
+		sqlStmt=String.format(sqlStmt,task_id,task_group,user_id);
+		try{
+			ResultSet rs=queryExecutor(sqlStmt);
+			return rs;
+		}
+		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	/**
 	 * 查看用户当前已领且未完成的任务
-	 * @param task_id 任务id
+	 * @param task_size 任务大小
 	 * @param user_id 用户id
 	 * @return ResultSet: row=[task_id,progress]
 	 */
@@ -265,6 +376,29 @@ public class SQLHelper {
 		}
 	}
 	
+	
+	/**
+	 * 查看用户当前已领且未完成的任务个数
+	 * @param task_size 任务大小
+	 * @param user_id 用户id
+	 * @return Integer: 未完成任务个数
+	 */
+	public Integer getNumberOfUnfinishedTaskInfoByUserId(String user_id,Integer task_size){
+		String sqlStmt="select count(*) from label_user_task where "
+				+"user_id='%s' and progress<%d order by task_id;";
+		sqlStmt=String.format(sqlStmt,user_id,task_size);
+		try{
+			ResultSet rs=queryExecutor(sqlStmt);
+			return rs.getInt(1);
+		}
+		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@Deprecated
 	/**
 	 * 标注页所有未标注条目罗列
 	 * @param task_id
@@ -275,6 +409,28 @@ public class SQLHelper {
 		String sqlStmt="select ods_sentence_id, source_name,concept_name, "
 				+"content, src_content from label_ods_src where task_id=%d;";
 		sqlStmt=String.format(sqlStmt, task_id);
+		try{
+			ResultSet rs=queryExecutor(sqlStmt);
+			return rs;
+		}
+		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * 标注页所有待标注条目罗列
+	 * @param task_id
+	 * @param task_group
+	 * @return ResultSet: row=[ods_sentence_id, source_name,concept name,
+	 *		src_content, content]
+	 */
+	public ResultSet getAllItemToLabel(Integer task_id,Integer task_group){
+		String sqlStmt="select ods_sentence_id, source_name,concept_name, "
+				+"content, src_content from label_ods_src where task_id=%d and task_group=%d;";
+		sqlStmt=String.format(sqlStmt,task_id,task_group);
 		try{
 			ResultSet rs=queryExecutor(sqlStmt);
 			return rs;
