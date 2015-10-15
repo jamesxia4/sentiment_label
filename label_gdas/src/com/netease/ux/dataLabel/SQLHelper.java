@@ -420,8 +420,10 @@ public class SQLHelper {
 		}
 	}
 	
+	
+	
 	/**
-	 * 标注页所有待标注条目罗列
+	 * 标注页所有待标注条目导出
 	 * @param task_id
 	 * @param task_group
 	 * @return ResultSet: row=[ods_sentence_id, source_name,concept name,
@@ -443,6 +445,30 @@ public class SQLHelper {
 	}
 	
 	/**
+	 * 第一次提交后后续标注项罗列
+	 * @param task_id,task_group 
+	 */
+	public ResultSet getAllUnlabeledItem(Integer task_id,String user_id,Integer task_group){
+		String sqlStmt="select ods_sentence_id,source_name,concept_name,"
+				+ "content,src_content,sentiment,is_conflict,is_relevent "
+				+ "from label_ods_rst where task_id=%d and user_id='%s' "
+				+ "and task_group=%d and is_final=0;";
+		sqlStmt=String.format(sqlStmt,task_id,user_id,task_group);
+		try{
+			ResultSet rs=queryExecutor(sqlStmt);
+			return rs;
+		}
+		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
+	
+	@Deprecated
+	/**
 	 * 标注页所有已标注条目罗列
 	 * @param task_id
 	 * @return ResultSet: row=[ods_sentence_id, source_name,concept name,
@@ -452,6 +478,29 @@ public class SQLHelper {
 		String sqlStmt="select ods_sentence_id, source_name,concept_name, "
 				+"content, src_content, sentiment, is_conflict, is_relevent "
 				+"from label_ods_rst where task_id=%d and user_id='%s';";
+		sqlStmt=String.format(sqlStmt, task_id,user_id);
+		try{
+			ResultSet rs=queryExecutor(sqlStmt);
+			return rs;
+		}
+		catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
+	/**
+	 * 标注页所有已标注条目罗列
+	 * @param task_id
+	 * @return ResultSet: row=[ods_sentence_id, source_name,concept name,
+	 *		src_content, content, sentiment, is_conflict, is_relevent]
+	 */
+	public ResultSet getAllLabeledItem(Integer task_id,String user_id,Integer task_group){
+		String sqlStmt="select ods_sentence_id, source_name,concept_name, "
+				+"content, src_content, sentiment, is_conflict, is_relevent "
+				+"from label_ods_rst where task_id=%d and task_group=%d and user_id='%s';";
 		sqlStmt=String.format(sqlStmt, task_id,user_id);
 		try{
 			ResultSet rs=queryExecutor(sqlStmt);
