@@ -30,7 +30,7 @@ public class DataLabel {
 	
 	/**任务大厅 罗列任务名和起止日期
 	 * @return HashMap<Integer任务id,String起止日期>
-	 */
+	 *//*
 	public HashMap<Integer,String> getLobbyAllTaskIdAndDates(){
 		HashMap<Integer,String> taskIdAndDates=new HashMap<Integer,String>();
 		try{
@@ -57,22 +57,22 @@ public class DataLabel {
 		}
 	}
 	
-	/**任务大厅 罗列任务名和进度
+	*//**任务大厅 罗列任务名和进度
 	 * @return HashMap<Integer任务id,String三人进度>
-	 */
+	 *//*
 	public HashMap<Integer,String> getLobbyAllTaskIdAndProgress(){
 		HashMap<Integer,String> taskIdAndProgress=new HashMap<Integer,String>();
 		try{
 			ResultSet rs_src=dbHelper.queryExecutor("select task_id from label_task order by task_id;");
 			while(rs_src.next()){
 				Integer task_id=rs_src.getInt(1);
-/*				System.out.println("    "+task_id.toString());*/
+				System.out.println("    "+task_id.toString());
 				ResultSet rs=dbHelper.getProgressByTaskId(task_id);
 				String taskProgress="";
 				while(rs.next()){
 					Integer usrProgress=rs.getInt(2);
 					taskProgress=taskProgress+usrProgress.toString()+"/200 ";
-/*					System.out.println(taskProgress);*/
+					System.out.println(taskProgress);
 
 				}
 				taskProgress=taskProgress.trim();
@@ -89,10 +89,10 @@ public class DataLabel {
 		}
 	}
 	
-	/**
+	*//**
 	 * 任务大厅：获取所有任务id
 	 * @return List<Integer> 任务id
-	 */
+	 *//*
 	public List<String> getAllTaskId(){
 		List<String> taskIdList=new ArrayList<String>();
 		try{
@@ -114,10 +114,10 @@ public class DataLabel {
 		}
 	}
 	
-	/**
+	*//**
 	 * 任务大厅：以Json格式输出任务id与信息
 	 * @return {"1":["2015-09-16 16:00:00.0--2015-09-17 16:00:00.0","200/200 "]}
-	 */
+	 *//*
 	public JSONObject getLobbyAllTaskInfo(){
 		List<String> taskIdList=getAllTaskId();
 		List<String[]> infoList=new ArrayList<String[]>();
@@ -138,8 +138,8 @@ public class DataLabel {
 			Object progress=entryProgress.getValue();
 			datesAndProgress[0]=(String)date;
 			datesAndProgress[1]=(String)progress;
-/*			System.out.println(datesAndProgress[0]);
-			System.out.println(datesAndProgress[1]);*/
+			System.out.println(datesAndProgress[0]);
+			System.out.println(datesAndProgress[1]);
 			infoList.add(datesAndProgress);
 		}
 		
@@ -151,9 +151,9 @@ public class DataLabel {
 		return JSONObject.fromObject(taskIdAndInfo);
 	}
 	
-	/**任务描述 罗列起止日期
+	*//**任务描述 罗列起止日期
 	 * @return String起始日期-截止日期
-	 */
+	 *//*
 	public String getDatesByTaskId(Integer task_id){
 		String dates="";
 		try{
@@ -180,15 +180,15 @@ public class DataLabel {
 		
 	}
 	
-	/**任务描述 罗列人员名与各自进度
+	*//**任务描述 罗列人员名与各自进度
 	 * @return JSON:{"James":"200/200","John":"0/200","Mary":"200/200"}
-	 */
+	 *//*
 	public JSONObject getAllUserProgressByTaskId(Integer task_id){
 		Map<String,String> userIdAndProgress=new HashMap<String,String>();
 		try{
-/*			ResultSet rs=dbHelper.getProgressByTaskId(task_id);
+			ResultSet rs=dbHelper.getProgressByTaskId(task_id);
 			rs.last();
-			System.out.println(rs.getRow());*/
+			System.out.println(rs.getRow());
 			ResultSet rs=dbHelper.getProgressByTaskId(task_id);
 			while(rs.next()){
 				String userId=rs.getString(1);
@@ -208,9 +208,9 @@ public class DataLabel {
 		}
 	}
 	
-	/**已领任务 罗列当前用户已领任务时间与进度
+	*//**已领任务 罗列当前用户已领任务时间与进度
 	 * @return JSON:{"2":["2015-09-16 16:01:00.0--2015-09-17 16:01:00.0","0/200"]}
-	 */
+	 *//*
 	public JSONObject getTakenTaskTimeAndProgress(String user_id){
 		Map<String,String[]> takenTaskTimeAndProgress=new HashMap<String,String[]>();
 		try{
@@ -249,11 +249,11 @@ public class DataLabel {
 		}
 	}
 	
-	/**
+	*//**
 	 * 输出标注页所有标注项信息
 	 * @param task_id 标注任务id
 	 * @return JSONObject
-	 */
+	 *//*
 	public JSONObject getAllItemToLabel(Integer task_id){
 		Map<String,String[]> labelItemList=new HashMap<String,String[]>();
 		try{
@@ -269,7 +269,7 @@ public class DataLabel {
 				sentence_info[3]=rs.getString(5);
 				sentenceInfo.add(sentence_info);
 			}
-/*			System.out.println(sentences.size());*/
+			System.out.println(sentences.size());
 			for(int i=0;i<sentences.size();i++){
 				labelItemList.put(sentences.get(i),sentenceInfo.get(i));
 			}
@@ -285,11 +285,11 @@ public class DataLabel {
 	}
 	//TODO JSON输入写数据库
 	
-	/**
+	*//**
 	 * 已完成任务：以JSON格式输出任务标注一致性以及有效条数
 	 * @param user_id
 	 * @return JSON:{"1":["2015-09-16 16:00:00.0--2015-09-17 16:00:00.0"}
-	 */
+	 *//*
 	public JSONObject getAllFinishedTaskInfo(String user_id){
 		Map<String,String[]> finishedTaskInfo=new HashMap<String,String[]>();
 		try{
@@ -326,10 +326,10 @@ public class DataLabel {
 		}
 	}
 	
-	/**
+	*//**
 	 * 输出排行榜
 	 * @return JSONArray:["Thomas","Carter","Mary","John","James"]
-	 */
+	 *//*
 	public JSONArray getAllRank(){
 		List<String> rankCollection=new ArrayList<String>();
 		try{
@@ -346,5 +346,5 @@ public class DataLabel {
 			e.printStackTrace();
 			return null;
 		}
-	}
+	}*/
 }

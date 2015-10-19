@@ -22,7 +22,7 @@ import java.util.Iterator;
 
 public class DataLabelTest extends TestCase{
 
-	@Test
+	/*@Test
 	public void testGetAllTaskId(){
 		DataLabel testLogicLayer=new DataLabel();
 		List<String> taskIdList=testLogicLayer.getAllTaskId();
@@ -42,7 +42,7 @@ public class DataLabelTest extends TestCase{
 		while(iterDates.hasNext()){
 			Map.Entry entryDates=(Map.Entry) iterDates.next();
 			Object date=entryDates.getValue();
-/*			System.out.println((String)date);*/
+			System.out.println((String)date);
 		}
 	}
 	
@@ -54,7 +54,7 @@ public class DataLabelTest extends TestCase{
 		while(iterProgress.hasNext()){
 			Map.Entry entryProgress=(Map.Entry) iterProgress.next();
 			Object progress=entryProgress.getValue();
-/*			System.out.println((String)progress);*/
+			System.out.println((String)progress);
 		}
 	}
 	
@@ -104,8 +104,8 @@ public class DataLabelTest extends TestCase{
 	public void testGetAllItemToLabel(){
 		DataLabel testLogicLayer=new DataLabel();
 		JSONObject testObject=testLogicLayer.getAllItemToLabel((Integer)1);
-/*		System.out.println(testObject.toString());*/
-	}
+		System.out.println(testObject.toString());
+	}*/
 	
 }
 

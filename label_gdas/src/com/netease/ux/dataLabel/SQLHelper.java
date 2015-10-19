@@ -147,25 +147,6 @@ public class SQLHelper {
 		return rowCount;
 	}
 	
-	@Deprecated
-	/**
-	 * 任务大厅罗列所有任务
-	 * @return ResultSet: row=[task_id, start_time, end_time]
-	 */
-	public ResultSet getLobbyAllTasks(){
-		String sqlStmt="select task_id, start_time, end_time from label_task order by task_id;";
-		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	
 	/**
 	 * 任务大厅罗列所有任务(新)
 	 * @param task_group 任务组
@@ -185,27 +166,7 @@ public class SQLHelper {
 			return null;
 		}
 	}
-	
-	@Deprecated
-	/**
-	 * 查询指定任务的所有人员进度
-	 * @param task_id 任务id
-	 * @return ResultSet: row= [user_id, progress]
-	 */
-	public ResultSet getProgressByTaskId(Integer task_id){
-		String sqlStmt="select user_id,progress from label_user_task where "
-				+"task_id =%d order by user_id;";
-		sqlStmt=String.format(sqlStmt, task_id);
-		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return null;
-		}
-	}
+
 	
 	/**
 	 * 查询指定任务的所有人员进度(新)
@@ -228,26 +189,6 @@ public class SQLHelper {
 		}
 	}
 	
-	@Deprecated
-	/**
-	 * 返回指定任务下所有标注员id
-	 * @param task_id
-	 * @return ResultSet rs: row[task_id,user_id]
-	 */
-	public ResultSet getAllUserIdByTaskId(Integer task_id){
-		String sqlStmt="select task_id, user_id from label_user_task where task_id=%d;";
-		sqlStmt=String.format(sqlStmt, task_id);
-		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
 	/**
 	 * 返回指定任务下所有标注员id(新)
 	 * @param task_id 任务id
@@ -257,27 +198,6 @@ public class SQLHelper {
 	public ResultSet getAllUserIdByTaskId(Integer task_id,Integer task_group){
 		String sqlStmt="select task_id, user_id from label_user_task where task_id=%d and task_group=%d;";
 		sqlStmt=String.format(sqlStmt,task_id,task_group);
-		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	@Deprecated
-	/**
-	 * 查询指定任务的介绍信息（开始、结束时间）
-	 * @param task_id 任务id
-	 * @return ResultSet: row=[task_id,start_time,end_time]
-	 */
-	public ResultSet getTaskInfoByTaskId(Integer task_id){
-		String sqlStmt="select task_id,start_time,end_time from label_task where "
-				+"task_id=%d;";
-		sqlStmt=String.format(sqlStmt, task_id);
 		try{
 			ResultSet rs=queryExecutor(sqlStmt);
 			return rs;
@@ -310,27 +230,6 @@ public class SQLHelper {
 		}
 	}
 	
-	@Deprecated
-	/**
-	 * 查询用户的某个任务的进度
-	 * @param task_id 任务id
-	 * @param user_id 用户id
-	 * @return ResultSet: row=[task_id,progress]
-	 */
-	public ResultSet getTaskInfoByTaskIdAndUserId(Integer task_id,String user_id){
-		String sqlStmt="select task_id,progress from label_user_task where "
-				+"task_id=%d and user_id='%s';";
-		sqlStmt=String.format(sqlStmt, task_id,user_id);
-		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return null;
-		}
-	}
 	
 	
 	/**
@@ -398,30 +297,6 @@ public class SQLHelper {
 		}
 	}
 	
-	@Deprecated
-	/**
-	 * 标注页所有未标注条目罗列
-	 * @param task_id
-	 * @return ResultSet: row=[ods_sentence_id, source_name,concept name,
-	 *		src_content, content]
-	 */
-	public ResultSet getAllItemToLabel(Integer task_id){
-		String sqlStmt="select ods_sentence_id, source_name,concept_name, "
-				+"content, src_content from label_ods_src where task_id=%d;";
-		sqlStmt=String.format(sqlStmt, task_id);
-		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	
-	
 	/**
 	 * 标注页所有待标注条目导出
 	 * @param task_id
@@ -467,28 +342,7 @@ public class SQLHelper {
 	}
 	
 	
-	@Deprecated
-	/**
-	 * 标注页所有已标注条目罗列
-	 * @param task_id
-	 * @return ResultSet: row=[ods_sentence_id, source_name,concept name,
-	 *		src_content, content, sentiment, is_conflict, is_relevent]
-	 */
-	public ResultSet getAllLabeledItem(Integer task_id,String user_id){
-		String sqlStmt="select ods_sentence_id, source_name,concept_name, "
-				+"content, src_content, sentiment, is_conflict, is_relevent "
-				+"from label_ods_rst where task_id=%d and user_id='%s';";
-		sqlStmt=String.format(sqlStmt, task_id,user_id);
-		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return null;
-		}
-	}
+
 	
 	
 	/**
@@ -569,52 +423,6 @@ public class SQLHelper {
 		}
 	}
 	
-	@Deprecated
-	/**
-	 * 在某个task_id下所有标注员提交后遍历同task_id的标注项，选出有效项目
-	 * 标准：三人标注一致，且is_conflict!=1, is_relevent=1
-	 * @param task_id
-	 * @return rowCount,异常时返回-1
-	 */
-	//在MySQL中,Update语句中的表如果同时被此条语句select,要用临时表做替换 ,否则报1093
-	//http://stackoverflow.com/questions/45494/mysql-error-1093-cant-specify-target-table-for-update-in-from-clause
-	public int updateNumEffectiveByTaskId(Integer task_id){
-		String sqlStmt="update label_ods_rst set is_useful=0 where ods_sentence_id=(select ods_sentence_id FROM (select * from label_ods) as tmpTable "
-				+ "where task_id=%d group by ods_sentence_id having count(distinct sentiment)>1);";
-		//http://zhidao.baidu.com/question/68619324.html
-		sqlStmt=String.format(sqlStmt, task_id);
-		try{
-			int rowCount=updateExecutor(sqlStmt);
-			return rowCount;
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return -1;
-		}
-	}
-	
-	@Deprecated
-	/**
-	 * 在某个task_id下所有标注员提交后遍历同task_id的标注项，选出有效项目
-	 * 标准：三人标注一致，且is_conflict!=1, is_relevent=1
-	 * @param task_id
-	 * @return rowCount,异常时返回-1
-	 */
-	public int getEffectiveSentenceIdByTaskId(Integer task_id){
-		String sqlStmt="select ods_sentence_id FROM (select * from label_ods) as tmpTable "
-				+ "where task_id=%d group by ods_sentence_id having count(distinct sentiment)>1;";
-		sqlStmt=String.format(sqlStmt, task_id);
-		try{
-			int rowCount=updateExecutor(sqlStmt);
-			return rowCount;
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return -1;
-		}
-	}
 	
 	/**
 	 * 提交后根据用户任务中的progress更新toal_labeled
@@ -676,7 +484,6 @@ public class SQLHelper {
 	 * 标注一致性计算
 	 *********************************************************/
 	
-	@Deprecated
 	/**
 	 * 计算一对标注员之间在某个任务上标注结果一致的个数
 	 * select count(*) from 
@@ -707,112 +514,6 @@ public class SQLHelper {
 		}
 	}
 	
-	/**
-	 * 计算某个任务的Pe
-	 * @param task_id
-	 * @param task_size
-	 * @return
-	 */
-	public float calculatePeByTaskId(Integer task_id,Integer task_size){
-		String sqlStmtPos="select sum(tmp.cnt)/%d/3 "
-				+"from "
-				+"(select ods_sentence_id,count(user_id) as cnt from label_ods_rst "
-				+" where task_id=%d and sentiment=1.0 group by ods_sentence_id "
-				+" order by ods_sentence_id) as tmp;";
-		String sqlStmtNeg="select sum(tmp.cnt)/%d/3 "
-				+"from "
-				+"(select ods_sentence_id,count(user_id) as cnt from label_ods_rst "
-				+" where task_id=%d and sentiment=-1.0 group by ods_sentence_id "
-				+" order by ods_sentence_id) as tmp;";
-		String sqlStmtNeu="select sum(tmp.cnt)/%d/3 "
-				+"from "
-				+"(select ods_sentence_id,count(user_id) as cnt from label_ods_rst "
-				+" where task_id=%d and sentiment=0.0 group by ods_sentence_id "
-				+" order by ods_sentence_id) as tmp;";
-		sqlStmtPos=String.format(sqlStmtPos,task_size,task_id);
-		sqlStmtNeg=String.format(sqlStmtNeg,task_size,task_id);
-		sqlStmtNeu=String.format(sqlStmtNeu,task_size,task_id);
-/*		System.out.println(sqlStmtPos);
-		System.out.println(sqlStmtNeg);
-		System.out.println(sqlStmtNeu);*/
-		try{
-			ResultSet rsPos=queryExecutor(sqlStmtPos);
-			ResultSet rsNeg=queryExecutor(sqlStmtNeg);
-			ResultSet rsNeu=queryExecutor(sqlStmtNeu);
-			float ratioPos=(float)0.0;
-			float ratioNeg=(float)0.0;
-			float ratioNeu=(float)0.0;
-			
-			float pe;
-			while(rsPos.next()){
-				ratioPos=rsPos.getFloat(1);
-			}
-			while(rsNeg.next()){
-				ratioNeg=rsNeg.getFloat(1);
-			}
-			while(rsNeu.next()){
-				ratioNeu=rsNeu.getFloat(1);
-			}
-			
-			pe=ratioPos*ratioPos+ratioNeg*ratioNeg+ratioNeu*ratioNeu;
-			return pe;
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return (float)0.0;
-		}
-	}
-	
-	/**
-	 * 计算某个任务的Pbar
-	 * @param task_id
-	 * @param task_size
-	 * @return sum:Pbar
-	 */
-	public float calculatePbarByTaskId(Integer task_id,Integer task_size){
-		String sqlStmt="select tmp.ods_sentence_id,sum(POW(tmp.sum1,2)) from"
-				+ " (select ods_sentence_id,sentiment,count(*) as sum1 from label_ods_rst where task_id =%d "
-				+ "group by ods_sentence_id,sentiment) as tmp group by ods_sentence_id;";
-		sqlStmt=String.format(sqlStmt, task_id);
-/*		System.out.println(sqlStmt);*/
-		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			Float sum=(float)0.0;
-/*			rs.last();
-			System.out.println("row:"+rs.getRow());*/
-			while(rs.next()){
-				Float sqrSum=(float)rs.getInt(2);
-				sqrSum=sqrSum-(float)3.0;
-				sqrSum=sqrSum*(float)(1.0/(6.0));
-/*				System.out.println(sqrSum);*/
-				sum=sum+sqrSum;
-			}
-			sum=sum/(float)task_size;
-			return sum;
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return (float)0.0;
-		}
-	}
-	
-	/**
-	 * 根据pe和pbar计算kappa
-	 * @param task_id
-	 * @param task_size
-	 * @return kappa
-	 */
-	public float calculateFleissKappa(Integer task_id,Integer task_size){
-		float pe=(float)0.0;
-		float pbar=(float)0.0;
-		pe=calculatePeByTaskId(task_id,task_size);
-		pbar=calculatePbarByTaskId(task_id,task_size);
-		float kappa=(float)0.0;
-		kappa=(pbar-pe)/(1-pe);
-		return kappa;
-	}
 	
 	/**
 	 * 更新某个标注员指定任务的一致性参数

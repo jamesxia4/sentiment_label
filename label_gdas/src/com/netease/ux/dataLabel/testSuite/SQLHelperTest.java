@@ -19,7 +19,7 @@ import junit.framework.TestCase;
 import com.netease.ux.dataLabel.*;
 
 public class SQLHelperTest extends TestCase{
-	@Test
+	/*@Test
 	public void testSQLHelper() {
 		Config mysqlConfig=new Config("D:/config/dbConfig.cfg");
 		SQLHelper testSQL=new SQLHelper(mysqlConfig);
@@ -27,7 +27,7 @@ public class SQLHelperTest extends TestCase{
 		assertEquals("root",testSQL.SQLInfo("dbUsername"));
 		assertEquals("biubiubiu",testSQL.SQLInfo("dbPassword"));
 		assertEquals("jdbc:mysql://localhost:3306/label_netease_gdas_test?useUnicode=True&characterEncoding=utf-8",testSQL.SQLInfo("dbUrl"));
-/*		System.out.println("In test--SQLHelper Constructor\n");*/
+		System.out.println("In test--SQLHelper Constructor\n");
 	}
 
 	@Test
@@ -39,7 +39,7 @@ public class SQLHelperTest extends TestCase{
 		assertEquals("biubiubiu",testSQL.SQLInfo("dbPassword"));
 		assertEquals("jdbc:mysql://localhost:3306/label_netease_gdas_test?useUnicode=True&characterEncoding=utf-8",testSQL.SQLInfo("dbUrl"));
 		assertNull(testSQL.SQLInfo("123123123"));
-/*		System.out.println("In test--SQLHelper SQLInfo");*/
+		System.out.println("In test--SQLHelper SQLInfo");
 	}
 	
 	@Test
@@ -49,7 +49,7 @@ public class SQLHelperTest extends TestCase{
 		try{
 			ResultSet rs=testSQL.queryExecutor("select task_id, start_time, end_time from label_task;");
 			rs.last();
-/*			System.out.println(rs.getRow());*/
+			System.out.println(rs.getRow());
 		}
 		catch(SQLException e){
 			e.printStackTrace();
@@ -257,7 +257,7 @@ public class SQLHelperTest extends TestCase{
 		try{
 			ResultSet rs=testSQL.getFinishedTask("Mary", 200);
 			rs.last();
-/*			System.out.println(rs.getRow());*/
+			System.out.println(rs.getRow());
 			assertEquals((float)0.7,rs.getFloat(2));
 			assertEquals(130,rs.getInt(3));
 		}
@@ -311,5 +311,5 @@ public class SQLHelperTest extends TestCase{
 			testSQL.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 		}
-	}
+	}*/
 }
