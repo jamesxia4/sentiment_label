@@ -152,7 +152,7 @@ public class SQLHelper {
 	 *********************************************************/
 	
 	/**
-	 * 任务大厅，罗列所有任务(新)：任务id,剩余时间,标题,描述信息
+	 * 任务大厅，罗列所有任务：任务id,剩余时间,标题,描述信息
 	 * @param task_group 任务组
 	 * @return ResultSet: row=[task_id, timediff, task_title,description]
 	 */
@@ -230,6 +230,7 @@ public class SQLHelper {
 			return null;
 		}
 	}
+	
 	
 	/**
 	 * 任务大厅，领取任务
@@ -311,6 +312,26 @@ public class SQLHelper {
 	
 	
 	/**
+	 * 我的任务，获得未完成的任务的已领人数
+	 * @param task_group 任务组
+	 * @return ResultSet: row=[task_id,count(人数)]
+	 */
+	public ResultSet getMyTaskAllTasksTakenByUsers(Integer task_group, Integer task_id){
+		String sqlStmt="select task_id,task_group,count(*) from label_user_task "
+				+ "where task_group=%d and task_id=%d;";
+		sqlStmt=String.format(sqlStmt, task_group,task_id);
+		try{
+			ResultSet rs=queryExecutor(sqlStmt);
+			return rs;
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
+	/**
 	 * 我的任务：根据已输出的task_id取得已完成任务的信息
 	 * @param task_group
 	 * @param task_id
@@ -331,6 +352,7 @@ public class SQLHelper {
 		
 	}
 	
+	/**
 	
 	
 	/*********************************************************
@@ -342,7 +364,7 @@ public class SQLHelper {
 	 * select count(*) from 
 	 * ((select * from label_ods where task_id=%d and user_id = '%s') as task_1_1) 
 	 * inner join 
-	 * ((select * from label_ods where task_id=%d and user_id = '%s') as task_1_2) 
+	 * ((select * from label_ods where task_id=%d and user_id = '%s') as task_1_2)  
 	 * on task_1_1.sentiment=task_1_2.sentiment and task_1_1.ods_sentence_id=task_1_2.ods_sentence_id;
 	 * @param task_id,user_id_1,user_id_2
 	 * @return ResultSet rs:[count]
