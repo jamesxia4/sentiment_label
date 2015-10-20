@@ -1,0 +1,126 @@
+
+mysql> desc label_user;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| user_id       | varchar(255) | NO   | PRI | NULL    |       |
+| total_labeled | bigint(11)   | NO   | MUL | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+
+mysql> desc label_task;
++-------------+---------------+------+-----+---------+----------------+
+| Field       | Type          | Null | Key | Default | Extra          |
++-------------+---------------+------+-----+---------+----------------+
+| task_id     | bigint(11)    | NO   | PRI | NULL    |                |
+| start_time  | datetime      | NO   |     | NULL    |                |
+| end_time    | datetime      | NO   |     | NULL    |                |
+| description | varchar(3000) | YES  |     | NULL    |                |
+| task_title  | varchar(500)  | YES  |     | NULL    |                |
+| task_group  | bigint(11)    | NO   | PRI | NULL    |                |
++-------------+---------------+------+-----+---------+----------------+
+6 rows in set (0.01 sec)
+
+
+mysql> desc label_user_task;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| task_id       | bigint(11)   | NO   | PRI | NULL    |       |
+| user_id       | varchar(255) | NO   | PRI | NULL    |       |
+| kappa         | float        | YES  |     | NULL    |       |
+| num_effective | int(11)      | YES  |     | NULL    |       |
+| progress      | int(11)      | NO   |     | NULL    |       |
+| task_group    | bigint(11)   | NO   | PRI | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mysql> desc label_ods_src;
++-----------------+---------------+------+-----+---------+-------+
+| Field           | Type          | Null | Key | Default | Extra |
++-----------------+---------------+------+-----+---------+-------+
+| ods_sentence_id | bigint(11)    | NO   | PRI | NULL    |       |
+| date_id         | int(11)       | NO   |     | NULL    |       |
+| game_id         | int(11)       | NO   |     | NULL    |       |
+| source_id       | bigint(11)    | NO   |     | NULL    |       |
+| comment_id      | bigint(11)    | NO   |     | NULL    |       |
+| sentence_index  | int(11)       | NO   |     | NULL    |       |
+| concept_id      | bigint(11)    | NO   |     | NULL    |       |
+| source_name     | varchar(255)  | YES  |     | NULL    |       |
+| concept_name    | varchar(255)  | YES  |     | NULL    |       |
+| content         | varchar(500)  | YES  |     | NULL    |       |
+| src_content     | varchar(3000) | YES  |     | NULL    |       |
+| task_id         | bigint(11)    | NO   | PRI | NULL    |       |
+| task_group      | bigint(11)    | NO   | PRI | NULL    |       |
++-----------------+---------------+------+-----+---------+-------+
+13 rows in set (0.07 sec)
+
+
+mysql> desc label_ods_rst;
++-----------------+---------------+------+-----+---------+-------+
+| Field           | Type          | Null | Key | Default | Extra |
++-----------------+---------------+------+-----+---------+-------+
+| ods_sentence_id | bigint(11)    | NO   | PRI | NULL    |       |
+| date_id         | int(11)       | NO   |     | NULL    |       |
+| game_id         | int(11)       | NO   |     | NULL    |       |
+| source_id       | bigint(11)    | NO   |     | NULL    |       |
+| comment_id      | bigint(11)    | NO   |     | NULL    |       |
+| sentence_index  | int(11)       | NO   |     | NULL    |       |
+| concept_id      | bigint(11)    | NO   |     | NULL    |       |
+| source_name     | varchar(255)  | YES  |     | NULL    |       |
+| concept_name    | varchar(255)  | YES  |     | NULL    |       |
+| content         | varchar(500)  | YES  |     | NULL    |       |
+| src_content     | varchar(3000) | YES  |     | NULL    |       |
+| sentiment       | float         | YES  |     | NULL    |       |
+| is_conflict     | int(11)       | YES  |     | NULL    |       |
+| is_relevent     | int(11)       | YES  |     | NULL    |       |
+| task_id         | bigint(11)    | NO   | PRI | NULL    |       |
+| user_id         | varchar(255)  | NO   | PRI | NULL    |       |
+| is_final        | int(11)       | YES  |     | NULL    |       |
+| task_group      | bigint(11)    | NO   | PRI | NULL    |       |
++-----------------+---------------+------+-----+---------+-------+
+18 rows in set (0.01 sec)
+

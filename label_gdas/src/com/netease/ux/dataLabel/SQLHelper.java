@@ -147,14 +147,19 @@ public class SQLHelper {
 		return rowCount;
 	}
 	
+	/*********************************************************
+	 * 任务大厅
+	 *********************************************************/
+	
 	/**
-	 * 任务大厅罗列所有任务(新)
+	 * 任务大厅，罗列所有任务(新)：任务id,剩余时间,标题,描述信息
 	 * @param task_group 任务组
 	 * @return ResultSet: row=[task_id, timediff, task_title,description]
 	 */
 	public ResultSet getLobbyAllTasks(Integer task_group){
-		String sqlStmt="select task_group,task_id,TIMESTAMPDIFF(day,NOW(),end_time),"
-				+ "task_title,description from label_task where task_group=%d order by task_id;";
+		String sqlStmt="select task_id,task_group,TIMESTAMPDIFF(day,NOW(),end_time),"
+				+ "task_title,description,requirements from label_task "
+				+ "where task_group=%d order by task_id;";
 		sqlStmt=String.format(sqlStmt,task_group);
 		try{
 			ResultSet rs=queryExecutor(sqlStmt);
@@ -166,23 +171,20 @@ public class SQLHelper {
 			return null;
 		}
 	}
-
 	
 	/**
-	 * 查询指定任务的所有人员进度(新)
-	 * @param task_id 任务id
+	 * 任务大厅，获得各个任务已领人数
 	 * @param task_group 任务组
-	 * @return ResultSet: row= [user_id, progress]
+	 * @return ResultSet: row=[task_id,count(人数)]
 	 */
-	public ResultSet getProgressByTaskId(Integer task_id,Integer task_group){
-		String sqlStmt="select user_id,progress from label_user_task where "
-				+"task_id =%d and task_group =%d order by user_id;";
-		sqlStmt=String.format(sqlStmt, task_id,task_group);
+	public ResultSet getLobbyAllTasksTakenByUsers(Integer task_group){
+		String sqlStmt="select task_id,task_group,count(*) from label_user_task "
+				+ "where task_group=%d group by task_id order by task_id;";
+		sqlStmt=String.format(sqlStmt, task_group);
 		try{
 			ResultSet rs=queryExecutor(sqlStmt);
 			return rs;
-		}
-		catch(SQLException e){
+		}catch(SQLException e){
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return null;
@@ -190,19 +192,18 @@ public class SQLHelper {
 	}
 	
 	/**
-	 * 返回指定任务下所有标注员id(新)
-	 * @param task_id 任务id
-	 * @param task_group 任务组
-	 * @return ResultSet rs: row[task_id,user_id]
+	 * 任务大厅，输出已经被当前用户领取的任务编号
+	 * @param task_group
+	 * @param user_id
+	 * @return ResultSet: row=[task_id,task_group]
 	 */
-	public ResultSet getAllUserIdByTaskId(Integer task_id,Integer task_group){
-		String sqlStmt="select task_id, user_id from label_user_task where task_id=%d and task_group=%d;";
-		sqlStmt=String.format(sqlStmt,task_id,task_group);
+	public ResultSet getLobbyAllTasksIfTaken(Integer task_group,String user_id){
+		String sqlStmt="select task_id,task_group from label_user_task where task_group=%d and user_id='%s';";
+		sqlStmt=String.format(sqlStmt,task_group,user_id);
 		try{
 			ResultSet rs=queryExecutor(sqlStmt);
 			return rs;
-		}
-		catch(SQLException e){
+		}catch(SQLException e){
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return null;
@@ -210,44 +211,20 @@ public class SQLHelper {
 	}
 	
 	/**
-	 * 查询指定任务的介绍信息(新)
-	 * @param task_id 任务id
-	 * @param task_group 任务组
-	 * @return ResultSet: row=[task_id,timediff,title,description]
+	 * 任务大厅，输出当前用户已经领了但是没有完成的任务个数
 	 */
-	public ResultSet getTaskInfoByTaskId(Integer task_id,Integer task_group){
-		String sqlStmt="select task_id,TIMESTAMPDIFF(day,NOW(),end_time),title,description from label_task where "
-				+"task_id=%d and task_group=%d";
-		sqlStmt=String.format(sqlStmt,task_id,task_group);
+	public Integer getLobbyNumberOfUnfinishedTask(Integer task_group,String user_id,Integer task_size){
+		String sqlStmt="select count(*) from label_user_task "
+				+ "where task_group=%d and user_id='%s' and is_finished=0;";
+		sqlStmt=String.format(sqlStmt,task_group,user_id,task_size);
 		try{
 			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	
-	
-	/**
-	 * 查询用户的某个任务的进度
-	 * @param task_id 任务id
-	 * @param task_group 任务组id
-	 * @param user_id 用户id
-	 * @return ResultSet: row=[task_id,progress]
-	 */
-	public ResultSet getTaskInfoByTaskIdAndUserId(Integer task_id,Integer task_group,String user_id){
-		String sqlStmt="select task_id,progress from label_user_task where "
-				+"task_id=%d and task_group=%d and user_id='%s';";
-		sqlStmt=String.format(sqlStmt,task_id,task_group,user_id);
-		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
-		}
-		catch(SQLException e){
+			Integer unfinishedCount=0;
+			while(rs.next()){
+				unfinishedCount=rs.getInt(1);
+			}
+			return unfinishedCount;
+		}catch(SQLException e){
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return null;
@@ -255,236 +232,112 @@ public class SQLHelper {
 	}
 	
 	/**
-	 * 查看用户当前已领且未完成的任务
-	 * @param task_size 任务大小
-	 * @param user_id 用户id
-	 * @return ResultSet: row=[task_id,progress]
-	 */
-	public ResultSet getUnfinishedTaskInfoByUserId(String user_id,Integer task_size){
-		String sqlStmt="select task_id,progress from label_user_task where "
-				+"user_id='%s' and progress<%d order by task_id;";
-		sqlStmt=String.format(sqlStmt,user_id,task_size);
-		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	
-	/**
-	 * 查看用户当前已领且未完成的任务个数
-	 * @param task_size 任务大小
-	 * @param user_id 用户id
-	 * @return Integer: 未完成任务个数
-	 */
-	public Integer getNumberOfUnfinishedTaskInfoByUserId(String user_id,Integer task_size){
-		String sqlStmt="select count(*) from label_user_task where "
-				+"user_id='%s' and progress<%d order by task_id;";
-		sqlStmt=String.format(sqlStmt,user_id,task_size);
-		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs.getInt(1);
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	/**
-	 * 标注页所有待标注条目导出
+	 * 任务大厅，领取任务
 	 * @param task_id
 	 * @param task_group
-	 * @return ResultSet: row=[ods_sentence_id, source_name,concept name,
-	 *		src_content, content]
-	 */
-	public ResultSet getAllItemToLabel(Integer task_id,Integer task_group){
-		String sqlStmt="select ods_sentence_id, source_name,concept_name, "
-				+"content, src_content from label_ods_src where task_id=%d and task_group=%d;";
-		sqlStmt=String.format(sqlStmt,task_id,task_group);
-		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	/**
-	 * 第一次提交后后续标注项罗列
-	 * @param task_id,task_group 
-	 */
-	public ResultSet getAllUnlabeledItem(Integer task_id,String user_id,Integer task_group){
-		String sqlStmt="select ods_sentence_id,source_name,concept_name,"
-				+ "content,src_content,sentiment,is_conflict,is_relevent "
-				+ "from label_ods_rst where task_id=%d and user_id='%s' "
-				+ "and task_group=%d and is_final=0;";
-		sqlStmt=String.format(sqlStmt,task_id,user_id,task_group);
-		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return null;
-		}
-		
-	}
-	
-	
-
-	
-	
-	/**
-	 * 标注页所有已标注条目罗列
-	 * @param task_id
-	 * @return ResultSet: row=[ods_sentence_id, source_name,concept name,
-	 *		src_content, content, sentiment, is_conflict, is_relevent]
-	 */
-	public ResultSet getAllLabeledItem(Integer task_id,String user_id,Integer task_group){
-		String sqlStmt="select ods_sentence_id, source_name,concept_name, "
-				+"content, src_content, sentiment, is_conflict, is_relevent "
-				+"from label_ods_rst where task_id=%d and task_group=%d and user_id='%s';";
-		sqlStmt=String.format(sqlStmt, task_id,user_id);
-		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	/**
-	 * 标注页提交:更新页面上单个标注项的值
-	 * @param user_id: 用户id 用于标识标注者的身份
-	 * @param task_id: 任务id 用于确定任务
-	 * @param ods_sentence_id 用于确定标注项是任务中的哪一条
-	 * @param sentiment 情感倾向
-	 * @param is_conflict 句中情感是否冲突
-	 * @param is_relevent 语句情感是否与特征无关
-	 * @return 执行update操作后返回的rowCount, -1为异常
-	 */
-	public int insertLabelItem(String user_id,Integer task_id,Integer ods_sentence_id,Float sentiment,Integer is_conflict,Integer is_relevent){
-		String sqlStmtSrc="select * from label_ods_src where ods_sentence_id=%d and task_id=%d";
-		
-		String sqlStmtTgt="Insert into label_ods_rst values "
-				+ "(%d,%d,%d,%d,%d,%d,%d,"
-				+ "'%s','%s','%s','%s',"
-				+ "%f,%d,%d,%d,'%s');";
-		sqlStmtSrc=String.format(sqlStmtSrc,ods_sentence_id,task_id);
-		try{
-			ResultSet rs=queryExecutor(sqlStmtSrc);
-			while(rs.next()){
-				sqlStmtTgt=String.format(sqlStmtTgt,rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getInt(4),rs.getInt(5),rs.getInt(6),rs.getInt(7),
-						rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),sentiment,is_conflict,is_relevent,task_id,user_id);
-/*				System.out.println(sqlStmtTgt);*/
-				int rowCount=updateExecutor(sqlStmtTgt);
-				return rowCount;
-			}
-			return -1;
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return -1;
-		}
-	}
-	
-	/**
-	 * 在提交任务后根据UserId和TaskId更新对应项的progress
 	 * @param user_id
-	 * @param task_id
-	 * @return rowCount,异常时返回-1
+	 * @return rowCount, -1为异常
 	 */
-	public int updateProgressByUserIdAndTaskId(String user_id,Integer task_id,Integer task_size){
-		String sqlStmt="update label_user_task set progress=%d where user_id='%s' and task_id=%d;";
-		sqlStmt=String.format(sqlStmt, task_size, user_id ,task_id);
+	public int setNewTaskToBeTaken(Integer task_id,Integer task_group,String user_id){
+		String sqlStmt="insert into label_user_task values (%d,%s,%d,0.0,0,0,0)";
+		sqlStmt=String.format(sqlStmt, task_id,user_id,task_group);
 		try{
 			int rowCount=updateExecutor(sqlStmt);
 			return rowCount;
-		}
-		catch (SQLException e){
+		}catch(SQLException e){
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return -1;
-		}
-	}
-	
-	
-	/**
-	 * 提交后根据用户任务中的progress更新toal_labeled
-	 * @param user_id 用户id
-	 * @return rowCount,异常时返回-1
-	 */
-	public int updateUserTotalLabeled(String user_id,Integer task_size){
-		String sqlStmt="update label_user set total_labeled=total_labeled+ %d where user_id='%s';";
-		sqlStmt=String.format(sqlStmt, task_size, user_id);
-		try{
-			int rowCount=updateExecutor(sqlStmt);
-			return rowCount;
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return -1;
-		}
-	}
-	
-	/**
-	 * 根据用户id输出所有已完成任务的kappa和有效标注数量
-	 * @param user_id 用户id
-	 * @return ResultSet: row=[task_id, kappa, num_effective]
-	 */
-	public ResultSet getFinishedTask(String user_id,Integer task_size){
-		String sqlStmt="select task_id, kappa, num_effective from label_user_task where user_id='%s' and progress=%d order by task_id;";
-		sqlStmt=String.format(sqlStmt, user_id,task_size);
-		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return null;
-		}
-		
-	}
-	
-	/**
-	 * 输出标注量排行榜
-	 * @return ResultSet: row=[user_id,total_labeled]
-	 */
-	public ResultSet getLabelRank(){
-		String sqlStmt="select * from label_user order by total_labeled desc;";
-		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return null;
 		}
 	}
 	
 	/*********************************************************
-	 * 标注一致性计算
+	 * 我的任务
 	 *********************************************************/
 	
 	/**
+	 * 我的任务：输出未完成的任务task_id
+	 */
+	public ResultSet getMyTaskAllUnfinishedTasks(String user_id){
+		String sqlStmt="select task_group,task_id from label_user_task where user_id='%s' and is_finished=0;";
+		sqlStmt=String.format(sqlStmt, user_id);
+		try{
+			ResultSet rs=queryExecutor(sqlStmt);
+			return rs;
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
+	/**
+	 * 我的任务：输出已完成的任务task_id
+	 */
+	public ResultSet getMyTaskAllFinishedTasks(String user_id){
+		String sqlStmt="select task_group,task_id from label_user_task where user_id='%s' and is_finished=1;";
+		sqlStmt=String.format(sqlStmt, user_id);
+		try{
+			ResultSet rs=queryExecutor(sqlStmt);
+			return rs;
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * 我的任务：根据已输出的task_id取得未完成任务的信息
+	 * @param task_group
+	 * @param task_id
+	 * @return
+	 */
+	public ResultSet getUnfinishedTaskInfoByTaskGroupAndTaskId(Integer task_group,Integer task_id){
+		String sqlStmt="select task_id,task_group,TIMESTAMPDIFF(day,NOW(),end_time),"
+				+ "task_title,description,requirements from label_task "
+				+ "where task_id=%d and task_group=%d;";
+		sqlStmt=String.format(sqlStmt, task_id,task_group);
+		try{
+			ResultSet rs=queryExecutor(sqlStmt);
+			return rs;
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
+	/**
+	 * 我的任务：根据已输出的task_id取得已完成任务的信息
+	 * @param task_group
+	 * @param task_id
+	 * @return
+	 */
+	public ResultSet getFinishedTaskInfoByTaskGroupAndTaskId(Integer task_group,Integer task_id,String user_id){
+		String sqlStmt="select task_id,task_group,kappa,progress,num_effective,from label_user_task "
+				+ "where task_id=%d and task_group=%d and user_id='%s';";
+		sqlStmt=String.format(sqlStmt, task_id,task_group,user_id);
+		try{
+			ResultSet rs=queryExecutor(sqlStmt);
+			return rs;
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
+	
+	
+	/*********************************************************
+	 * 标注一致性计算及排行榜
+	 *********************************************************/
+	
+/*	*//**
 	 * 计算一对标注员之间在某个任务上标注结果一致的个数
 	 * select count(*) from 
 	 * ((select * from label_ods where task_id=%d and user_id = '%s') as task_1_1) 
@@ -493,7 +346,7 @@ public class SQLHelper {
 	 * on task_1_1.sentiment=task_1_2.sentiment and task_1_1.ods_sentence_id=task_1_2.ods_sentence_id;
 	 * @param task_id,user_id_1,user_id_2
 	 * @return ResultSet rs:[count]
-	 */
+	 *//*
 	public ResultSet getNumberOfAgreementBetweenTwoUserOnTask(Integer task_id, String user_id_1,String user_id_2){
 		String sqlStmt=
 				"select count(*) from "+
@@ -512,14 +365,14 @@ public class SQLHelper {
 			e.printStackTrace();
 			return null;
 		}
-	}
+	}*/
 	
 	
-	/**
+/*	*//**
 	 * 更新某个标注员指定任务的一致性参数
 	 * @param task_id, 任务id
 	 * @return rowCount, -1为异常
-	 */
+	 *//*
 	public int updateKappaByTaskId(Integer task_id, String user_id, Float kappa){
 		String sqlStmt="update label_user_task set kappa=%f where task_id=%d and user_id='%s';";
 		sqlStmt=String.format(sqlStmt, kappa, task_id, user_id);
@@ -532,6 +385,6 @@ public class SQLHelper {
 			e.printStackTrace();
 			return -1;
 		}
-	}
+	}*/
 
 }
