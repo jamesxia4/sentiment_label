@@ -28,323 +28,70 @@ public class DataLabel {
 		dbHelper=new SQLHelper(mysqlConfig);
 	}
 	
-	/**任务大厅 罗列任务名和起止日期
-	 * @return HashMap<Integer任务id,String起止日期>
-	 *//*
-	public HashMap<Integer,String> getLobbyAllTaskIdAndDates(){
-		HashMap<Integer,String> taskIdAndDates=new HashMap<Integer,String>();
+	public JSONObject getLobbyAllTasksInfo(Integer task_group,String user_id){
+		HashMap<String,String[]> taskIdAndInfo=new HashMap<String,String[]>();
 		try{
-			ResultSet rs=dbHelper.getLobbyAllTasks();
-			while(rs.next()){
-				Integer task_id;
-				String startDateAndEndDate;
-				task_id=rs.getInt(1);
-				Timestamp startTime=rs.getTimestamp(2);
-				Timestamp endTime=rs.getTimestamp(3);
-				String sTS=startTime.toString();
-				String eTS=endTime.toString();
-				startDateAndEndDate=sTS+"--"+eTS;
-				taskIdAndDates.put(task_id, startDateAndEndDate);
-			}
-			dbHelper.close();
-			return taskIdAndDates;
-		}
-		catch (SQLException e) {
-			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			dbHelper.close();
-			e.printStackTrace();
-			return taskIdAndDates;
-		}
-	}
-	
-	*//**任务大厅 罗列任务名和进度
-	 * @return HashMap<Integer任务id,String三人进度>
-	 *//*
-	public HashMap<Integer,String> getLobbyAllTaskIdAndProgress(){
-		HashMap<Integer,String> taskIdAndProgress=new HashMap<Integer,String>();
-		try{
-			ResultSet rs_src=dbHelper.queryExecutor("select task_id from label_task order by task_id;");
-			while(rs_src.next()){
-				Integer task_id=rs_src.getInt(1);
-				System.out.println("    "+task_id.toString());
-				ResultSet rs=dbHelper.getProgressByTaskId(task_id);
-				String taskProgress="";
-				while(rs.next()){
-					Integer usrProgress=rs.getInt(2);
-					taskProgress=taskProgress+usrProgress.toString()+"/200 ";
-					System.out.println(taskProgress);
+			ResultSet rsInfo=dbHelper.getLobbyAllTasks(task_group);
+			ResultSet rsNumTaken=dbHelper.getLobbyAllTasksTakenByUsers(task_group);
 
-				}
-				taskProgress=taskProgress.trim();
-				taskIdAndProgress.put(task_id, taskProgress);
-			}
-			dbHelper.close();
-			return taskIdAndProgress;
-		}
-		catch(SQLException e){
-			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			dbHelper.close();
-			e.printStackTrace();
-			return taskIdAndProgress;
-		}
-	}
-	
-	*//**
-	 * 任务大厅：获取所有任务id
-	 * @return List<Integer> 任务id
-	 *//*
-	public List<String> getAllTaskId(){
-		List<String> taskIdList=new ArrayList<String>();
-		try{
-			String sqlStmt="select task_id from label_task order by task_id;";
-			ResultSet rs=dbHelper.queryExecutor(sqlStmt);
-			while(rs.next()){
-				Integer task_id=rs.getInt(1);
-				String str_task_id=task_id.toString();
-				taskIdList.add(str_task_id);
-			}
-			dbHelper.close();
-			return taskIdList;
-		}
-		catch(SQLException e){
-			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			dbHelper.close();
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	*//**
-	 * 任务大厅：以Json格式输出任务id与信息
-	 * @return {"1":["2015-09-16 16:00:00.0--2015-09-17 16:00:00.0","200/200 "]}
-	 *//*
-	public JSONObject getLobbyAllTaskInfo(){
-		List<String> taskIdList=getAllTaskId();
-		List<String[]> infoList=new ArrayList<String[]>();
-		HashMap<Integer,String> taskIdAndDates=getLobbyAllTaskIdAndDates();
-		HashMap<Integer,String> taskIdAndProgress=getLobbyAllTaskIdAndProgress();
-		
-		//用entryset遍历效率更高，如果用keyset遍历，实际遍历了两次，
-		//一次是iterator,一次是用取出的key找value
-		//entryset直接一次取出放入entry,快一倍
-		Iterator iterDates=taskIdAndDates.entrySet().iterator();
-		Iterator iterProgress=taskIdAndProgress.entrySet().iterator();
-		
-		while(iterDates.hasNext() && iterProgress.hasNext()){
-			String[] datesAndProgress=new String[2];
-			Map.Entry entryDates=(Map.Entry) iterDates.next();
-			Map.Entry entryProgress=(Map.Entry) iterProgress.next();
-			Object date=entryDates.getValue();
-			Object progress=entryProgress.getValue();
-			datesAndProgress[0]=(String)date;
-			datesAndProgress[1]=(String)progress;
-			System.out.println(datesAndProgress[0]);
-			System.out.println(datesAndProgress[1]);
-			infoList.add(datesAndProgress);
-		}
-		
-		Map<String,String[]> taskIdAndInfo = new HashMap<String,String[]>();
-		for(int i=0;i<taskIdList.size();i++){
-			taskIdAndInfo.put(taskIdList.get(i),infoList.get(i));
-		}
-		dbHelper.close();
-		return JSONObject.fromObject(taskIdAndInfo);
-	}
-	
-	*//**任务描述 罗列起止日期
-	 * @return String起始日期-截止日期
-	 *//*
-	public String getDatesByTaskId(Integer task_id){
-		String dates="";
-		try{
-			String sqlStmt="select start_time,end_time from label_task where task_id=%d;";
-			sqlStmt=String.format(sqlStmt, task_id);
-			ResultSet rs=dbHelper.queryExecutor(sqlStmt);
+			Integer numUnfinished=dbHelper.getLobbyNumberOfUnfinishedTask(task_group, user_id, 100);
 			
-			while(rs.next()){
-				Timestamp startTime=rs.getTimestamp(1);
-				Timestamp endTime=rs.getTimestamp(2);
-				String sTS=startTime.toString();
-				String eTS=endTime.toString();
-				dates=sTS+"--"+eTS;
-			}
-			dbHelper.close();
-			return dates;
-		}
-		catch(SQLException e){
-			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			dbHelper.close();
-			e.printStackTrace();
-			return dates;
-		}
-		
-	}
-	
-	*//**任务描述 罗列人员名与各自进度
-	 * @return JSON:{"James":"200/200","John":"0/200","Mary":"200/200"}
-	 *//*
-	public JSONObject getAllUserProgressByTaskId(Integer task_id){
-		Map<String,String> userIdAndProgress=new HashMap<String,String>();
-		try{
-			ResultSet rs=dbHelper.getProgressByTaskId(task_id);
-			rs.last();
-			System.out.println(rs.getRow());
-			ResultSet rs=dbHelper.getProgressByTaskId(task_id);
-			while(rs.next()){
-				String userId=rs.getString(1);
-				String taskProgress;
-				Integer usrProgress=rs.getInt(2);
-				taskProgress=usrProgress.toString()+"/200";
-				userIdAndProgress.put(userId, taskProgress);
-			}
-			dbHelper.close();
-			return JSONObject.fromObject(userIdAndProgress);
-		}
-		catch(SQLException e){
-			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			dbHelper.close();
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	*//**已领任务 罗列当前用户已领任务时间与进度
-	 * @return JSON:{"2":["2015-09-16 16:01:00.0--2015-09-17 16:01:00.0","0/200"]}
-	 *//*
-	public JSONObject getTakenTaskTimeAndProgress(String user_id){
-		Map<String,String[]> takenTaskTimeAndProgress=new HashMap<String,String[]>();
-		try{
-			List<String> taskId=new ArrayList<String>();
-			List<String[]> taskInfo=new ArrayList<String[]>();
-			ResultSet rs=dbHelper.getUnfinishedTaskInfoByUserId(user_id, 200);
-			while(rs.next()){
-				taskId.add(((Integer)rs.getInt(1)).toString());
-				ResultSet rs_info=dbHelper.getTaskInfoByTaskId(rs.getInt(1));
-				ResultSet rs_progress=dbHelper.getTaskInfoByTaskIdAndUserId(rs.getInt(1), user_id);
-				
-				String[] task_info=new String[2];
-				while(rs_info.next() && rs_progress.next()){
-					Timestamp startTime=rs_info.getTimestamp(2);
-					Timestamp endTime=rs_info.getTimestamp(3);
-					String sTS=startTime.toString();
-					String eTS=endTime.toString();
-					task_info[0]=sTS+"--"+eTS;
-					
-					Integer usrProgress=rs_progress.getInt(2);
-					task_info[1]=usrProgress.toString()+"/200";
-					taskInfo.add(task_info);
+				while(rsInfo.next()&&rsNumTaken.next()){
+					//未完成任务数<=5可以继续接活
+					if(numUnfinished<=5){
+						Integer task_id=rsInfo.getInt(1);
+						String str_task_id=((Integer)rsInfo.getInt(1)).toString();
+						String[] task_info=new String[6];
+						task_info[0]=((Integer)(rsInfo.getInt(3))).toString();
+						task_info[1]=rsInfo.getString(4);
+						task_info[2]=rsInfo.getString(5);
+						task_info[3]=rsInfo.getString(6);
+						Integer numTaken=rsNumTaken.getInt(3);
+						task_info[4]=((Integer)numTaken).toString();
+						Integer isTakenByUser=dbHelper.getLobbyTaskIsTakenByUser(task_group,task_id,user_id);
+						if(numTaken<3 && isTakenByUser==0){
+							task_info[5]="领取任务";
+							taskIdAndInfo.put(str_task_id, task_info);
+						}
+						else if(numTaken==3)
+						{
+							task_info[5]="人数已满";
+							taskIdAndInfo.put(str_task_id, task_info);
+						}
+						else
+						{
+							task_info[5]="已领取";
+							taskIdAndInfo.put(str_task_id, task_info);
+						}
+					//否则不允许继续接任务
+					}else{
+						Integer task_id=rsInfo.getInt(1);
+						String str_task_id=((Integer)rsInfo.getInt(1)).toString();
+						String[] task_info=new String[6];
+						task_info[0]=((Integer)(rsInfo.getInt(3))).toString();
+						task_info[1]=rsInfo.getString(4);
+						task_info[2]=rsInfo.getString(5);
+						task_info[3]=rsInfo.getString(6);
+						Integer numTaken=rsNumTaken.getInt(3);
+						task_info[4]=((Integer)numTaken).toString();
+						Integer isTakenByUser=dbHelper.getLobbyTaskIsTakenByUser(task_group,task_id,user_id);
+						if(isTakenByUser==1){
+							task_info[5]="已领取";
+						}
+						else if(numTaken==3){
+							task_info[5]="人数已满";
+						}
+						else{
+							task_info[5]="不可用";
+						}
+						taskIdAndInfo.put(str_task_id, task_info);
+					}
 				}
+				return JSONObject.fromObject(taskIdAndInfo);
+			}catch(SQLException e){
+				dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+				e.printStackTrace();
+				return null;
 			}
-			for(int i=0;i<taskInfo.size();i++){
-				takenTaskTimeAndProgress.put(taskId.get(i), taskInfo.get(i));
-			}
-			dbHelper.close();
-			return JSONObject.fromObject(takenTaskTimeAndProgress);
 		}
-		catch(SQLException e){
-			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			dbHelper.close();
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	*//**
-	 * 输出标注页所有标注项信息
-	 * @param task_id 标注任务id
-	 * @return JSONObject
-	 *//*
-	public JSONObject getAllItemToLabel(Integer task_id){
-		Map<String,String[]> labelItemList=new HashMap<String,String[]>();
-		try{
-			ResultSet rs=dbHelper.getAllItemToLabel(task_id);
-			List<String> sentences=new ArrayList<String>();
-			List<String[]> sentenceInfo=new ArrayList<String[]>();
-			while(rs.next()){
-				sentences.add(((Integer)rs.getInt(1)).toString());
-				String[] sentence_info=new String[4];
-				sentence_info[0]=rs.getString(2);
-				sentence_info[1]=rs.getString(3);
-				sentence_info[2]=rs.getString(4);
-				sentence_info[3]=rs.getString(5);
-				sentenceInfo.add(sentence_info);
-			}
-			System.out.println(sentences.size());
-			for(int i=0;i<sentences.size();i++){
-				labelItemList.put(sentences.get(i),sentenceInfo.get(i));
-			}
-			dbHelper.close();
-			return JSONObject.fromObject(labelItemList);
-		}
-		catch(SQLException e){
-			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			dbHelper.close();
-			e.printStackTrace();
-			return null;
-		}
-	}
-	//TODO JSON输入写数据库
-	
-	*//**
-	 * 已完成任务：以JSON格式输出任务标注一致性以及有效条数
-	 * @param user_id
-	 * @return JSON:{"1":["2015-09-16 16:00:00.0--2015-09-17 16:00:00.0"}
-	 *//*
-	public JSONObject getAllFinishedTaskInfo(String user_id){
-		Map<String,String[]> finishedTaskInfo=new HashMap<String,String[]>();
-		try{
-			ResultSet rs=dbHelper.getFinishedTask(user_id, 200);
-			List<String> taskId=new ArrayList<String>();
-			List<String[]> taskInfo=new ArrayList<String[]>();
-			while(rs.next()){
-				taskId.add(((Integer)rs.getInt(1)).toString());
-				String[] task_info=new String[3];
-				
-				ResultSet rs_info=dbHelper.getTaskInfoByTaskId(rs.getInt(1));
-				while(rs_info.next()){
-					Timestamp startTime=rs_info.getTimestamp(2);
-					Timestamp endTime=rs_info.getTimestamp(3);
-					String sTS=startTime.toString();
-					String eTS=endTime.toString();
-					task_info[0]=sTS+"--"+eTS;
-				}
-				task_info[1]=((Float)rs.getFloat(2)).toString();
-				task_info[2]=((Integer)rs.getInt(3)).toString(); 
-				taskInfo.add(task_info);
-			}
-			for(int i=0;i<taskId.size();i++){
-				finishedTaskInfo.put(taskId.get(i),taskInfo.get(i));
-			}
-			dbHelper.close();
-			return JSONObject.fromObject(finishedTaskInfo);
-		}
-		catch(SQLException e){
-			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			dbHelper.close();
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	*//**
-	 * 输出排行榜
-	 * @return JSONArray:["Thomas","Carter","Mary","John","James"]
-	 *//*
-	public JSONArray getAllRank(){
-		List<String> rankCollection=new ArrayList<String>();
-		try{
-			ResultSet rs=dbHelper.getLabelRank();
-			while(rs.next()){
-				rankCollection.add(rs.getString(1));
-			}
-			dbHelper.close();
-			return JSONArray.fromObject(rankCollection);
-		}
-		catch(SQLException e){
-			dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			dbHelper.close();
-			e.printStackTrace();
-			return null;
-		}
-	}*/
 }

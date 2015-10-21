@@ -178,8 +178,12 @@ public class SQLHelper {
 	 * @return ResultSet: row=[task_id,count(人数)]
 	 */
 	public ResultSet getLobbyAllTasksTakenByUsers(Integer task_group){
-		String sqlStmt="select task_id,task_group,count(*) from label_user_task "
-				+ "where task_group=%d group by task_id order by task_id;";
+		String sqlStmt="select label_task.task_id,label_task.task_group,tmpCount.cnt from "
+				+ "label_task "
+				+ "left join "
+				+ "(select task_id,task_group,count(*) as cnt from label_user_task where task_group=%d group by task_id order by task_id) as tmpCount "
+				+ "on  "
+				+ "label_task.task_id=tmpCount.task_id order by label_task.task_id;";
 		sqlStmt=String.format(sqlStmt, task_group);
 		try{
 			ResultSet rs=queryExecutor(sqlStmt);
@@ -192,17 +196,20 @@ public class SQLHelper {
 	}
 	
 	/**
-	 * 任务大厅，输出已经被当前用户领取的任务编号
+	 * 任务大厅，判断某任务当前用户是否已领
 	 * @param task_group
+	 * @param task_id
 	 * @param user_id
-	 * @return ResultSet: row=[task_id,task_group]
+	 * @return ResultSet: row=[count]
 	 */
-	public ResultSet getLobbyAllTasksIfTaken(Integer task_group,String user_id){
-		String sqlStmt="select task_id,task_group from label_user_task where task_group=%d and user_id='%s';";
-		sqlStmt=String.format(sqlStmt,task_group,user_id);
+	public Integer getLobbyTaskIsTakenByUser(Integer task_group,Integer task_id,String user_id){
+		String sqlStmt="select count(*) from label_user_task "
+				+ "where task_group=%d and task_id=%d and user_id='%s';";
+		sqlStmt=String.format(sqlStmt,task_group,task_id,user_id);
 		try{
 			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
+			rs.last();
+			return rs.getInt(1);
 		}catch(SQLException e){
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
@@ -352,8 +359,9 @@ public class SQLHelper {
 		
 	}
 	
-	/**
-	
+	/*********************************************************
+	 * 标注页面
+	 *********************************************************/
 	
 	/*********************************************************
 	 * 标注一致性计算及排行榜
