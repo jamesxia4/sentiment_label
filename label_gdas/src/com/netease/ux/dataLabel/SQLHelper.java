@@ -31,7 +31,7 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-public class SQLHelper {
+public class SQLHelper implements java.io.Serializable{
 	public Logger logger = Logger.getLogger(SQLHelper.class);
 	private Properties dbProp;
 	private String dbDriver="";
@@ -41,6 +41,10 @@ public class SQLHelper {
 	
 	private Connection conn=null;
 	private Statement stmt=null;
+	
+	public SQLHelper(){
+	}
+	
 	
 	/**
 	 * Constructor

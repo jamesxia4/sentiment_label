@@ -21,7 +21,7 @@ import java.util.List;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-public class DataLabel {
+public class DataLabel implements java.io.Serializable{
 	private SQLHelper dbHelper=null;
 	public DataLabel(){
 		Config mysqlConfig=new Config("D:/config/dbConfig.cfg");
@@ -94,4 +94,9 @@ public class DataLabel {
 				return null;
 			}
 		}
+	
+/*	public JSONObject getMyTaskAllUnfinishedTaskInfo(Integer task_group,String user_id){
+		HashMap<String,String> myUnfinishedTaskInfo=new HashMap<String,String[]>();
+		
+	}*/
 }
