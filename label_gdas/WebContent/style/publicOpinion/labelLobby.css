@@ -1,3 +1,19 @@
 @CHARSET "UTF-8";
 
-#
+#label_lobby_container{
+	
+}
+
+#label_lobby_header{
+	
+}
+
+#label_lobby_header_logo{
+	
+}
+
+#label_lobby_header_text{
+	font-family: Lato,"微软雅黑",arial, sans-serif;
+	font-size:24px;
+	color:#2aceae;
+}
