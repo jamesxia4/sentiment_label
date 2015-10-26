@@ -58,16 +58,46 @@ div{
 .label_taskgroup_item{
 	text-align:center;
 	font-size:14px;
+	color:#292d3e;
+	width:108px;
+	height:30px;
+	
+	border:1px solid #ebebeb;
+	padding:10px 0px 0px 0px;
+	margin-left:5px;
+	border-radius: 5px;
+	float:left;
+}
+
+#label_main_content
+.label_taskgroup_item:hover{
+	text-align:center;
+	font-size:14px;
 	color:#2aceae;
+	width:108px;
+	height:30px;
+	
+	border:1px solid #ebebeb;
+	padding:10px 0px 0px 0px;
+	margin-left:5px;
+	border-radius: 5px;
+	float:left;
+}
+
+#label_main_content
+.label_taskgroup_item.selected{
+	text-align:center;
+	font-size:14px;
+	background-color:#2aceae;
+	color:#ffffff;
 	width:108px;
 	height:30px;
 	
 	border:1px solid #2aceae;
 	padding:10px 0px 0px 0px;
-	margin:5px;
+	margin-left:5px;
 	border-radius: 5px;
 	float:left;
-	
 }
 
 

@@ -28,7 +28,7 @@
 		<div class="label_lobby_task_grid">
 			<div class="label_taskgroup_wrapper">
 				<div class="label_task_group_selector">
-				<!--//TODO:加上期数选择 --> 
+				<!--//TODO:加上期数选择 现在先写死 20151026 --> 
 					<div class="label_taskgroup_item">2015年 第1期</div>
 					<div class="label_taskgroup_item">2015年 第2期</div>
 				</div>
