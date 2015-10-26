@@ -14,21 +14,29 @@
 		JSONObject testObject=testLogicLayer.getLobbyAllTasksInfo(1,"hzxiayuanfang");
 		//out.println(testObject.toString());
 	%> 
-	<div id="label_lobby_container">
-		<div id="label_lobby_header">
-			<div id="label_lobby_header_logo">
-				<img src="../image/publicOpinion/3.png">
+	<div id="label_main_content">
+		<div class="label_lobby_container">
+		<div class="label_lobby_header">
+			<div class="label_logo_wrapper">
+				<div class="label_lobby_header_logo">
+					<img src="../image/publicOpinion/label_logo.png">
+				</div>
+				<div class="label_lobby_header_text">任务大厅</div>
 			</div>
-			<div id="label_lobby_header_text">
-				任务大厅
-			</div>
-			<div id="label_lobby_header_spliter">
-			
-			</div>
+			<div class="label_lobby_header_spliter"></div>
 		</div>
-		<div class="lobbyTask-grid" id="lobbyTask-grid">
-			
+		<div class="label_lobby_task_grid">
+			<div class="label_taskgroup_wrapper">
+				<div class="label_task_group_selector">
+				<!--//TODO:加上期数选择 --> 
+					<div class="label_taskgroup_item">2015年 第1期</div>
+					<div class="label_taskgroup_item">2015年 第2期</div>
+				</div>
+			</div>
 		</div>
 	</div>
+	
+	</div>
+	
 </body>
 </html>

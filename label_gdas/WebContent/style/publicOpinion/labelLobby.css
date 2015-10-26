@@ -1,19 +1,74 @@
 @CHARSET "UTF-8";
 
-#label_lobby_container{
-	
+body {
+	font-family:Lato,"微软雅黑",arial, sans-serif;
+	margin: 0;
+    padding: 0;
 }
 
-#label_lobby_header{
-	
+div{
+	display:block;
 }
 
-#label_lobby_header_logo{
+#label_main_content{
 	
+	margin-left:215px;
+	border-top:1px;
+	border-left:1px;
 }
 
-#label_lobby_header_text{
-	font-family: Lato,"微软雅黑",arial, sans-serif;
+#label_main_content .label_lobby_container{
+	padding-bottom:20px;
+}
+
+#label_main_content .label_lobby_container .label_lobby_header{
+	padding:70px 30px 20px 60px;
+}
+
+#label_main_content .label_lobby_container .label_logo_wrapper .label_lobby_header_logo{
+	padding:5px 5px 0px 5px;
+	float:left;
+}
+
+#label_main_content .label_lobby_container .label_logo_wrapper .label_lobby_header_text{
 	font-size:24px;
+	font-weight:bold;
 	color:#2aceae;
+	padding-left:5px;
 }
+
+#label_main_content .label_lobby_container .label_lobby_header .label_lobby_header_spliter{
+	padding-top:5px;
+	border-bottom:1px solid #b7b7b7;
+	width:100%;
+}
+
+
+#label_main_content .label_lobby_container .label_lobby_task_grid{
+	padding:0px 30px 20px 70px;
+	font-size:14px;
+}
+
+#label_main_content
+.label_lobby_container .label_lobby_task_grid .label_taskgroup_wrapper{
+	
+}
+
+#label_main_content
+.label_taskgroup_item{
+	text-align:center;
+	font-size:14px;
+	color:#2aceae;
+	width:108px;
+	height:30px;
+	
+	border:1px solid #2aceae;
+	padding:10px 0px 0px 0px;
+	margin:5px;
+	border-radius: 5px;
+	float:left;
+	
+}
+
+
+
