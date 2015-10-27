@@ -6,8 +6,8 @@
 <%@ page import="net.sf.json.JSONObject" %>
 <%@ page import="com.netease.ux.dataLabel.DataLabel" %>
 <link href="../style/publicOpinion/labelLobby.css" rel="stylesheet">
-<script src="../js/jquery-shortcuts/jquery.shortcuts.min.js"></script>
-<script src="../js/pubicOpinion/lobbyUI.js"></script>
+<script src="../js/jquery-1.8.3.js"></script>
+<script src="../js/publicOpinion/lobbyUI.js"></script>
 <title>任务大厅</title>
 </head>
 <body>
