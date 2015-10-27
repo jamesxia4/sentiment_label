@@ -85,7 +85,7 @@ div{
 }
 
 #label_main_content
-.label_taskgroup_item.selected{
+.label_taskgroup_item.taskgroup_item_selected{
 	text-align:center;
 	font-size:14px;
 	background-color:#2aceae;
