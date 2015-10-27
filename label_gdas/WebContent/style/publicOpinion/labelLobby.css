@@ -45,14 +45,14 @@ div{
 
 
 #label_main_content .label_lobby_container .label_lobby_task_grid{
-	padding:0px 30px 20px 70px;
+	padding:5px 30px 20px 70px;
 	font-size:14px;
 }
 
-#label_main_content
-.label_lobby_container .label_lobby_task_grid .label_taskgroup_wrapper{
-	
+#label_main_content .label_lobby_container .label_lobby_task_grid .label_taskgroup_wrapper{
+	padding:6px 0px 6px 0px;
 }
+
 
 #label_main_content
 .label_taskgroup_item{
@@ -66,10 +66,10 @@ div{
 	padding:10px 0px 0px 0px;
 	margin-left:5px;
 	border-radius: 5px;
-	float:left;
+	display:inline-block;
 }
 
-#label_main_content
+#label_main_content 
 .label_taskgroup_item:hover{
 	text-align:center;
 	font-size:14px;
@@ -81,7 +81,7 @@ div{
 	padding:10px 0px 0px 0px;
 	margin-left:5px;
 	border-radius: 5px;
-	float:left;
+	display:inline-block;
 }
 
 #label_main_content
@@ -97,7 +97,16 @@ div{
 	padding:10px 0px 0px 0px;
 	margin-left:5px;
 	border-radius: 5px;
-	float:left;
+	display:inline-block;
+}
+
+#label_main_content
+.label_lobby_task_grid .label_lobby_tasks .label_lobby_subHeader{
+	font-size:16px;
+	color:#292d3e;
+	font-weight:bold;
+	padding:5px 0px 1px 5px;
+	border-bottom:1px solid #b7b7b7;
 }
 
 
