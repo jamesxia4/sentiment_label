@@ -21,35 +21,35 @@ div{
 	padding-bottom:20px;
 }
 
-#label_main_content .label_lobby_container .label_lobby_header{
+#label_main_content .label_lobby_header{
 	padding:70px 30px 20px 60px;
 }
 
-#label_main_content .label_lobby_container .label_logo_wrapper .label_lobby_header_logo{
+#label_main_content .label_lobby_header_logo{
 	padding:5px 5px 0px 5px;
 	float:left;
 }
 
-#label_main_content .label_lobby_container .label_logo_wrapper .label_lobby_header_text{
+#label_main_content .label_lobby_header_text{
 	font-size:24px;
 	font-weight:bold;
 	color:#2aceae;
 	padding-left:5px;
 }
 
-#label_main_content .label_lobby_container .label_lobby_header .label_lobby_header_spliter{
+#label_main_content .label_lobby_header_spliter{
 	padding-top:5px;
 	border-bottom:1px solid #b7b7b7;
 	width:100%;
 }
 
 
-#label_main_content .label_lobby_container .label_lobby_task_grid{
+#label_main_content .label_lobby_task_grid{
 	padding:5px 30px 20px 70px;
 	font-size:14px;
 }
 
-#label_main_content .label_lobby_container .label_lobby_task_grid .label_taskgroup_wrapper{
+#label_main_content .label_taskgroup_wrapper{
 	padding:6px 0px 6px 0px;
 }
 
@@ -69,8 +69,7 @@ div{
 	display:inline-block;
 }
 
-#label_main_content 
-.label_taskgroup_item:hover{
+#label_main_content .label_taskgroup_item:hover{
 	text-align:center;
 	font-size:14px;
 	color:#2aceae;
@@ -84,8 +83,7 @@ div{
 	display:inline-block;
 }
 
-#label_main_content
-.label_taskgroup_item.taskgroup_item_selected{
+#label_main_content .label_taskgroup_item.taskgroup_item_selected{
 	text-align:center;
 	font-size:14px;
 	background-color:#2aceae;
@@ -100,8 +98,7 @@ div{
 	display:inline-block;
 }
 
-#label_main_content
-.label_lobby_task_grid .label_lobby_tasks .label_lobby_subHeader{
+#label_main_content .label_lobby_subHeader{
 	font-size:16px;
 	color:#292d3e;
 	font-weight:bold;
@@ -109,8 +106,7 @@ div{
 	border-bottom:1px solid #b7b7b7;
 }
 
-#label_main_content 
-.label_lobby_task_grid .label_lobby_tasks .label_lobby_tasks_item{
+#label_main_content .label_lobby_tasks_item{
 	height: 125px;
 	border-width: 1px;
 	border-style: solid;
@@ -121,9 +117,22 @@ div{
 	margin-bottom:15px;
 }
 
-#label_main_content 
-.label_lobby_task_grid .label_lobby_tasks .label_lobby_tasks_item .label_remainingTime span#label_clock{
-	background: #fff url('../../image/publicOpinion/clock.png') no-repeat 15px;
+#label_main_content .label_remainingTime{
+	margin:15px 0px 0px 15px;
+}
+
+#label_main_content #label_clock {
+	background: url('../../image/publicOpinion/clock.png');
+    background-size: cover;
+    height:15px;
+    width:15px;
+    float:left;
+}
+
+#label_main_content #label_rTime{
+	font-size:12px;
+	margin: 0px 0px 0px 10px;
+	float:left;
 }
 
 

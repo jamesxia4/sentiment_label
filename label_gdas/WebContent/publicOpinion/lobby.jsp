@@ -39,14 +39,16 @@
 					<div class="label_lobby_subHeader">所有任务</div>
 					<div class="label_lobby_tasks_item">
 						<div class="label_remainingTime">
-							<span id="label_clock"></span>
-							<span id="label_rTime"><%=testObject.getJSONArray("1").get(0).toString()%></span>
+							<div id="label_clock"></div>
+							<div id="label_rTime"><%=testObject.getJSONArray("1").get(0).toString()%>天</div>
 						</div>
 					</div>
-					<div class="label_lobby_tasks_item">2</div>
-					<div class="label_lobby_tasks_item">3</div>
-					<div class="label_lobby_tasks_item">4</div>
-					<div class="label_lobby_tasks_item">5</div>
+					<div class="label_lobby_tasks_item">
+						<div class="label_remainingTime">
+							<div id="label_clock"></div>
+							<div id="label_rTime"><%=testObject.getJSONArray("5").get(0).toString()%>天</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
