@@ -145,7 +145,13 @@ div{
 
 #label_main_content .label_item_pulldown{
 	margin-top:39px;
-	background: url('../../image/publicOpinion/down_arrow.png') center;
+	background:url('../../image/publicOpinion/down_arrow.png') no-repeat center;
+    height:9px;
+}
+
+#label_main_content .label_item_pulldown.infoPulledDown{
+	margin-top:39px;
+	background:url('../../image/publicOpinion/up_arrow.png') no-repeat center;
     height:9px;
 }
 
