@@ -109,5 +109,22 @@ div{
 	border-bottom:1px solid #b7b7b7;
 }
 
+#label_main_content 
+.label_lobby_task_grid .label_lobby_tasks .label_lobby_tasks_item{
+	height: 125px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #dcdcdc;
+	border-radius: 5px;
+	box-shadow: 2px 2px 2px #dee6e9;
+	margin-top:15px;
+	margin-bottom:15px;
+}
+
+#label_main_content 
+.label_lobby_task_grid .label_lobby_tasks .label_lobby_tasks_item .label_remainingTime span#label_clock{
+	background: #fff url('../../image/publicOpinion/clock.png') no-repeat 15px;
+}
+
 
 

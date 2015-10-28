@@ -87,9 +87,13 @@ public class DataLabel implements java.io.Serializable{
 						taskIdAndInfo.put(str_task_id, task_info);
 					}
 				}
+				rsInfo.close();
+				rsNumTaken.close();
+				dbHelper.close();
 				return JSONObject.fromObject(taskIdAndInfo);
 			}catch(SQLException e){
 				dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+				dbHelper.close();
 				e.printStackTrace();
 				return null;
 			}

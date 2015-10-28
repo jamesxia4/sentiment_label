@@ -114,6 +114,7 @@ public class SQLHelper implements java.io.Serializable{
 	 */
 	public void close(){
 		try{
+			stmt.close();
 			conn.close();
 		}
 		catch(SQLException e){
@@ -131,10 +132,26 @@ public class SQLHelper implements java.io.Serializable{
 	 */
 	public ResultSet queryExecutor(String sqlToExecute) throws SQLException{
 		connect_db();
+		ResultSet rs=null;
 /*		System.out.println("Creating Statement...");*/
-		stmt=conn.createStatement();
-		ResultSet rs = stmt.executeQuery(sqlToExecute);
-		return rs;
+		try{
+			stmt=conn.createStatement();
+			rs = stmt.executeQuery(sqlToExecute);
+			return rs;
+		} catch(SQLException e){
+			e.printStackTrace();
+			return null;
+		} /*finally {
+			if(rs!=null){
+				rs.close();
+			}
+			if(stmt!=null){
+				stmt.close();
+			}
+			if(conn!=null){
+				conn.close();
+			}
+		}*/
 	}
 	
 	/**
@@ -148,6 +165,8 @@ public class SQLHelper implements java.io.Serializable{
 /*		System.out.println("Creating Statement...");*/
 		stmt=conn.createStatement();
 		int rowCount=stmt.executeUpdate(sqlToExecute);
+		stmt.close();
+		conn.close();
 		return rowCount;
 	}
 	
@@ -196,7 +215,7 @@ public class SQLHelper implements java.io.Serializable{
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return null;
-		}
+		} 
 	}
 	
 	/**
@@ -213,12 +232,16 @@ public class SQLHelper implements java.io.Serializable{
 		try{
 			ResultSet rs=queryExecutor(sqlStmt);
 			rs.last();
-			return rs.getInt(1);
+			Integer rtnInt=rs.getInt(1);
+			rs.close();
+			close();
+			return rtnInt;
 		}catch(SQLException e){
+			close();
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return null;
-		}
+		} 
 	}
 	
 	/**
@@ -234,12 +257,14 @@ public class SQLHelper implements java.io.Serializable{
 			while(rs.next()){
 				unfinishedCount=rs.getInt(1);
 			}
+			rs.close();
 			return unfinishedCount;
 		}catch(SQLException e){
+			close();
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return null;
-		}
+		} 
 	}
 	
 	
@@ -260,7 +285,7 @@ public class SQLHelper implements java.io.Serializable{
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return -1;
-		}
+		} 
 	}
 	
 	/*********************************************************
@@ -280,8 +305,7 @@ public class SQLHelper implements java.io.Serializable{
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return null;
-		}
-		
+		} 
 	}
 	
 	/**
@@ -297,7 +321,7 @@ public class SQLHelper implements java.io.Serializable{
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return null;
-		}
+		} 
 	}
 	
 	/**
@@ -318,7 +342,7 @@ public class SQLHelper implements java.io.Serializable{
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return null;
-		}
+		} 
 	}
 	
 	
@@ -338,7 +362,7 @@ public class SQLHelper implements java.io.Serializable{
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return null;
-		}
+		} 
 	}
 	
 	
@@ -359,8 +383,7 @@ public class SQLHelper implements java.io.Serializable{
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return null;
-		}
-		
+		} 
 	}
 	
 	/*********************************************************
