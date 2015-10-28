@@ -18,12 +18,6 @@ $(document).ready(function(){
 		e.preventDefault();
 		if(!$(this).hasClass("infoPulledDown")){
 			$(this).addClass("infoPulledDown");
-			$(this).siblings(".label_item_pulldown").each(function(i,e){
-				if($(e).hasClass("infoPulledDown")){
-					$(e).removeClass("infoPulledDown");
-				}
-			});
-		
 		}
 	});
 });
