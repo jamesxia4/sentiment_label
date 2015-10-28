@@ -39,14 +39,16 @@
 					<div class="label_lobby_subHeader">所有任务</div>
 					<div class="label_lobby_tasks_item">
 						<div class="label_remainingTime">
-							<div id="label_clock"></div>
-							<div id="label_rTime"><%=testObject.getJSONArray("1").get(0).toString()%>天</div>
+							<div class="label_clock"></div>
+							<div class="label_rTime"><%=testObject.getJSONArray("1").get(0).toString()%>天</div>
 						</div>
+						<div class="label_item_name"><%=testObject.getJSONArray("1").get(1).toString()%></div>
+						<div class="label_item_pulldown"></div>
 					</div>
 					<div class="label_lobby_tasks_item">
 						<div class="label_remainingTime">
-							<div id="label_clock"></div>
-							<div id="label_rTime"><%=testObject.getJSONArray("5").get(0).toString()%>天</div>
+							<div class="label_clock"></div>
+							<div class="label_rTime"><%=testObject.getJSONArray("5").get(0).toString()%>天</div>
 						</div>
 					</div>
 				</div>

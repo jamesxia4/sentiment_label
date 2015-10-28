@@ -115,25 +115,37 @@ div{
 	box-shadow: 2px 2px 2px #dee6e9;
 	margin-top:15px;
 	margin-bottom:15px;
+	padding-bottom:6px;
 }
 
 #label_main_content .label_remainingTime{
-	margin:15px 0px 0px 15px;
+	margin:15px 0px 15px 15px;
 }
 
-#label_main_content #label_clock {
+#label_main_content .label_clock {
 	background: url('../../image/publicOpinion/clock.png');
     background-size: cover;
     height:15px;
     width:15px;
+    margin-right:10px;
     float:left;
 }
 
-#label_main_content #label_rTime{
+#label_main_content .label_rTime{
 	font-size:12px;
-	margin: 0px 0px 0px 10px;
-	float:left;
 }
 
+#label_main_content .label_item_name{
+	margin:15px 22px 0px 30px;
+	font-size:24px;
+	margin-left:30px;
+	font-weight:bold;
+	font-color:#292d3e;
+}
 
+#label_main_content .label_item_pulldown{
+	margin-top:39px;
+	background: url('../../image/publicOpinion/down_arrow.png') center;
+    height:9px;
+}
 
