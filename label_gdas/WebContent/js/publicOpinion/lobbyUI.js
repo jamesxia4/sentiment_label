@@ -41,6 +41,7 @@ $(document).ready(function(){
 	$(".label_rTime").each(function(i,e){
 		if($(e).text().slice(0,-1)<=10){
 			$(e).addClass("urgent");
+			$(e).siblings(".label_clock").addClass("urgent");
 		}
 	});
 	

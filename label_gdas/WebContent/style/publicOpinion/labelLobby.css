@@ -122,8 +122,17 @@ div{
 	overflow:hidden;
 }
 
-#label_main_content .label_clock {
+#label_main_content .label_clock{
 	background: url('../../image/publicOpinion/clock.png');
+    background-size: cover;
+    height:15px;
+    width:15px;
+    margin-right:10px;
+    float:left;
+}
+
+#label_main_content .label_clock.urgent{
+	background: url('../../image/publicOpinion/clock_urgent.png');
     background-size: cover;
     height:15px;
     width:15px;
@@ -190,5 +199,17 @@ div{
 	margin-top:0px;
 	background:url('../../image/publicOpinion/up_arrow.png') no-repeat center;
     height:9px;
+}
+
+#label_main_content .label_user_wrapper{
+	
+}
+
+#label_main_content .label_user_on{
+	
+}
+
+#label_main_content .label_user_off{
+	
 }
 
