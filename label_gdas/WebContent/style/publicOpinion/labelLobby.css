@@ -168,11 +168,12 @@ div{
 }
 
 #label_main_content .label_item_name{
-	margin:15px 22px 0px 30px;
+	margin:15px 17px 0px 30px;
 	font-size:24px;
 	margin-left:30px;
 	font-weight:bold;
-	font-color:#292d3e;
+	color:#292d3e;
+	display:inline-block;
 }
 
 #label_main_content .label_item_spliter{
@@ -202,14 +203,26 @@ div{
 }
 
 #label_main_content .label_user_wrapper{
-	
+	display:inline-block;
+	position: relative;
+	top: -2px;
 }
 
 #label_main_content .label_user_on{
-	
+	background:url('../../image/publicOpinion/user_on.png');
+	background-size: cover;
+	width:11px;
+    height:13px;
+    display:inline-block;
+    margin-left:5px;
 }
 
 #label_main_content .label_user_off{
-	
+	background:url('../../image/publicOpinion/user_off.png');
+	background-size: cover;
+	width:11px;
+    height:13px;
+    display:inline-block;
+    margin-left:5px;
 }
 

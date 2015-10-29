@@ -58,6 +58,11 @@
 							<div class="label_scrapSource">空中网论坛</div>
 						</div>
 						<div class="label_item_name"><%=testObject.getJSONArray("3").get(1).toString()%></div>
+						<div class="label_user_wrapper">
+							<div class="label_user_on"></div>
+							<div class="label_user_on"></div>
+							<div class="label_user_off"></div>
+						</div>
 						<div class="label_item_spliter"></div>
 						<div class="label_item_infobox"></div>
 						<div class="label_item_pulldown"></div>
