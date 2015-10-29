@@ -107,7 +107,6 @@ div{
 }
 
 #label_main_content .label_lobby_tasks_item{
-	height: 125px;
 	border-width: 1px;
 	border-style: solid;
 	border-color: #dcdcdc;
@@ -118,8 +117,9 @@ div{
 	padding-bottom:6px;
 }
 
-#label_main_content .label_remainingTime{
+#label_main_content .label_timeGameSource{
 	margin:15px 0px 15px 15px;
+	overflow:hidden;
 }
 
 #label_main_content .label_clock {
@@ -133,6 +133,29 @@ div{
 
 #label_main_content .label_rTime{
 	font-size:12px;
+	margin-right:15px;
+	color:#292d3e;
+	float:left;
+}
+
+#label_main_content .label_rTime.urgent{
+	font-size:12px;
+	margin-right:15px;
+	color:#ff0f2f;
+	float:left;
+}
+
+#label_main_content .label_fromGame{
+	font-size:12px;
+	margin-right:15px;
+	color:#13c7a3;
+	float:left;
+}
+
+#label_main_content .label_scrapSource{
+	font-size:12px;
+	color:#13c7a3;
+	float:left;
 }
 
 #label_main_content .label_item_name{
@@ -143,6 +166,20 @@ div{
 	font-color:#292d3e;
 }
 
+#label_main_content .label_item_spliter{
+	padding-top:35px;
+	margin-left:15px;
+	margin-right:15px;
+	border-bottom:1px solid #b7b7b7;
+	display:none;
+}
+
+#label_main_content .label_item_infobox{
+	padding:10px 10px 10px 10px;
+	height:130px;
+	display:none;
+}
+
 #label_main_content .label_item_pulldown{
 	margin-top:39px;
 	background:url('../../image/publicOpinion/down_arrow.png') no-repeat center;
@@ -150,7 +187,7 @@ div{
 }
 
 #label_main_content .label_item_pulldown.infoPulledDown{
-	margin-top:39px;
+	margin-top:0px;
 	background:url('../../image/publicOpinion/up_arrow.png') no-repeat center;
     height:9px;
 }

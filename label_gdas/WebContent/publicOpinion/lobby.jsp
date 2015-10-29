@@ -38,19 +38,41 @@
 				<div class="label_lobby_tasks">
 					<div class="label_lobby_subHeader">所有任务</div>
 					<div class="label_lobby_tasks_item">
-						<div class="label_remainingTime">
+						<div class="label_timeGameSource">
 							<div class="label_clock"></div>
 							<div class="label_rTime"><%=testObject.getJSONArray("1").get(0).toString()%>天</div>
+							<div class="label_fromGame">炉石传说</div>
+							<div class="label_scrapSource">百度贴吧</div>
 						</div>
 						<div class="label_item_name"><%=testObject.getJSONArray("1").get(1).toString()%></div>
+						<div class="label_item_spliter"></div>
+						<div class="label_item_infobox"></div>
 						<div class="label_item_pulldown"></div>
 					</div>
+					
 					<div class="label_lobby_tasks_item">
-						<div class="label_remainingTime">
+						<div class="label_timeGameSource">
 							<div class="label_clock"></div>
-							<div class="label_rTime"><%=testObject.getJSONArray("5").get(0).toString()%>天</div>
+							<div class="label_rTime"><%=testObject.getJSONArray("3").get(0).toString()%>天</div>
+							<div class="label_fromGame">坦克世界</div>
+							<div class="label_scrapSource">空中网论坛</div>
 						</div>
-						<div class="label_item_name"><%=testObject.getJSONArray("1").get(1).toString()%></div>
+						<div class="label_item_name"><%=testObject.getJSONArray("3").get(1).toString()%></div>
+						<div class="label_item_spliter"></div>
+						<div class="label_item_infobox"></div>
+						<div class="label_item_pulldown"></div>
+					</div>
+					
+					<div class="label_lobby_tasks_item">
+						<div class="label_timeGameSource">
+							<div class="label_clock"></div>
+							<div class="label_rTime">10天</div>
+							<div class="label_fromGame">战舰世界</div>
+							<div class="label_scrapSource">空中网论坛</div>
+						</div>
+						<div class="label_item_name"><%=testObject.getJSONArray("5").get(1).toString()%></div>
+						<div class="label_item_spliter"></div>
+						<div class="label_item_infobox"></div>
 						<div class="label_item_pulldown"></div>
 					</div>
 				</div>
