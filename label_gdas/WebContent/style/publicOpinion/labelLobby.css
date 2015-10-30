@@ -172,7 +172,8 @@ div{
 }
 
 #label_main_content .label_taskNameWorkerWrapper{
-	
+	display:inline-block;
+	width:100%;
 }
 
 #label_main_content .label_item_name{
@@ -216,7 +217,7 @@ div{
 #label_main_content .label_user_wrapper{
 	display:inline-block;
 	vertical-align: middle;
-	margin-top:18px;
+	margin-top:10px;
 }
 
 #label_main_content .label_user_on{
@@ -235,5 +236,33 @@ div{
     height:13px;
     display:inline-block;
     margin-left:5px;
+}
+
+#label_main_content .label_userBtn_available{
+	margin-left: 1000px;
+    margin-right: 18px;
+    height: 29px;
+    width: 117px;
+    border-radius: 20px;
+    color: #ffffff;
+    background-color: #2aceae;
+    text-align: center;
+    font-size: 14px;
+    padding-top: 10px;
+    display: inline-block;
+    float: right;
+    vertical-align: text-top;
+}
+
+#label_main_content .label_userBtn_taken{
+	
+}
+
+#label_main_content .label_userBtn_full{
+	
+}
+
+#label_main_content .label_userBtn_disabled{
+	
 }
 
