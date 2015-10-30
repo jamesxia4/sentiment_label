@@ -2,6 +2,13 @@
  * 
  */
 
+//测试数据，撸完就删
+var userData={
+		"1":1,
+		"3":2,
+		"5":3
+};
+
 $(document).ready(function(){
 	//任务组选择器
 	$(".label_taskgroup_item").click(function(e){
@@ -46,4 +53,8 @@ $(document).ready(function(){
 	});
 	
 	//当前参与人数指示器
+	
+	//按钮颜色调整
+	
+	//翻页
 });

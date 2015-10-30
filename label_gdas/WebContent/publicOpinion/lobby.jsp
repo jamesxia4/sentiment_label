@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<%@ page import="java.io.*" %>
 <%@ page import="net.sf.json.JSONObject" %>
 <%@ page import="com.netease.ux.dataLabel.DataLabel" %>
 <link href="../style/publicOpinion/labelLobby.css" rel="stylesheet">
@@ -13,8 +14,13 @@
 <body>
 	<%! 
 		DataLabel testLogicLayer=new DataLabel();
-		JSONObject testObject=testLogicLayer.getLobbyAllTasksInfo(1,"hzxiayuanfang");
-	%>
+		JSONObject testObject=testLogicLayer.getLobbyAllTasksInfo(1,"hzxiayuanfang");%>
+	<% 
+		response.setHeader("Pragma","No-Cache");
+		response.setHeader("Cache-Control","No-Cache");
+		response.setDateHeader("Ewindowsxpires", 0);
+		System.out.println(testObject.toString()); 
+	%>	
 		<div id="label_main_content">
 		<div class="label_lobby_container">
 			<div class="label_lobby_header">
@@ -53,15 +59,17 @@
 					<div class="label_lobby_tasks_item">
 						<div class="label_timeGameSource">
 							<div class="label_clock"></div>
-							<div class="label_rTime"><%=testObject.getJSONArray("3").get(0).toString()%>天</div>
+							<div class="label_rTime"><%=testObject.getJSONArray("2").get(0).toString()%>天</div>
 							<div class="label_fromGame">坦克世界</div>
 							<div class="label_scrapSource">空中网论坛</div>
 						</div>
-						<div class="label_item_name"><%=testObject.getJSONArray("3").get(1).toString()%></div>
-						<div class="label_user_wrapper">
-							<div class="label_user_on"></div>
-							<div class="label_user_on"></div>
-							<div class="label_user_off"></div>
+						<div class="label_taskNameWorkerWrapper">
+							<div class="label_item_name"><%=testObject.getJSONArray("2").get(1).toString()%></div>
+							<div class="label_user_wrapper">
+								<div class="label_user_on"></div>
+								<div class="label_user_on"></div>
+								<div class="label_user_off"></div>
+							</div>
 						</div>
 						<div class="label_item_spliter"></div>
 						<div class="label_item_infobox"></div>
@@ -71,11 +79,110 @@
 					<div class="label_lobby_tasks_item">
 						<div class="label_timeGameSource">
 							<div class="label_clock"></div>
-							<div class="label_rTime">10天</div>
+							<div class="label_rTime"><%=testObject.getJSONArray("3").get(0).toString()%>天</div>
+							<div class="label_fromGame">战舰世界</div>
+							<div class="label_scrapSource">空中网论坛</div>
+						</div>
+						<div class="label_item_name"><%=testObject.getJSONArray("3").get(1).toString()%></div>
+						<div class="label_item_spliter"></div>
+						<div class="label_item_infobox"></div>
+						<div class="label_item_pulldown"></div>
+					</div>
+					
+					<div class="label_lobby_tasks_item">
+						<div class="label_timeGameSource">
+							<div class="label_clock"></div>
+							<div class="label_rTime"><%=testObject.getJSONArray("4").get(0).toString()%>天</div>
+							<div class="label_fromGame">战舰世界</div>
+							<div class="label_scrapSource">空中网论坛</div>
+						</div>
+						<div class="label_item_name"><%=testObject.getJSONArray("4").get(1).toString()%></div>
+						<div class="label_item_spliter"></div>
+						<div class="label_item_infobox"></div>
+						<div class="label_item_pulldown"></div>
+					</div>
+					
+					<div class="label_lobby_tasks_item">
+						<div class="label_timeGameSource">
+							<div class="label_clock"></div>
+							<div class="label_rTime"><%=testObject.getJSONArray("5").get(0).toString()%>天</div>
 							<div class="label_fromGame">战舰世界</div>
 							<div class="label_scrapSource">空中网论坛</div>
 						</div>
 						<div class="label_item_name"><%=testObject.getJSONArray("5").get(1).toString()%></div>
+						<div class="label_item_spliter"></div>
+						<div class="label_item_infobox"></div>
+						<div class="label_item_pulldown"></div>
+					</div>
+					
+					
+					<div class="label_lobby_tasks_item">
+						<div class="label_timeGameSource">
+							<div class="label_clock"></div>
+							<div class="label_rTime"><%=testObject.getJSONArray("6").get(0).toString()%>天</div>
+							<div class="label_fromGame">炉石传说</div>
+							<div class="label_scrapSource">百度贴吧</div>
+						</div>
+						<div class="label_item_name"><%=testObject.getJSONArray("6").get(1).toString()%></div>
+						<div class="label_item_spliter"></div>
+						<div class="label_item_infobox"></div>
+						<div class="label_item_pulldown"></div>
+					</div>
+					
+					<div class="label_lobby_tasks_item">
+						<div class="label_timeGameSource">
+							<div class="label_clock"></div>
+							<div class="label_rTime"><%=testObject.getJSONArray("7").get(0).toString()%>天</div>
+							<div class="label_fromGame">坦克世界</div>
+							<div class="label_scrapSource">空中网论坛</div>
+						</div>
+						<div class="label_taskNameWorkerWrapper">
+							<div class="label_item_name"><%=testObject.getJSONArray("7").get(1).toString()%></div>
+							<div class="label_user_wrapper">
+								<div class="label_user_on"></div>
+								<div class="label_user_on"></div>
+								<div class="label_user_off"></div>
+							</div>
+						</div>
+						<div class="label_item_spliter"></div>
+						<div class="label_item_infobox"></div>
+						<div class="label_item_pulldown"></div>
+					</div>
+					
+					<div class="label_lobby_tasks_item">
+						<div class="label_timeGameSource">
+							<div class="label_clock"></div>
+							<div class="label_rTime"><%=testObject.getJSONArray("8").get(0).toString()%>天</div>
+							<div class="label_fromGame">战舰世界</div>
+							<div class="label_scrapSource">空中网论坛</div>
+						</div>
+						<div class="label_item_name"><%=testObject.getJSONArray("8").get(1).toString()%></div>
+						<div class="label_item_spliter"></div>
+						<div class="label_item_infobox"></div>
+						<div class="label_item_pulldown"></div>
+					</div>
+					
+					<div class="label_lobby_tasks_item">
+						<div class="label_timeGameSource">
+							<div class="label_clock"></div>
+							<div class="label_rTime"><%=testObject.getJSONArray("9").get(0).toString()%>天</div>
+							<div class="label_fromGame">战舰世界</div>
+							<div class="label_scrapSource">空中网论坛</div>
+						</div>
+						<div class="label_item_name"><%=testObject.getJSONArray("9").get(1).toString()%></div>
+						<div class="label_item_spliter"></div>
+						<div class="label_item_infobox"></div>
+						<div class="label_item_pulldown"></div>
+					</div>
+					
+					<div class="label_lobby_tasks_item">
+						<div class="label_timeGameSource">
+							<div class="label_clock"></div>
+							<div class="label_rTime"><%=testObject.getJSONArray("10").get(0).toString()%>天</div>
+							<div class="label_fromGame">战舰世界</div>
+							<div class="label_scrapSource">空中网论坛</div>
+						</div>
+						<div class="label_item_name"><%=testObject.getJSONArray("10").get(1).toString()%></div>
 						<div class="label_item_spliter"></div>
 						<div class="label_item_infobox"></div>
 						<div class="label_item_pulldown"></div>
