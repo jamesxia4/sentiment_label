@@ -41,13 +41,15 @@ public class LobbyServlet extends HttpServlet {
         
         response.setHeader("Pragma","No-Cache");
 		response.setHeader("Cache-Control","No-Cache");
+		response.setDateHeader("Ewindowsxpires", 0);
 		
         PrintWriter out= response.getWriter();
         DataLabel testLogicLayer=new DataLabel();
         
         //参数:task_group=xxx&user_id=xxx
         Integer task_group_from_url=Integer.parseInt(request.getParameter("task_group"));
-		JSONObject testObject=testLogicLayer.getLobbyAllTasksInfo(task_group_from_url,request.getParameter("task_group"));
+		JSONObject testObject=testLogicLayer.getLobbyAllTasksInfo(task_group_from_url,request.getParameter("user_id"));
+		System.out.println(testObject.toString());
 		out.println(testObject.toString());
     }
 
