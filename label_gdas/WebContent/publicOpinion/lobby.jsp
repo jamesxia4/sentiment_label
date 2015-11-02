@@ -15,12 +15,8 @@
 	<%! 
 		DataLabel testLogicLayer=new DataLabel();
 		JSONObject testObject=testLogicLayer.getLobbyAllTasksInfo(1,"hzxiayuanfang");%>
-	<% 
-		response.setHeader("Pragma","No-Cache");
-		response.setHeader("Cache-Control","No-Cache");
-		response.setDateHeader("Ewindowsxpires", 0);
-		System.out.println(testObject.toString()); 
-	%>	
+		
+		
 		<div id="label_main_content">
 		<div class="label_lobby_container">
 			<div class="label_lobby_header">

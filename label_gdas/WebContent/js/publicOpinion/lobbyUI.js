@@ -24,12 +24,69 @@ $(document).ready(function(){
 			console.log("Success");
 			console.log(data);
 			renderHtml(data);
+			addGadgets(data);
 		}
 	});
 });
 
-//渲染页面,添加特效
+//渲染页面,添加html骨架
 function renderHtml(data){
+	$(document).ready(function(){
+		console.log("start");
+		
+		var dataLength=0;
+		for(var item in data){
+			dataLength++;
+		}
+		
+		console.log(dataLength);
+		for(var idx=0;idx<dataLength;idx++){
+			console.log(idx);
+			$("<div class=\"label_lobby_tasks_item\"></div>").appendTo($(".label_lobby_tasks"));
+		}
+		
+		//添加任务项框架
+		$(".label_lobby_tasks_item").each(function(i,e){
+			$("<div class=\"label_timeGameSource\"></div>").appendTo($(this));
+			$("<div class=\"label_taskNameWorkerWrapper\"></div>").appendTo($(this));
+			$("<div class=\"label_item_spliter\"></div>").appendTo($(this));
+			$("<div class=\"label_item_infobox\"></div>").appendTo($(this));
+			$("<div class=\"label_item_pulldown\"></div>").appendTo($(this));
+		});
+		
+		
+		//在任务项框架中的抬头部分添加数据来源游戏名称和任务倒计时
+		$(".label_timeGameSource").each(function(i,e){
+			$("<div class=\"label_clock\"></div>").appendTo($(this));
+			//生成任务剩余时间字符串
+			var idx=(i+1).toString();
+			var timeLeft=data[idx][0];
+			var divTimeLeft="<div class=\"label_rTime\">"+timeLeft+"天"+"</div>";
+			//TODO 把游戏来源和数据来源换了,现在先写死--20151102
+			$(divTimeLeft).appendTo($(this));
+			$("<div class=\"label_fromGame\">炉石传说</div>").appendTo($(this));
+			$("<div class=\"label_fromGame\">百度贴吧</div>").appendTo($(this));
+		});
+		
+		//在任务项框架中添加任务名与领取人数指示器，以及领取按钮
+		$(".label_taskNameWorkerWrapper").each(function(i,e){
+			//生成任务名
+			var idx=(i+1).toString();
+			var taskName=data[idx][1];
+			var divTaskName="<div class=\"label_item_name\">"+taskName+"</div>";
+			//TODO 把游戏来源和数据来源换了,现在先写死--20151102
+			$(divTaskName).appendTo($(this));
+			$("<div class=\"label_user_wrapper\"></div>").appendTo($(this));
+		});
+		
+		//TODO:在任务项框架中添加下拉信息框的信息
+		
+		
+	});
+}
+
+//渲染页面,添加特效
+function addGadgets(data){
 	$(document).ready(function(){
 		//任务组选择器
 		$(".label_taskgroup_item").click(function(e){
