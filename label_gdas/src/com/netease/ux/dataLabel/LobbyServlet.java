@@ -44,7 +44,10 @@ public class LobbyServlet extends HttpServlet {
 		
         PrintWriter out= response.getWriter();
         DataLabel testLogicLayer=new DataLabel();
-		JSONObject testObject=testLogicLayer.getLobbyAllTasksInfo(1,"hzxiayuanfang");
+        
+        //参数:task_group=xxx&user_id=xxx
+        Integer task_group_from_url=Integer.parseInt(request.getParameter("task_group"));
+		JSONObject testObject=testLogicLayer.getLobbyAllTasksInfo(task_group_from_url,request.getParameter("task_group"));
 		out.println(testObject.toString());
     }
 
