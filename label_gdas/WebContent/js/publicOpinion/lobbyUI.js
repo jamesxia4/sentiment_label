@@ -74,7 +74,19 @@ $(document).ready(function(){
 	});
 	
 	//按钮样式自动生成
-	$
+	$(".label_taskNameWorkerWrapper").each(function(i,e){
+		var idx=(i+1).toString();
+		var buttonStyle=jsonData[idx][5];
+		if (buttonStyle=="可领取"){
+			$("<div class=\"label_userBtn_available\">可领取</div>").appendTo($(this));
+		} else if(buttonStyle=="已领取") {
+			$("<div class=\"label_userBtn_disable\">已领取</div>").appendTo($(this));
+		} else if(buttonStyle=="已满") {
+			$("<div class=\"label_userBtn_disable\">已满</div>").appendTo($(this));
+		} else {
+			$("<div class=\"label_userBtn_disable\">不可用</div>").appendTo($(this));
+		}
+	});
 	
 	//翻页
 });

@@ -53,7 +53,6 @@
 						<div class="label_taskNameWorkerWrapper">
 							<div class="label_item_name"><%=testObject.getJSONArray("1").get(1).toString()%></div>
 							<div class="label_user_wrapper"></div>
-							<div class="label_userBtn_available">可领取</div>
 						</div>
 						
 						<div class="label_item_spliter"></div>
@@ -70,8 +69,7 @@
 						</div>
 						<div class="label_taskNameWorkerWrapper">
 							<div class="label_item_name"><%=testObject.getJSONArray("2").get(1).toString()%></div>
-							<div class="label_user_wrapper">
-							</div>
+							<div class="label_user_wrapper"></div>
 						</div>
 						<div class="label_item_spliter"></div>
 						<div class="label_item_infobox"></div>
