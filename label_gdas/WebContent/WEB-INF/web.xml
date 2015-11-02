@@ -9,4 +9,15 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <servlet> 
+    <servlet-name>LabelLobby</servlet-name>   
+    <servlet-class>com.netease.ux.dataLabel.LobbyServlet</servlet-class>     
+  </servlet>
+  
+  <servlet-mapping>   
+    <servlet-name>LabelLobby</servlet-name>   
+    <url-pattern>/lobby</url-pattern>   
+  </servlet-mapping>  
+  
 </web-app>
