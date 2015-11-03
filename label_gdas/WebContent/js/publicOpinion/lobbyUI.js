@@ -86,7 +86,7 @@ function renderHtml(data){
 			$("<div class=\"label_infobox_header\">任务介绍 :</div>").appendTo($(this));
 			$("<div class=\"label_infobox_textbox_upper\"></div>").appendTo($(this));
 			$("<div class=\"label_infobox_textbox_lower\"></div>").appendTo($(this));
-			$("<div class=\"label_infobox_generalDesc\">该任务数据来源于“UXData-舆情监控系统”从网上抓取的用户评论。任务目的是标注相关评论语句的情感倾向以及与游戏特征的关系，标注结果将用于评估舆情监控系统中情感分类算法的准确率，以便进行算法迭代和后续通用指数的设计。</div>").appendTo($(this));
+			$("<div class=\"label_infobox_generalDesc\"></div>").appendTo($(this));
 			
 			var idx=(i+1).toString();
 			$("<div class=\"label_textbox_commentGame\"></div>").appendTo($(e).children(".label_infobox_textbox_upper"));
@@ -102,13 +102,14 @@ function renderHtml(data){
 			$("<div class=\"label_textbox_labelType\"></div>").appendTo($(e).children(".label_infobox_textbox_lower"));
 			$("<div class=\"label_textbox_labelBonus\"></div>").appendTo($(e).children(".label_infobox_textbox_lower"));
 			
-			$(e).children(".label_textbox_commentGame").text("评论游戏 ："+data[idx][5]);
-			$(e).children(".label_textbox_dataSource").text("数据来源 ："+data[idx][6]);
-			$(e).children(".label_textbox_dataTime").text("数据时间 ："+data[idx][4]);
-			$(e).children(".label_textbox_userTaken").text("参加人数 ："+data[idx][10]);
-			$(e).children(".label_textbox_labelSize").text("标注数量 ："+data[idx][7]);
-			$(e).children(".label_textbox_labelType").text("标注类型 ："+data[idx][8]);
-			$(e).children(".label_textbox_labelBonus").text("任务奖励 ：0~100金币（标注数量x准确率）");
+			$(e).find(".label_textbox_commentGame").text("评论游戏："+data[idx][5]);
+			$(e).find(".label_textbox_dataSource").text("数据来源："+data[idx][6]);
+			$(e).find(".label_textbox_dataTime").text("数据时间："+data[idx][4]);
+			$(e).find(".label_textbox_userTaken").text("参加人数："+data[idx][10]);
+			$(e).find(".label_textbox_labelSize").text("标注数量："+data[idx][7]);
+			$(e).find(".label_textbox_labelType").text("标注类型："+data[idx][8]);
+			$(e).find(".label_infobox_generalDesc").text(data[idx][9]);
+			$(e).find(".label_textbox_labelBonus").text("任务奖励：0~100金币（标注数量x准确率）");
 
 		});
 		

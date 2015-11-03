@@ -213,7 +213,7 @@ div{
 	padding-left:15px;
 	margin-top:10px;
 	font-size:14px;
-	height:16px;
+
 	font-weight:bold;
 	color:#666666;
 	display:none;
@@ -221,9 +221,9 @@ div{
 
 #label_main_content .label_infobox_textbox_lower{
 	padding-left:15px;
-	margin-top:10px;
+	margin-top:8px;
 	font-size:14px;
-	height:16px;
+
 	font-weight:bold;
 	color:#666666;
 	display:none;
@@ -231,51 +231,44 @@ div{
 
 
 #label_main_content .label_infobox_textbox_upper .label_textbox_commentGame{
-	border:1px solid #b7b7b7;
 	width:25%;
-	height:16px;
+
 	display:inline-block;
 }
 
 #label_main_content .label_infobox_textbox_upper .label_textbox_dataSource{
-	border:1px solid #b7b7b7;
 	width:25%;
-	height:16px;
+
 	display:inline-block;
 }
 
 #label_main_content .label_infobox_textbox_upper .label_textbox_dataTime{
-	border:1px solid #b7b7b7;
 	width:25%;
-	height:16px;
+
 	display:inline-block;
 }
 
 #label_main_content .label_infobox_textbox_upper .label_textbox_userTaken{
-	border:1px solid #b7b7b7;
 	width:22%;
-	height:16px;
+
 	display:inline-block;
 }
 
 #label_main_content .label_infobox_textbox_lower .label_textbox_labelSize{
-	border:1px solid #b7b7b7;
 	width:25%;
-	height:16px;
+
 	display:inline-block;
 }
 
 #label_main_content .label_infobox_textbox_lower .label_textbox_labelType{
-	border:1px solid #b7b7b7;
 	width:25%;
-	height:16px;
+
 	display:inline-block;
 }
 
 #label_main_content .label_infobox_textbox_lower .label_textbox_labelBonus{
-	border:1px solid #b7b7b7;
 	width:25%;
-	height:16px;
+
 	display:inline-block;
 }
 
