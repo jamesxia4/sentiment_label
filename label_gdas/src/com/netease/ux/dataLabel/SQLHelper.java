@@ -125,36 +125,6 @@ public class SQLHelper implements java.io.Serializable{
 	
 	
 	/**
-	 * 执行查询语句并返回结果
-	 * @param sqlToExecute, select型语句
-	 * @return rs(查询结果)
-	 * @throws SQLException
-	 */
-	public ResultSet queryExecutor(String sqlToExecute) throws SQLException{
-		connect_db();
-		ResultSet rs=null;
-/*		System.out.println("Creating Statement...");*/
-		try{
-			stmt=conn.createStatement();
-			rs = stmt.executeQuery(sqlToExecute);
-			return rs;
-		} catch(SQLException e){
-			e.printStackTrace();
-			return null;
-		} /*finally {
-			if(rs!=null){
-				rs.close();
-			}
-			if(stmt!=null){
-				stmt.close();
-			}
-			if(conn!=null){
-				conn.close();
-			}
-		}*/
-	}
-	
-	/**
 	 * 执行insert/delete/update并返回结果
 	 * @param sqlToExecute, insert/delete/update型语句
 	 * @return rowCount
@@ -162,7 +132,6 @@ public class SQLHelper implements java.io.Serializable{
 	 */
 	public int updateExecutor(String sqlToExecute) throws SQLException{
 		connect_db();
-/*		System.out.println("Creating Statement...");*/
 		stmt=conn.createStatement();
 		int rowCount=stmt.executeUpdate(sqlToExecute);
 		stmt.close();
@@ -177,18 +146,38 @@ public class SQLHelper implements java.io.Serializable{
 	/**
 	 * 任务大厅，罗列所有任务：任务id,剩余时间,标题,描述信息
 	 * @param task_group 任务组
-	 * @return ResultSet: row=[task_id, timediff, task_title,description]
+	 * @return List<String[]>: row=[task_id, timediff, task_title,description]
 	 */
-	public ResultSet getLobbyAllTasks(Integer task_group){
+	public List<String[]> getLobbyAllTasks(Integer task_group){
 		String sqlStmt="select task_id,task_group,TIMESTAMPDIFF(day,NOW(),end_time),"
-				+ "task_title,description,requirements from label_task "
+				+ "task_title,dataTime,commentGame,dataSource,taskSize,taskType,generalDesc from label_task "
 				+ "where task_group=%d order by task_id;";
-		sqlStmt=String.format(sqlStmt,task_group);
+		sqlStmt=String.format(sqlStmt,task_group);	
 		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
+			connect_db(); 
+			stmt=conn.createStatement();
+			ResultSet rs=stmt.executeQuery(sqlStmt);
+			List<String[]> taskInfoList=new ArrayList<String[]>();
+			while(rs.next()){
+				String[] taskItem=new String[10];
+				taskItem[0]=((Integer)rs.getInt(1)).toString();	//任务id
+				taskItem[1]=((Integer)rs.getInt(2)).toString(); //任务组
+				taskItem[2]=((Integer)rs.getInt(3)).toString(); //任务剩余时间
+				taskItem[3]=rs.getString(4);					//任务名
+				taskItem[4]=rs.getString(5);					//数据时间
+				taskItem[5]=rs.getString(6);					//数据对应游戏名称
+				taskItem[6]=rs.getString(7);					//数据来源
+				taskItem[7]=((Integer)rs.getInt(8)).toString(); //任务大小
+				taskItem[8]=rs.getString(9);					//任务类型
+				taskItem[9]=rs.getString(10);					//infobox说明文字
+				taskInfoList.add(taskItem);
+			}
+			rs.close();
+			close();
+			return taskInfoList;
 		}
 		catch(SQLException e){
+			close();
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			return null;
@@ -198,9 +187,9 @@ public class SQLHelper implements java.io.Serializable{
 	/**
 	 * 任务大厅，获得各个任务已领人数
 	 * @param task_group 任务组
-	 * @return ResultSet: row=[task_id,count(人数)]
+	 * @return List<String[]>: row=[task_id,count(人数)]
 	 */
-	public ResultSet getLobbyAllTasksTakenByUsers(Integer task_group){
+	public List<String[]> getLobbyAllTasksTakenByUsers(Integer task_group){
 		String sqlStmt="select label_task.task_id,label_task.task_group,tmpCount.cnt from "
 				+ "label_task "
 				+ "left join "
@@ -209,11 +198,24 @@ public class SQLHelper implements java.io.Serializable{
 				+ "label_task.task_id=tmpCount.task_id order by label_task.task_id;";
 		sqlStmt=String.format(sqlStmt, task_group);
 		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
+			connect_db();
+			stmt=conn.createStatement();
+			ResultSet rs=stmt.executeQuery(sqlStmt);
+			List<String[]> taskUserInfo=new ArrayList<String[]>();
+			while(rs.next()){
+				String[] taskUserInfoItem=new String[3];
+				taskUserInfoItem[0]=((Integer)rs.getInt(1)).toString();
+				taskUserInfoItem[1]=((Integer)rs.getInt(2)).toString();
+				taskUserInfoItem[2]=((Integer)rs.getInt(3)).toString();
+				taskUserInfo.add(taskUserInfoItem);
+			}
+			rs.close();
+			close();
+			return taskUserInfo;
 		}catch(SQLException e){
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
+			close();
 			return null;
 		} 
 	}
@@ -223,46 +225,51 @@ public class SQLHelper implements java.io.Serializable{
 	 * @param task_group
 	 * @param task_id
 	 * @param user_id
-	 * @return ResultSet: row=[count]
+	 * @return Integer: row=[count]
 	 */
 	public Integer getLobbyTaskIsTakenByUser(Integer task_group,Integer task_id,String user_id){
 		String sqlStmt="select count(*) from label_user_task "
 				+ "where task_group=%d and task_id=%d and user_id='%s';";
 		sqlStmt=String.format(sqlStmt,task_group,task_id,user_id);
 		try{
-			ResultSet rs=queryExecutor(sqlStmt);
+			connect_db();
+			stmt=conn.createStatement();
+			ResultSet rs=stmt.executeQuery(sqlStmt);
 			rs.last();
 			Integer rtnInt=rs.getInt(1);
 			rs.close();
 			close();
 			return rtnInt;
 		}catch(SQLException e){
-			close();
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
+			close();
 			return null;
 		} 
 	}
 	
 	/**
 	 * 任务大厅，输出当前用户已经领了但是没有完成的任务个数
+	 * //TODO 以后要根据task_size自动判断 
 	 */
 	public Integer getLobbyNumberOfUnfinishedTask(Integer task_group,String user_id,Integer task_size){
 		String sqlStmt="select count(*) from label_user_task "
 				+ "where task_group=%d and user_id='%s' and is_finished=0;";
 		sqlStmt=String.format(sqlStmt,task_group,user_id,task_size);
 		try{
-			ResultSet rs=queryExecutor(sqlStmt);
+			connect_db();
+			stmt=conn.createStatement();
+			ResultSet rs=stmt.executeQuery(sqlStmt);
 			Integer unfinishedCount=0;
-			while(rs.next()){
-				unfinishedCount=rs.getInt(1);
-			}
+			rs.last();
+			unfinishedCount=rs.getInt(1);
 			rs.close();
+			close();
 			return unfinishedCount;
 		}catch(SQLException e){
-			close();
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
+			close();
 			return null;
 		} 
 	}
@@ -288,13 +295,13 @@ public class SQLHelper implements java.io.Serializable{
 		} 
 	}
 	
-	/*********************************************************
+/*	*//*********************************************************
 	 * 我的任务
-	 *********************************************************/
+	 *********************************************************//*
 	
-	/**
+	*//**
 	 * 我的任务：输出未完成的任务task_id
-	 */
+	 *//*
 	public ResultSet getMyTaskAllUnfinishedTasks(String user_id){
 		String sqlStmt="select task_group,task_id from label_user_task where user_id='%s' and is_finished=0;";
 		sqlStmt=String.format(sqlStmt, user_id);
@@ -308,9 +315,9 @@ public class SQLHelper implements java.io.Serializable{
 		} 
 	}
 	
-	/**
+	*//**
 	 * 我的任务：输出已完成的任务task_id
-	 */
+	 *//*
 	public ResultSet getMyTaskAllFinishedTasks(String user_id){
 		String sqlStmt="select task_group,task_id from label_user_task where user_id='%s' and is_finished=1;";
 		sqlStmt=String.format(sqlStmt, user_id);
@@ -324,12 +331,12 @@ public class SQLHelper implements java.io.Serializable{
 		} 
 	}
 	
-	/**
+	*//**
 	 * 我的任务：根据已输出的task_id取得未完成任务的信息
 	 * @param task_group
 	 * @param task_id
 	 * @return
-	 */
+	 *//*
 	public ResultSet getUnfinishedTaskInfoByTaskGroupAndTaskId(Integer task_group,Integer task_id){
 		String sqlStmt="select task_id,task_group,TIMESTAMPDIFF(day,NOW(),end_time),"
 				+ "task_title,description,requirements from label_task "
@@ -346,11 +353,11 @@ public class SQLHelper implements java.io.Serializable{
 	}
 	
 	
-	/**
+	*//**
 	 * 我的任务，获得未完成的任务的已领人数
 	 * @param task_group 任务组
 	 * @return ResultSet: row=[task_id,count(人数)]
-	 */
+	 *//*
 	public ResultSet getMyTaskAllTasksTakenByUsers(Integer task_group, Integer task_id){
 		String sqlStmt="select task_id,task_group,count(*) from label_user_task "
 				+ "where task_group=%d and task_id=%d;";
@@ -366,12 +373,12 @@ public class SQLHelper implements java.io.Serializable{
 	}
 	
 	
-	/**
+	*//**
 	 * 我的任务：根据已输出的task_id取得已完成任务的信息
 	 * @param task_group
 	 * @param task_id
 	 * @return
-	 */
+	 *//*
 	public ResultSet getFinishedTaskInfoByTaskGroupAndTaskId(Integer task_group,Integer task_id,String user_id){
 		String sqlStmt="select task_id,task_group,kappa,progress,num_effective,from label_user_task "
 				+ "where task_id=%d and task_group=%d and user_id='%s';";
@@ -384,7 +391,7 @@ public class SQLHelper implements java.io.Serializable{
 			e.printStackTrace();
 			return null;
 		} 
-	}
+	}*/
 	
 	/*********************************************************
 	 * 标注页面

@@ -32,7 +32,7 @@ public class LobbyServlet extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * doGet：根据用户选择期数及其用户名输出任务大厅
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8"); 
@@ -44,21 +44,31 @@ public class LobbyServlet extends HttpServlet {
 		response.setDateHeader("Ewindowsxpires", 0);
 		
         PrintWriter out= response.getWriter();
-        DataLabel testLogicLayer=new DataLabel();
+        DataLabel labelHandler=new DataLabel();
         
         //参数:task_group=xxx&user_id=xxx
         Integer task_group_from_url=Integer.parseInt(request.getParameter("task_group"));
-		JSONObject testObject=testLogicLayer.getLobbyAllTasksInfo(task_group_from_url,request.getParameter("user_id"));
-		System.out.println(testObject.toString());
-		out.println(testObject.toString());
+		JSONObject labelObject=labelHandler.getLobbyAllTasksInfo(task_group_from_url,request.getParameter("user_id"));
+		System.out.println(labelObject.toString());
+		out.println(labelObject.toString());
     }
 
-/*	*//**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 *//*
+	/**
+	 * doPost:根据用户任务选择更新数据库
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}*/
+		response.setContentType("text/html;charset=utf-8"); 
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        response.setHeader("Pragma","No-Cache");
+		response.setHeader("Cache-Control","No-Cache");
+		response.setDateHeader("Ewindowsxpires", 0);
+		
+		PrintWriter out = response.getWriter();
+		DataLabel labelHandler=new DataLabel();
+		
+		//处理post表单
+		
+	}
 
 }

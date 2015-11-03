@@ -60,21 +60,23 @@ function renderHtml(data){
 			$("<div class=\"label_clock\"></div>").appendTo($(this));
 			//生成任务剩余时间字符串
 			var idx=(i+1).toString();
-			var timeLeft=data[idx][0];
+			var timeLeft=data[idx][2];
+			//TODO 日期变负的以后也要改
 			var divTimeLeft="<div class=\"label_rTime\">"+timeLeft+"天"+"</div>";
-			//TODO 把游戏来源和数据来源换了,现在先写死--20151102
 			$(divTimeLeft).appendTo($(this));
-			$("<div class=\"label_fromGame\">炉石传说</div>").appendTo($(this));
-			$("<div class=\"label_fromGame\">百度贴吧</div>").appendTo($(this));
+			
+			var commentGame="<div class=\"label_fromGame\">"+data[idx][5]+"</div>";
+			var dataSource="<div class=\"label_scrapSource\">"+data[idx][6]+"</div>";
+			$(commentGame).appendTo($(this));
+			$(dataSource).appendTo($(this));
 		});
 		
 		//在任务项框架中添加任务名与领取人数指示器，以及领取按钮
 		$(".label_taskNameWorkerWrapper").each(function(i,e){
 			//生成任务名
 			var idx=(i+1).toString();
-			var taskName=data[idx][1];
+			var taskName=data[idx][3];
 			var divTaskName="<div class=\"label_item_name\">"+taskName+"</div>";
-			//TODO 把游戏来源和数据来源换了,现在先写死--20151102
 			$(divTaskName).appendTo($(this));
 			$("<div class=\"label_user_wrapper\"></div>").appendTo($(this));
 		});
@@ -133,7 +135,7 @@ function addGadgets(data){
 		//当前参与人数指示器
 		$(".label_user_wrapper").each(function(i,e){
 			var idx=(i+1).toString();
-			var numPerson=parseInt(data[idx][4]);
+			var numPerson=parseInt(data[idx][10]);
 			for(var iterIdx=0;iterIdx<numPerson;iterIdx++){
 				$("<div class=\"label_user_on\"></div>").appendTo($(this));
 			}
@@ -145,7 +147,7 @@ function addGadgets(data){
 		//按钮样式自动生成
 		$(".label_taskNameWorkerWrapper").each(function(i,e){
 			var idx=(i+1).toString();
-			var buttonStyle=data[idx][5];
+			var buttonStyle=data[idx][11];
 			if (buttonStyle=="领取任务"){
 				$("<div class=\"label_userBtn_available\">领取任务</div>").appendTo($(this));
 			} else if(buttonStyle=="已领取") {

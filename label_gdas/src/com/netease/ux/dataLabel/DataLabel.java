@@ -30,74 +30,65 @@ public class DataLabel implements java.io.Serializable{
 	
 	public JSONObject getLobbyAllTasksInfo(Integer task_group,String user_id){
 		HashMap<String,String[]> taskIdAndInfo=new HashMap<String,String[]>();
-		try{
-			ResultSet rsInfo=dbHelper.getLobbyAllTasks(task_group);
-			ResultSet rsNumTaken=dbHelper.getLobbyAllTasksTakenByUsers(task_group);
-
-			Integer numUnfinished=dbHelper.getLobbyNumberOfUnfinishedTask(task_group, user_id, 100);
+		
+		List<String[]> rsInfo=dbHelper.getLobbyAllTasks(task_group);
+		List<String[]> rsNumTaken=dbHelper.getLobbyAllTasksTakenByUsers(task_group);
+		Integer numUnfinished=dbHelper.getLobbyNumberOfUnfinishedTask(task_group, user_id, 100);
+		for(int i=0;i<rsInfo.size();i++){
+			String[] task_info=new String[12];
 			
-				while(rsInfo.next()&&rsNumTaken.next()){
-					//未完成任务数<=5可以继续接活
-					if(numUnfinished<=5){
-						Integer task_id=rsInfo.getInt(1);
-						String str_task_id=((Integer)rsInfo.getInt(1)).toString();
-						String[] task_info=new String[6];
-						task_info[0]=((Integer)(rsInfo.getInt(3))).toString();
-						task_info[1]=rsInfo.getString(4);
-						task_info[2]=rsInfo.getString(5);
-						task_info[3]=rsInfo.getString(6);
-						Integer numTaken=rsNumTaken.getInt(3);
-						task_info[4]=((Integer)numTaken).toString();
-						Integer isTakenByUser=dbHelper.getLobbyTaskIsTakenByUser(task_group,task_id,user_id);
-						if(numTaken<3 && isTakenByUser==0){
-							task_info[5]="领取任务";
-							taskIdAndInfo.put(str_task_id, task_info);
-						}
-						else if(numTaken==3)
-						{
-							task_info[5]="人数已满";
-							taskIdAndInfo.put(str_task_id, task_info);
-						}
-						else
-						{
-							task_info[5]="已领取";
-							taskIdAndInfo.put(str_task_id, task_info);
-						}
-					//否则不允许继续接任务
-					}else{
-						Integer task_id=rsInfo.getInt(1);
-						String str_task_id=((Integer)rsInfo.getInt(1)).toString();
-						String[] task_info=new String[6];
-						task_info[0]=((Integer)(rsInfo.getInt(3))).toString();
-						task_info[1]=rsInfo.getString(4);
-						task_info[2]=rsInfo.getString(5);
-						task_info[3]=rsInfo.getString(6);
-						Integer numTaken=rsNumTaken.getInt(3);
-						task_info[4]=((Integer)numTaken).toString();
-						Integer isTakenByUser=dbHelper.getLobbyTaskIsTakenByUser(task_group,task_id,user_id);
-						if(isTakenByUser==1){
-							task_info[5]="已领取";
-						}
-						else if(numTaken==3){
-							task_info[5]="人数已满";
-						}
-						else{
-							task_info[5]="不可用";
-						}
-						taskIdAndInfo.put(str_task_id, task_info);
-					}
+			Integer task_id=Integer.parseInt(rsInfo.get(i)[0]);
+			String str_task_id=rsInfo.get(i)[0];
+			task_info[0]=rsInfo.get(i)[0];	//任务id
+			task_info[1]=rsInfo.get(i)[1];	//任务组
+			task_info[2]=rsInfo.get(i)[2];	//任务剩余时间
+			task_info[3]=rsInfo.get(i)[3];  //任务名
+			task_info[4]=rsInfo.get(i)[4];  //数据采集时间
+			task_info[5]=rsInfo.get(i)[5];  //数据来源游戏名
+			task_info[6]=rsInfo.get(i)[6];  //数据来源
+			task_info[7]=rsInfo.get(i)[7];  //任务大小
+			task_info[8]=rsInfo.get(i)[8];  //任务类型
+			task_info[9]=rsInfo.get(i)[9];  //InfoboxText
+			
+			Integer numTaken=Integer.parseInt(rsNumTaken.get(i)[2]); //任务已领人数
+			task_info[10]=((Integer)numTaken).toString(); //任务已领人数
+			
+			//是否已被领取
+			Integer isTakenByUser=dbHelper.getLobbyTaskIsTakenByUser(task_group,task_id,user_id);
+			
+			//未完成任务数<=5可以继续接活
+			if(numUnfinished<=5){
+				if(numTaken<3 && isTakenByUser==0){
+					task_info[11]="领取任务";
 				}
-				rsInfo.close();
-				rsNumTaken.close();
-				dbHelper.close();
-				return JSONObject.fromObject(taskIdAndInfo);
-			}catch(SQLException e){
-				dbHelper.logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-				dbHelper.close();
-				e.printStackTrace();
-				return null;
+				else if(numTaken==3)
+				{
+					task_info[11]="人数已满";
+				}
+				else
+				{
+					task_info[11]="已领取";
+				}
+			//否则不允许继续接任务
+			}else{
+				if(isTakenByUser==1){
+					task_info[11]="已领取";
+				}
+				else if(numTaken==3){
+					task_info[11]="人数已满";
+				}
+				else{
+					task_info[11]="不可用";
+				}
 			}
+			taskIdAndInfo.put(str_task_id, task_info);
 		}
+		return JSONObject.fromObject(taskIdAndInfo);
+	}
+	
+	public JSONObject setUserNewTask(Integer task_group,Integer task_id,String user_id){
+		return null;
+	}
 	
 /*	public JSONObject getMyTaskAllUnfinishedTaskInfo(Integer task_group,String user_id){
 		HashMap<String,String> myUnfinishedTaskInfo=new HashMap<String,String[]>();
