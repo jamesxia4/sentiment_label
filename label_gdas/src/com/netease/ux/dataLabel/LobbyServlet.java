@@ -20,7 +20,7 @@ import java.util.Iterator;
 /**
  * Servlet implementation class LobbyServlet
  */
-//@WebServlet(asyncSupported = true, urlPatterns = { "/lobby" })
+
 public class LobbyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
