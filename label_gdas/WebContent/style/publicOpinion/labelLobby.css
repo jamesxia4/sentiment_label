@@ -211,7 +211,7 @@ div{
 
 #label_main_content .label_infobox_textbox_upper{
 	padding-left:15px;
-	margin-top:10px;
+	margin-top:5px;
 	font-size:14px;
 
 	font-weight:bold;
@@ -221,7 +221,7 @@ div{
 
 #label_main_content .label_infobox_textbox_lower{
 	padding-left:15px;
-	margin-top:8px;
+	margin-top:5px;
 	font-size:14px;
 
 	font-weight:bold;
@@ -273,7 +273,7 @@ div{
 }
 
 #label_main_content .label_infobox_generalDesc{
-	margin-top:10px;
+	margin-top:5px;
 	font-size:14px;
 	height:16px;
 	font-weight:bold;
