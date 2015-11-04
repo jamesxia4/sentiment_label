@@ -1,7 +1,7 @@
 /**
  * 业务逻辑封装
- * @version 0.1
- * @2015-09-17
+ * @version 0.2
+ * @2015-11-04
  */
 
 package com.netease.ux.dataLabel;
