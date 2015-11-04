@@ -188,10 +188,13 @@ function addGadgets(JsonData){
 				$("<div class=\"label_userBtn_available\">领取任务</div>").appendTo($(this));
 			} else if(buttonStyle=="已领取") {
 				$("<div class=\"label_userBtn_disable\">已领取</div>").appendTo($(this));
+				$(this).parents(".label_lobby_tasks_item").css("background-color","#f0f0f0");
 			} else if(buttonStyle=="人数已满") {
 				$("<div class=\"label_userBtn_disable\">人数已满</div>").appendTo($(this));
+				$(this).parents(".label_lobby_tasks_item").css("background-color","#f0f0f0");
 			} else {
 				$("<div class=\"label_userBtn_disable\">不可用</div>").appendTo($(this));
+				$(this).parents(".label_lobby_tasks_item").css("background-color","#f0f0f0");
 			}
 		});
 		

@@ -30,7 +30,7 @@ public class DataLabel implements java.io.Serializable{
 		dbHelper=new SQLHelper(mysqlConfig);
 	}
 	
-	//任务大厅显示所有任务
+	//任务大厅:显示所有任务
 	//TODO 与期数联调
 	public JSONObject getLobbyAllTasksInfo(Integer task_group,String user_id){
 		//用了LinkedHashMap就解决了Json无序的问题啦.
@@ -95,14 +95,22 @@ public class DataLabel implements java.io.Serializable{
 		return JSONObject.fromObject(taskIdAndInfo);
 	}
 	
-	//任务大厅领取任务
+	//任务大厅:领取任务
 	public JSONObject setUserNewTask(Integer task_group,Integer task_id,String user_id){
 		dbHelper.setNewTaskToBeTaken(task_id, task_group, user_id);
 		return getLobbyAllTasksInfo(task_group,user_id);
 	}
 	
-/*	public JSONObject getMyTaskAllUnfinishedTaskInfo(Integer task_group,String user_id){
-		HashMap<String,String> myUnfinishedTaskInfo=new HashMap<String,String[]>();
-		
-	}*/
+	
+	//我的任务:已领未完成任务
+	public JSONObject getMyTaskAllUnfinishedTaskInfo(Integer task_group,String user_id){
+		HashMap<String,String[]> myUnfinishedTaskInfo=new LinkedHashMap<String,String[]>();
+		return JSONObject.fromObject(myUnfinishedTaskInfo);
+	}
+	
+	//我的任务:已完成任务
+	public JSONObject getMyTaskAllFinishedTaskInfo(Integer task_group,String user_id){
+		HashMap<String,String[]> myFinishedTaskInfo=new LinkedHashMap<String,String[]>();
+		return JSONObject.fromObject(myFinishedTaskInfo);
+	}
 }
