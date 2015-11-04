@@ -236,6 +236,7 @@ public class SQLHelper implements java.io.Serializable{
 	/**
 	 * 任务大厅，输出当前用户已经领了但是没有完成的任务个数
 	 * //TODO 以后要根据task_size自动判断 
+	 * //TODO 把task_group去掉
 	 */
 	public Integer getLobbyNumberOfUnfinishedTask(Integer task_group,String user_id,Integer task_size){
 		String sqlStmt="select count(*) from label_user_task "
@@ -265,7 +266,6 @@ public class SQLHelper implements java.io.Serializable{
 	 * @param task_id
 	 * @param task_group
 	 * @param user_id
-	 * @return rowCount, -1为异常
 	 */
 	public void setNewTaskToBeTaken(Integer task_id,Integer task_group,String user_id){
 		String sqlStmt="insert into label_user_task values (%d,'%s',%d,0.0,0,0,0)";

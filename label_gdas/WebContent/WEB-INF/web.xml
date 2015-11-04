@@ -17,4 +17,22 @@
     <servlet-name>LabelLobby</servlet-name>
     <url-pattern>/lobby</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>LabelMyTask</servlet-name>
+    <servlet-class>com.netease.ux.dataLabel.MyTaskServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LabelMyTask</servlet-name>
+    <url-pattern>/myTask</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>LabelLabel</servlet-name>
+    <servlet-class>com.netease.ux.dataLabel.LabelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LabelLabel</servlet-name>
+    <url-pattern>/label</url-pattern>
+  </servlet-mapping>
 </web-app>

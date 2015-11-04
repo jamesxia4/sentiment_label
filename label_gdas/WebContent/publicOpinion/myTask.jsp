@@ -6,12 +6,52 @@
 <%@ page import="java.io.*" %>
 <%@ page import="net.sf.json.JSONObject" %>
 <%@ page import="com.netease.ux.dataLabel.DataLabel" %>
+<link href="../style/publicOpinion/labelLobby.css" rel="stylesheet">
 <link href="../style/publicOpinion/labelMyTask.css" rel="stylesheet">
 <script src="../js/jquery-1.8.3.js"></script>
 <script src="../js/publicOpinion/myTaskUI.js"></script>
 <title>我要徒手拆高达</title>
 </head>
 <body>
-
+	<div id="label_main_content">
+		<div class="label_lobby_container">
+			<div class="label_lobby_header">
+				<div class="label_logo_wrapper">
+					<div class="label_lobby_header_logo">
+						<img src="../image/publicOpinion/label_logo.png">
+					</div>
+					<div class="label_lobby_header_text">我的任务</div>
+				</div>
+				<div class="label_lobby_header_spliter"></div>
+			</div>
+			<div class="label_lobby_task_grid">
+				<div class="label_taskgroup_wrapper" id="myTask_finishedTask_selector" >
+					<div class="label_task_group_selector">
+					<!--//TODO:加上期数选择 现在先写死 20151026 --> 
+						<div class="label_taskgroup_item">2015年 第1期</div>
+						<div class="label_taskgroup_item">2015年 第2期</div>
+						<div class="label_taskgroup_item">全部</div>
+					</div>
+				</div>
+				<div class="label_lobby_tasks" id="label_unfinished_tasks">
+					<div class="label_lobby_subHeader">未完成任务</div>
+					<!-- 以下是所有未完成任务的罗列  -->
+				</div>
+				
+				<div class="label_taskgroup_wrapper"  id="myTask_finishedTask_selector" style="margin-top:105px;">
+					<div class="label_task_group_selector">
+					<!--//TODO:加上期数选择 现在先写死 20151026 --> 
+						<div class="label_taskgroup_item">2015年 第1期</div>
+						<div class="label_taskgroup_item">2015年 第2期</div>
+						<div class="label_taskgroup_item">全部</div>
+					</div>
+				</div>
+				<div class="label_lobby_tasks" id="label_finished_tasks" style="padding-top: 23px;">
+					<div class="label_lobby_subHeader">已完成任务</div>
+					<!-- 以下是所有已完成任务的罗列  -->
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
