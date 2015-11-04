@@ -25,7 +25,7 @@ import net.sf.json.JSONObject;
 public class DataLabel implements java.io.Serializable{
 	private SQLHelper dbHelper=null;
 	public DataLabel(){
-		Config mysqlConfig=new Config("D:/config/dbConfig.cfg");
+		Config mysqlConfig=new Config("config/dbConfig.cfg");
 		dbHelper=new SQLHelper(mysqlConfig);
 	}
 	
