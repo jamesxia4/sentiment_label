@@ -65,8 +65,13 @@ function renderHtml(JsonData){
 			//生成任务剩余时间字符串
 			var idx=$(this).parents(".label_lobby_tasks_item").attr("jsondataid");
 			var timeLeft=JsonData[idx][2];
-			//TODO 日期变负的以后也要改
-			var divTimeLeft="<div class=\"label_rTime\">"+timeLeft+"天"+"</div>";
+			var divTimeLeft;
+			if(parseInt(timeLeft)<0){
+				divTimeLeft="<div class=\"label_rTime\">"+"已结束"+"</div>";
+			}
+			else{
+				divTimeLeft="<div class=\"label_rTime\">"+timeLeft+"天"+"</div>";
+			}
 			$(divTimeLeft).appendTo($(this));
 			
 			var commentGame="<div class=\"label_fromGame\">"+JsonData[idx][5]+"</div>";
@@ -160,13 +165,7 @@ function addGadgets(JsonData){
 			}
 		});
 		
-		//剩余时间提示（小于10天红色）
-		$(".label_rTime").each(function(i,e){
-			if($(e).text().slice(0,-1)<=10){
-				$(e).addClass("urgent");
-				$(e).siblings(".label_clock").addClass("urgent");
-			}
-		});
+
 		
 		//当前参与人数指示器
 		$(".label_user_wrapper").each(function(i,e){
@@ -195,6 +194,22 @@ function addGadgets(JsonData){
 			} else {
 				$("<div class=\"label_userBtn_disable\">不可用</div>").appendTo($(this));
 				$(this).parents(".label_lobby_tasks_item").css("background-color","#f0f0f0");
+			}
+		});
+		
+		//剩余时间提示（小于10天红色,已结束也是红丝）
+		$(".label_rTime").each(function(i,e){
+			if($(e).text()=="已结束"){
+				$(e).addClass("urgent");
+				$(e).siblings(".label_clock").addClass("urgent");
+				//如果该项所在的item还是可领取的，修改成不可用
+				$(e).parents(".label_lobby_tasks_item").find(".label_userBtn_available").attr("class","label_userBtn_disable");
+				$(e).parents(".label_lobby_tasks_item").find(".label_userBtn_disable").text("不可用");
+				$(e).parents(".label_lobby_tasks_item").css("background-color","#f0f0f0");
+			}
+			else if($(e).text().slice(0,-1)<=10){
+				$(e).addClass("urgent");
+				$(e).siblings(".label_clock").addClass("urgent");
 			}
 		});
 		
