@@ -24,8 +24,9 @@ import net.sf.json.JSONObject;
 
 public class DataLabel implements java.io.Serializable{
 	private SQLHelper dbHelper=null;
-	public DataLabel(){
-		Config mysqlConfig=new Config("config/dbConfig.cfg");
+	public DataLabel(String configFullPath){
+		//如果是tomcat调用,当前的根文件夹就是tomcat的文件夹
+		Config mysqlConfig=new Config(configFullPath);
 		dbHelper=new SQLHelper(mysqlConfig);
 	}
 	

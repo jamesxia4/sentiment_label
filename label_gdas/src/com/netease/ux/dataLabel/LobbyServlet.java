@@ -44,7 +44,7 @@ public class LobbyServlet extends HttpServlet {
 		response.setDateHeader("Ewindowsxpires", 0);
 		
         PrintWriter out= response.getWriter();
-        DataLabel labelHandler=new DataLabel();
+        DataLabel labelHandler=new DataLabel("../workspace/sentiment_label/label_gdas/config/dbConfig.cfg");
         
         //参数:task_group=xxx&user_id=xxx
         Integer task_group_from_url=Integer.parseInt(request.getParameter("task_group"));
@@ -65,7 +65,7 @@ public class LobbyServlet extends HttpServlet {
 		response.setDateHeader("Ewindowsxpires", 0);
 		
 		PrintWriter out = response.getWriter();
-		DataLabel labelHandler=new DataLabel();
+		DataLabel labelHandler=new DataLabel("../workspace/sentiment_label/label_gdas/config/dbConfig.cfg");
 		
 		//处理post表单
 		Integer task_id=Integer.parseInt(request.getParameter("task_id"));
