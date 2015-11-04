@@ -29,6 +29,7 @@ public class DataLabel implements java.io.Serializable{
 	}
 	
 	//任务大厅显示所有任务
+	//TODO 与期数联调
 	public JSONObject getLobbyAllTasksInfo(Integer task_group,String user_id){
 		HashMap<String,String[]> taskIdAndInfo=new HashMap<String,String[]>();
 		
@@ -57,20 +58,24 @@ public class DataLabel implements java.io.Serializable{
 			//是否已被领取
 			Integer isTakenByUser=dbHelper.getLobbyTaskIsTakenByUser(task_group,task_id,user_id);
 			
-			//未完成任务数<=5可以继续接活
-			if(numUnfinished<=5){
+			//未完成任务数<=4可以继续接活
+			if(numUnfinished<=4){
 				if(numTaken<3 && isTakenByUser==0){
 					task_info[11]="领取任务";
 				}
-				else if(numTaken==3)
+				else if(numTaken==3 && isTakenByUser==0)
 				{
 					task_info[11]="人数已满";
+				}
+				else if(numTaken==3 && isTakenByUser==1)
+				{
+					task_info[11]="已领取";
 				}
 				else
 				{
 					task_info[11]="已领取";
 				}
-			//否则不允许继续接任务
+			//>=5以后不允许继续接任务
 			}else{
 				if(isTakenByUser==1){
 					task_info[11]="已领取";
