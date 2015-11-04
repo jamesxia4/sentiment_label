@@ -46,6 +46,7 @@ function renderHtml(data){
 		
 		//TODO Json遍历bug要改
 		for(var idx=0;idx<dataLength;idx++){
+			var jsonDataIdx=idx+1;
 			var jsonDataId=(idx+1).toString();
 			$("<div class=\"label_lobby_tasks_item\"></div>").appendTo($(".label_lobby_tasks")).attr("jsonDataId",jsonDataId);
 		}

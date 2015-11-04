@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import java.util.ArrayList;
@@ -31,7 +32,8 @@ public class DataLabel implements java.io.Serializable{
 	//任务大厅显示所有任务
 	//TODO 与期数联调
 	public JSONObject getLobbyAllTasksInfo(Integer task_group,String user_id){
-		HashMap<String,String[]> taskIdAndInfo=new HashMap<String,String[]>();
+		//用了LinkedHashMap就解决了Json无序的问题啦.
+		HashMap<String,String[]> taskIdAndInfo=new LinkedHashMap<String,String[]>();
 		
 		List<String[]> rsInfo=dbHelper.getLobbyAllTasks(task_group);
 		List<String[]> rsNumTaken=dbHelper.getLobbyAllTasksTakenByUsers(task_group);
