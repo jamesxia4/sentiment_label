@@ -49,7 +49,6 @@ public class LobbyServlet extends HttpServlet {
         //参数:task_group=xxx&user_id=xxx
         Integer task_group_from_url=Integer.parseInt(request.getParameter("task_group"));
 		JSONObject labelObject=labelHandler.getLobbyAllTasksInfo(task_group_from_url,request.getParameter("user_id"));
-		System.out.println(labelObject.toString());
 		out.println(labelObject.toString());
     }
 
@@ -73,8 +72,6 @@ public class LobbyServlet extends HttpServlet {
 		String user_id=request.getParameter("user_id");
 		
 		JSONObject labelObject=labelHandler.setUserNewTask(task_group, task_id, user_id);
-		System.out.println("New task taken:\n");
-		System.out.println(labelObject.toString());
 		out.println(labelObject.toString());		
 	}
 
