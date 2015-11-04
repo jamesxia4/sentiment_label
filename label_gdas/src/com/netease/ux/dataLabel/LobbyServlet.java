@@ -54,7 +54,7 @@ public class LobbyServlet extends HttpServlet {
     }
 
 	/**
-	 * doPost:根据用户任务选择更新数据库
+	 * doPost:根据用户选择领取任务并更新数据库
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8"); 
@@ -68,7 +68,14 @@ public class LobbyServlet extends HttpServlet {
 		DataLabel labelHandler=new DataLabel();
 		
 		//处理post表单
+		Integer task_id=Integer.parseInt(request.getParameter("task_id"));
+		Integer task_group=Integer.parseInt(request.getParameter("task_group"));
+		String user_id=request.getParameter("user_id");
 		
+		JSONObject labelObject=labelHandler.setUserNewTask(task_group, task_id, user_id);
+		System.out.println("New task taken:\n");
+		System.out.println(labelObject.toString());
+		out.println(labelObject.toString());		
 	}
 
 }

@@ -124,21 +124,6 @@ public class SQLHelper implements java.io.Serializable{
 	}
 	
 	
-	/**
-	 * 执行insert/delete/update并返回结果
-	 * @param sqlToExecute, insert/delete/update型语句
-	 * @return rowCount
-	 * @throws SQLException
-	 */
-	public int updateExecutor(String sqlToExecute) throws SQLException{
-		connect_db();
-		stmt=conn.createStatement();
-		int rowCount=stmt.executeUpdate(sqlToExecute);
-		stmt.close();
-		conn.close();
-		return rowCount;
-	}
-	
 	/*********************************************************
 	 * 任务大厅
 	 *********************************************************/
@@ -282,18 +267,21 @@ public class SQLHelper implements java.io.Serializable{
 	 * @param user_id
 	 * @return rowCount, -1为异常
 	 */
-	public int setNewTaskToBeTaken(Integer task_id,Integer task_group,String user_id){
-		String sqlStmt="insert into label_user_task values (%d,%s,%d,0.0,0,0,0)";
+	public void setNewTaskToBeTaken(Integer task_id,Integer task_group,String user_id){
+		String sqlStmt="insert into label_user_task values (%d,'%s',%d,0.0,0,0,0)";
 		sqlStmt=String.format(sqlStmt, task_id,user_id,task_group);
 		try{
-			int rowCount=updateExecutor(sqlStmt);
-			return rowCount;
+			connect_db();
+			stmt=conn.createStatement();
+			stmt.executeUpdate(sqlStmt);
+			close();
 		}catch(SQLException e){
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
-			return -1;
+			close();
 		} 
 	}
+	
 	
 /*	*//*********************************************************
 	 * 我的任务

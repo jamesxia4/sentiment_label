@@ -319,6 +319,7 @@ div{
 }
 
 #label_main_content .label_userBtn_available{
+	/*字体位置要改*/
     margin-right: 18px;
     line-height:16px;
     height: 26px;
@@ -334,7 +335,43 @@ div{
     vertical-align: top;
 }
 
+#label_main_content .label_userBtn_available:hover{
+	/*字体位置要改*/
+    margin-right: 18px;
+    line-height:16px;
+    height: 25px;
+    width: 117px;
+    border-radius: 20px;
+    color: #2aceae;
+    background-color: #ffffff;
+    border:1px solid #2aceae;
+    text-align: center;
+    font-size: 14px;
+    padding-top: 9px;
+    display: inline-block;
+    float: right;
+    vertical-align: top;
+}
+
+#label_main_content .label_userBtn_available:active{
+	/*字体位置要改*/
+    margin-right: 18px;
+    line-height:16px;
+    height: 25px;
+    width: 117px;
+    border-radius: 20px;
+    color: #2aceae;
+    background-color: #e9e9e9;
+    text-align: center;
+    font-size: 14px;
+    padding-top: 9px;
+    display: inline-block;
+    float: right;
+    vertical-align: top;
+}
+
 #label_main_content .label_userBtn_disable{
+	/*字体位置要改*/
 	margin-right: 18px;
     line-height:16px;
     height: 26px;

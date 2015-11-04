@@ -28,6 +28,7 @@ public class DataLabel implements java.io.Serializable{
 		dbHelper=new SQLHelper(mysqlConfig);
 	}
 	
+	//任务大厅显示所有任务
 	public JSONObject getLobbyAllTasksInfo(Integer task_group,String user_id){
 		HashMap<String,String[]> taskIdAndInfo=new HashMap<String,String[]>();
 		
@@ -86,8 +87,10 @@ public class DataLabel implements java.io.Serializable{
 		return JSONObject.fromObject(taskIdAndInfo);
 	}
 	
+	//任务大厅领取任务
 	public JSONObject setUserNewTask(Integer task_group,Integer task_id,String user_id){
-		return null;
+		dbHelper.setNewTaskToBeTaken(task_id, task_group, user_id);
+		return getLobbyAllTasksInfo(task_group,user_id);
 	}
 	
 /*	public JSONObject getMyTaskAllUnfinishedTaskInfo(Integer task_group,String user_id){
