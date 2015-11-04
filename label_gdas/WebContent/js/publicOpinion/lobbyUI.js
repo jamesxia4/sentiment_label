@@ -5,6 +5,8 @@
 //测试数据，撸完就删
 //楼上已撸
 
+//data遍历有bug,要改
+
 //用来获取页面url参数
 function getUrlParam(name)
 {
@@ -14,20 +16,23 @@ function getUrlParam(name)
 } 
 
 //ajax调用servlet接口获取json并渲染页面
-$(document).ready(function(){
-	var url_to_use="/label_gdas/lobby?user_id="+getUrlParam('user_id')+"&task_group="+getUrlParam('task_group');
-	$.ajax({
-		type:"GET",
-		url:url_to_use,
-		dataType:"json",
-		success: function(data){
-			console.log("Success");
-			console.log(data);
-			renderHtml(data);
-			addGadgets(data);
-		}
+
+function reloadLobby(){
+	$(document).ready(function(){
+		var url_to_use="/label_gdas/lobby?user_id="+getUrlParam('user_id')+"&task_group="+getUrlParam('task_group');
+		$.ajax({
+			type:"GET",
+			url:url_to_use,
+			dataType:"json",
+			success: function(data){
+				console.log("Success");
+				renderHtml(data);
+				addGadgets(data);
+				listenEvents(data);
+			}
+		});
 	});
-});
+}
 
 //渲染页面,添加html骨架
 function renderHtml(data){
@@ -39,10 +44,10 @@ function renderHtml(data){
 			dataLength++;
 		}
 		
-		console.log(dataLength);
+		//TODO Json遍历bug要改
 		for(var idx=0;idx<dataLength;idx++){
-			console.log(idx);
-			$("<div class=\"label_lobby_tasks_item\"></div>").appendTo($(".label_lobby_tasks"));
+			var jsonDataId=(idx+1).toString();
+			$("<div class=\"label_lobby_tasks_item\"></div>").appendTo($(".label_lobby_tasks")).attr("jsonDataId",jsonDataId);
 		}
 		
 		//添加任务项框架
@@ -56,6 +61,7 @@ function renderHtml(data){
 		
 		
 		//在任务项框架中的抬头部分添加数据来源游戏名称和任务倒计时
+		//TODO Json遍历bug要改
 		$(".label_timeGameSource").each(function(i,e){
 			$("<div class=\"label_clock\"></div>").appendTo($(this));
 			//生成任务剩余时间字符串
@@ -72,6 +78,7 @@ function renderHtml(data){
 		});
 		
 		//在任务项框架中添加任务名与领取人数指示器，以及领取按钮
+		//TODO Json遍历bug要改
 		$(".label_taskNameWorkerWrapper").each(function(i,e){
 			//生成任务名
 			var idx=(i+1).toString();
@@ -81,7 +88,8 @@ function renderHtml(data){
 			$("<div class=\"label_user_wrapper\"></div>").appendTo($(this));
 		});
 		
-		//TODO 在任务项框架中添加下拉信息框的信息
+		//在任务项框架中添加下拉信息框的信息
+		//TODO Json遍历bug要改
 		$(".label_item_infobox").each(function(i,e){
 			$("<div class=\"label_infobox_header\">任务介绍 :</div>").appendTo($(this));
 			$("<div class=\"label_infobox_textbox_upper\"></div>").appendTo($(this));
@@ -165,6 +173,7 @@ function addGadgets(data){
 		});
 		
 		//当前参与人数指示器
+		//TODO Json遍历bug要改
 		$(".label_user_wrapper").each(function(i,e){
 			var idx=(i+1).toString();
 			var numPerson=parseInt(data[idx][10]);
@@ -177,6 +186,7 @@ function addGadgets(data){
 		});
 		
 		//按钮样式自动生成
+		//TODO Json遍历bug要改
 		$(".label_taskNameWorkerWrapper").each(function(i,e){
 			var idx=(i+1).toString();
 			var buttonStyle=data[idx][11];
@@ -187,8 +197,6 @@ function addGadgets(data){
 			} else if(buttonStyle=="人数已满") {
 				$("<div class=\"label_userBtn_disable\">人数已满</div>").appendTo($(this));
 			} else {
-				console.log(idx);
-				console.log(buttonStyle);
 				$("<div class=\"label_userBtn_disable\">不可用</div>").appendTo($(this));
 			}
 		});
@@ -198,3 +206,30 @@ function addGadgets(data){
 	});
 }
 
+function listenEvents(jsonData){
+	$(document).ready(function(){
+		//TODO 加入校验防止客户端修改数据作弊
+
+		$(".label_userBtn_available").click(function(){
+			var jsonId=(parseInt($(this).parent().parent().attr("jsondataid"))).toString();
+			$.post(
+				"/label_gdas/lobby?",
+				{
+					task_id:jsonId,
+					task_group:getUrlParam('task_group'),
+					user_id:getUrlParam('user_id'),
+				},
+				function(data,status){
+					console.log(data);
+				    alert("领取成功\n");
+				    
+				    //刷新所有任务
+				    $(".label_lobby_tasks").empty();
+				    reloadLobby();
+				}
+			);
+		});
+	});
+}
+
+reloadLobby();
