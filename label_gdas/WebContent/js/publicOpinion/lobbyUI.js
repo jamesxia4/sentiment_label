@@ -197,7 +197,7 @@ function addGadgets(JsonData){
 			}
 		});
 		
-		//剩余时间提示（小于10天红色,已结束也是红丝）
+		//剩余时间提示（小于10天红色,已结束也是红色）
 		$(".label_rTime").each(function(i,e){
 			if($(e).text()=="已结束"){
 				$(e).addClass("urgent");

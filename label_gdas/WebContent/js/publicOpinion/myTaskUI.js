@@ -2,14 +2,24 @@
  * 
  */
 
-/**
- * 
- */
 
 //测试数据，撸完就删
-//楼上已撸
+var testData={
+"1":["1","1","8","2015第1期 玩家评论情感倾向任务 001","2015.10.1~2015.12.1","炉石传说","百度贴吧","100","情感倾向任务 文字类","该任务数据来源于“UXData-舆情监控系统”从网上抓取的用户评论。任务目的是标注相关评论语句的情感倾向以及与游戏特征的关系，标注结果将用于评估舆情监控系统中情感分类算法的准确率，以便进行算法迭代和后续通用指数的设计","1","已领取"],
+"2":["2","1","8","2015第1期 玩家评论情感倾向任务 002","2015.10.1~2015.12.1","炉石传说","百度贴吧","100","情感倾向任务 文字类","该任务数据来源于“UXData-舆情监控系统”从网上抓取的用户评论。任务目的是标注相关评论语句的情感倾向以及与游戏特征的关系，标注结果将用于评估舆情监控系统中情感分类算法的准确率，以便进行算法迭代和后续通用指数的设计","1","已领取"],
+"4":["4","1","9","2015第1期 玩家评论情感倾向任务 004","2015.10.1~2015.12.1","炉石传说","百度贴吧","100","情感倾向任务 文字类","该任务数据来源于“UXData-舆情监控系统”从网上抓取的用户评论。任务目的是标注相关评论语句的情感倾向以及与游戏特征的关系，标注结果将用于评估舆情监控系统中情感分类算法的准确率，以便进行算法迭代和后续通用指数的设计","1","已领取"],
+"5":["5","1","10","2015第1期 玩家评论情感倾向任务 005","2015.10.1~2015.12.1","炉石传说","百度贴吧","100","情感倾向任务 文字类","该任务数据来源于“UXData-舆情监控系统”从网上抓取的用户评论。任务目的是标注相关评论语句的情感倾向以及与游戏特征的关系，标注结果将用于评估舆情监控系统中情感分类算法的准确率，以便进行算法迭代和后续通用指数的设计","1","已领取"],
+"7":["7","1","0","2015第1期 玩家评论情感倾向任务 007","2015.10.1~2015.12.1","炉石传说","百度贴吧","100","情感倾向任务 文字类","该任务数据来源于“UXData-舆情监控系统”从网上抓取的用户评论。任务目的是标注相关评论语句的情感倾向以及与游戏特征的关系，标注结果将用于评估舆情监控系统中情感分类算法的准确率，以便进行算法迭代和后续通用指数的设计","1","已领取"]
+}
 
-//data遍历有bug,要改
+var testData1={
+"1":["1","1","2015第1期 玩家评论情感倾向任务 001","100","0.98","1"],
+"2":["2","1","2015第1期 玩家评论情感倾向任务 002","100","0.93","2"],
+"4":["4","1","2015第1期 玩家评论情感倾向任务 004","100","0.92","1"],
+"5":["5","1","2015第1期 玩家评论情感倾向任务 005","100","0.91","3"],
+"6":["6","1","2015第1期 玩家评论情感倾向任务 006","100","0.88","1"],
+"7":["6","1","2015第1期 玩家评论情感倾向任务 007","100","0.75","3"],
+}
 
 //用来获取页面url参数
 function getUrlParam(name)
@@ -21,9 +31,9 @@ function getUrlParam(name)
 
 //ajax调用servlet接口获取json并渲染页面
 
-/*function reloadLobby(){
+/*function reloadMyTask(){
 	$(document).ready(function(){
-		var url_to_use="/label_gdas/lobby?user_id="+getUrlParam('user_id')+"&task_group="+getUrlParam('task_group');
+		var url_to_use="/label_gdas/myTask?user_id="+getUrlParam('user_id');
 		$.ajax({
 			type:"GET",
 			url:url_to_use,
@@ -39,10 +49,8 @@ function getUrlParam(name)
 }*/
 
 //渲染页面,添加html骨架
-function renderHtml(JsonData){
+function renderUnfinished(JsonData){
 	$(document).ready(function(){
-		console.log("start");
-		
 		var dataLength=0;
 		for(var item in JsonData){
 			dataLength++;
@@ -50,11 +58,11 @@ function renderHtml(JsonData){
 		
 		//Json本质是个对象，所以就当成对象来遍历起属性与属性值
 		for(var taskId in JsonData){
-			$("<div class=\"label_lobby_tasks_item\"></div>").appendTo($(".label_lobby_tasks")).attr("jsonDataId",taskId);
+			$("<div class=\"label_myTask_tasks_item\"></div>").appendTo($(".label_myTask_tasks")).attr("jsonDataId",taskId);
 		}
 		
 		//添加任务项框架
-		$(".label_lobby_tasks_item").each(function(i,e){
+		$(".label_myTask_tasks_item").each(function(i,e){
 			$("<div class=\"label_timeGameSource\"></div>").appendTo($(this));
 			$("<div class=\"label_taskNameWorkerWrapper\"></div>").appendTo($(this));
 			$("<div class=\"label_item_spliter\"></div>").appendTo($(this));
@@ -67,7 +75,7 @@ function renderHtml(JsonData){
 		$(".label_timeGameSource").each(function(i,e){
 			$("<div class=\"label_clock\"></div>").appendTo($(this));
 			//生成任务剩余时间字符串
-			var idx=$(this).parents(".label_lobby_tasks_item").attr("jsondataid");
+			var idx=$(this).parents(".label_myTask_tasks_item").attr("jsondataid");
 			var timeLeft=JsonData[idx][2];
 			var divTimeLeft;
 			if(parseInt(timeLeft)<0){
@@ -87,7 +95,7 @@ function renderHtml(JsonData){
 		//在任务项框架中添加任务名与领取人数指示器，以及领取按钮
 		$(".label_taskNameWorkerWrapper").each(function(i,e){
 			//生成任务名
-			var idx=$(this).parents(".label_lobby_tasks_item").attr("jsondataid");
+			var idx=$(this).parents(".label_myTask_tasks_item").attr("jsondataid");
 			var taskName=JsonData[idx][3];
 			var divTaskName="<div class=\"label_item_name\">"+taskName+"</div>";
 			$(divTaskName).appendTo($(this));
@@ -101,16 +109,13 @@ function renderHtml(JsonData){
 			$("<div class=\"label_infobox_textbox_lower\"></div>").appendTo($(this));
 			$("<div class=\"label_infobox_generalDesc\"></div>").appendTo($(this));
 			
-			var idx=$(this).parents(".label_lobby_tasks_item").attr("jsondataid");
+			var idx=$(this).parents(".label_myTask_tasks_item").attr("jsondataid");
 			$("<div class=\"label_textbox_commentGame\"></div>").appendTo($(e).children(".label_infobox_textbox_upper"));
 			$("<div class=\"label_textbox_dataSource\"></div>").appendTo($(e).children(".label_infobox_textbox_upper"));
 			$("<div class=\"label_textbox_dataTime\"></div>").appendTo($(e).children(".label_infobox_textbox_upper"));
 			$("<div class=\"label_textbox_userTaken\"></div>").appendTo($(e).children(".label_infobox_textbox_upper"));
-			
-
-			
-			
-			
+					
+					
 			$("<div class=\"label_textbox_labelSize\"></div>").appendTo($(e).children(".label_infobox_textbox_lower"));
 			$("<div class=\"label_textbox_labelType\"></div>").appendTo($(e).children(".label_infobox_textbox_lower"));
 			$("<div class=\"label_textbox_labelBonus\"></div>").appendTo($(e).children(".label_infobox_textbox_lower"));
@@ -125,13 +130,61 @@ function renderHtml(JsonData){
 			$(e).find(".label_textbox_labelBonus").text("任务奖励：0~100金币（标注数量x准确率）");
 
 		});
+	});
+}
+
+
+//渲染页面,添加html骨架
+function renderFinished(JsonData){
+	$(document).ready(function(){
+		var dataLength=0;
+		for(var item in JsonData){
+			dataLength++;
+		}
 		
+		//Json本质是个对象，所以就当成对象来遍历起属性与属性值
+		for(var taskId in JsonData){
+			$("<div class=\"label_myTask_finished_item\"></div>").appendTo($(".label_myTask_finishedTasks")).attr("jsonDataId",taskId);
+		}
+		
+		//添加任务项框架
+		$(".label_myTask_finished_item").each(function(i,e){
+			$("<div class=\"label_finishedTaskNameWrapper\"></div>").appendTo($(this));
+			$("<div class=\"label_finishedTask_infobox\"></div>").appendTo($(this));
+		});
+		
+		
+		//在任务项框架中添加任务名与领取人数指示器，以及领取按钮
+		$(".label_finishedTaskNameWrapper").each(function(i,e){
+			//生成任务名
+			var idx=$(this).parents(".label_myTask_finished_item").attr("jsondataid");
+			
+			var taskName=JsonData[idx][2];
+			var divTaskName="<div class=\"finished_item_name\">"+taskName+"</div>";
+			$(divTaskName).appendTo($(this));
+			
+			var taskName=(parseInt(JsonData[idx][3])*parseFloat(JsonData[idx][4])).toString();
+			$("<div class=\"label_bonus_wrapper\"></div>").appendTo($(this));
+		});
+		
+		//在任务项框架中添加任务名与领取人数指示器，以及领取按钮
+		$(".label_finishedTask_infobox").each(function(i,e){
+			var idx=$(this).parents(".label_myTask_finished_item").attr("jsondataid");
+			
+			var userRank="<div class=\"finishedTask_infobox_rank\">"+"本任务排名  "+JsonData[idx][5]+"</div>";
+			var taskSize="<div class=\"finishedTask_infobox_size\">"+"标注数量  "+JsonData[idx][3]+"</div>";
+			var taskAccuracy="<div class=\"finishedTask_infobox_size\">"+"准确率  "+JsonData[idx][4]+"</div>";
+			
+			$(userRank).appendTo($(this));
+			$(taskSize).appendTo($(this));
+			$(taskAccuracy).appendTo($(this));
+		});
 		
 	});
 }
 
 //渲染页面,添加特效
-function addGadgets(){
+function addGadgets(JsonData){
 	$(document).ready(function(){
 		//任务组选择器
 		$(".label_taskgroup_item").click(function(e){
@@ -150,7 +203,7 @@ function addGadgets(){
 		$(".label_item_pulldown").click(function(e){
 			e.preventDefault();
 			if(!$(this).hasClass("infoPulledDown")){
-				$(this).parent().siblings(".label_lobby_tasks_item").children(".label_item_pulldown").each(function(i,e){
+				$(this).parent().siblings(".label_myTask_tasks_item").children(".label_item_pulldown").each(function(i,e){
 					if($(e).hasClass("infoPulledDown")){
 						$(e).removeClass("infoPulledDown");
 						$(e).siblings(".label_item_spliter").slideUp(180);
@@ -171,9 +224,9 @@ function addGadgets(){
 		
 
 		
-/*		//当前参与人数指示器
+		//当前参与人数指示器
 		$(".label_user_wrapper").each(function(i,e){
-			var idx=$(this).parents(".label_lobby_tasks_item").attr("jsondataid");
+			var idx=$(this).parents(".label_myTask_tasks_item").attr("jsondataid");
 			var numPerson=parseInt(JsonData[idx][10]);
 			for(var iterIdx=0;iterIdx<numPerson;iterIdx++){
 				$("<div class=\"label_user_on\"></div>").appendTo($(this));
@@ -181,71 +234,60 @@ function addGadgets(){
 			for(var iterIdx=0;iterIdx<3-numPerson;iterIdx++){
 				$("<div class=\"label_user_off\"></div>").appendTo($(this));
 			}
-		});*/
+		});
 		
-/*		//按钮样式自动生成
+		//按钮样式自动生成
 		$(".label_taskNameWorkerWrapper").each(function(i,e){
-			var idx=$(this).parents(".label_lobby_tasks_item").attr("jsondataid");
+			var idx=$(this).parents(".label_myTask_tasks_item").attr("jsondataid");
 			var buttonStyle=JsonData[idx][11];
-			if (buttonStyle=="领取任务"){
-				$("<div class=\"label_userBtn_available\">领取任务</div>").appendTo($(this));
-			} else if(buttonStyle=="已领取") {
-				$("<div class=\"label_userBtn_disable\">已领取</div>").appendTo($(this));
-				$(this).parents(".label_lobby_tasks_item").css("background-color","#f0f0f0");
-			} else if(buttonStyle=="人数已满") {
-				$("<div class=\"label_userBtn_disable\">人数已满</div>").appendTo($(this));
-				$(this).parents(".label_lobby_tasks_item").css("background-color","#f0f0f0");
-			} else {
-				$("<div class=\"label_userBtn_disable\">不可用</div>").appendTo($(this));
-				$(this).parents(".label_lobby_tasks_item").css("background-color","#f0f0f0");
+			if (buttonStyle=="已领取"){
+				$("<div class=\"label_userBtn_available\">继续任务</div>").appendTo($(this));
 			}
-		});*/
+		});
 		
-/*		//剩余时间提示（小于10天红色,已结束也是红丝）
+		//剩余时间提示（小于10天红色,已结束也是红色）
 		$(".label_rTime").each(function(i,e){
 			if($(e).text()=="已结束"){
 				$(e).addClass("urgent");
 				$(e).siblings(".label_clock").addClass("urgent");
 				//如果该项所在的item还是可领取的，修改成不可用
-				$(e).parents(".label_lobby_tasks_item").find(".label_userBtn_available").attr("class","label_userBtn_disable");
-				$(e).parents(".label_lobby_tasks_item").find(".label_userBtn_disable").text("不可用");
-				$(e).parents(".label_lobby_tasks_item").css("background-color","#f0f0f0");
+				$(e).parents(".label_myTask_tasks_item").find(".label_userBtn_available").attr("class","label_userBtn_disable");
+				$(e).parents(".label_myTask_tasks_item").find(".label_userBtn_disable").text("已结束");
+				$(e).parents(".label_myTask_tasks_item").css("background-color","#f0f0f0");
 			}
 			else if($(e).text().slice(0,-1)<=10){
 				$(e).addClass("urgent");
 				$(e).siblings(".label_clock").addClass("urgent");
 			}
-		});*/
+		});
 		
 		//翻页
 		//TODO: 做个ajax翻页
 	});
 }
 
-function listenEvents(jsonData){
+//跳转至标注页
+function listenEvents(JsonData){
 	$(document).ready(function(){
 		//TODO 加入校验防止客户端修改数据作弊
 
 		$(".label_userBtn_available").click(function(){
-			var jsonId=$(this).parents(".label_lobby_tasks_item").attr("jsondataid");
-			$.post(
-				"/label_gdas/lobby?",
-				{
-					task_id:jsonId,
-					task_group:getUrlParam('task_group'),
-					user_id:getUrlParam('user_id'),
-				},
-				function(data,status){
-					console.log(data);
-				    alert("领取成功\n");
-				    
-				    //刷新所有任务
-				    $(".label_lobby_tasks").empty();
-				    reloadLobby();
-				}
-			);
+			var idx=$(this).parents(".label_myTask_tasks_item").attr("jsondataid");
+			var json_task_id=JsonData[idx][0];
+			var json_task_group=JsonData[idx][1];
+			$(function(){
+				location.href = "/label_gdas/publicOpinion/label.jsp?task_id="+json_task_id+"&task_group="+json_task_group+"&user_id="+getUrlParam('user_id');
+			});
 		});
 	});
 }
 
-addGadgets();
+//Entry
+$(document).ready(function(){
+	renderUnfinished(testData);
+	renderFinished(testData1);
+	addGadgets(testData);
+	listenEvents(testData);
+});
+
+
