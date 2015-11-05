@@ -399,11 +399,15 @@ div{
 
 #label_main_content .label_finished_left_wrapper{
 	display:inline-block;
+	width:60%
 }
 
 #label_main_content .label_finished_right_wrapper{
 	display:inline-block;
-	text-align:right;
+	float:right;
+	margin-top:25px;
+	margin-right:30px;
+	margin-bottom:40px;
 }
 
 #label_main_content .label_finishedTaskNameWrapper{
@@ -440,5 +444,16 @@ div{
 	display:inline-block;
 }
 
+#label_main_content .label_bonus_bonusLogo{
+	background:url('../../image/publicOpinion/bonus_logo.png') no-repeat center;
+	width:41px;
+    height:27px;
+}
 
+#label_main_content .label_bonus_bonusText{
+	padding-top:5px;
+	padding-left:10px;
+	font-size:16px;
+	color:#292d3e;
+}
 
