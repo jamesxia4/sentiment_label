@@ -149,10 +149,20 @@ function renderFinished(JsonData){
 		
 		//添加任务项框架
 		$(".label_myTask_finished_item").each(function(i,e){
-			$("<div class=\"label_finishedTaskNameWrapper\"></div>").appendTo($(this));
-			$("<div class=\"label_finishedTask_infobox\"></div>").appendTo($(this));
+			$("<div class=\"label_finished_left_wrapper\"></div").appendTo($(this));
+				$("<div class=\"label_finishedTaskNameWrapper\"></div>").appendTo($(this).children(".label_finished_left_wrapper"));
+				$("<div class=\"label_finishedTask_infobox\"></div>").appendTo($(this).children(".label_finished_left_wrapper"));
+			$("<div class=\"label_finished_right_wrapper\"></div").appendTo($(this));
 		});
 		
+		//添加每项已完成任务的bonus
+		$(".label_finished_right_wrapper").each(function(i,e){
+			var idx=$(this).parents(".label_myTask_finished_item").attr("jsondataid");
+			var bonus=(parseInt(JsonData[idx][3])*parseFloat(JsonData[idx][4])).toString();
+			$("<div class=\"label_bonus_wrapper\"></div>").appendTo($(this));
+			$("<div class=\"label_bonus_bonusLogo\"></div>").appendTo($(this).children(".label_bonus_wrapper"));
+			$("<div class=\"label_bonus_bonusText\"></div>").appendTo($(this).children(".label_bonus_wrapper")).text(bonus);
+		});
 		
 		//在任务项框架中添加任务名与领取人数指示器，以及领取按钮
 		$(".label_finishedTaskNameWrapper").each(function(i,e){
@@ -162,22 +172,25 @@ function renderFinished(JsonData){
 			var taskName=JsonData[idx][2];
 			var divTaskName="<div class=\"finished_item_name\">"+taskName+"</div>";
 			$(divTaskName).appendTo($(this));
-			
-			var taskName=(parseInt(JsonData[idx][3])*parseFloat(JsonData[idx][4])).toString();
-			$("<div class=\"label_bonus_wrapper\"></div>").appendTo($(this));
 		});
 		
-		//在任务项框架中添加任务名与领取人数指示器，以及领取按钮
+		//在任务项框架中添加其他信息
 		$(".label_finishedTask_infobox").each(function(i,e){
 			var idx=$(this).parents(".label_myTask_finished_item").attr("jsondataid");
 			
-			var userRank="<div class=\"finishedTask_infobox_rank\">"+"本任务排名  "+JsonData[idx][5]+"</div>";
-			var taskSize="<div class=\"finishedTask_infobox_size\">"+"标注数量  "+JsonData[idx][3]+"</div>";
-			var taskAccuracy="<div class=\"finishedTask_infobox_size\">"+"准确率  "+JsonData[idx][4]+"</div>";
+			var userRank="<div class=\"finishedTask_infobox_title\">"+"本任务排名  "+"</div>";
+			var userRankText="<div class=\"finishedTask_infobox_text\">"+JsonData[idx][5]+"</div>";
+			var taskSize="<div class=\"finishedTask_infobox_title\">"+"标注数量  "+"</div>";
+			var taskSizeText="<div class=\"finishedTask_infobox_text\">"+JsonData[idx][3]+"</div>";
+			var taskAccuracy="<div class=\"finishedTask_infobox_title\">"+"准确率  "+"</div>";
+			var taskAccuracyText="<div class=\"finishedTask_infobox_text\">"+JsonData[idx][4]+"</div>";
 			
 			$(userRank).appendTo($(this));
+			$(userRankText).appendTo($(this));
 			$(taskSize).appendTo($(this));
+			$(taskSizeText).appendTo($(this));
 			$(taskAccuracy).appendTo($(this));
+			$(taskAccuracyText).appendTo($(this));
 		});
 		
 	});

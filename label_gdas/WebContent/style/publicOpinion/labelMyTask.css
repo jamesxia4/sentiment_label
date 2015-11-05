@@ -382,6 +382,9 @@ div{
     vertical-align: top;
 }
 
+#label_main_content .label_myTask_finishedTasks{
+	margin-top:80px;
+}
 
 #label_main_content .label_myTask_finished_item{
 	border-width: 1px;
@@ -394,9 +397,16 @@ div{
 	padding-bottom:6px;
 }
 
-#label_main_content .label_finishedTaskNameWrapper{
+#label_main_content .label_finished_left_wrapper{
 	display:inline-block;
-	width:100%;
+}
+
+#label_main_content .label_finished_right_wrapper{
+	display:inline-block;
+	text-align:right;
+}
+
+#label_main_content .label_finishedTaskNameWrapper{
 }
 
 #label_main_content .finished_item_name{
@@ -412,24 +422,23 @@ div{
 
 #label_main_content .label_finishedTask_infobox{
 	margin-left:30px;
-	margin-down:25px;
+	margin-bottom:17px;
 	display:inline-block;
-	width:100%;
 }
 
-#label_main_content .finishedTask_infobox_rank{
+#label_main_content .finishedTask_infobox_title{
+	font-size:14px;
+	margin-right:10px;
+	color:#999999;
 	display:inline-block;
-	width:15%;
 }
 
-#label_main_content .finishedTask_infobox_size{
+#label_main_content .finishedTask_infobox_text{
+	font-size:14px;
+	color:#13c7a3;
+	margin-right:40px;
 	display:inline-block;
-	width:15%;
 }
 
-#label_main_content .finishedTask_infobox_accuracy{
-	display:inline-block;
-	width:15%;
-}
 
 
