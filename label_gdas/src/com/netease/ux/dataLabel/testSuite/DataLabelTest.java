@@ -22,9 +22,23 @@ import java.util.Iterator;
 
 public class DataLabelTest extends TestCase{
 	@Test 
-	public void testGetAllUserProgressByTaskId(){
+	public void testGetLobbyAllTasksInfo(){
 		DataLabel testLogicLayer=new DataLabel("config/dbConfig.cfg");
 		JSONObject testObject=testLogicLayer.getLobbyAllTasksInfo(1,"hzxiayuanfang");
+		//System.out.println(testObject.toString());
+	}
+	
+	@Test 
+	public void testGetMyTaskAllUnfinishedTaskInfo(){
+		DataLabel testLogicLayer=new DataLabel("config/dbConfig.cfg");
+		JSONObject testObject=testLogicLayer.getMyTaskAllUnfinishedTaskInfo("hzxiayuanfang");
+		//System.out.println(testObject.toString());
+	}
+	
+	@Test 
+	public void testGetMyTaskAllinishedTaskInfo(){
+		DataLabel testLogicLayer=new DataLabel("config/dbConfig.cfg");
+		JSONObject testObject=testLogicLayer.getMyTaskAllFinishedTaskInfo("hzxiayuanfang");
 		System.out.println(testObject.toString());
 	}
 }

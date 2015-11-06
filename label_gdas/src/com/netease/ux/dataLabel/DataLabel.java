@@ -103,14 +103,54 @@ public class DataLabel implements java.io.Serializable{
 	
 	
 	//我的任务:已领未完成任务
-	public JSONObject getMyTaskAllUnfinishedTaskInfo(Integer task_group,String user_id){
+	public JSONObject getMyTaskAllUnfinishedTaskInfo(String user_id){
 		HashMap<String,String[]> myUnfinishedTaskInfo=new LinkedHashMap<String,String[]>();
+		List<String[]> rsInfo=dbHelper.getMyTaskAllUnfinishedTaskInfo(user_id);
+		List<String[]> rsNumTaken=dbHelper.getMyTaskUnfinishedTaskTakenByUser(user_id);
+		
+		for(int i=0;i<rsInfo.size();i++){
+			String[] task_info=new String[11];
+			
+			String str_task_id=rsInfo.get(i)[0];
+			task_info[0]=rsInfo.get(i)[0];	//任务id
+			task_info[1]=rsInfo.get(i)[1];	//任务组
+			task_info[2]=rsInfo.get(i)[2];	//任务剩余时间
+			task_info[3]=rsInfo.get(i)[3];  //任务名
+			task_info[4]=rsInfo.get(i)[4];  //数据采集时间
+			task_info[5]=rsInfo.get(i)[5];  //数据来源游戏名
+			task_info[6]=rsInfo.get(i)[6];  //数据来源
+			task_info[7]=rsInfo.get(i)[7];  //任务大小
+			task_info[8]=rsInfo.get(i)[8];  //任务类型
+			task_info[9]=rsInfo.get(i)[9];  //InfoboxText
+			
+			Integer numTaken=Integer.parseInt(rsNumTaken.get(i)[2]); //任务已领人数
+			task_info[10]=((Integer)numTaken).toString(); //任务已领人数
+			myUnfinishedTaskInfo.put(str_task_id, task_info);
+		}
+		
 		return JSONObject.fromObject(myUnfinishedTaskInfo);
 	}
 	
 	//我的任务:已完成任务
-	public JSONObject getMyTaskAllFinishedTaskInfo(Integer task_group,String user_id){
+	public JSONObject getMyTaskAllFinishedTaskInfo(String user_id){
 		HashMap<String,String[]> myFinishedTaskInfo=new LinkedHashMap<String,String[]>();
+		List<String[]> rsInfo=dbHelper.getMyTaskAllFinishedTaskInfo(user_id);
+		
+		for(int i=0;i<rsInfo.size();i++){
+			String[] task_info=new String[6];
+			
+			String str_task_id=rsInfo.get(i)[0];
+			task_info[0]=rsInfo.get(i)[0];	//任务id
+			task_info[1]=rsInfo.get(i)[1];	//任务组
+			task_info[2]=rsInfo.get(i)[2];	//任务名
+			task_info[3]=rsInfo.get(i)[3];  //任务大小
+			task_info[4]=rsInfo.get(i)[4];  //任务精确度
+			//TODO 等排名弄好了再改这里
+			task_info[5]="2";  //任务排名
+
+			myFinishedTaskInfo.put(str_task_id, task_info);
+		}
+		
 		return JSONObject.fromObject(myFinishedTaskInfo);
 	}
 }

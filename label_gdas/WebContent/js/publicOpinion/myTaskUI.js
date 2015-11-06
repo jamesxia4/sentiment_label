@@ -31,22 +31,39 @@ function getUrlParam(name)
 
 //ajax调用servlet接口获取json并渲染页面
 
-/*function reloadMyTask(){
+function reloadMyUnfinishedTask(){
 	$(document).ready(function(){
-		var url_to_use="/label_gdas/myTask?user_id="+getUrlParam('user_id');
+		var url_to_use="/label_gdas/myTask?user_id="+getUrlParam('user_id')+"&req_type=1";
 		$.ajax({
 			type:"GET",
 			url:url_to_use,
 			dataType:"json",
 			success: function(data){
 				console.log("Success");
-				renderHtml(data);
+				console.log(data);
+				renderUnfinished(data);
 				addGadgets(data);
 				listenEvents(data);
 			}
 		});
 	});
-}*/
+}
+
+function reloadMyFinishedTask(){
+	$(document).ready(function(){
+		var url_to_use="/label_gdas/myTask?user_id="+getUrlParam('user_id')+"&req_type=2";
+		$.ajax({
+			type:"GET",
+			url:url_to_use,
+			dataType:"json",
+			success: function(data){
+				console.log("Success1");
+				console.log(data);
+				renderFinished(data);
+			}
+		});
+	});
+}
 
 //渲染页面,添加html骨架
 function renderUnfinished(JsonData){
@@ -296,11 +313,7 @@ function listenEvents(JsonData){
 }
 
 //Entry
-$(document).ready(function(){
-	renderUnfinished(testData);
-	renderFinished(testData1);
-	addGadgets(testData);
-	listenEvents(testData);
-});
+reloadMyUnfinishedTask();
+reloadMyFinishedTask();
 
 

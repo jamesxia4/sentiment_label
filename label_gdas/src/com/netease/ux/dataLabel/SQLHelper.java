@@ -283,103 +283,154 @@ public class SQLHelper implements java.io.Serializable{
 	}
 	
 	
-/*	*//*********************************************************
+	/*********************************************************
 	 * 我的任务
-	 *********************************************************//*
+	 *********************************************************/
 	
-	*//**
-	 * 我的任务：输出未完成的任务task_id
-	 *//*
-	public ResultSet getMyTaskAllUnfinishedTasks(String user_id){
-		String sqlStmt="select task_group,task_id from label_user_task where user_id='%s' and is_finished=0;";
+	/**
+	 * 我的任务：输出未完成的任务信息
+	 */
+	public List<String[]> getMyTaskAllUnfinishedTaskInfo(String user_id){
+		String sqlStmt="select label_task.task_id,label_task.task_group,TIMESTAMPDIFF(day,NOW(),label_task.end_time),label_task.task_title,"
+				+ "label_task.dataTime,label_task.commentGame,label_task.dataSource,label_task.taskSize,label_task.taskType,label_task.generalDesc "
+				+ "from label_task inner join (select * from label_user_task where user_id='%s' and is_finished=0) as label_user_task_unfinished "
+				+ "on label_task.task_id=label_user_task_unfinished.task_id and label_task.task_group=label_user_task_unfinished.task_group "
+				+ "order by label_task.task_group,label_task.task_id;";
 		sqlStmt=String.format(sqlStmt, user_id);
+		List<String[]> unfinishedTaskInfo=new ArrayList<String[]>();
 		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
+			connect_db();
+			stmt=conn.createStatement();
+			ResultSet rs=stmt.executeQuery(sqlStmt);
+			while(rs.next()){
+				String[] taskItem=new String[10];
+				taskItem[0]=((Integer)rs.getInt(1)).toString();	//任务id
+				taskItem[1]=((Integer)rs.getInt(2)).toString(); //任务组
+				taskItem[2]=((Integer)rs.getInt(3)).toString(); //任务剩余时间
+				taskItem[3]=rs.getString(4);					//任务名
+				taskItem[4]=rs.getString(5);					//数据时间
+				taskItem[5]=rs.getString(6);					//数据对应游戏名称
+				taskItem[6]=rs.getString(7);					//数据来源
+				taskItem[7]=((Integer)rs.getInt(8)).toString(); //任务大小
+				taskItem[8]=rs.getString(9);					//任务类型
+				taskItem[9]=rs.getString(10);					//infobox说明文字
+				unfinishedTaskInfo.add(taskItem);
+			}
+			rs.close();
+			close();
+			return unfinishedTaskInfo;
 		}catch(SQLException e){
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
+			close();
 			return null;
 		} 
 	}
 	
-	*//**
-	 * 我的任务：输出已完成的任务task_id
-	 *//*
-	public ResultSet getMyTaskAllFinishedTasks(String user_id){
-		String sqlStmt="select task_group,task_id from label_user_task where user_id='%s' and is_finished=1;";
+	
+	/**
+	 * 我的任务：输出未完成的任务已领人数
+	 */
+	public List<String[]> getMyTaskUnfinishedTaskTakenByUser(String user_id){
+		String sqlStmt="select user_count.task_id,user_count.task_group,user_count.cnt from "
+				+ "(select * from label_user_task where is_finished=0 and user_id='%s') as task_unfinished "
+				+ "inner join "
+				+ "(select task_group,task_id,count(*) as cnt from label_user_task group by task_group,task_id order by task_group,task_id)as user_count "
+				+ "on task_unfinished.task_id=user_count.task_id and task_unfinished.task_group=user_count.task_group "
+				+ "order by user_count.task_group,user_count.task_id;";
 		sqlStmt=String.format(sqlStmt, user_id);
+		List<String[]> unfinishedTaskTakenByUser=new ArrayList<String[]>();
 		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
+			connect_db();
+			stmt=conn.createStatement();
+			ResultSet rs=stmt.executeQuery(sqlStmt);
+			while(rs.next()){
+				String[] taskUserInfoItem=new String[3];
+				taskUserInfoItem[0]=((Integer)rs.getInt(1)).toString();
+				taskUserInfoItem[1]=((Integer)rs.getInt(2)).toString();
+				taskUserInfoItem[2]=((Integer)rs.getInt(3)).toString();
+				unfinishedTaskTakenByUser.add(taskUserInfoItem);
+			}
+			rs.close();
+			close();
+			return unfinishedTaskTakenByUser;
 		}catch(SQLException e){
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
+			close();
 			return null;
 		} 
 	}
 	
-	*//**
-	 * 我的任务：根据已输出的task_id取得未完成任务的信息
-	 * @param task_group
-	 * @param task_id
-	 * @return
-	 *//*
-	public ResultSet getUnfinishedTaskInfoByTaskGroupAndTaskId(Integer task_group,Integer task_id){
-		String sqlStmt="select task_id,task_group,TIMESTAMPDIFF(day,NOW(),end_time),"
-				+ "task_title,description,requirements from label_task "
-				+ "where task_id=%d and task_group=%d;";
-		sqlStmt=String.format(sqlStmt, task_id,task_group);
+	/**
+	 * 我的任务：输出已完成的任务信息
+	 */
+	public List<String[]> getMyTaskAllFinishedTaskInfo(String user_id){
+		String sqlStmt="select label_task.task_id,label_task.task_group,label_task.task_title,"
+				+ "label_task.taskSize,finished_task.kappa from "
+				+" label_task "
+				+ "inner join "
+				+ "(select * from label_user_task where user_id='%s' and is_finished=1) as finished_task "
+				+ "on label_task.task_id=finished_task.task_id and label_task.task_group=finished_task.task_group "
+				+ "order by label_task.task_id;";
+		sqlStmt=String.format(sqlStmt, user_id);
+		List<String[]> unfinishedTaskInfo=new ArrayList<String[]>();
 		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
+			connect_db();
+			stmt=conn.createStatement();
+			ResultSet rs=stmt.executeQuery(sqlStmt);
+			while(rs.next()){
+				String[] taskItem=new String[5];
+				taskItem[0]=((Integer)rs.getInt(1)).toString();	//任务id
+				taskItem[1]=((Integer)rs.getInt(2)).toString(); //任务组
+				taskItem[2]=rs.getString(3);					//任务名
+				taskItem[3]=((Integer)rs.getInt(4)).toString(); //任务大小
+				taskItem[4]=((Float)rs.getFloat(5)).toString();	//任务精度
+				unfinishedTaskInfo.add(taskItem);
+			}
+			rs.close();
+			close();
+			return unfinishedTaskInfo;
 		}catch(SQLException e){
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
+			close();
 			return null;
 		} 
 	}
 	
 	
-	*//**
-	 * 我的任务，获得未完成的任务的已领人数
-	 * @param task_group 任务组
-	 * @return ResultSet: row=[task_id,count(人数)]
-	 *//*
-	public ResultSet getMyTaskAllTasksTakenByUsers(Integer task_group, Integer task_id){
-		String sqlStmt="select task_id,task_group,count(*) from label_user_task "
-				+ "where task_group=%d and task_id=%d;";
-		sqlStmt=String.format(sqlStmt, task_group,task_id);
+	/**
+	 * 我的任务：输出已完成的任务名次
+	 */
+	public List<String[]> getMyTaskAllFinishedTaskRank(String user_id){
+		String sqlStmt="";
+		sqlStmt=String.format(sqlStmt, user_id);
+		List<String[]> unfinishedTaskInfo=new ArrayList<String[]>();
 		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
+			connect_db();
+			stmt=conn.createStatement();
+			ResultSet rs=stmt.executeQuery(sqlStmt);
+			while(rs.next()){
+				String[] taskItem=new String[5];
+				taskItem[0]=((Integer)rs.getInt(1)).toString();	//任务id
+				taskItem[1]=((Integer)rs.getInt(2)).toString(); //任务组
+				taskItem[2]=rs.getString(3);					//任务名
+				taskItem[3]=((Integer)rs.getInt(4)).toString(); //任务大小
+				taskItem[4]=((Float)rs.getFloat(5)).toString();	//任务精度
+				unfinishedTaskInfo.add(taskItem);
+			}
+			rs.close();
+			close();
+			return unfinishedTaskInfo;
 		}catch(SQLException e){
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
+			close();
 			return null;
 		} 
 	}
 	
-	
-	*//**
-	 * 我的任务：根据已输出的task_id取得已完成任务的信息
-	 * @param task_group
-	 * @param task_id
-	 * @return
-	 *//*
-	public ResultSet getFinishedTaskInfoByTaskGroupAndTaskId(Integer task_group,Integer task_id,String user_id){
-		String sqlStmt="select task_id,task_group,kappa,progress,num_effective,from label_user_task "
-				+ "where task_id=%d and task_group=%d and user_id='%s';";
-		sqlStmt=String.format(sqlStmt, task_id,task_group,user_id);
-		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
-		}catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return null;
-		} 
-	}*/
 	
 	/*********************************************************
 	 * 标注页面

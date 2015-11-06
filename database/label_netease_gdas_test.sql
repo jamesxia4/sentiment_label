@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-11-03 13:45:11
+-- Generation Time: 2015-11-06 03:22:21
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -160,7 +160,6 @@ INSERT INTO `label_user_task` (`task_id`, `user_id`, `task_group`, `kappa`, `num
 (4, 'hzxiayuanfang', 1, 0, 0, 100, 0),
 (5, 'hzxiayuanfang', 1, 0, 0, 100, 0),
 (7, 'hzxiayuanfang', 1, 0, 0, 100, 0),
-(8, 'hzxiayuanfang', 1, 0, 0, 100, 0),
 (9, 'gzwanwei', 1, 0, 0, 50, 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

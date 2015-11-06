@@ -1,7 +1,7 @@
 package com.netease.ux.dataLabel;
 
 import java.io.*;
-import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,7 +35,28 @@ public class MyTaskServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParameter("user_id"));
+		response.setContentType("text/html;charset=utf-8"); 
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        
+        response.setHeader("Pragma","No-Cache");
+		response.setHeader("Cache-Control","No-Cache");
+		response.setDateHeader("Ewindowsxpires", 0);
+		
+        PrintWriter out= response.getWriter();
+        DataLabel labelHandler=new DataLabel("../workspace/sentiment_label/label_gdas/config/dbConfig.cfg");
+        
+        //参数:user_id=xxx&req_type=1 输出未完成任务信息
+        Integer req_type=Integer.parseInt(request.getParameter("req_type"));
+        if(req_type==1){
+        	System.out.println("Eureka");
+			JSONObject labelObject=labelHandler.getMyTaskAllUnfinishedTaskInfo(request.getParameter("user_id"));
+			out.println(labelObject.toString());
+        }else if(req_type==2){
+        	System.out.println("Eureka1");
+        	JSONObject labelObject=labelHandler.getMyTaskAllFinishedTaskInfo(request.getParameter("user_id"));
+			out.println(labelObject.toString());
+        }
 	}
 
 	/**
