@@ -269,10 +269,7 @@ function addGadgets(JsonData){
 		//按钮样式自动生成
 		$(".label_taskNameWorkerWrapper").each(function(i,e){
 			var idx=$(this).parents(".label_myTask_tasks_item").attr("jsondataid");
-			var buttonStyle=JsonData[idx][11];
-			if (buttonStyle=="已领取"){
-				$("<div class=\"label_userBtn_available\">继续任务</div>").appendTo($(this));
-			}
+			$("<div class=\"label_userBtn_available\">继续任务</div>").appendTo($(this));
 		});
 		
 		//剩余时间提示（小于10天红色,已结束也是红色）

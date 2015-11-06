@@ -49,11 +49,11 @@ public class MyTaskServlet extends HttpServlet {
         //参数:user_id=xxx&req_type=1 输出未完成任务信息
         Integer req_type=Integer.parseInt(request.getParameter("req_type"));
         if(req_type==1){
-        	System.out.println("Eureka");
+/*        	System.out.println("Eureka");*/
 			JSONObject labelObject=labelHandler.getMyTaskAllUnfinishedTaskInfo(request.getParameter("user_id"));
 			out.println(labelObject.toString());
         }else if(req_type==2){
-        	System.out.println("Eureka1");
+/*        	System.out.println("Eureka1");*/
         	JSONObject labelObject=labelHandler.getMyTaskAllFinishedTaskInfo(request.getParameter("user_id"));
 			out.println(labelObject.toString());
         }
