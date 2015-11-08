@@ -12,6 +12,33 @@
 <title>肚子好饿好饿啊</title>
 </head>
 <body>
-
+	<div id="label_main_content">
+		<div class="label_label_container">
+			<div class="label_label_header">
+				<div class="label_label_wrapper">
+					<div class="label_label_header_logo">
+						<img src="../image/publicOpinion/label_logo.png">
+					</div>
+					<div class="label_label_header_text">任务标注</div>
+				</div>
+				<div class="label_label_header_spliter"></div>
+				<div class="label_label_headerAndSubmit">
+					<div class="label_label_smallHeader">2015第一期 玩家评论情感倾向任务 001</div>
+					<div class="label_label_sumbit">提交</div>
+				</div>
+				<div class="label_label_bonusLogo"></div>
+				<div class="label_label_progressBar"></div>
+				<div class="label_labelCard_grid">
+					<div class="label_labelCard_Done"></div>
+					<div class="label_labelCard_Doing"></div>
+					<div class="label_labelCard_toDo"></div>
+					<div class="label_labelOptionWrapper">
+						<div class="label_label_isIrrelevent"></div>
+						<div class="label_label_sentiment"></div>
+					</div>
+				</div>
+			</div>
+		<div>
+	</div>
 </body>
 </html>
