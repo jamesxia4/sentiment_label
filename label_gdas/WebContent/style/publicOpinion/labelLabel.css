@@ -108,8 +108,12 @@ div{
 #label_main_content .label_progressBarWrapper{
 	margin:5px;
 	padding-top:5px;
-	padding-left:35px;
+	padding-left:30px;
 	padding-right:60px;
+}
+
+#label_main_content .label_label_bonusWrapper{
+	width:100%;
 	overflow:hidden;
 }
 
@@ -123,12 +127,10 @@ div{
 }
 
 #label_main_content .label_label_progressBar{
-	width:100%;
 	height:10px;
-	padding-top:3px;
-	margin-right:75px;
+	padding-top:5px;
+	margin-right:20px;
 	position:relative;
-	float:left;
 	display:block;
 }
 
