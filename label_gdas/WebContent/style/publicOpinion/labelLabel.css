@@ -44,7 +44,8 @@ div{
 }
 
 #label_main_content .label_label_headerAndSubmit{
-
+	height:26px;
+	padding:5px;
 	margin-top:15px;
 	margin-left:10px;
 	margin-right:75px;
@@ -102,4 +103,53 @@ div{
     display: inline-block;
     float: right;
     vertical-align: top;
+}
+
+#label_main_content .label_progressBarWrapper{
+	margin:5px;
+	padding-top:5px;
+	padding-left:35px;
+	padding-right:60px;
+	overflow:hidden;
+}
+
+#label_main_content .label_label_bonusLogo{
+	background:url('../../image/publicOpinion/bonus_logo.png') no-repeat center;
+	width:41px;
+    height:27px;
+    margin-left:97%;
+    float:left;
+    display:block;
+}
+
+#label_main_content .label_label_progressBar{
+	width:100%;
+	height:10px;
+	padding-top:3px;
+	margin-right:75px;
+	position:relative;
+	float:left;
+	display:block;
+}
+
+#label_main_content .label_label_progressBarUndoneLayer{
+	width:100%;
+	position:absolute;
+	z-index:100;
+	border-bottom:1px dotted #dcdcdc;
+}
+
+#label_main_content .label_label_progressBarDoneLayer{
+	width:80%;
+	position:absolute;
+	z-index:300;
+	border-bottom:1px solid #2aceae;
+}
+
+#label_main_content .label_label_progressBarDotUnDone{
+	position:absolute;
+}
+
+#label_main_content .label_label_progressBarDotDone{
+	position:absolute;
 }
