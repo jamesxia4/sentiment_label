@@ -84,7 +84,9 @@
 						<div class="label_label_bonusLogo"></div>
 					</div>
 					<div class="label_label_progressBar">
-						<div class="label_label_progressBarUndoneLayer"></div>
+						<div class="label_label_progressBarUndoneLayer">
+							<div class="label_label_progressBarDotUnDone"></div>
+						</div>
 						<div class="label_label_progressBarDoneLayer"></div>
 					</div>
 				</div>

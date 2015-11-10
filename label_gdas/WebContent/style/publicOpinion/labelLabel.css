@@ -144,18 +144,41 @@ div{
 #label_main_content .label_label_progressBarDoneLayer{
 	width:80%;
 	position:absolute;
-	z-index:300;
+	z-index:200;
 	border-bottom:1px solid #2aceae;
 }
 
 #label_main_content .label_label_progressBarDotUnDone{
-	background:url('../../image/publicOpinion/bonus_logo.png') no-repeat center;
+	background:url('../../image/publicOpinion/scale_uncovered.png') no-repeat center;
 	position:absolute;
-	z-index:200;
+	z-index:300;
+	height:9px;
+	width:9px;
+	top:-4px;
 }
 
+#label_main_content .label_label_progressBarDotFinished{
+	background:url('../../image/publicOpinion/scale_final.png') no-repeat center;
+	position:absolute;
+	z-index:300;
+	height:9px;
+	width:9px;
+}
+
+
+
 #label_main_content .label_label_progressBarDotDone{
-	background:url('../../image/publicOpinion/bonus_logo.png') no-repeat center;
+	background:url('../../image/publicOpinion/scale_covered.png') no-repeat center;
 	position:absolute;
 	z-index:400;
+	height:9px;
+	width:9px;
+}
+
+#label_main_content .label_label_progressBarDotIndex{
+	background:url('../../image/publicOpinion/scale_index.png') no-repeat center;
+	position:absolute;
+	z-index:500;
+	height:11px;
+	width:11px;
 }
