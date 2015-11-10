@@ -7,7 +7,7 @@
 <link href="../style/publicOpinion/labelLabel.css" rel="stylesheet">
 <script src="../js/jquery-1.8.3.js"></script>
 <script src="../js/publicOpinion/labelUI.js"></script>
-<title>简单粗暴有力量</title>
+<title>8楼自动售货机老是卡货(╯‵□′)╯︵┻━┻</title>
 </head>
 <body>
 	<div id="label_main_content">
