@@ -5,10 +5,7 @@
  */
 
 package com.netease.ux.dataLabel;
-import com.netease.ux.dataLabel.*;
-import java.sql.ResultSet;
-import java.sql.Timestamp;
-import java.sql.SQLException;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;

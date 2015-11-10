@@ -3,8 +3,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<%@ page import="java.io.*" %>
-<%@ page import="net.sf.json.JSONObject" %>
 <%@ page import="com.netease.ux.dataLabel.DataLabel" %>
 <link href="../style/publicOpinion/labelLobby.css" rel="stylesheet">
 <script src="../js/jquery-1.8.3.js"></script>

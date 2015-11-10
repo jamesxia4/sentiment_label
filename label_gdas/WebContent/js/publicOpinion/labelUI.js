@@ -10,9 +10,19 @@ function getUrlParam(name){
 } 
 
 function renderProgressBar(progress){
-	$(document).ready(function(){
-/*		for(var i=0;i<10;i++){
-			$("progressBarDotUnDone").appendTo(".label_label_progressBarUndoneLayer");
-		}*/
-	});
+		var numToPaintGreen=Math.floor(progress/10);
+		console.log(numToPaintGreen);
+		for(var i=0;i<9;i++){
+			if(i==0){
+				$("<div class=\"label_label_progressBarDotUnDone\"></div>").appendTo($(".label_label_progressBar"));
+			}
+			else{
+				$("<div class=\"label_label_progressBarDotUnDone\"></div>").appendTo($(".label_label_progressBar")).css("left",(i*11).toString()+"%");
+			}
+		}
 }
+
+$(document).ready(function(){
+	console.log("start");
+	renderProgressBar(97);
+});

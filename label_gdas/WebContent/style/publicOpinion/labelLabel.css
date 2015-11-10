@@ -154,8 +154,8 @@ div{
 	z-index:300;
 	height:9px;
 	width:9px;
-	top:-4px;
-	left:-1px;
+	top:1px;
+	left:-2px;
 }
 
 #label_main_content .label_label_progressBarDotFinished{
@@ -164,6 +164,8 @@ div{
 	z-index:300;
 	height:9px;
 	width:9px;
+	top:-4px;
+	left:100%;
 }
 
 
@@ -174,6 +176,8 @@ div{
 	z-index:400;
 	height:9px;
 	width:9px;
+	top:-4px;
+	left:-2px;
 }
 
 #label_main_content .label_label_progressBarDotIndex{
