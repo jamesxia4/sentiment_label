@@ -149,9 +149,13 @@ div{
 }
 
 #label_main_content .label_label_progressBarDotUnDone{
+	background:url('../../image/publicOpinion/bonus_logo.png') no-repeat center;
 	position:absolute;
+	z-index:200;
 }
 
 #label_main_content .label_label_progressBarDotDone{
+	background:url('../../image/publicOpinion/bonus_logo.png') no-repeat center;
 	position:absolute;
+	z-index:400;
 }

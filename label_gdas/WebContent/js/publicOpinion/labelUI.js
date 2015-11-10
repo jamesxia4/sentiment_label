@@ -11,6 +11,8 @@ function getUrlParam(name){
 
 function renderProgressBar(progress){
 	$(document).ready(function(){
-		
+		for(var i=0;i<10;i++){
+			$("progressBarDotUnDone").appendTo(".label_label_progressBarUndoneLayer");
+		}
 	});
 }
