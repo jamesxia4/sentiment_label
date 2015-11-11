@@ -25,9 +25,7 @@
 					<div class="label_label_sumbit">提交</div>
 				</div>
 				<div class="label_progressBarWrapper">
-					<div class="label_label_bonusWrapper">
-						<div class="label_label_bonusLogo"></div>
-					</div>
+					
 					<div class="label_label_progressBar">
 						<div class="label_label_progressBarUndoneLayer">
 							<div class="label_label_progressBarDotFinished"></div>
@@ -35,6 +33,11 @@
 						<div class="label_label_progressBarDoneLayer"></div>
 					</div>
 				</div>
+				
+				<div class="label_label_bonusWrapper">
+						<div class="label_label_bonusLogo"></div>
+				</div>
+					
 				<div class="label_labelCard_grid">
 					<div class="label_labelCard_Done"></div>
 					<div class="label_labelCard_Doing">

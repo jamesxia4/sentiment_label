@@ -113,16 +113,15 @@ div{
 }
 
 #label_main_content .label_label_bonusWrapper{
-	width:100%;
 	overflow:hidden;
+	padding-right:40px;
 }
 
 #label_main_content .label_label_bonusLogo{
 	background:url('../../image/publicOpinion/bonus_logo.png') no-repeat center;
 	width:41px;
     height:27px;
-    margin-left:97%;
-    float:left;
+    float:right;
     display:block;
 }
 
