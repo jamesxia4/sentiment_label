@@ -11,7 +11,8 @@ div{
 }
 
 #label_main_content{
-	
+	width: 1220px;
+    max-width: 1220px;
 	margin-left:215px;
 	border-top:1px;
 	border-left:1px;
@@ -32,7 +33,6 @@ div{
 
 #label_main_content .label_myTask_header_text{
 	font-size:24px;
-	font-weight:bold;
 	color:#2aceae;
 	padding-left:5px;
 }
@@ -266,7 +266,7 @@ div{
 }
 
 #label_main_content .label_infobox_textbox_lower .label_textbox_labelBonus{
-	width:25%;
+	width:26%;
 
 	display:inline-block;
 }

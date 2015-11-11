@@ -11,7 +11,8 @@ div{
 }
 
 #label_main_content{
-	
+	width: 1220px;
+    max-width: 1220px;
 	margin-left:215px;
 	border-top:1px;
 	border-left:1px;
@@ -22,7 +23,7 @@ div{
 }
 
 #label_main_content .label_label_header{
-	padding:70px 30px 20px 60px;
+	padding:70px 30px 0px 60px;
 }
 
 #label_main_content .label_label_header_logo{
@@ -32,7 +33,6 @@ div{
 
 #label_main_content .label_label_header_text{
 	font-size:24px;
-	font-weight:bold;
 	color:#2aceae;
 	padding-left:5px;
 }
@@ -48,7 +48,7 @@ div{
 	padding:5px;
 	margin-top:15px;
 	margin-left:10px;
-	margin-right:75px;
+	margin-right:80px;
 }
 
 #label_main_content .label_label_smallHeader{
@@ -109,12 +109,12 @@ div{
 	margin:5px;
 	padding-top:5px;
 	padding-left:30px;
-	padding-right:60px;
+	padding-right:80px;
 }
 
 #label_main_content .label_label_bonusWrapper{
 	overflow:hidden;
-	padding-right:40px;
+	padding-right:60px;
 }
 
 #label_main_content .label_label_bonusLogo{
@@ -186,4 +186,73 @@ div{
 	height:11px;
 	top:0px;
 	width:11px;
+}
+
+#label_main_content .label_label_bigWrapper{
+	padding: 10px 120px 20px 90px;
+	
+}
+
+#label_main_content .label_labelCard_grid{
+	background-color:#F2F2F2;
+	border-radius:10px;
+	height:420px;
+	margin-top:10px;
+	padding:15px;
+}
+
+#label_main_content .label_labelCard_wrapper{
+	margin-bottom:20px;
+}
+
+#label_main_content .label_labelCard_Done{
+	border-radius:10px;
+	width:320px;
+	height:315px;
+	display:inline-block;
+	background-color:#DFDFDF;
+	margin-right:5px;
+
+}
+
+#label_main_content .label_labelCard_Doing{
+	border-radius:10px;
+	width:316px;
+	height:311px;
+	display:inline-block;
+	margin-right:5px;
+	border:2px solid #2aceae;
+}
+
+#label_main_content .label_labelCard_ToDo{
+	border-radius:10px;
+	width:320px;
+	height:315px;
+	display:inline-block;
+}
+
+#label_main_content .label_labelOptionWrapper{
+	margin-left:75px;
+	margin-right:53px;
+	margin-bottom:15px;
+	height:55px;
+}
+
+#label_main_content .label_label_isIrrelevent{
+	height:55px;
+	width:255px;
+	border-radius:5px;
+	box-shadow: 2px 2px 2px #dee6e9;
+	background-color:#ffffff;
+	margin-right:12px;
+	display:inline-block;
+}
+
+#label_main_content .label_label_sentiment{
+	height:55px;
+	width:555px;
+	border-radius:5px;
+	box-shadow: 2px 2px 2px #dee6e9;
+	background-color:#ffffff;
+	display:inline-block;
 }

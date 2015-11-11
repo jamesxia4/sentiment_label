@@ -25,7 +25,6 @@
 					<div class="label_label_sumbit">提交</div>
 				</div>
 				<div class="label_progressBarWrapper">
-					
 					<div class="label_label_progressBar">
 						<div class="label_label_progressBarUndoneLayer">
 							<div class="label_label_progressBarDotFinished"></div>
@@ -37,24 +36,57 @@
 				<div class="label_label_bonusWrapper">
 						<div class="label_label_bonusLogo"></div>
 				</div>
-					
+			</div>
+			
+			<div class="label_label_bigWrapper">
 				<div class="label_labelCard_grid">
-					<div class="label_labelCard_Done"></div>
-					<div class="label_labelCard_Doing">
-						<div class="label_labelItem_comment"></div>
-						<div class="label_labelItem_spliter"></div>
-						<div class="label_labelItem_source"></div>
-						<div class="label_labelItem_extraInfo">
-							<div class="label_labelItem_subject"></div>
-							<div class="label_labelItem_urlSource"></div>
-							<div class="label_labelItem_url"></div>
+					<div class="label_labelCard_wrapper">
+						<div class="label_labelCard_Done">
+							<div class="label_labelItem_commentWrapper">
+								<div class="label_labelItem_comment">
+									<textarea rows="" cols=""></textarea>
+								</div>
+								<div class="label_labelItem_tick"></div>
+							</div>
+							<div class="label_labelItem_spliter"></div>
+							<div class="label_labelItem_source">
+								<textarea rows="" cols=""></textarea>
+							</div>
+							<div class="label_labelItem_extraInfo">
+								<div class="label_labelItem_subject"></div>
+								<div class="label_labelItem_urlSource"></div>
+								<div class="label_labelItem_url"></div>
+							</div>
+						</div>
+						
+						<div class="label_labelCard_Doing">
+							<div class="label_labelItem_comment"></div>
+							<div class="label_labelItem_spliter"></div>
+							<div class="label_labelItem_source"></div>
+							<div class="label_labelItem_extraInfo">
+								<div class="label_labelItem_subject"></div>
+								<div class="label_labelItem_urlSource"></div>
+								<div class="label_labelItem_url"></div>
+							</div>
+						</div>
+						
+						<div class="label_labelCard_ToDo">
+							<div class="label_labelItem_comment"></div>
+							<div class="label_labelItem_spliter"></div>
+							<div class="label_labelItem_source"></div>
+							<div class="label_labelItem_extraInfo">
+								<div class="label_labelItem_subject"></div>
+								<div class="label_labelItem_urlSource"></div>
+								<div class="label_labelItem_url"></div>
+							</div>
 						</div>
 					</div>
-					<div class="label_labelCard_toDo"></div>
+					
 					<div class="label_labelOptionWrapper">
 						<div class="label_label_isIrrelevent"></div>
 						<div class="label_label_sentiment"></div>
 					</div>
+					
 				</div>
 			</div>
 		</div>
