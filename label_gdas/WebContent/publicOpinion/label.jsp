@@ -41,43 +41,75 @@
 			<div class="label_label_bigWrapper">
 				<div class="label_labelCard_grid">
 					<div class="label_labelCard_wrapper">
-						<div class="label_labelCard_Done">
-							<div class="label_labelItem_commentWrapper">
-								<div class="label_labelItem_comment">
-									<textarea rows="" cols=""></textarea>
+						<div class="label_labelCard Done">
+							<div class="card_wrapper">
+								<div class="label_labelItem_commentWrapper">
+									<div class="label_labelItem_comment">
+										<textarea class="label_card_comment" rows="2" cols="22"></textarea>
+									</div>
+									<div class="label_labelItem_tick"></div>
 								</div>
-								<div class="label_labelItem_tick"></div>
-							</div>
-							<div class="label_labelItem_spliter"></div>
-							<div class="label_labelItem_source">
-								<textarea rows="" cols=""></textarea>
-							</div>
-							<div class="label_labelItem_extraInfo">
-								<div class="label_labelItem_subject"></div>
-								<div class="label_labelItem_urlSource"></div>
-								<div class="label_labelItem_url"></div>
-							</div>
-						</div>
-						
-						<div class="label_labelCard_Doing">
-							<div class="label_labelItem_comment"></div>
-							<div class="label_labelItem_spliter"></div>
-							<div class="label_labelItem_source"></div>
-							<div class="label_labelItem_extraInfo">
-								<div class="label_labelItem_subject"></div>
-								<div class="label_labelItem_urlSource"></div>
-								<div class="label_labelItem_url"></div>
+								<div class="label_labelItem_spliter">
+									<div class="label_spliter_hyphen">———————</div> 
+									<div class="label_spliter_text">评论原文</div> 
+									<div class="label_spliter_hyphen">———————</div>  
+								</div>
+								<div class="label_labelItem_source">
+									<textarea class= "label_card_source" rows="11" cols="22"></textarea>
+								</div>
+								<div class="label_labelItem_extraInfo">
+									<div class="label_labelItem_subject"></div>
+									<div class="label_labelItem_urlSource"></div>
+									<div class="label_labelItem_url"></div>
+								</div>
 							</div>
 						</div>
 						
-						<div class="label_labelCard_ToDo">
-							<div class="label_labelItem_comment"></div>
-							<div class="label_labelItem_spliter"></div>
-							<div class="label_labelItem_source"></div>
-							<div class="label_labelItem_extraInfo">
-								<div class="label_labelItem_subject"></div>
-								<div class="label_labelItem_urlSource"></div>
-								<div class="label_labelItem_url"></div>
+						<div class="label_labelCard Doing">
+							<div class="card_wrapper">
+								<div class="label_labelItem_commentWrapper">
+									<div class="label_labelItem_comment">
+										<textarea class="label_card_comment doing" rows="2" cols="22"></textarea>
+									</div>
+									<div class="label_labelItem_tick"></div>
+								</div>
+								<div class="label_labelItem_spliter">
+									<div class="label_spliter_hyphen">———————</div> 
+									<div class="label_spliter_text">评论原文</div> 
+									<div class="label_spliter_hyphen">———————</div> 
+								</div>
+								<div class="label_labelItem_source">
+									<textarea class= "label_card_source doing" rows="11" cols="22"></textarea>
+								</div>
+								<div class="label_labelItem_extraInfo">
+									<div class="label_labelItem_subject"></div>
+									<div class="label_labelItem_urlSource"></div>
+									<div class="label_labelItem_url"></div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="label_labelCard ToDo">
+							<div class="card_wrapper">
+								<div class="label_labelItem_commentWrapper">
+									<div class="label_labelItem_comment">
+										<textarea class="label_card_comment" rows="2" cols="22"></textarea>
+									</div>
+									<div class="label_labelItem_tick"></div>
+								</div>
+								<div class="label_labelItem_spliter">
+									<div class="label_spliter_hyphen">———————</div> 
+									<div class="label_spliter_text">评论原文</div> 
+									<div class="label_spliter_hyphen">———————</div> 
+								</div>
+								<div class="label_labelItem_source">
+									<textarea class= "label_card_source" rows="11" cols="22"></textarea>
+								</div>
+								<div class="label_labelItem_extraInfo">
+									<div class="label_labelItem_subject"></div>
+									<div class="label_labelItem_urlSource"></div>
+									<div class="label_labelItem_url"></div>
+								</div>
 							</div>
 						</div>
 					</div>

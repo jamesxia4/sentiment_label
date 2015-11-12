@@ -205,17 +205,16 @@ div{
 	margin-bottom:20px;
 }
 
-#label_main_content .label_labelCard_Done{
+#label_main_content .label_labelCard.Done{
 	border-radius:10px;
 	width:320px;
 	height:315px;
 	display:inline-block;
 	background-color:#DFDFDF;
 	margin-right:5px;
-
 }
 
-#label_main_content .label_labelCard_Doing{
+#label_main_content .label_labelCard.Doing{
 	border-radius:10px;
 	width:316px;
 	height:311px;
@@ -224,7 +223,7 @@ div{
 	border:2px solid #2aceae;
 }
 
-#label_main_content .label_labelCard_ToDo{
+#label_main_content .label_labelCard.ToDo{
 	border-radius:10px;
 	width:320px;
 	height:315px;
@@ -255,4 +254,87 @@ div{
 	box-shadow: 2px 2px 2px #dee6e9;
 	background-color:#ffffff;
 	display:inline-block;
+}
+
+#label_main_content .card_wrapper{
+	margin:5px;
+}
+
+#label_main_content .label_labelItem_comment{
+	width:310px;
+	height:70px;
+}
+
+#label_main_content .label_labelItem_source{
+	width:310px;
+	height:220px;
+}
+
+#label_main_content .label_labelItem_spliter{
+	height:15px;
+	width:310px;
+	font-size:12px;
+	color:#292d3e;
+}
+
+#label_main_content .label_spliter_hyphen{
+	display:inline-block;
+	font-size:12px;
+	line-height:15px;	
+}
+
+#label_main_content .label_spliter_text{
+	display:inline-block;
+	font-size:12px;
+	line-height:15px;
+	margin-left:36px;
+	margin-right:36px;
+}
+
+#label_main_content .label_card_source{
+	overflow: auto;
+    resize: none;
+    font-size: 14px;
+    width: 310px;
+    height: 220px;
+    border: 0px solid #ffffff;
+    background-color: #dfdfdf;
+    padding:0px;
+    color:#292d3e;
+}
+
+#label_main_content .label_card_comment{
+	overflow: auto;
+    resize: none;
+    font-size: 14px;
+    width: 310px;
+    height: 70px;
+    border: 0px solid #ffffff;
+    background-color: #dfdfdf;
+    padding:0px;
+    color:#292d3e;
+}
+
+#label_main_content .label_card_source.doing{
+	overflow: auto;
+    resize: none;
+    font-size: 14px;
+    width: 306px;
+    height: 218px;
+    border: 0px solid #ffffff;
+    background-color: #dfdfdf;
+    padding:0px;
+    color:#292d3e;
+}
+
+#label_main_content .label_card_comment.doing{
+	overflow: auto;
+    resize: none;
+    font-size: 14px;
+    width: 306px;
+    height: 70px;
+    border: 0px solid #ffffff;
+    background-color: #dfdfdf;
+    padding:0px;
+    color:#292d3e;
 }
