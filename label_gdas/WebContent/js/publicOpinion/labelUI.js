@@ -5,7 +5,7 @@
 var testData={
 		"1":["现在活跃人数确实少了1","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区1","画面","百度贴吧","www.baidu.com","0"],
 		"2":["现在活跃人数确实少了2","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区2","画面","百度贴吧","www.baidu.com","0"],
-		"3":["现在活跃人数确实少了3","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区3","画面","百度贴吧","www.baidu.com","0"],
+		"3":["现在活跃人数确实少了3现在活跃人数确实少了3现在活跃人数确实少了3现在活跃人数确实少了3现在活跃人数确实少了3","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区3","画面","百度贴吧","www.baidu.com","0"],
 		"4":["现在活跃人数确实少了4","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区4","画面","百度贴吧","www.baidu.com","0"],
 		"5":["现在活跃人数确实少了5","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区5","画面","百度贴吧","www.baidu.com","0"],
 		"6":["现在活跃人数确实少了6","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区6","画面","百度贴吧","www.baidu.com","0"]
@@ -16,6 +16,26 @@ function getUrlParam(name){
 	var r = window.location.search.substr(1).match(reg);  //匹配目标参数
 	if (r!=null) return unescape(r[2]); return null; //返回参数值
 } 
+
+function renderComment(data,done,doing,todo){
+	var textDone=data[done][0];
+	var textDoing=data[doing][0];
+	var textTodo=data[todo][0];
+	
+	$(".label_labelCard.Done").find(".label_card_comment").text(textDone);
+	$(".label_labelCard.Doing").find(".label_card_comment").text(textDoing);
+	$(".label_labelCard.ToDo").find(".label_card_comment").text(textTodo);
+}
+
+function renderSource(data,done,doing,todo){
+	var textDone=data[done][1];
+	var textDoing=data[doing][1];
+	var textTodo=data[todo][1];
+	
+	$(".label_labelCard.Done").find(".label_card_source").text(textDone);
+	$(".label_labelCard.Doing").find(".label_card_source").text(textDoing);
+	$(".label_labelCard.ToDo").find(".label_card_source").text(textTodo);
+}
 
 function renderProgressBar(progress){
 		var numToPaintGreen=Math.floor(progress/10);
@@ -57,4 +77,6 @@ function renderProgressBar(progress){
 $(document).ready(function(){
 	console.log("start");
 	renderProgressBar(50);
+	renderComment(testData,"1","2","3");
+	renderSource(testData,"1","2","3");
 });

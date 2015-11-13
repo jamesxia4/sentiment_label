@@ -7,7 +7,7 @@
 <link href="../style/publicOpinion/labelLabel.css" rel="stylesheet">
 <script src="../js/jquery-1.8.3.js"></script>
 <script src="../js/publicOpinion/labelUI.js"></script>
-<title>8楼自动售货机老是卡货(╯‵□′)╯︵┻━┻</title>
+<title>肚子又饿啦(╯‵□′)╯︵┻━┻</title>
 </head>
 <body>
 	<div id="label_main_content">
@@ -45,7 +45,7 @@
 							<div class="card_wrapper">
 								<div class="label_labelItem_commentWrapper">
 									<div class="label_labelItem_comment">
-										<textarea class="label_card_comment" rows="2" cols="22"></textarea>
+										<textarea class="label_card_comment" readonly="readonly" ></textarea>
 									</div>
 									<div class="label_labelItem_tick"></div>
 								</div>
@@ -55,12 +55,15 @@
 									<div class="label_spliter_hyphen">———————</div>  
 								</div>
 								<div class="label_labelItem_source">
-									<textarea class= "label_card_source" rows="11" cols="22"></textarea>
+									<textarea class= "label_card_source" readonly="readonly" ></textarea>
 								</div>
 								<div class="label_labelItem_extraInfo">
-									<div class="label_labelItem_subject"></div>
-									<div class="label_labelItem_urlSource"></div>
-									<div class="label_labelItem_url"></div>
+									<div class="label_labelItem_subjectHeader">主题:</div>
+									<div class="label_labelItem_subject">画面</div>
+									<div class="label_labelItem_urlSource">百度贴吧</div>
+									<div class="label_labelItem_url">
+										<a href="http://www.baidu.com">来源</a>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -69,7 +72,7 @@
 							<div class="card_wrapper">
 								<div class="label_labelItem_commentWrapper">
 									<div class="label_labelItem_comment">
-										<textarea class="label_card_comment doing" rows="2" cols="22"></textarea>
+										<textarea class="label_card_comment doing" readonly="readonly" ></textarea>
 									</div>
 									<div class="label_labelItem_tick"></div>
 								</div>
@@ -79,12 +82,15 @@
 									<div class="label_spliter_hyphen">———————</div> 
 								</div>
 								<div class="label_labelItem_source">
-									<textarea class= "label_card_source doing" rows="11" cols="22"></textarea>
+									<textarea class= "label_card_source doing" readonly="readonly" ></textarea>
 								</div>
 								<div class="label_labelItem_extraInfo">
-									<div class="label_labelItem_subject"></div>
-									<div class="label_labelItem_urlSource"></div>
-									<div class="label_labelItem_url"></div>
+									<div class="label_labelItem_subjectHeader">主题:</div>
+									<div class="label_labelItem_subject">画面</div>
+									<div class="label_labelItem_urlSource">百度贴吧</div>
+									<div class="label_labelItem_url">
+										<a href="http://www.baidu.com">来源</a>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -93,7 +99,7 @@
 							<div class="card_wrapper">
 								<div class="label_labelItem_commentWrapper">
 									<div class="label_labelItem_comment">
-										<textarea class="label_card_comment" rows="2" cols="22"></textarea>
+										<textarea class="label_card_comment todo" readonly="readonly" ></textarea>
 									</div>
 									<div class="label_labelItem_tick"></div>
 								</div>
@@ -103,20 +109,46 @@
 									<div class="label_spliter_hyphen">———————</div> 
 								</div>
 								<div class="label_labelItem_source">
-									<textarea class= "label_card_source" rows="11" cols="22"></textarea>
+									<textarea class= "label_card_source todo" readonly="readonly" ></textarea>
 								</div>
 								<div class="label_labelItem_extraInfo">
-									<div class="label_labelItem_subject"></div>
-									<div class="label_labelItem_urlSource"></div>
-									<div class="label_labelItem_url"></div>
+									<div class="label_labelItem_subjectHeader">主题:</div>
+									<div class="label_labelItem_subject">画面</div>
+									<div class="label_labelItem_urlSource">百度贴吧</div>
+									<div class="label_labelItem_url">
+										<a href="http://www.baidu.com">来源</a>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 					
 					<div class="label_labelOptionWrapper">
-						<div class="label_label_isIrrelevent"></div>
-						<div class="label_label_sentiment"></div>
+						<div class="label_label_isIrrelevent">
+							<div class="label_checkWrapper">
+								<input type="checkbox" class="semCheck">
+								<div class="label_checkbox_font">与主题无关</div>
+							</div>
+						</div>
+						<div class="label_label_sentiment">
+							<div class="label_radioWrapper">
+								<div class="label_radio_itemWrapper">
+									<input type="radio" class="semRadio" name="semSelect">
+									<div class="label_radio_font">好评</div>
+								</div>
+								
+								<div class="label_radio_itemWrapper">
+									<input type="radio" class="semRadio" name="semSelect">
+									<div class="label_radio_font">中评</div>
+								</div>
+								<div class="label_radio_itemWrapper">
+									<input type="radio" class="semRadio" name="semSelect">
+									<div class="label_radio_font">差评</div>
+								</div>
+								<input type="radio" class="semRadio" name="semSelect">
+								<div class="label_radio_font">矛盾</div>
+							</div>
+						</div>
 					</div>
 					
 				</div>
