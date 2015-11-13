@@ -194,7 +194,7 @@ div{
 }
 
 #label_main_content .label_labelCard_grid{
-	background-color:#F2F2F2;
+	background-color:#f2f2f2;
 	border-radius:10px;
 	height:420px;
 	margin-top:10px;
@@ -207,11 +207,12 @@ div{
 
 #label_main_content .label_labelCard.Done{
 	border-radius:10px;
-	width:320px;
-	height:315px;
+	width:316px;
+	height:311px;
 	display:inline-block;
-	background-color:#DFDFDF;
+	background-color:#dfdfdf;
 	margin-right:5px;
+	border:2px solid #dfdfdf;
 }
 
 #label_main_content .label_labelCard.Doing{
@@ -225,9 +226,10 @@ div{
 
 #label_main_content .label_labelCard.ToDo{
 	border-radius:10px;
-	width:320px;
-	height:315px;
+	width:316px;
+	height:311px;
 	display:inline-block;
+	border:2px solid #f2f2f2;
 }
 
 #label_main_content .label_labelOptionWrapper{
@@ -298,9 +300,10 @@ div{
 #label_main_content .label_card_source{
 	overflow: auto;
     resize: none;
+    outline: none;
     font-size: 12px;
-    width: 300px;
-    height: 220px;
+    width: 296px;
+    height: 218px;
     border: 0px solid #ffffff;
     background-color: #dfdfdf;
     padding:0px;
@@ -311,8 +314,9 @@ div{
 #label_main_content .label_card_comment{
 	overflow: auto;
     resize: none;
+    outline: none;
     font-size: 14px;
-    width: 300px;
+    width: 296px;
     height: 50px;
     border: 0px solid #ffffff;
     background-color: #dfdfdf;
@@ -324,6 +328,7 @@ div{
 #label_main_content .label_card_source.doing{
 	overflow: auto;
     resize: none;
+    outline: none;
     font-size: 12px;
     width: 296px;
     height: 218px;
@@ -337,6 +342,7 @@ div{
 #label_main_content .label_card_comment.doing{
 	overflow: auto;
     resize: none;
+    outline: none;
     font-size: 14px;
     width: 296px;
     height: 50px;
@@ -350,6 +356,7 @@ div{
 #label_main_content .label_card_source.todo{
 	overflow: auto;
     resize: none;
+    outline: none;
     font-size: 12px;
     width: 296px;
     height: 218px;
@@ -364,6 +371,7 @@ div{
 #label_main_content .label_card_comment.todo{
 	overflow: auto;
     resize: none;
+    outline: none;
     font-size: 14px;
     width: 296px;
     height: 50px;

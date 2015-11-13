@@ -74,9 +74,34 @@ function renderProgressBar(progress){
 		});
 }
 
+function cardSelector(){
+	$(".label_labelCard").click(function(e){
+		e.preventDefault();
+		if(!$(this).hasClass("Doing")&&!$(this).hasClass("ToDo")){
+			$(this).addClass("Doing");
+			$(this).siblings(".label_labelCard").each(function(i,e){
+				if($(e).hasClass("Doing")){
+					$(e).removeClass("Doing");
+					$(e).addClass("Done");
+				}
+			});
+		}
+		else if(!$(this).hasClass("Doing")&&$(this).hasClass("ToDo")){
+			$(this).removeClass("ToDo").addClass("Doing");
+			$(this).siblings(".label_labelCard").each(function(i,e){
+				if($(e).hasClass("Doing")){
+					$(e).removeClass("Doing");
+					$(e).addClass("Done");
+				}
+			});
+		}
+	});
+};
+
 $(document).ready(function(){
 	console.log("start");
 	renderProgressBar(50);
 	renderComment(testData,"1","2","3");
 	renderSource(testData,"1","2","3");
+	cardSelector();
 });
