@@ -50,10 +50,13 @@ function renderCard(data,card1,card2,card3){
 }
 
 function renderProgressBar(progress){
+		$(".label_label_progressBar").empty();
+		$("<div class=\"label_label_progressBarUndoneLayer\">").appendTo($(".label_label_progressBar"));
+		$("<div class=\"label_label_progressBarDotFinished\">").appendTo($(".label_label_progressBarUndoneLayer"));
+		$("<div class=\"label_label_progressBarDoneLayer\">").appendTo($(".label_label_progressBar"));
 		var numToPaintGreen=Math.floor(progress/10);
 		var barWidth;
 		//根据progressBar宽度调整刻度
-		
 		//添加刻度
 		for(var i=0;i<10;i++){
 			if(i==0){
@@ -147,7 +150,7 @@ function listenEvents(){
 
 
 function renderInit(jsonData,idx1,idx2,idx3){
-	//renderProgressBar(idx1);
+	renderProgressBar(idx1);
 	renderCard(jsonData,idx1,idx2,idx3);
 	cardSelector();
 }

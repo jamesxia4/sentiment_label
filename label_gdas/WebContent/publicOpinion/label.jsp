@@ -42,7 +42,7 @@
 				<div class="label_labelCard_grid">
 					<div class="label_prev"></div>
 					<div class="label_labelCard_wrapper">
-						<div class="label_labelCard Doing" id="label_card1" dataid="1">
+						<div class="label_labelCard Doing" id="label_card1">
 							<div class="card_wrapper">
 								<div class="label_labelItem_commentWrapper">
 									<div class="label_labelItem_comment">
@@ -69,7 +69,7 @@
 							</div>
 						</div>
 						
-						<div class="label_labelCard ToDo" id="label_card2" dataid="2">
+						<div class="label_labelCard ToDo" id="label_card2">
 							<div class="card_wrapper">
 								<div class="label_labelItem_commentWrapper">
 									<div class="label_labelItem_comment">
@@ -96,7 +96,7 @@
 							</div>
 						</div>
 						
-						<div class="label_labelCard ToDo" id="label_card3" dataid="3">
+						<div class="label_labelCard ToDo" id="label_card3">
 							<div class="card_wrapper">
 								<div class="label_labelItem_commentWrapper">
 									<div class="label_labelItem_comment">
