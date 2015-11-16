@@ -1,15 +1,26 @@
 /**
  * 
  */
-
-var testData={
+testData={
 		"1":["现在活跃人数确实少了1","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区1","画面","百度贴吧","www.baidu.com","0"],
 		"2":["现在活跃人数确实少了2","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区2","画面","百度贴吧","www.baidu.com","0"],
-		"3":["现在活跃人数确实少了3现在活跃人数确实少了3现在活跃人数确实少了3现在活跃人数确实少了3现在活跃人数确实少了3","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区3","画面","百度贴吧","www.baidu.com","0"],
+		"3":["现在活跃人数确实少了3","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区3","画面","百度贴吧","www.baidu.com","0"],
 		"4":["现在活跃人数确实少了4","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区4","画面","百度贴吧","www.baidu.com","0"],
 		"5":["现在活跃人数确实少了5","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区5","画面","百度贴吧","www.baidu.com","0"],
 		"6":["现在活跃人数确实少了6","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区6","画面","百度贴吧","www.baidu.com","0"]
+};
+
+sentimentLabel=[-3,-3,-3,-3,-3,-3];
+
+dataLength=0;
+for(key in testData){
+	dataLength++;
 }
+
+indexCard1=1;
+indexCard2=2;
+indexCard3=3;
+
 //用来获取页面url参数
 function getUrlParam(name){
 	var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
@@ -17,24 +28,25 @@ function getUrlParam(name){
 	if (r!=null) return unescape(r[2]); return null; //返回参数值
 } 
 
-function renderComment(data,done,doing,todo){
-	var textDone=data[done][0];
-	var textDoing=data[doing][0];
-	var textTodo=data[todo][0];
+function renderCard(data,card1,card2,card3){
+	console.log(card1);
+	console.log(card2);
+	console.log(card3);
+	var textDone=data[card1.toString()][0];
+	var textDoing=data[card2.toString()][0];
+	var textTodo=data[card3.toString()][0];
 	
-	$(".label_labelCard.Done").find(".label_card_comment").text(textDone);
-	$(".label_labelCard.Doing").find(".label_card_comment").text(textDoing);
-	$(".label_labelCard.ToDo").find(".label_card_comment").text(textTodo);
-}
+	$("#label_card1").find(".label_card_comment").text(textDone);
+	$("#label_card2").find(".label_card_comment").text(textDoing);
+	$("#label_card3").find(".label_card_comment").text(textTodo);
 
-function renderSource(data,done,doing,todo){
-	var textDone=data[done][1];
-	var textDoing=data[doing][1];
-	var textTodo=data[todo][1];
+	var textDone=data[card1.toString()][1];
+	var textDoing=data[card2.toString()][1];
+	var textTodo=data[card3.toString()][1];
 	
-	$(".label_labelCard.Done").find(".label_card_source").text(textDone);
-	$(".label_labelCard.Doing").find(".label_card_source").text(textDoing);
-	$(".label_labelCard.ToDo").find(".label_card_source").text(textTodo);
+	$("#label_card1").find(".label_card_source").text(textDone);
+	$("#label_card2").find(".label_card_source").text(textDoing);
+	$("#label_card3").find(".label_card_source").text(textTodo);
 }
 
 function renderProgressBar(progress){
@@ -77,6 +89,7 @@ function renderProgressBar(progress){
 function cardSelector(){
 	$(".label_labelCard").click(function(e){
 		e.preventDefault();
+		
 		if(!$(this).hasClass("Doing")&&!$(this).hasClass("ToDo")&&!$(this).hasClass("Done")){
 			$(this).addClass("Doing");
 			$(this).find(".label_card_source").addClass("doing");
@@ -89,6 +102,8 @@ function cardSelector(){
 					$(e).find(".label_card_comment.doing").removeClass("doing");
 				}
 			});
+			//清零放在最后
+			$("input[name='semSelect']:checked").attr('checked',false);
 		}
 		else if(!$(this).hasClass("Doing")){
 			$(this).removeClass("ToDo").removeClass("Done").addClass("Doing");
@@ -96,21 +111,70 @@ function cardSelector(){
 			$(this).find(".label_card_comment").removeClass("todo").addClass("doing");
 			$(this).siblings(".label_labelCard").each(function(i,e){
 				if($(e).hasClass("Doing")){
-					//TODO 判断是否已选
-					$(e).removeClass("Doing");
-					$(e).addClass("Done");
-					$(e).find(".label_card_source.doing").removeClass("doing");
-					$(e).find(".label_card_comment.doing").removeClass("doing");
+					if($("input[name='semSelect']:checked").val()!=undefined){
+						$(e).removeClass("Doing");
+						$(e).addClass("Done");
+						$(e).find(".label_card_source.doing").removeClass("doing");
+						$(e).find(".label_card_comment.doing").removeClass("doing");
+					}else{
+						$(e).removeClass("Doing");
+						$(e).addClass("ToDo");
+						$(e).find(".label_card_source.doing").removeClass("doing").addClass("todo");
+						$(e).find(".label_card_comment.doing").removeClass("doing").addClass("todo");;
+					}
 				}
 			});
+			//清零放在最后
+			$("input[name='semSelect']:checked").attr('checked',false);
 		}
 	});
 };
 
-$(document).ready(function(){
-	console.log("start");
-	renderProgressBar(50);
-	renderComment(testData,"1","2","3");
-	renderSource(testData,"1","2","3");
+function listenEvents(){
+	var dataLength=0;
+	for(key in testData){
+		dataLength++;
+	}
+	$(".label_next").click(function(){
+		if(indexCard3<dataLength){
+			indexCard1++;
+			indexCard2++;
+			indexCard3++;
+			renderInit(testData,indexCard1,indexCard2,indexCard3);
+		}
+	});
+}
+
+
+function renderInit(jsonData,idx1,idx2,idx3){
+	//renderProgressBar(idx1);
+	renderCard(jsonData,idx1,idx2,idx3);
 	cardSelector();
+}
+
+function listenEvents(jsonData){
+	$(".label_prev").click(function(e){
+		e.preventDefault();
+		if(indexCard1>=2){
+			indexCard1--;
+			indexCard2--;
+			indexCard3--;
+			renderInit(jsonData,indexCard1,indexCard2,indexCard3);
+		}
+	});
+	
+	$(".label_next").click(function(e){
+		e.preventDefault();
+		if(indexCard3<dataLength){
+			indexCard1++;
+			indexCard2++;
+			indexCard3++;
+			renderInit(jsonData,indexCard1,indexCard2,indexCard3);
+		}
+	});
+}
+
+$(document).ready(function(){
+	renderInit(testData,1,2,3);
+	listenEvents(testData);
 });

@@ -42,34 +42,7 @@
 				<div class="label_labelCard_grid">
 					<div class="label_prev"></div>
 					<div class="label_labelCard_wrapper">
-						<div class="label_labelCard Done">
-							<div class="card_wrapper">
-								<div class="label_labelItem_commentWrapper">
-									<div class="label_labelItem_comment">
-										<textarea class="label_card_comment" readonly="readonly" ></textarea>
-									</div>
-									<div class="label_labelItem_tick"></div>
-								</div>
-								<div class="label_labelItem_spliter">
-									<div class="label_spliter_hyphen">———————</div> 
-									<div class="label_spliter_text">评论原文</div> 
-									<div class="label_spliter_hyphen">———————</div>  
-								</div>
-								<div class="label_labelItem_source">
-									<textarea class= "label_card_source" readonly="readonly" ></textarea>
-								</div>
-								<div class="label_labelItem_extraInfo">
-									<div class="label_labelItem_subjectHeader">主题:</div>
-									<div class="label_labelItem_subject">画面</div>
-									<div class="label_labelItem_urlSource">百度贴吧</div>
-									<div class="label_labelItem_url">
-										<a href="http://www.baidu.com">来源</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="label_labelCard Doing">
+						<div class="label_labelCard Doing" id="label_card1" dataid="1">
 							<div class="card_wrapper">
 								<div class="label_labelItem_commentWrapper">
 									<div class="label_labelItem_comment">
@@ -96,7 +69,34 @@
 							</div>
 						</div>
 						
-						<div class="label_labelCard ToDo">
+						<div class="label_labelCard ToDo" id="label_card2" dataid="2">
+							<div class="card_wrapper">
+								<div class="label_labelItem_commentWrapper">
+									<div class="label_labelItem_comment">
+										<textarea class="label_card_comment todo" readonly="readonly" ></textarea>
+									</div>
+									<div class="label_labelItem_tick"></div>
+								</div>
+								<div class="label_labelItem_spliter">
+									<div class="label_spliter_hyphen">———————</div> 
+									<div class="label_spliter_text">评论原文</div> 
+									<div class="label_spliter_hyphen">———————</div> 
+								</div>
+								<div class="label_labelItem_source">
+									<textarea class= "label_card_source todo" readonly="readonly" ></textarea>
+								</div>
+								<div class="label_labelItem_extraInfo">
+									<div class="label_labelItem_subjectHeader">主题:</div>
+									<div class="label_labelItem_subject">画面</div>
+									<div class="label_labelItem_urlSource">百度贴吧</div>
+									<div class="label_labelItem_url">
+										<a href="http://www.baidu.com">来源</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="label_labelCard ToDo" id="label_card3" dataid="3">
 							<div class="card_wrapper">
 								<div class="label_labelItem_commentWrapper">
 									<div class="label_labelItem_comment">
@@ -135,19 +135,19 @@
 						<div class="label_label_sentiment">
 							<div class="label_radioWrapper">
 								<div class="label_radio_itemWrapper">
-									<input type="radio" class="semRadio" name="semSelect">
+									<input type="radio" class="semRadio" name="semSelect" value="2">
 									<div class="label_radio_font">好评</div>
 								</div>
 								
 								<div class="label_radio_itemWrapper">
-									<input type="radio" class="semRadio" name="semSelect">
+									<input type="radio" class="semRadio" name="semSelect" value="0">
 									<div class="label_radio_font">中评</div>
 								</div>
 								<div class="label_radio_itemWrapper">
-									<input type="radio" class="semRadio" name="semSelect">
+									<input type="radio" class="semRadio" name="semSelect" value="-2">
 									<div class="label_radio_font">差评</div>
 								</div>
-								<input type="radio" class="semRadio" name="semSelect">
+								<input type="radio" class="semRadio" name="semSelect" value="1">
 								<div class="label_radio_font">矛盾</div>
 							</div>
 						</div>

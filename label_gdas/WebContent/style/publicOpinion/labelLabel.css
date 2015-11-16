@@ -204,7 +204,7 @@ div{
 
 #label_main_content .label_labelCard_wrapper{
 	margin-bottom:20px;
-	position:absolute:
+	position:absolute;
 	z-index:100;
 }
 
@@ -241,6 +241,9 @@ div{
 	margin-right:53px;
 	margin-bottom:15px;
 	height:55px;
+	position:absolute;
+	z-index:100;
+	top:345px;
 }
 
 #label_main_content .label_label_isIrrelevent{
@@ -461,15 +464,46 @@ div{
 }
 
 #label_main_content .label_prev{
+	background:url('../../image/publicOpinion/prev.png') no-repeat center;
 	height:69px;
 	width:69px;
 	position:absolute;
 	z-index:200;
+	top:145px;
+	left:-30px;
+	opacity: 0.2;
+}
+
+#label_main_content .label_prev:hover{
+	background:url('../../image/publicOpinion/prev.png') no-repeat center;
+	height:69px;
+	width:69px;
+	position:absolute;
+	z-index:200;
+	top:145px;
+	left:-30px;
+	opacity: 1.0;
+	
 }
 
 #label_main_content .label_next{
+	background:url('../../image/publicOpinion/next.png') no-repeat center;
 	height:69px;
 	width:69px;
 	position:absolute;
 	z-index:200;
+	top:145px;
+	right:-30px;
+	opacity: 0.2;
+}
+
+#label_main_content .label_next:hover{
+	background:url('../../image/publicOpinion/next.png') no-repeat center;
+	height:69px;
+	width:69px;
+	position:absolute;
+	z-index:200;
+	top:145px;
+	right:-30px;
+	opacity: 1.0;
 }
