@@ -77,21 +77,30 @@ function renderProgressBar(progress){
 function cardSelector(){
 	$(".label_labelCard").click(function(e){
 		e.preventDefault();
-		if(!$(this).hasClass("Doing")&&!$(this).hasClass("ToDo")){
+		if(!$(this).hasClass("Doing")&&!$(this).hasClass("ToDo")&&!$(this).hasClass("Done")){
 			$(this).addClass("Doing");
+			$(this).find(".label_card_source").addClass("doing");
+			$(this).find(".label_card_comment").addClass("doing");
 			$(this).siblings(".label_labelCard").each(function(i,e){
 				if($(e).hasClass("Doing")){
 					$(e).removeClass("Doing");
 					$(e).addClass("Done");
+					$(e).find(".label_card_source.doing").removeClass("doing");
+					$(e).find(".label_card_comment.doing").removeClass("doing");
 				}
 			});
 		}
-		else if(!$(this).hasClass("Doing")&&$(this).hasClass("ToDo")){
-			$(this).removeClass("ToDo").addClass("Doing");
+		else if(!$(this).hasClass("Doing")){
+			$(this).removeClass("ToDo").removeClass("Done").addClass("Doing");
+			$(this).find(".label_card_source").removeClass("todo").addClass("doing");
+			$(this).find(".label_card_comment").removeClass("todo").addClass("doing");
 			$(this).siblings(".label_labelCard").each(function(i,e){
 				if($(e).hasClass("Doing")){
+					//TODO 判断是否已选
 					$(e).removeClass("Doing");
 					$(e).addClass("Done");
+					$(e).find(".label_card_source.doing").removeClass("doing");
+					$(e).find(".label_card_comment.doing").removeClass("doing");
 				}
 			});
 		}

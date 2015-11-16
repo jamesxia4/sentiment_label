@@ -40,6 +40,7 @@
 			
 			<div class="label_label_bigWrapper">
 				<div class="label_labelCard_grid">
+					<div class="label_prev"></div>
 					<div class="label_labelCard_wrapper">
 						<div class="label_labelCard Done">
 							<div class="card_wrapper">
@@ -122,6 +123,7 @@
 							</div>
 						</div>
 					</div>
+					<div class="label_next"></div>
 					
 					<div class="label_labelOptionWrapper">
 						<div class="label_label_isIrrelevent">

@@ -198,11 +198,14 @@ div{
 	border-radius:10px;
 	height:420px;
 	margin-top:10px;
-	padding:15px;
+	padding:15px 10px 15px 15px;
+	position:relative;
 }
 
 #label_main_content .label_labelCard_wrapper{
 	margin-bottom:20px;
+	position:absolute:
+	z-index:100;
 }
 
 #label_main_content .label_labelCard.Done{
@@ -228,6 +231,7 @@ div{
 	border-radius:10px;
 	width:316px;
 	height:311px;
+	margin-right:5px;
 	display:inline-block;
 	border:2px solid #f2f2f2;
 }
@@ -454,4 +458,18 @@ div{
 	color:#3d4256;
 	margin-right:5px;
 	display:inline-block;
+}
+
+#label_main_content .label_prev{
+	height:69px;
+	width:69px;
+	position:absolute;
+	z-index:200;
+}
+
+#label_main_content .label_next{
+	height:69px;
+	width:69px;
+	position:absolute;
+	z-index:200;
 }
