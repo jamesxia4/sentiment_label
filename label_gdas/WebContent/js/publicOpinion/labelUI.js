@@ -2,15 +2,16 @@
  * 
  */
 testData={
-		"1":["现在活跃人数确实少了1","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区1","画面","百度贴吧","www.baidu.com","0"],
-		"2":["现在活跃人数确实少了2","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区2","画面","百度贴吧","www.baidu.com","0"],
-		"3":["现在活跃人数确实少了3","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区3","画面","百度贴吧","www.baidu.com","0"],
-		"4":["现在活跃人数确实少了4","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区4","画面","百度贴吧","www.baidu.com","0"],
-		"5":["现在活跃人数确实少了5","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区5","画面","百度贴吧","www.baidu.com","0"],
-		"6":["现在活跃人数确实少了6","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区6","画面","百度贴吧","www.baidu.com","0"]
+		"1":["现在活跃人数确实少了1","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区1","画面","百度贴吧","www.baidu.com","-3","-1"],
+		"2":["现在活跃人数确实少了2","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区2","画面","百度贴吧","www.baidu.com","-3","-1"],
+		"3":["现在活跃人数确实少了3","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区3","画面","百度贴吧","www.baidu.com","-3","-1"],
+		"4":["现在活跃人数确实少了4","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区4","画面","百度贴吧","www.baidu.com","-3","-1"],
+		"5":["现在活跃人数确实少了5","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区5","画面","百度贴吧","www.baidu.com","-3","-1"],
+		"6":["现在活跃人数确实少了6","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区6","画面","百度贴吧","www.baidu.com","-3","-1"]
 };
 
 sentimentLabel=[-3,-3,-3,-3,-3,-3];
+irreleventLabel=[-1,-1,-1,-1,-1,-1];
 
 dataLength=0;
 for(key in testData){
@@ -28,28 +29,30 @@ function getUrlParam(name){
 	if (r!=null) return unescape(r[2]); return null; //返回参数值
 } 
 
+//TODO 渲染的时候要读取暂存结果
 function renderCard(data,card1,card2,card3){
 	console.log(card1);
 	console.log(card2);
 	console.log(card3);
-	var textDone=data[card1.toString()][0];
-	var textDoing=data[card2.toString()][0];
-	var textTodo=data[card3.toString()][0];
+	var cardComment1=data[card1.toString()][0];
+	var cardComment2=data[card2.toString()][0];
+	var cardComment3=data[card3.toString()][0];
 	
-	$("#label_card1").find(".label_card_comment").text(textDone);
-	$("#label_card2").find(".label_card_comment").text(textDoing);
-	$("#label_card3").find(".label_card_comment").text(textTodo);
+	$("#label_card1").find(".label_card_comment").text(cardComment1);
+	$("#label_card2").find(".label_card_comment").text(cardComment2);
+	$("#label_card3").find(".label_card_comment").text(cardComment3);
 
-	var textDone=data[card1.toString()][1];
-	var textDoing=data[card2.toString()][1];
-	var textTodo=data[card3.toString()][1];
+	var cardSource1=data[card1.toString()][1];
+	var cardSource2=data[card2.toString()][1];
+	var cardSource3=data[card3.toString()][1];
 	
-	$("#label_card1").find(".label_card_source").text(textDone);
-	$("#label_card2").find(".label_card_source").text(textDoing);
-	$("#label_card3").find(".label_card_source").text(textTodo);
+	$("#label_card1").find(".label_card_source").text(cardSource1);
+	$("#label_card2").find(".label_card_source").text(cardSource2);
+	$("#label_card3").find(".label_card_source").text(cardSource3);
 }
 
 function renderProgressBar(progress){
+		//渲染前先清空原有结果
 		$(".label_label_progressBar").empty();
 		$("<div class=\"label_label_progressBarUndoneLayer\">").appendTo($(".label_label_progressBar"));
 		$("<div class=\"label_label_progressBarDotFinished\">").appendTo($(".label_label_progressBarUndoneLayer"));
@@ -155,6 +158,7 @@ function renderInit(jsonData,idx1,idx2,idx3){
 	cardSelector();
 }
 
+//TODO 翻页的时候要做暂存
 function listenEvents(jsonData){
 	$(".label_prev").click(function(e){
 		e.preventDefault();
