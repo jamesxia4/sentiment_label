@@ -24,9 +24,17 @@
 					<div class="label_label_smallHeader">2015第一期 玩家评论情感倾向任务 001</div>
 					<div class="label_label_sumbit">提交</div>
 				</div>
-				<div class="label_progressBarWrapper"></div>	
+				<div class="label_progressBarWrapper">
+					<div class="label_label_progressBar">
+						<div class="label_label_progressBarUndoneLayer">
+							<div class="label_label_progressBarDotFinished"></div>
+						</div>
+						<div class="label_label_progressBarDoneLayer"></div>
+					</div>
+				</div>
+				
 				<div class="label_label_bonusWrapper">
-					<div class="label_label_bonusLogo"></div>
+						<div class="label_label_bonusLogo"></div>
 				</div>
 			</div>
 			
