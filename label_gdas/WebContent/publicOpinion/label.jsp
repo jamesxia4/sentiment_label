@@ -42,7 +42,7 @@
 				<div class="label_labelCard_grid">
 					<div class="label_prev"></div>
 					<div class="label_labelCard_wrapper">
-						<div class="label_labelCard Doing" id="label_card1">
+						<div class="label_labelCard ToDo" id="label_card1">
 							<div class="card_wrapper">
 								<div class="label_labelItem_commentWrapper">
 									<div class="label_labelItem_comment">
