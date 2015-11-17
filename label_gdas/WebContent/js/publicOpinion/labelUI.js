@@ -101,7 +101,7 @@ function renderPage(jsonData,idx1,idx2,idx3){
 }
 
 
-
+//TODO BUG
 function headInsertSingleCard(jsonData,idx,label){
 	var newCard=$("#label_card3").html();
 	$("#label_card3").remove();
@@ -114,6 +114,7 @@ function headInsertSingleCard(jsonData,idx,label){
 
 }
 
+//TODO BUG
 function tailAppendSingleCard(jsonData,idx,label){
 	var newCard=$("#label_card1").html();
 	$("#label_card1").remove();
