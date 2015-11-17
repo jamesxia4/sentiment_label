@@ -13,9 +13,12 @@ testData={
 sentimentLabel=[-3,-3,-3,-3,-3,-3];
 irreleventLabel=[-1,-1,-1,-1,-1,-1];
 
+var i=0;
 dataLength=0;
 for(key in testData){
-	dataLength++;
+	++dataLength;
+	sentimentLabel[i++]=testData[key][5];
+	irreleventLabel[i++]=testData[key][6];
 }
 
 indexCard1=1;
@@ -136,20 +139,6 @@ function cardSelector(){
 	});
 };
 
-function listenEvents(){
-	var dataLength=0;
-	for(key in testData){
-		dataLength++;
-	}
-	$(".label_next").click(function(){
-		if(indexCard3<dataLength){
-			indexCard1++;
-			indexCard2++;
-			indexCard3++;
-			renderInit(testData,indexCard1,indexCard2,indexCard3);
-		}
-	});
-}
 
 
 function renderInit(jsonData,idx1,idx2,idx3){
@@ -180,6 +169,7 @@ function listenEvents(jsonData){
 		}
 	});
 }
+
 
 $(document).ready(function(){
 	renderInit(testData,1,2,3);
