@@ -70,6 +70,7 @@ function renderCardText(data,semLabel,card1,card2,card3){
 	}
 }
 
+//TODO 进度指示器
 function renderProgressBar(progress){
 		//渲染前先清空原有结果
 		$(".label_label_progressBar").empty();
@@ -94,9 +95,11 @@ function renderProgressBar(progress){
 		//画出进度条
 		$(".label_label_progressBarDoneLayer").css("width",(progress/100*barWidth).toString()+"px");
 		if(progress>0){
-		$("<div class=\"label_label_progressBarDotIndex\"></div>").appendTo($(".label_label_progressBar")).css("left",(progress/100*barWidth-1).toString()+"px");}
-		else{
+			$("<div class=\"label_label_progressBarDotIndex\"></div>").appendTo($(".label_label_progressBar")).css("left",(progress/100*barWidth-1).toString()+"px");
+			$("<div class=\"label_label_progressBarIndicator\"></div>").appendTo($(".label_label_progressBar")).css("left",(progress/100*barWidth-11).toString()+"px").text(progress.toString());
+		}else{
 			$("<div class=\"label_label_progressBarDotIndex\"></div>").appendTo($(".label_label_progressBar")).css("left",(progress/100*barWidth-3).toString()+"px");
+			$("<div class=\"label_label_progressBarIndicator\"></div>").appendTo($(".label_label_progressBar")).css("left",(progress/100*barWidth-11).toString()+"px").text(progress.toString());
 		}
 		
 		//根据计算结果调整刻度颜色
