@@ -35,6 +35,7 @@ function getUrlParam(name){
 
 //TODO 渲染的时候要读取暂存结果添加小勾
 function renderCardText(data,semLabel,card1,card2,card3){
+	
 	var cardComment1=data[card1.toString()][0];
 	var cardComment2=data[card2.toString()][0];
 	var cardComment3=data[card3.toString()][0];
@@ -178,26 +179,23 @@ function renderExtraInfo(jsonData,idx1,idx2,idx3){
 } 
 
 //TODO 点击时load标注值 
-//TODO 进度条写这里
 //TODO 给已完成的添加小勾
 function bindingCardEvents(){
 	$(".label_labelCard").click(function(e){
 		e.preventDefault();
 		if(!$(this).hasClass("Doing")){
-/*			console.log("flag1");*/
+			renderProgressBar(parseInt($(this).attr("dataId")));
 			$(this).removeClass("ToDo").removeClass("Done").addClass("Doing");
 			$(this).find(".label_card_source").removeClass("todo").addClass("doing");
 			$(this).find(".label_card_comment").removeClass("todo").addClass("doing");
 			$(this).siblings(".label_labelCard").each(function(i,e){
 				if($(e).hasClass("Doing")){
 					if($("input[name='semSelect']:checked").val()!=undefined){
-/*						console.log("flag2");*/
 						$(e).removeClass("Doing");
 						$(e).addClass("Done");
 						$(e).find(".label_card_source.doing").removeClass("doing");
 						$(e).find(".label_card_comment.doing").removeClass("doing");
 					}else{
-/*						console.log("flag2");*/
 						$(e).removeClass("Doing");
 						$(e).addClass("ToDo");
 						$(e).find(".label_card_source.doing").removeClass("doing").addClass("todo");
