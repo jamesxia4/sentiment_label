@@ -2,12 +2,12 @@
  * 
  */
 testData={
-		"1":["现在活跃人数确实少了1","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区1","画面","百度贴吧","www.baidu.com","-3","-1"],
-		"2":["现在活跃人数确实少了2","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区2","画面","百度贴吧","www.baidu.com","-3","-1"],
-		"3":["现在活跃人数确实少了3","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区3","画面","百度贴吧","www.baidu.com","-3","-1"],
-		"4":["现在活跃人数确实少了4","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区4","画面","百度贴吧","www.baidu.com","-2","-1"],
-		"5":["现在活跃人数确实少了5","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区5","画面","百度贴吧","www.baidu.com","-3","-1"],
-		"6":["现在活跃人数确实少了6","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区6","画面","百度贴吧","www.baidu.com","-3","-1"]
+		"1":["现在活跃人数确实少了1","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区1","画面","百度贴吧","http://www.baidu.com/","-3","-1"],
+		"2":["现在活跃人数确实少了2","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区2","画面","百度贴吧","http://www.google.com.sg/","-3","-1"],
+		"3":["现在活跃人数确实少了3","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区3","画面","百度贴吧","http://www.sina.com.cn/","-3","-1"],
+		"4":["现在活跃人数确实少了4","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区4","画面","百度贴吧","http://www.bilibili.com/","-2","-1"],
+		"5":["现在活跃人数确实少了5","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区5","画面","百度贴吧","http://www.acfun.tv/","-3","-1"],
+		"6":["现在活跃人数确实少了6","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区6","画面","百度贴吧","http://news.163.com/","-3","-1"]
 };
 
 sentimentLabel=[];
@@ -35,9 +35,6 @@ function getUrlParam(name){
 
 //TODO 渲染的时候要读取暂存结果
 function renderCardText(data,card1,card2,card3){
-/*	console.log(card1);
-	console.log(card2);
-	console.log(card3);*/
 	var cardComment1=data[card1.toString()][0];
 	var cardComment2=data[card2.toString()][0];
 	var cardComment3=data[card3.toString()][0];
@@ -51,6 +48,10 @@ function renderCardText(data,card1,card2,card3){
 	$("#label_card1").find(".label_card_source").text(cardSource1);
 	$("#label_card2").find(".label_card_source").text(cardSource2);
 	$("#label_card3").find(".label_card_source").text(cardSource3);
+	
+	$("#label_card1").attr("dataId",card1.toString());
+	$("#label_card2").attr("dataId",card2.toString());
+	$("#label_card3").attr("dataId",card3.toString());
 }
 
 function renderProgressBar(progress){
@@ -98,32 +99,31 @@ function renderProgressBar(progress){
 function renderPage(jsonData,idx1,idx2,idx3){
 	renderProgressBar(idx1);
 	renderCardText(jsonData,idx1,idx2,idx3);
+	renderExtraInfo(jsonData,idx1,idx2,idx3);
+	bindingCardEvents();
 }
 
 
-//TODO BUG
 function headInsertSingleCard(jsonData,idx,label){
 	var newCard=$("#label_card3").html();
 	$("#label_card3").remove();
 	$("#label_card2").attr("id","label_card3");
 	$("#label_card1").attr("id","label_card2");
-	
+
 	$("<div class=\"label_labelCard ToDo\" id=\"label_card1\"></div>").prependTo($(".label_labelCard_wrapper"));
 	$(newCard).appendTo($("#label_card1"));
-	
-
+	$("#label_card1").attr("dataId",idx.toString());
 }
 
-//TODO BUG
 function tailAppendSingleCard(jsonData,idx,label){
 	var newCard=$("#label_card1").html();
 	$("#label_card1").remove();
 	$("#label_card2").attr("id","label_card1");
 	$("#label_card3").attr("id","label_card2");
-	
+		
 	$("<div class=\"label_labelCard ToDo\" id=\"label_card3\"></div>").appendTo($(".label_labelCard_wrapper"));
 	$(newCard).appendTo($("#label_card3"));
-	
+	$("#label_card3").attr("dataId",idx.toString());
 }
 
 function renderSingleCard(jsonData,idx,semLabel,cardId){
@@ -133,7 +133,6 @@ function renderSingleCard(jsonData,idx,semLabel,cardId){
 	$(cardId).find(".label_card_source").removeClass("todo").removeClass("doing").text(cardSource);
 	$(cardId).removeClass("ToDo").removeClass("Doing").removeClass("Done");
 	var label=semLabel[idx-1];
-	console.log(label);
 	if(label!=-3){
 		$(cardId).addClass("Done");
 	}else{
@@ -143,6 +142,58 @@ function renderSingleCard(jsonData,idx,semLabel,cardId){
 	}
 }
 
+function renderExtraInfo(jsonData,idx1,idx2,idx3){
+	$("#label_card1").find(".label_labelItem_subject").text(jsonData[idx1][2]);
+	$("#label_card1").find(".label_labelItem_urlSource").text(jsonData[idx1][3]);
+	$("#label_card1").find("a").prop("href",jsonData[idx1][4]);
+	
+	$("#label_card2").find(".label_labelItem_subject").text(jsonData[idx2][2]);
+	$("#label_card2").find(".label_labelItem_urlSource").text(jsonData[idx2][3]);
+	$("#label_card2").find("a").prop("href",jsonData[idx2][4]);
+	
+	$("#label_card3").find(".label_labelItem_subject").text(jsonData[idx3][2]);
+	$("#label_card3").find(".label_labelItem_urlSource").text(jsonData[idx3][3]);
+	$("#label_card3").find("a").prop("href",jsonData[idx3][4]);
+	
+	$(".label_labelItem_url").click(function(e){
+		var href=$(this).find("a").attr("href");
+		window.open(href);
+	})
+}
+
+//TODO 点击时load标注值 
+//TODO 进度条写这里
+function bindingCardEvents(){
+	$(".label_labelCard").click(function(e){
+		e.preventDefault();
+		if(!$(this).hasClass("Doing")){
+/*			console.log("flag1");*/
+			$(this).removeClass("ToDo").removeClass("Done").addClass("Doing");
+			$(this).find(".label_card_source").removeClass("todo").addClass("doing");
+			$(this).find(".label_card_comment").removeClass("todo").addClass("doing");
+			$(this).siblings(".label_labelCard").each(function(i,e){
+				if($(e).hasClass("Doing")){
+					if($("input[name='semSelect']:checked").val()!=undefined){
+/*						console.log("flag2");*/
+						$(e).removeClass("Doing");
+						$(e).addClass("Done");
+						$(e).find(".label_card_source.doing").removeClass("doing");
+						$(e).find(".label_card_comment.doing").removeClass("doing");
+					}else{
+/*						console.log("flag2");*/
+						$(e).removeClass("Doing");
+						$(e).addClass("ToDo");
+						$(e).find(".label_card_source.doing").removeClass("doing").addClass("todo");
+						$(e).find(".label_card_comment.doing").removeClass("doing").addClass("todo");;
+					}
+				}
+			});
+			//TODO 清零改成Load
+			//TODO Load标注值
+			$("input[name='semSelect']:checked").attr('checked',false);
+		}
+	});
+}
 //TODO 翻页的时候要做暂存
 function listenEvents(jsonData,label){
 	$(document).ready(function(){
@@ -153,7 +204,9 @@ function listenEvents(jsonData,label){
 				indexCard2--;
 				indexCard3--;
 				headInsertSingleCard(jsonData,indexCard1,label);
-/*				renderSingleCard(jsonData,indexCard1,label,"#label_card1");*/
+				renderSingleCard(jsonData,indexCard1,label,"#label_card1");
+				renderExtraInfo(jsonData,indexCard1,indexCard2,indexCard3);
+				bindingCardEvents();
 			}
 		});
 		
@@ -164,46 +217,43 @@ function listenEvents(jsonData,label){
 				indexCard2++;
 				indexCard3++;
 				tailAppendSingleCard(jsonData,indexCard3,label);
-/*				renderSingleCard(jsonData,indexCard3,label,"#label_card3");*/
+				renderSingleCard(jsonData,indexCard3,label,"#label_card3");
+				renderExtraInfo(jsonData,indexCard1,indexCard2,indexCard3);
+				bindingCardEvents();
 			}
 		});
 		
-		$(".label_labelCard").click(function(e){
-			e.preventDefault();
-			if(!$(this).hasClass("Doing")){
-				console.log("flag1");
-				$(this).removeClass("ToDo").removeClass("Done").addClass("Doing");
-				$(this).find(".label_card_source").removeClass("todo").addClass("doing");
-				$(this).find(".label_card_comment").removeClass("todo").addClass("doing");
-				$(this).siblings(".label_labelCard").each(function(i,e){
-					if($(e).hasClass("Doing")){
-						if($("input[name='semSelect']:checked").val()!=undefined){
-							console.log("flag2");
-							$(e).removeClass("Doing");
-							$(e).addClass("Done");
-							$(e).find(".label_card_source.doing").removeClass("doing");
-							$(e).find(".label_card_comment.doing").removeClass("doing");
-						}else{
-							console.log("flag2");
-							$(e).removeClass("Doing");
-							$(e).addClass("ToDo");
-							$(e).find(".label_card_source.doing").removeClass("doing").addClass("todo");
-							$(e).find(".label_card_comment.doing").removeClass("doing").addClass("todo");;
-						}
-					}
-				});
-				//清零放在最后
-				$("input[name='semSelect']:checked").attr('checked',false);
+		//点击情感选项时保存结果
+		$(".semRadio").click(function(e){
+			var semSelectOption=parseInt($(this).val());
+			var irrSelectOption=parseInt($(".semCheck").val());
+			var dataId=parseInt($(".label_labelCard.Doing").attr("dataId"));
+			sentimentLabel[dataId-1]=semSelectOption;
+			irreleventLabel[dataId-1]=irrSelectOption;
+			console.log(sentimentLabel);
+			
+			if(semSelectOption==0){
+				$("#semRadio1").prop('checked',true);
+			}
+			else if(semSelectOption==1){
+				$("#semRadio2").prop('checked',true);
+			}
+			else if(semSelectOption==2){
+				$("#semRadio3").prop('checked',true);
+			}
+			else if(semSelectOption==3){
+				$("#semRadio4").prop('checked',true);
+			}
+			else{
+				$("input[name='semSelect']:checked").prop('checked',false);
 			}
 		});
+		
+
 	});
 }
 
-
-
-
 $(document).ready(function(){
-	console.log(sentimentLabel);
 	renderPage(testData,indexCard1,indexCard2,indexCard3);
 	listenEvents(testData,sentimentLabel);
 });

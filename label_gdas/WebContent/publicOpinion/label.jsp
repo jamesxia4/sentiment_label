@@ -60,10 +60,10 @@
 								</div>
 								<div class="label_labelItem_extraInfo">
 									<div class="label_labelItem_subjectHeader">主题:</div>
-									<div class="label_labelItem_subject">画面</div>
-									<div class="label_labelItem_urlSource">百度贴吧</div>
+									<div class="label_labelItem_subject"></div>
+									<div class="label_labelItem_urlSource"></div>
 									<div class="label_labelItem_url">
-										<a href="http://www.baidu.com">来源</a>
+										<a>来源</a>
 									</div>
 								</div>
 							</div>
@@ -87,10 +87,10 @@
 								</div>
 								<div class="label_labelItem_extraInfo">
 									<div class="label_labelItem_subjectHeader">主题:</div>
-									<div class="label_labelItem_subject">画面</div>
-									<div class="label_labelItem_urlSource">百度贴吧</div>
+									<div class="label_labelItem_subject"></div>
+									<div class="label_labelItem_urlSource"></div>
 									<div class="label_labelItem_url">
-										<a href="http://www.baidu.com">来源</a>
+										<a>来源</a>
 									</div>
 								</div>
 							</div>
@@ -114,10 +114,10 @@
 								</div>
 								<div class="label_labelItem_extraInfo">
 									<div class="label_labelItem_subjectHeader">主题:</div>
-									<div class="label_labelItem_subject">画面</div>
-									<div class="label_labelItem_urlSource">百度贴吧</div>
+									<div class="label_labelItem_subject"></div>
+									<div class="label_labelItem_urlSource"></div>
 									<div class="label_labelItem_url">
-										<a href="http://www.baidu.com">来源</a>
+										<a>来源</a>
 									</div>
 								</div>
 							</div>
@@ -135,20 +135,22 @@
 						<div class="label_label_sentiment">
 							<div class="label_radioWrapper">
 								<div class="label_radio_itemWrapper">
-									<input type="radio" class="semRadio" name="semSelect" value="2">
+									<input type="radio" class="semRadio" name="semSelect" value="0" id="semRadio1">
 									<div class="label_radio_font">好评</div>
 								</div>
 								
 								<div class="label_radio_itemWrapper">
-									<input type="radio" class="semRadio" name="semSelect" value="0">
+									<input type="radio" class="semRadio" name="semSelect" value="1" id="semRadio2">
 									<div class="label_radio_font">中评</div>
 								</div>
 								<div class="label_radio_itemWrapper">
-									<input type="radio" class="semRadio" name="semSelect" value="-2">
+									<input type="radio" class="semRadio" name="semSelect" value="2" id="semRadio3">
 									<div class="label_radio_font">差评</div>
 								</div>
-								<input type="radio" class="semRadio" name="semSelect" value="1">
-								<div class="label_radio_font">矛盾</div>
+								<div class="label_radio_itemWrapper">
+									<input type="radio" class="semRadio" name="semSelect" value="3" id="semRadio4">
+									<div class="label_radio_font">矛盾</div>
+								</div>
 							</div>
 						</div>
 					</div>
