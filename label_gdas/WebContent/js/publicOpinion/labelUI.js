@@ -210,7 +210,7 @@ function bindingCardEvents(){
 	});
 }
 
-function listenEvents(jsonData,label){
+function listenEvents(jsonData,semLabel,irrLabel){
 	$(document).ready(function(){
 		$(".label_prev").click(function(e){
 			e.preventDefault();
@@ -218,8 +218,8 @@ function listenEvents(jsonData,label){
 				indexCard1--;
 				indexCard2--;
 				indexCard3--;
-				headInsertSingleCard(jsonData,indexCard1,label);
-				renderSingleCard(jsonData,indexCard1,label,"#label_card1");
+				headInsertSingleCard(jsonData,indexCard1,semLabel);
+				renderSingleCard(jsonData,indexCard1,semLabel,"#label_card1");
 				renderExtraInfo(jsonData,indexCard1,indexCard2,indexCard3);
 				bindingCardEvents();
 			}
@@ -231,8 +231,8 @@ function listenEvents(jsonData,label){
 				indexCard1++;
 				indexCard2++;
 				indexCard3++;
-				tailAppendSingleCard(jsonData,indexCard3,label);
-				renderSingleCard(jsonData,indexCard3,label,"#label_card3");
+				tailAppendSingleCard(jsonData,indexCard3,semLabel);
+				renderSingleCard(jsonData,indexCard3,semLabel,"#label_card3");
 				renderExtraInfo(jsonData,indexCard1,indexCard2,indexCard3);
 				bindingCardEvents();
 			}
@@ -244,8 +244,8 @@ function listenEvents(jsonData,label){
 			var irrSelectOption=parseInt($(".semCheck").val());
 			var dataId=parseInt($(".label_labelCard.Doing").attr("dataId"));
 			var cardId=$(".label_labelCard.Doing").attr("id");
-			sentimentLabel[dataId-1]=semSelectOption;
-			irreleventLabel[dataId-1]=irrSelectOption;
+			semLabel[dataId-1]=semSelectOption;
+			irrLabel[dataId-1]=irrSelectOption;
 			console.log(sentimentLabel);
 			
 			if(semSelectOption==0){
@@ -271,5 +271,5 @@ function listenEvents(jsonData,label){
 
 $(document).ready(function(){
 	renderPage(testData,sentimentLabel,indexCard1,indexCard2,indexCard3);
-	listenEvents(testData,sentimentLabel);
+	listenEvents(testData,sentimentLabel,irreleventLabel);
 });
