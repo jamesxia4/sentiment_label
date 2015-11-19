@@ -7,7 +7,7 @@ testData={
 		"3":["现在活跃人数确实少了3","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区3","画面","百度贴吧","http://www.sina.com.cn/","1","-1"],
 		"4":["现在活跃人数确实少了4","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区4","画面","百度贴吧","http://www.bilibili.com/","-3","-1"],
 		"5":["现在活跃人数确实少了5","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区5","画面","百度贴吧","http://www.acfun.tv/","3","-1"],
-		"6":["现在活跃人数确实少了6","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区6","画面","百度贴吧","http://news.163.com/","-3","-1"]
+		"6":["现在活跃人数确实少了6","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区6","画面","百度贴吧","http://news.163.com/","2","-1"]
 };
 
 sentimentLabel=[];
@@ -50,14 +50,17 @@ function renderCardText(data,semLabel,card1,card2,card3){
 	$("#label_card2").find(".label_card_source").text(cardSource2);
 	$("#label_card3").find(".label_card_source").text(cardSource3);
 	
-	$("#label_card1").attr("dataId",card1.toString());
-	$("#label_card2").attr("dataId",card2.toString());
-	$("#label_card3").attr("dataId",card3.toString());
+	$("#label_card1").attr("dataid",card1.toString());
+	$("#label_card2").attr("dataid",card2.toString());
+	$("#label_card3").attr("dataid",card3.toString());
 	
 	var tempArr=[card1,card2,card3];
+	console.log(card1,card2,card3);
+	console.log(tempArr);
 	for( idx in tempArr){
-		cardId="#label_card"+idx.toString();
-		var label=semLabel[idx-1];
+		cardId="#label_card"+tempArr[idx].toString();
+		var label=semLabel[tempArr[idx]-1];
+		console.log(idx,label);
 		if(label!=-3){
 			$(cardId).addClass("Done");
 			$(cardId).find(".label_card_comment").removeClass("doing").removeClass("todo");
@@ -70,7 +73,6 @@ function renderCardText(data,semLabel,card1,card2,card3){
 	}
 }
 
-//TODO 进度指示器
 function renderProgressBar(progress){
 		//渲染前先清空原有结果
 		$(".label_label_progressBar").empty();
@@ -115,11 +117,11 @@ function renderProgressBar(progress){
 }
 
 
-function renderPage(jsonData,semLabel,idx1,idx2,idx3){
+function renderPage(jsonData,semLabel,irrLabel,idx1,idx2,idx3){
 	renderProgressBar(idx1);
 	renderCardText(jsonData,semLabel,idx1,idx2,idx3);
 	renderExtraInfo(jsonData,idx1,idx2,idx3);
-	bindingCardEvents();
+	bindingCardEvents(semLabel,irrLabel);
 }
 
 
@@ -131,7 +133,7 @@ function headInsertSingleCard(jsonData,idx,label){
 
 	$("<div class=\"label_labelCard ToDo\" id=\"label_card1\"></div>").prependTo($(".label_labelCard_wrapper"));
 	$(newCard).appendTo($("#label_card1"));
-	$("#label_card1").attr("dataId",idx.toString());
+	$("#label_card1").attr("dataid",idx.toString());
 }
 
 function tailAppendSingleCard(jsonData,idx,label){
@@ -142,7 +144,7 @@ function tailAppendSingleCard(jsonData,idx,label){
 		
 	$("<div class=\"label_labelCard ToDo\" id=\"label_card3\"></div>").appendTo($(".label_labelCard_wrapper"));
 	$(newCard).appendTo($("#label_card3"));
-	$("#label_card3").attr("dataId",idx.toString());
+	$("#label_card3").attr("dataid",idx.toString());
 }
 
 //TODO 添加小勾
@@ -153,6 +155,7 @@ function renderSingleCard(jsonData,idx,semLabel,cardId){
 	$(cardId).find(".label_card_source").removeClass("todo").removeClass("doing").text(cardSource);
 	$(cardId).removeClass("ToDo").removeClass("Doing").removeClass("Done");
 	var label=semLabel[idx-1];
+	console.log(label);
 	if(label!=-3){
 		$(cardId).addClass("Done");
 	}else{
@@ -181,13 +184,13 @@ function renderExtraInfo(jsonData,idx1,idx2,idx3){
 	})
 } 
 
-//TODO 点击时load标注值 
+//TODO 自动翻页(点到最后一个)
 //TODO 给已完成的添加小勾
-function bindingCardEvents(){
+function bindingCardEvents(semLabel,irrLabel){
 	$(".label_labelCard").click(function(e){
 		e.preventDefault();
 		if(!$(this).hasClass("Doing")){
-			renderProgressBar(parseInt($(this).attr("dataId")));
+			renderProgressBar(parseInt($(this).attr("dataid")));
 			$(this).removeClass("ToDo").removeClass("Done").addClass("Doing");
 			$(this).find(".label_card_source").removeClass("todo").addClass("doing");
 			$(this).find(".label_card_comment").removeClass("todo").addClass("doing");
@@ -206,9 +209,18 @@ function bindingCardEvents(){
 					}
 				}
 			});
-			//TODO 清零改成Load
-			//TODO Load标注值
-			$("input[name='semSelect']:checked").attr('checked',false);
+			//TODO Load irr
+			var idx=parseInt($(this).attr("dataid"));
+			console.log(idx);
+			var semVal=semLabel[idx-1];
+			var irrVal=irrLabel[idx-1];
+			
+			if(semVal!=-3){
+				var radioId="#semRadio"+(semVal+1).toString();
+				$(radioId).prop('checked',true);
+			}else{
+				$("input[name='semSelect']:checked").prop('checked',false);
+			}
 		}
 	});
 }
@@ -224,7 +236,7 @@ function listenEvents(jsonData,semLabel,irrLabel){
 				headInsertSingleCard(jsonData,indexCard1,semLabel);
 				renderSingleCard(jsonData,indexCard1,semLabel,"#label_card1");
 				renderExtraInfo(jsonData,indexCard1,indexCard2,indexCard3);
-				bindingCardEvents();
+				bindingCardEvents(semLabel,irrLabel);
 			}
 		});
 		
@@ -237,7 +249,7 @@ function listenEvents(jsonData,semLabel,irrLabel){
 				tailAppendSingleCard(jsonData,indexCard3,semLabel);
 				renderSingleCard(jsonData,indexCard3,semLabel,"#label_card3");
 				renderExtraInfo(jsonData,indexCard1,indexCard2,indexCard3);
-				bindingCardEvents();
+				bindingCardEvents(semLabel,irrLabel);
 			}
 		});
 		
@@ -245,11 +257,10 @@ function listenEvents(jsonData,semLabel,irrLabel){
 		$(".semRadio").click(function(e){
 			var semSelectOption=parseInt($(this).val());
 			var irrSelectOption=parseInt($(".semCheck").val());
-			var dataId=parseInt($(".label_labelCard.Doing").attr("dataId"));
+			var dataid=parseInt($(".label_labelCard.Doing").attr("dataid"));
 			var cardId=$(".label_labelCard.Doing").attr("id");
-			semLabel[dataId-1]=semSelectOption;
-			irrLabel[dataId-1]=irrSelectOption;
-			console.log(sentimentLabel);
+			semLabel[dataid-1]=semSelectOption;
+			irrLabel[dataid-1]=irrSelectOption;
 			
 			if(semSelectOption==0){
 				$("#semRadio1").prop('checked',true);
@@ -273,6 +284,6 @@ function listenEvents(jsonData,semLabel,irrLabel){
 }
 
 $(document).ready(function(){
-	renderPage(testData,sentimentLabel,indexCard1,indexCard2,indexCard3);
+	renderPage(testData,sentimentLabel,irreleventLabel,indexCard1,indexCard2,indexCard3);
 	listenEvents(testData,sentimentLabel,irreleventLabel);
 });
