@@ -2,11 +2,11 @@
  * 
  */
 testData={
-		"1":["现在活跃人数确实少了1","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区1","画面","百度贴吧","http://www.baidu.com/","-3","-1"],
+		"1":["现在活跃人数确实少了1","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区1","画面","百度贴吧","http://www.baidu.com/","0","-1"],
 		"2":["现在活跃人数确实少了2","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区2","画面","百度贴吧","http://www.google.com.sg/","-3","-1"],
-		"3":["现在活跃人数确实少了3","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区3","画面","百度贴吧","http://www.sina.com.cn/","-3","-1"],
-		"4":["现在活跃人数确实少了4","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区4","画面","百度贴吧","http://www.bilibili.com/","-2","-1"],
-		"5":["现在活跃人数确实少了5","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区5","画面","百度贴吧","http://www.acfun.tv/","-3","-1"],
+		"3":["现在活跃人数确实少了3","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区3","画面","百度贴吧","http://www.sina.com.cn/","1","-1"],
+		"4":["现在活跃人数确实少了4","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区4","画面","百度贴吧","http://www.bilibili.com/","-3","-1"],
+		"5":["现在活跃人数确实少了5","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区5","画面","百度贴吧","http://www.acfun.tv/","3","-1"],
 		"6":["现在活跃人数确实少了6","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区6","画面","百度贴吧","http://news.163.com/","-3","-1"]
 };
 
@@ -33,8 +33,8 @@ function getUrlParam(name){
 	if (r!=null) return unescape(r[2]); return null; //返回参数值
 } 
 
-//TODO 渲染的时候要读取暂存结果
-function renderCardText(data,card1,card2,card3){
+//TODO 渲染的时候要读取暂存结果添加小勾
+function renderCardText(data,semLabel,card1,card2,card3){
 	var cardComment1=data[card1.toString()][0];
 	var cardComment2=data[card2.toString()][0];
 	var cardComment3=data[card3.toString()][0];
@@ -52,6 +52,21 @@ function renderCardText(data,card1,card2,card3){
 	$("#label_card1").attr("dataId",card1.toString());
 	$("#label_card2").attr("dataId",card2.toString());
 	$("#label_card3").attr("dataId",card3.toString());
+	
+	var tempArr=[card1,card2,card3];
+	for( idx in tempArr){
+		cardId="#label_card"+idx.toString();
+		var label=semLabel[idx-1];
+		if(label!=-3){
+			$(cardId).addClass("Done");
+			$(cardId).find(".label_card_comment").removeClass("doing").removeClass("todo");
+			$(cardId).find(".label_card_source").removeClass("doing").removeClass("todo");
+		}else{
+			$(cardId).addClass("ToDo");
+			$(cardId).find(".label_card_comment").addClass("todo");
+			$(cardId).find(".label_card_source").addClass("todo");
+		}
+	}
 }
 
 function renderProgressBar(progress){
@@ -96,9 +111,9 @@ function renderProgressBar(progress){
 }
 
 
-function renderPage(jsonData,idx1,idx2,idx3){
+function renderPage(jsonData,semLabel,idx1,idx2,idx3){
 	renderProgressBar(idx1);
-	renderCardText(jsonData,idx1,idx2,idx3);
+	renderCardText(jsonData,semLabel,idx1,idx2,idx3);
 	renderExtraInfo(jsonData,idx1,idx2,idx3);
 	bindingCardEvents();
 }
@@ -126,6 +141,7 @@ function tailAppendSingleCard(jsonData,idx,label){
 	$("#label_card3").attr("dataId",idx.toString());
 }
 
+//TODO 添加小勾
 function renderSingleCard(jsonData,idx,semLabel,cardId){
 	var cardComment=jsonData[idx.toString()][0];
 	var cardSource=jsonData[idx.toString()][1];
@@ -163,6 +179,7 @@ function renderExtraInfo(jsonData,idx1,idx2,idx3){
 
 //TODO 点击时load标注值 
 //TODO 进度条写这里
+//TODO 给已完成的添加小勾
 function bindingCardEvents(){
 	$(".label_labelCard").click(function(e){
 		e.preventDefault();
@@ -194,7 +211,7 @@ function bindingCardEvents(){
 		}
 	});
 }
-//TODO 翻页的时候要做暂存
+
 function listenEvents(jsonData,label){
 	$(document).ready(function(){
 		$(".label_prev").click(function(e){
@@ -228,6 +245,7 @@ function listenEvents(jsonData,label){
 			var semSelectOption=parseInt($(this).val());
 			var irrSelectOption=parseInt($(".semCheck").val());
 			var dataId=parseInt($(".label_labelCard.Doing").attr("dataId"));
+			var cardId=$(".label_labelCard.Doing").attr("id");
 			sentimentLabel[dataId-1]=semSelectOption;
 			irreleventLabel[dataId-1]=irrSelectOption;
 			console.log(sentimentLabel);
@@ -254,6 +272,6 @@ function listenEvents(jsonData,label){
 }
 
 $(document).ready(function(){
-	renderPage(testData,indexCard1,indexCard2,indexCard3);
+	renderPage(testData,sentimentLabel,indexCard1,indexCard2,indexCard3);
 	listenEvents(testData,sentimentLabel);
 });
