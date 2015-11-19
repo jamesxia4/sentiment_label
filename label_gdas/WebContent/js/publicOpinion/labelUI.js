@@ -159,7 +159,7 @@ function renderExtraInfo(jsonData,idx1,idx2,idx3){
 		var href=$(this).find("a").attr("href");
 		window.open(href);
 	})
-}
+} 
 
 //TODO 点击时load标注值 
 //TODO 进度条写这里
