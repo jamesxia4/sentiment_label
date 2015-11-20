@@ -135,20 +135,20 @@
 						<div class="label_label_sentiment">
 							<div class="label_radioWrapper">
 								<div class="label_radio_itemWrapper">
-									<input type="radio" class="semRadio" name="semSelect" value="0" id="semRadio1">
+									<input type="radio" class="semRadio" name="semSelect" value="1" id="semRadio1">
 									<div class="label_radio_font">好评</div>
 								</div>
 								
 								<div class="label_radio_itemWrapper">
-									<input type="radio" class="semRadio" name="semSelect" value="1" id="semRadio2">
+									<input type="radio" class="semRadio" name="semSelect" value="2" id="semRadio2">
 									<div class="label_radio_font">中评</div>
 								</div>
 								<div class="label_radio_itemWrapper">
-									<input type="radio" class="semRadio" name="semSelect" value="2" id="semRadio3">
+									<input type="radio" class="semRadio" name="semSelect" value="3" id="semRadio3">
 									<div class="label_radio_font">差评</div>
 								</div>
 								<div class="label_radio_itemWrapper">
-									<input type="radio" class="semRadio" name="semSelect" value="3" id="semRadio4">
+									<input type="radio" class="semRadio" name="semSelect" value="4" id="semRadio4">
 									<div class="label_radio_font">矛盾</div>
 								</div>
 							</div>

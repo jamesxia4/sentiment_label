@@ -2,12 +2,12 @@
  * 
  */
 testData={
-		"1":["现在活跃人数确实少了1","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区1","画面","百度贴吧","http://www.baidu.com/","0","-1"],
-		"2":["现在活跃人数确实少了2","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区2","画面","百度贴吧","http://www.google.com.sg/","-3","-1"],
-		"3":["现在活跃人数确实少了3","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区3","画面","百度贴吧","http://www.sina.com.cn/","1","-1"],
-		"4":["现在活跃人数确实少了4","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区4","画面","百度贴吧","http://www.bilibili.com/","-3","-1"],
-		"5":["现在活跃人数确实少了5","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区5","画面","百度贴吧","http://www.acfun.tv/","3","-1"],
-		"6":["现在活跃人数确实少了6","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区6","画面","百度贴吧","http://news.163.com/","2","-1"]
+		"1":["现在活跃人数确实少了1","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区1","画面","百度贴吧","http://www.baidu.com/","1","1"],
+		"2":["现在活跃人数确实少了2","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区2","画面","百度贴吧","http://www.google.com.sg/","0","0"],
+		"3":["现在活跃人数确实少了3","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区3","画面","百度贴吧","http://www.sina.com.cn/","2","1"],
+		"4":["现在活跃人数确实少了4","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区4","画面","百度贴吧","http://www.bilibili.com/","0","0"],
+		"5":["现在活跃人数确实少了5","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区5","画面","百度贴吧","http://www.acfun.tv/","4","1"],
+		"6":["现在活跃人数确实少了6","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区6","画面","百度贴吧","http://news.163.com/","3","0"]
 };
 
 sentimentLabel=[];
@@ -55,13 +55,11 @@ function renderCardText(data,semLabel,card1,card2,card3){
 	$("#label_card3").attr("dataid",card3.toString());
 	
 	var tempArr=[card1,card2,card3];
-	console.log(card1,card2,card3);
-	console.log(tempArr);
-	for( idx in tempArr){
-		cardId="#label_card"+tempArr[idx].toString();
+	for(idx in tempArr){
+		var cardId="#label_card"+(parseInt(idx)+1).toString();
 		var label=semLabel[tempArr[idx]-1];
-		console.log(idx,label);
-		if(label!=-3){
+		console.log(cardId,label);
+		if(label!=0){
 			$(cardId).addClass("Done");
 			$(cardId).find(".label_card_comment").removeClass("doing").removeClass("todo");
 			$(cardId).find(".label_card_source").removeClass("doing").removeClass("todo");
@@ -141,7 +139,6 @@ function tailAppendSingleCard(jsonData,idx,label){
 	$("#label_card1").remove();
 	$("#label_card2").attr("id","label_card1");
 	$("#label_card3").attr("id","label_card2");
-		
 	$("<div class=\"label_labelCard ToDo\" id=\"label_card3\"></div>").appendTo($(".label_labelCard_wrapper"));
 	$(newCard).appendTo($("#label_card3"));
 	$("#label_card3").attr("dataid",idx.toString());
@@ -155,8 +152,7 @@ function renderSingleCard(jsonData,idx,semLabel,cardId){
 	$(cardId).find(".label_card_source").removeClass("todo").removeClass("doing").text(cardSource);
 	$(cardId).removeClass("ToDo").removeClass("Doing").removeClass("Done");
 	var label=semLabel[idx-1];
-	console.log(label);
-	if(label!=-3){
+	if(label!=0){
 		$(cardId).addClass("Done");
 	}else{
 		$(cardId).addClass("ToDo");
@@ -189,6 +185,7 @@ function renderExtraInfo(jsonData,idx1,idx2,idx3){
 function bindingCardEvents(semLabel,irrLabel){
 	$(".label_labelCard").click(function(e){
 		e.preventDefault();
+		console.log(semLabel,irrLabel);
 		if(!$(this).hasClass("Doing")){
 			renderProgressBar(parseInt($(this).attr("dataid")));
 			$(this).removeClass("ToDo").removeClass("Done").addClass("Doing");
@@ -209,17 +206,21 @@ function bindingCardEvents(semLabel,irrLabel){
 					}
 				}
 			});
-			//TODO Load irr
 			var idx=parseInt($(this).attr("dataid"));
-			console.log(idx);
 			var semVal=semLabel[idx-1];
 			var irrVal=irrLabel[idx-1];
 			
-			if(semVal!=-3){
-				var radioId="#semRadio"+(semVal+1).toString();
+			if(semVal!=0){
+				var radioId="#semRadio"+(semVal).toString();
 				$(radioId).prop('checked',true);
 			}else{
 				$("input[name='semSelect']:checked").prop('checked',false);
+			}
+			
+			if(irrVal==1){
+				$(".semCheck").prop('checked',true);
+			}else{
+				$(".semCheck").prop('checked',false);
 			}
 		}
 	});
@@ -256,30 +257,41 @@ function listenEvents(jsonData,semLabel,irrLabel){
 		//点击情感选项时保存结果
 		$(".semRadio").click(function(e){
 			var semSelectOption=parseInt($(this).val());
-			var irrSelectOption=parseInt($(".semCheck").val());
+			var irrSelectOption=$(".semCheck").prop("checked");
 			var dataid=parseInt($(".label_labelCard.Doing").attr("dataid"));
 			var cardId=$(".label_labelCard.Doing").attr("id");
-			semLabel[dataid-1]=semSelectOption;
-			irrLabel[dataid-1]=irrSelectOption;
+			if(!isNaN(semSelectOption)){
+				semLabel[dataid-1]=semSelectOption;
+			}else{
+				semLabel[dataid-1]=0;
+			}
 			
-			if(semSelectOption==0){
-				$("#semRadio1").prop('checked',true);
+			if(irrSelectOption==true){
+				irrLabel[dataid-1]=1;
+			}else{
+				irrLabel[dataid-1]=0;
 			}
-			else if(semSelectOption==1){
-				$("#semRadio2").prop('checked',true);
-			}
-			else if(semSelectOption==2){
-				$("#semRadio3").prop('checked',true);
-			}
-			else if(semSelectOption==3){
-				$("#semRadio4").prop('checked',true);
-			}
-			else{
-				$("input[name='semSelect']:checked").prop('checked',false);
-			}
+/*			console.log(sentimentLabel,irreleventLabel);*/
 		});
 		
-
+		$(".semCheck").click(function(e){
+			var semSelectOption=parseInt($('input:radio:checked').val());
+			var irrSelectOption=$(".semCheck").prop("checked");
+			var dataid=parseInt($(".label_labelCard.Doing").attr("dataid"));
+			var cardId=$(".label_labelCard.Doing").attr("id");
+			if(!isNaN(semSelectOption)){
+				semLabel[dataid-1]=semSelectOption;
+			}else{
+				semLabel[dataid-1]=0;
+			}
+			
+			if(irrSelectOption==true){
+				irrLabel[dataid-1]=1;
+			}else{
+				irrLabel[dataid-1]=0;
+			}
+/*			console.log(sentimentLabel,irreleventLabel);*/
+		});
 	});
 }
 
