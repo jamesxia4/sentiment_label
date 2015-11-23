@@ -4,7 +4,7 @@
 testData={
 		"1":["现在活跃人数确实少了1","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区1","画面","百度贴吧","http://www.baidu.com/","1","1"],
 		"2":["现在活跃人数确实少了2","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区2","画面","百度贴吧","http://www.google.com.sg/","0","0"],
-		"3":["现在活跃人数确实少了3","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区3","画面","百度贴吧","http://www.sina.com.cn/","2","1"],
+		"3":["现在活跃人数确实少了3现在活跃人数确实少了3现在活跃人数确实少了3现在活跃人数确实少了3现在活跃人数确实少了3","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3","画面","百度贴吧","http://www.sina.com.cn/","2","1"],
 		"4":["现在活跃人数确实少了4","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区4","画面","百度贴吧","http://www.bilibili.com/","0","0"],
 		"5":["现在活跃人数确实少了5","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区5","画面","百度贴吧","http://www.acfun.tv/","4","1"],
 		"6":["现在活跃人数确实少了6","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区6","画面","百度贴吧","http://news.163.com/","3","0"]
@@ -33,7 +33,6 @@ function getUrlParam(name){
 	if (r!=null) return unescape(r[2]); return null; //返回参数值
 } 
 
-//TODO 渲染的时候要读取暂存结果添加小勾
 function renderCardText(data,semLabel,card1,card2,card3){
 	
 	var cardComment1=data[card1.toString()][0];
@@ -61,12 +60,14 @@ function renderCardText(data,semLabel,card1,card2,card3){
 		console.log(cardId,label);
 		if(label!=0){
 			$(cardId).addClass("Done");
-			$(cardId).find(".label_card_comment").removeClass("doing").removeClass("todo");
-			$(cardId).find(".label_card_source").removeClass("doing").removeClass("todo");
+			$(cardId).find(".label_labelItem_comment").css("width","260px");
+			$(cardId).find(".label_labelItem_tick").css("display","inline-block");
+			$(cardId).find(".label_card_comment").removeClass("doing").removeClass("todo").addClass("done");
+			$(cardId).find(".label_card_source").removeClass("doing").removeClass("todo").addClass("done");
 		}else{
 			$(cardId).addClass("ToDo");
-			$(cardId).find(".label_card_comment").addClass("todo");
-			$(cardId).find(".label_card_source").addClass("todo");
+			$(cardId).find(".label_card_comment").removeClass("doing").removeClass("done").addClass("todo");
+			$(cardId).find(".label_card_source").removeClass("doing").removeClass("done").addClass("todo");
 		}
 	}
 }
@@ -120,7 +121,6 @@ function renderPage(jsonData,semLabel,irrLabel,idx1,idx2,idx3){
 	renderCardText(jsonData,semLabel,idx1,idx2,idx3);
 	renderExtraInfo(jsonData,idx1,idx2,idx3);
 	bindingCardEvents(semLabel,irrLabel);
-	addCardTick();
 }
 
 
@@ -145,16 +145,21 @@ function tailAppendSingleCard(jsonData,idx,label){
 	$("#label_card3").attr("dataid",idx.toString());
 }
 
-//TODO 添加小勾
 function renderSingleCard(jsonData,idx,semLabel,cardId){
 	var cardComment=jsonData[idx.toString()][0];
 	var cardSource=jsonData[idx.toString()][1];
-	$(cardId).find(".label_card_comment").removeClass("todo").removeClass("doing").text(cardComment);
-	$(cardId).find(".label_card_source").removeClass("todo").removeClass("doing").text(cardSource);
+	$(cardId).find(".label_card_comment").removeClass("todo").removeClass("doing").removeClass("done").text(cardComment);
+	$(cardId).find(".label_card_source").removeClass("todo").removeClass("doing").removeClass("done").text(cardSource);
+	$(cardId).find(".label_labelItem_comment").removeAttr("style");
+	$(cardId).find(".label_labelItem_tick").css("display","none");
 	$(cardId).removeClass("ToDo").removeClass("Doing").removeClass("Done");
 	var label=semLabel[idx-1];
 	if(label!=0){
 		$(cardId).addClass("Done");
+		$(cardId).find(".label_card_comment").addClass("done");
+		$(cardId).find(".label_card_source").addClass("done");
+		$(cardId).find(".label_labelItem_comment").css("width","260px");
+		$(cardId).find(".label_labelItem_tick").css("display","inline-block");
 	}else{
 		$(cardId).addClass("ToDo");
 		$(cardId).find(".label_card_comment").addClass("todo");
@@ -181,18 +186,8 @@ function renderExtraInfo(jsonData,idx1,idx2,idx3){
 	})
 } 
 
-function addCardTick(){
-	$(".label_labelCard").each(function(i,e){
-		if($(this).hasClass("Done")){
-			$(this).find(".label_labelItem_comment").css("width","260px");
-			$(this).find(".label_card_comment").css("width","260px");
-			$(this).find(".label_labelItem_tick").css("display","inline-block");
-		}
-	});
-}
 
 //TODO 自动翻页(点到最后一个)
-//TODO 给已完成的添加小勾
 function bindingCardEvents(semLabel,irrLabel){
 	$(".label_labelCard").click(function(e){
 		e.preventDefault();
@@ -200,17 +195,19 @@ function bindingCardEvents(semLabel,irrLabel){
 		if(!$(this).hasClass("Doing")){
 			renderProgressBar(parseInt($(this).attr("dataid")));
 			$(this).removeClass("ToDo").removeClass("Done").addClass("Doing");
-			$(this).find(".label_card_source").removeClass("todo").addClass("doing");
-			$(this).find(".label_card_comment").removeClass("todo").addClass("doing");
+			$(this).find(".label_card_source").removeClass("done").removeClass("todo").addClass("doing");
+			$(this).find(".label_card_comment").removeClass("done").removeClass("todo").addClass("doing");
+			$(this).find(".label_labelItem_comment").removeAttr("style");
 			$(this).find(".label_labelItem_tick").css("display","none");
 			$(this).siblings(".label_labelCard").each(function(i,e){
 				if($(e).hasClass("Doing")){
 					if($("input[name='semSelect']:checked").val()!=undefined){
 						$(e).removeClass("Doing");
 						$(e).addClass("Done");
-						$(e).find(".label_card_source.doing").removeClass("doing");
-						$(e).find(".label_card_comment.doing").removeClass("doing");
-						addCardTick();
+						$(e).find(".label_labelItem_comment").css("width","260px");
+						$(e).find(".label_labelItem_tick").css("display","inline-block");
+						$(e).find(".label_card_source.doing").removeClass("doing").addClass("done");
+						$(e).find(".label_card_comment.doing").removeClass("doing").addClass("done");
 					}else{
 						$(e).removeClass("Doing");
 						$(e).addClass("ToDo");
@@ -271,40 +268,51 @@ function listenEvents(jsonData,semLabel,irrLabel){
 		$(".semRadio").click(function(e){
 			var semSelectOption=parseInt($(this).val());
 			var irrSelectOption=$(".semCheck").prop("checked");
-			var dataid=parseInt($(".label_labelCard.Doing").attr("dataid"));
-			var cardId=$(".label_labelCard.Doing").attr("id");
-			if(!isNaN(semSelectOption)){
-				semLabel[dataid-1]=semSelectOption;
+			if($(".label_labelCard.Doing").length>0){
+				var dataid=parseInt($(".label_labelCard.Doing").attr("dataid"));
+				var cardId=$(".label_labelCard.Doing").attr("id");
+				if(!isNaN(semSelectOption)){
+					semLabel[dataid-1]=semSelectOption;
+				}else{
+					semLabel[dataid-1]=0;
+				}
+				
+				if(irrSelectOption==true){
+					irrLabel[dataid-1]=1;
+				}else{
+					irrLabel[dataid-1]=0;
+				}
+	/*			console.log(sentimentLabel,irreleventLabel);*/
 			}else{
-				semLabel[dataid-1]=0;
+				alert("请先点选卡片");
+				$("input[name='semSelect']:checked").prop('checked',false);
+				$(".semCheck").prop('checked',false);
 			}
-			
-			if(irrSelectOption==true){
-				irrLabel[dataid-1]=1;
-			}else{
-				irrLabel[dataid-1]=0;
-			}
-/*			console.log(sentimentLabel,irreleventLabel);*/
-			
 		});
 		
 		$(".semCheck").click(function(e){
 			var semSelectOption=parseInt($('input:radio:checked').val());
 			var irrSelectOption=$(".semCheck").prop("checked");
-			var dataid=parseInt($(".label_labelCard.Doing").attr("dataid"));
-			var cardId=$(".label_labelCard.Doing").attr("id");
-			if(!isNaN(semSelectOption)){
-				semLabel[dataid-1]=semSelectOption;
+			if($(".label_labelCard.Doing").length>0){
+				var dataid=parseInt($(".label_labelCard.Doing").attr("dataid"));
+				var cardId=$(".label_labelCard.Doing").attr("id");
+				if(!isNaN(semSelectOption)){
+					semLabel[dataid-1]=semSelectOption;
+				}else{
+					semLabel[dataid-1]=0;
+				}
+				
+				if(irrSelectOption==true){
+					irrLabel[dataid-1]=1;
+				}else{
+					irrLabel[dataid-1]=0;
+				}
+	/*			console.log(sentimentLabel,irreleventLabel);*/
 			}else{
-				semLabel[dataid-1]=0;
+				alert("请先点选卡片");
+				$("input[name='semSelect']:checked").prop('checked',false);
+				$(".semCheck").prop('checked',false);
 			}
-			
-			if(irrSelectOption==true){
-				irrLabel[dataid-1]=1;
-			}else{
-				irrLabel[dataid-1]=0;
-			}
-/*			console.log(sentimentLabel,irreleventLabel);*/
 		});
 	});
 }

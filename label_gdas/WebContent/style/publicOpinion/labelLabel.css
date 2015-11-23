@@ -295,7 +295,7 @@ div{
 #label_main_content .label_labelItem_source{
 	width:300px;
 	height:200px;
-	padding:5px 10px 0px 10px;
+	padding:0px 10px 0px 10px;
 }
 
 #label_main_content .label_labelItem_spliter{
@@ -303,7 +303,7 @@ div{
 	width:307px;
 	font-size:12px;
 	color:#292d3e;
-	margin:3px 3px 3px 7px;
+	margin:3px 3px 0px 7px;
 }
 
 #label_main_content .label_spliter_hyphen{
@@ -320,32 +320,41 @@ div{
 	margin-right:33px;
 }
 
-#label_main_content .label_card_source{
-	overflow: auto;
+::-webkit-scrollbar-button{
+	display:none;
+}
+
+::-webkit-scrollbar-thumb{
+	background:#dfdfdf;
+	border-radius:4px;
+}
+#label_main_content .label_card_source.done{
+	overflow-x:hidden;
+	overflow-y:scroll;
     resize: none;
     outline: none;
     font-size: 12px;
     width: 296px;
-    height: 218px;
+    height: 210px;
     border: 0px solid #ffffff;
     background-color: #dfdfdf;
     padding:0px;
     color:#3d4256;
-    line-height:24px;
+    line-height:20px;
 }
 
-#label_main_content .label_card_comment{
-	overflow: auto;
+#label_main_content .label_card_comment.done{
+	overflow: hidden;
     resize: none;
     outline: none;
     font-size: 14px;
-    width: 296px;
+    width: 260px;
     height: 50px;
     border: 0px solid #ffffff;
     background-color: #dfdfdf;
     padding:0px;
     color:#3d4256;
-    line-height:24px;
+    line-height:40px;
 }
 
 #label_main_content .label_labelItem_tick{
@@ -353,26 +362,28 @@ div{
 	width:25px;
 	height:25px;
 	display:none;
-	margin-top:10px;
+	margin-top:15px;
 	vertical-align:top;
 }
 
 #label_main_content .label_card_source.doing{
-	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: scroll;
     resize: none;
     outline: none;
     font-size: 12px;
     width: 296px;
-    height: 218px;
+    height: 210px;
     border: 0px solid #ffffff;
     background-color: #f2f2f2;
     padding:0px;
     color:#3d4256;
-    line-height:24px;
+    line-height:20px;
 }
 
 #label_main_content .label_card_comment.doing{
-	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: scroll;
     resize: none;
     outline: none;
     font-size: 14px;
@@ -386,22 +397,24 @@ div{
 }
 
 #label_main_content .label_card_source.todo{
-	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: scroll;
     resize: none;
     outline: none;
     font-size: 12px;
     width: 296px;
-    height: 218px;
+    height: 210px;
     border: 0px solid #ffffff;
     background-color: #f2f2f2;
     padding:0px;
     color:#3d4256;
-    line-height:24px;
+    line-height:20px;
     
 }
 
 #label_main_content .label_card_comment.todo{
-	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: scroll;
     resize: none;
     outline: none;
     font-size: 14px;
@@ -419,6 +432,7 @@ div{
 	width:300px;
 	padding-left:10px;
 	padding-right:10px;
+	padding-top:5px;
 }
 
 
