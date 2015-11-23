@@ -1,5 +1,20 @@
 @CHARSET "UTF-8";
 
+
+::-webkit-scrollbar {width:6px; max-height: 60px;}/*滚动条大小*/
+::-webkit-scrollbar-thumb {background-clip: padding-box;
+background-color: #EAEAEA; min-height: 28px; border-radius:
+6px;}/*滚动条默认显示样式*/
+::-webkit-scrollbar-thumb:hover {background-color:
+#B5B5B5; }/*鼠标移动到滚动条显示样式*/
+::-webkit-scrollbar-thumb:active {background-color:
+#B5B5B5; }/*鼠标点击滚动条显示样式*/
+::-webkit-scrollbar-track:vertical,::-webkit-scrollbar-track:horizontal
+{background-color: transparent;}/*滚动条滚动轨迹横向纵向背景*/
+::-webkit-scrollbar-track:vertical,::-webkit-scrollbar-track:horizontal,::-webkit-scrollbar-thumb:vertical,::-webkit-scrollbar-thumb:horizontal
+{border-width: 0; border-style: solid; border-color:
+transparent;}
+
 body {
 	font-family:Lato,"微软雅黑",arial, sans-serif;
 	margin: 0;
@@ -320,21 +335,13 @@ div{
 	margin-right:33px;
 }
 
-::-webkit-scrollbar-button{
-	display:none;
-}
 
-::-webkit-scrollbar-thumb{
-	background:#dfdfdf;
-	border-radius:4px;
-}
 #label_main_content .label_card_source.done{
-	overflow-x:hidden;
-	overflow-y:scroll;
+	overflow:hidden;
     resize: none;
     outline: none;
     font-size: 12px;
-    width: 296px;
+    width: 300px;
     height: 210px;
     border: 0px solid #ffffff;
     background-color: #dfdfdf;
@@ -347,7 +354,7 @@ div{
 	overflow: hidden;
     resize: none;
     outline: none;
-    font-size: 14px;
+    font-size: 13.5px;
     width: 260px;
     height: 50px;
     border: 0px solid #ffffff;
@@ -372,7 +379,7 @@ div{
     resize: none;
     outline: none;
     font-size: 12px;
-    width: 296px;
+    width: 300px;
     height: 210px;
     border: 0px solid #ffffff;
     background-color: #f2f2f2;
@@ -386,8 +393,8 @@ div{
 	overflow-y: scroll;
     resize: none;
     outline: none;
-    font-size: 14px;
-    width: 296px;
+    font-size: 13.5px;
+    width: 300px;
     height: 50px;
     border: 0px solid #ffffff;
     background-color: #f2f2f2;
@@ -402,7 +409,7 @@ div{
     resize: none;
     outline: none;
     font-size: 12px;
-    width: 296px;
+    width: 300px;
     height: 210px;
     border: 0px solid #ffffff;
     background-color: #f2f2f2;
@@ -417,8 +424,8 @@ div{
 	overflow-y: scroll;
     resize: none;
     outline: none;
-    font-size: 14px;
-    width: 296px;
+    font-size: 13.5px;
+    width: 300px;
     height: 50px;
     border: 0px solid #ffffff;
     background-color: #f2f2f2;
