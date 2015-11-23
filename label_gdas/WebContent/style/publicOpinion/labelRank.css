@@ -1,1 +1,98 @@
 @CHARSET "UTF-8";
+
+body {
+	font-family:Lato,"微软雅黑",arial, sans-serif;
+	margin: 0;
+    padding: 0;
+}
+
+div{
+	display:block;
+}
+
+#label_main_content{
+	width: 1220px;
+    max-width: 1220px;
+	margin-left:215px;
+	border-top:1px;
+	border-left:1px;
+}
+
+#label_main_content .label_rank_container{
+	padding-bottom:20px;
+}
+
+#label_main_content .label_rank_header{
+	padding:70px 30px 20px 60px;
+}
+
+#label_main_content .label_rank_header_logo{
+	padding:5px 5px 0px 5px;
+	float:left;
+}
+
+#label_main_content .label_rank_header_text{
+	font-size:24px;
+	color:#2aceae;
+	padding-left:5px;
+}
+
+#label_main_content .label_rank_header_spliter{
+	padding-top:5px;
+	border-bottom:1px solid #b7b7b7;
+	width:100%;
+}
+
+
+#label_main_content .label_rank_grid{
+	padding:5px 30px 20px 70px;
+	font-size:14px;
+}
+
+#label_main_content .label_taskgroup_wrapper{
+	padding:6px 0px 6px 0px;
+}
+
+
+#label_main_content .label_taskgroup_item{
+	text-align:center;
+	font-size:14px;
+	color:#292d3e;
+	width:108px;
+	height:30px;
+	
+	border:1px solid #ebebeb;
+	padding:10px 0px 0px 0px;
+	margin-left:5px;
+	border-radius: 5px;
+	display:inline-block;
+}
+
+#label_main_content .label_taskgroup_item:hover{
+	text-align:center;
+	font-size:14px;
+	color:#2aceae;
+	width:108px;
+	height:30px;
+	
+	border:1px solid #ebebeb;
+	padding:10px 0px 0px 0px;
+	margin-left:5px;
+	border-radius: 5px;
+	display:inline-block;
+}
+
+#label_main_content .label_taskgroup_item.taskgroup_item_selected{
+	text-align:center;
+	font-size:14px;
+	background-color:#2aceae;
+	color:#ffffff;
+	width:108px;
+	height:30px;
+	
+	border:1px solid #2aceae;
+	padding:10px 0px 0px 0px;
+	margin-left:5px;
+	border-radius: 5px;
+	display:inline-block;
+}
