@@ -96,3 +96,28 @@ div{
 	border-radius: 5px;
 	display:inline-block;
 }
+
+#label_main_content .label_rankTableWrapper{
+	padding:0px 100px 20px 70px;
+	width:1010px;
+	height:465px;
+}
+
+#label_main_content .label_rank_subText{
+	padding:35px 30px 20px 5px;
+	height:80px;
+}
+
+#label_main_content .label_rank_subHeader{
+	font-size:16px;
+	line-height:18px;
+	color:#666666;
+	font-weight:bold;
+}
+
+#label_main_content ul{
+	margin-top:20px;
+	list-style:none;
+	padding:0px;
+	color:#666666;
+}
