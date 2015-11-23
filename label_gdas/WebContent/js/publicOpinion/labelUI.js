@@ -314,8 +314,6 @@ function listenEvents(jsonData,semLabel,irrLabel){
 				$(".semCheck").prop('checked',false);
 			}
 		});
-		
-		
 	});
 }
 
