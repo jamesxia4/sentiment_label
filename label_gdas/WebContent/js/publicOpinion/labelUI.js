@@ -120,6 +120,7 @@ function renderPage(jsonData,semLabel,irrLabel,idx1,idx2,idx3){
 	renderCardText(jsonData,semLabel,idx1,idx2,idx3);
 	renderExtraInfo(jsonData,idx1,idx2,idx3);
 	bindingCardEvents(semLabel,irrLabel);
+	addCardTick();
 }
 
 
@@ -180,6 +181,16 @@ function renderExtraInfo(jsonData,idx1,idx2,idx3){
 	})
 } 
 
+function addCardTick(){
+	$(".label_labelCard").each(function(i,e){
+		if($(this).hasClass("Done")){
+			$(this).find(".label_labelItem_comment").css("width","260px");
+			$(this).find(".label_card_comment").css("width","260px");
+			$(this).find(".label_labelItem_tick").css("display","inline-block");
+		}
+	});
+}
+
 //TODO 自动翻页(点到最后一个)
 //TODO 给已完成的添加小勾
 function bindingCardEvents(semLabel,irrLabel){
@@ -191,6 +202,7 @@ function bindingCardEvents(semLabel,irrLabel){
 			$(this).removeClass("ToDo").removeClass("Done").addClass("Doing");
 			$(this).find(".label_card_source").removeClass("todo").addClass("doing");
 			$(this).find(".label_card_comment").removeClass("todo").addClass("doing");
+			$(this).find(".label_labelItem_tick").css("display","none");
 			$(this).siblings(".label_labelCard").each(function(i,e){
 				if($(e).hasClass("Doing")){
 					if($("input[name='semSelect']:checked").val()!=undefined){
@@ -198,6 +210,7 @@ function bindingCardEvents(semLabel,irrLabel){
 						$(e).addClass("Done");
 						$(e).find(".label_card_source.doing").removeClass("doing");
 						$(e).find(".label_card_comment.doing").removeClass("doing");
+						addCardTick();
 					}else{
 						$(e).removeClass("Doing");
 						$(e).addClass("ToDo");
@@ -272,6 +285,7 @@ function listenEvents(jsonData,semLabel,irrLabel){
 				irrLabel[dataid-1]=0;
 			}
 /*			console.log(sentimentLabel,irreleventLabel);*/
+			
 		});
 		
 		$(".semCheck").click(function(e){
@@ -298,4 +312,5 @@ function listenEvents(jsonData,semLabel,irrLabel){
 $(document).ready(function(){
 	renderPage(testData,sentimentLabel,irreleventLabel,indexCard1,indexCard2,indexCard3);
 	listenEvents(testData,sentimentLabel,irreleventLabel);
+	
 });
