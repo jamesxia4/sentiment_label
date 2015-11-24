@@ -256,6 +256,8 @@ div{
 }
 
 #label_main_content .label_userName{
+	color:#292d3e;
+	font-weight:bold;
 	display:inline-block;
 }
 
