@@ -248,10 +248,13 @@ div{
 }
 
 #label_main_content .label_rankNameWrapper{
+	height:28px;
 }
 
 #label_main_content .label_userLogo{
 	background:url('../../image/publicOpinion/user_logo.png') no-repeat center;
+	height:28px;
+	width:28px;
 	display:inline-block;
 }
 
@@ -259,6 +262,9 @@ div{
 	color:#292d3e;
 	font-weight:bold;
 	display:inline-block;
+	height:28px;
+	line-height:28px;
+	vertical-align:top;
 }
 
 #label_main_content .label_rankBonusWrapper{
@@ -266,11 +272,16 @@ div{
 
 #label_main_content .label_rankBonusLogo{
 	background:url('../../image/publicOpinion/bonus_logo.png') no-repeat center;
+	height:27px;
+	width:41px;
 	display:inline-block;
 }
 
 #label_main_content .label_rankBonusText{
 	display:inline-block;
+	height:27px;
+	vertical-align:top;
+	line-height:27px;
 }
 
 #label_main_content .label_myScoreBoard{
