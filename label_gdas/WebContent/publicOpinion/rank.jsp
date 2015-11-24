@@ -35,8 +35,132 @@
 			</div>
 			
 			<div class="label_rankTableWrapper">
-					<div class="label_rankTableLeft"></div>
-					<div class="label_rankTableRight"></div>
+					<div class="label_rankTableLeft">
+						<ul class="rankTab">
+							<li class="selected">总分</li>
+							<li >任务数</li>
+							<li >精准度</li>
+						</ul>
+						<div class="label_tableBox">
+							<table>
+								<tr>
+									<th class="table_item_th">排名</th>
+									<th class="table_item_th">名称</th>
+									<th class="table_item_th">精准度</th>
+									<th>趋势</th>
+								</tr>
+								<tr>
+									<td class="table_item_td">1</td>
+									<td class="table_item_td">hzzjj</td>
+									<td class="table_item_td">0.93</td>
+									<td>+</td>
+								</tr>
+								<tr>
+									<td class="table_item_td">2</td>
+									<td class="table_item_td">hzzjj</td>
+									<td class="table_item_td">0.93</td>
+									<td>+</td>
+								</tr>
+								<tr>
+									<td class="table_item_td">3</td>
+									<td class="table_item_td">hzzjj</td>
+									<td class="table_item_td">0.93</td>
+									<td>+</td>
+								</tr>
+								<tr>
+									<td class="table_item_td">4</td>
+									<td class="table_item_td">hzzjj</td>
+									<td class="table_item_td">0.93</td>
+									<td>+</td>
+								</tr>
+								<tr>
+									<td class="table_item_td">5</td>
+									<td class="table_item_td">hzzjj</td>
+									<td class="table_item_td">0.93</td>
+									<td>+</td>
+								</tr>
+								<tr>
+									<td class="table_item_td">6</td>
+									<td class="table_item_td">hzzjj</td>
+									<td class="table_item_td">0.93</td>
+									<td>+</td>
+								</tr>
+								<tr>
+									<td class="table_item_td">7</td>
+									<td class="table_item_td">hzzjj</td>
+									<td class="table_item_td">0.93</td>
+									<td>+</td>
+								</tr>
+								<tr>
+									<td class="table_item_td">8</td>
+									<td class="table_item_td">hzzjj</td>
+									<td class="table_item_td">0.93</td>
+									<td>+</td>
+								</tr>
+								<tr>
+									<td class="table_item_td">9</td>
+									<td class="table_item_td">hzzjj</td>
+									<td class="table_item_td">0.93</td>
+									<td>+</td>
+								</tr>
+								<tr>
+									<td class="table_item_td">10</td>
+									<td class="table_item_td">hzzjj</td>
+									<td class="table_item_td">0.93</td>
+									<td>+</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="label_rankTableRight">
+						<div class="label_nameRankBox">
+							<div class="label_rankNameWrapper">
+								<div class="label_userLogo"></div>
+								<div class="label_userName">hzzhangjingjing</div>
+							</div>
+							<div class="label_rankBonusWrapper">
+								<div class="label_rankBonusLogo"></div>
+								<div class="label_rankBonusText">5000</div>
+							</div>
+						</div>
+						<div class="label_myScoreBoard">
+							<table>
+								<tr>
+									<th>总分</th>
+									<th>任务数</th>
+									<th>平均精准度</th>
+								</tr>
+								<tr>
+									<td id="labelMyScore">2000</td>
+									<td id="labelMyTask">2000</td>
+									<td id="labelMyAvgPrecision">0.86</td>
+								</tr>
+							</table>
+						</div>
+						<div class="label_rankBanner">我的排名</div>
+						<div class="label_myRank">
+							<table>
+								<tr>
+									<td>总分排名</td>
+									<td>2</td>
+									<td>+</td>
+								</tr>
+								
+								<tr>
+									<td>任务数排名</td>
+									<td>1</td>
+									<td>-</td>
+								</tr>
+								
+								<tr>
+									<td>精准度排名</td>
+									<td>5</td>
+									<td>-</td>
+								</tr>
+							</table>
+						</div>
+						<div class="label_myRankIndicator">恭喜您！你的排名上升咯！继续加油！</div>
+					</div>
 			</div>
 			
 			<div class="label_rank_header">
@@ -60,7 +184,7 @@
 				<div class="label_rank_subText">
 					<div class="label_rank_subHeader">&nbsp;&nbsp;积分规则：</div>
 					<ul>
-						<li>（1）每个人物获得的积分：该任务标注数量乘以标注精准度;</br> 
+						<li>（1）每个人物获得的积分：该任务标注数量乘以标注精准度;<br/> 
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（精准度为每位用户的标注结果同济他两位用户的标注结果进行对比计算而得出）</li>
 						<li>（2）抽奖获得的积分：每完成3个任务，获得一次抽奖机会，可获得随机0～50积分</li>
 						<li>（3）总积分等于每个人物获得的积分相加再加上抽奖获得的积分</li>

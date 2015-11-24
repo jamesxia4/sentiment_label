@@ -45,7 +45,7 @@ div{
 
 
 #label_main_content .label_rank_grid{
-	padding:5px 30px 20px 70px;
+	padding:5px 30px 0px 70px;
 	font-size:14px;
 }
 
@@ -115,9 +115,176 @@ div{
 	font-weight:bold;
 }
 
-#label_main_content ul{
+#label_main_content .label_rank_subText ul{
 	margin-top:20px;
 	list-style:none;
 	padding:0px;
 	color:#666666;
+}
+
+#label_main_content .label_rankTableLeft{
+	position:relative;
+	min-height:465px;
+	width:700px;
+	display:inline-block;
+	margin-right:15px;
+}
+
+#label_main_content .label_rankTableLeft .rankTab{
+	list-style:none;
+	padding:0px;
+	color:#666666;
+	position:absolute;
+	top:-10px;
+	height:40px;
+	width:280px;
+	z-index:200;
+	right:2px;
+	margin:0px;
+}
+
+#label_main_content .label_rankTableLeft .selected {
+	padding:0px;
+	background-color:#ABE6E5;
+	text-align:center;
+	display:inline-block;
+	color:#292d3e;
+	width:71px;
+	height:40px;
+	font-size:14px;
+	line-height:36px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	border-top:2px solid #2CC1BB;
+	border-left:2px solid #2CC1BB;
+	border-right:2px solid #2CC1BB;
+	border-bottom:0px;
+}
+
+#label_main_content .label_rankTableLeft li{
+	padding:0px;
+	color:#666666;
+	display:inline-block;
+	width:75px;
+	height:40px;
+	background-color:#ABE6E5;
+	text-align:center;
+	font-size:14px;
+	line-height:40px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	margin-right:6px;
+	border-bottom:2px solid #2CC1BB;
+}
+
+#label_main_content .label_tableBox{
+	position:absolute;
+	height:418px;
+	top:30px;
+	border-radius:5px;
+	border:2px solid #2CC1BB;
+	padding-top:5px;
+	background-color:#D3F2F3;
+	z-index:100;
+}
+
+#label_main_content .label_rankTableLeft table{
+	border-spacing:0px;
+}
+
+#label_main_content .label_rankTableLeft th{
+	display:inline-block;
+	width:100px;
+	padding:0px;
+	background-color:#2CC1BB;
+	color:#ffffff;
+	height:30px;
+	font-size:14px;
+	line-height:30px;
+}
+
+#label_main_content .label_rankTableLeft td{
+	display:inline-block;
+	width:100px;
+	padding:0px;
+	text-align:center;
+	height:30px;
+	font-size:14px;
+	line-height:30px;
+	padding-top:5px;
+	color:#666666;
+}
+
+#label_main_content .label_rankTableLeft .table_item_th{
+	width:198px;
+	display:inline-block;
+	padding:0px;
+	height:30px;
+	font-size:14px;
+	line-height:30px;
+}
+
+#label_main_content .label_rankTableLeft .table_item_td{
+	width:198px;
+	display:inline-block;
+	padding:0px;
+	height:30px;
+	font-size:14px;
+	line-height:30px;
+	padding-top:5px;
+}
+
+#label_main_content .label_rankTableRight{
+	min-height:423px;
+	width:283px;
+	display:inline-block;
+	border:2px solid #2CC1BB;
+	border-radius:5px;
+	margin-bottom:8px;
+}
+
+#label_main_content .label_nameRankBox{
+	height:125px;
+}
+
+#label_main_content .label_rankNameWrapper{
+}
+
+#label_main_content .label_userLogo{
+	background:url('../../image/publicOpinion/user_logo.png') no-repeat center;
+	display:inline-block;
+}
+
+#label_main_content .label_userName{
+	display:inline-block;
+}
+
+#label_main_content .label_rankBonusWrapper{
+}
+
+#label_main_content .label_rankBonusLogo{
+	background:url('../../image/publicOpinion/bonus_logo.png') no-repeat center;
+	display:inline-block;
+}
+
+#label_main_content .label_rankBonusText{
+	display:inline-block;
+}
+
+#label_main_content .label_myScoreBoard{
+	height:70px;
+}
+
+#label_main_content .label_rankBanner{
+	height:25px;
+	text-align:center;
+	line-height:25px;
+}
+
+#label_main_content .label_myRank{
+	height:185px;
+}
+
+#label_main_content .label_myRankIndicator{
+	height:15px;
 }
