@@ -244,8 +244,12 @@ div{
 }
 
 #label_main_content .label_nameRankBox{
-	height:125px;
-}
+	text-align:center;
+	height:50px;
+	padding:35px 50px 35px 50px; 
+	border-bottom-image:url('../../image/publicOpinion/spliter_line.png');
+	/*-webkit-gradient(linear,left,right,from(#ffffff),color-stop(0.5,#2cbfbe),to(#ffffff))*/
+}	
 
 #label_main_content .label_rankNameWrapper{
 	height:28px;
