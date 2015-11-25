@@ -50,72 +50,73 @@
 									<th>趋势</th>
 								</tr>
 								<tr>
-									<td class="table_item_td">1</td>
-									<td class="table_item_td">hzzjj</td>
-									<td class="table_item_td">0.93</td>
-									<td>+</td>
+									<td class="table_item_td_rank">1</td>
+									<td class="table_item_td_name">hzzjj</td>
+									<td class="table_item_td_precision">0.93</td>
+									<td class="table_item_td_trend up"></td>
 								</tr>
 								<tr>
-									<td class="table_item_td">2</td>
-									<td class="table_item_td">hzzjj</td>
-									<td class="table_item_td">0.93</td>
-									<td>+</td>
+									<td class="table_item_td_rank">2</td>
+									<td class="table_item_td_name">hzzjj</td>
+									<td class="table_item_td_precision">0.93</td>
+									<td class="table_item_td_trend down"></td>
 								</tr>
 								<tr>
-									<td class="table_item_td">3</td>
-									<td class="table_item_td">hzzjj</td>
-									<td class="table_item_td">0.93</td>
-									<td>+</td>
+									<td class="table_item_td_rank">3</td>
+									<td class="table_item_td_name">hzzjj</td>
+									<td class="table_item_td_precision">0.93</td>
+									<td class="table_item_td_trend unchanged"></td>
 								</tr>
 								<tr>
-									<td class="table_item_td">4</td>
-									<td class="table_item_td">hzzjj</td>
-									<td class="table_item_td">0.93</td>
-									<td>+</td>
+									<td class="table_item_td_rank">4</td>
+									<td class="table_item_td_name">hzzjj</td>
+									<td class="table_item_td_precision">0.93</td>
+									<td class="table_item_td_trend"></td>
 								</tr>
 								<tr>
-									<td class="table_item_td">5</td>
-									<td class="table_item_td">hzzjj</td>
-									<td class="table_item_td">0.93</td>
-									<td>+</td>
+									<td class="table_item_td_rank">5</td>
+									<td class="table_item_td_name">hzzjj</td>
+									<td class="table_item_td_precision">0.93</td>
+									<td class="table_item_td_trend"></td>
 								</tr>
 								<tr>
-									<td class="table_item_td">6</td>
-									<td class="table_item_td">hzzjj</td>
-									<td class="table_item_td">0.93</td>
-									<td>+</td>
+									<td class="table_item_td_rank">6</td>
+									<td class="table_item_td_name">hzzjj</td>
+									<td class="table_item_td_precision">0.93</td>
+									<td class="table_item_td_trend"></td>
 								</tr>
 								<tr>
-									<td class="table_item_td">7</td>
-									<td class="table_item_td">hzzjj</td>
-									<td class="table_item_td">0.93</td>
-									<td>+</td>
+									<td class="table_item_td_rank">7</td>
+									<td class="table_item_td_name">hzzjj</td>
+									<td class="table_item_td_precision">0.93</td>
+									<td class="table_item_td_trend"></td>
 								</tr>
 								<tr>
-									<td class="table_item_td">8</td>
-									<td class="table_item_td">hzzjj</td>
-									<td class="table_item_td">0.93</td>
-									<td>+</td>
+									<td class="table_item_td_rank">8</td>
+									<td class="table_item_td_name">hzzjj</td>
+									<td class="table_item_td_precision">0.93</td>
+									<td class="table_item_td_trend"></td>
 								</tr>
 								<tr>
-									<td class="table_item_td">9</td>
-									<td class="table_item_td">hzzjj</td>
-									<td class="table_item_td">0.93</td>
-									<td>+</td>
+									<td class="table_item_td_rank">9</td>
+									<td class="table_item_td_name">hzzjj</td>
+									<td class="table_item_td_precision">0.93</td>
+									<td class="table_item_td_trend"></td>
 								</tr>
 								<tr>
-									<td class="table_item_td">10</td>
-									<td class="table_item_td">hzzjj</td>
-									<td class="table_item_td">0.93</td>
-									<td>+</td>
+									<td class="table_item_td_rank">10</td>
+									<td class="table_item_td_name">hzzjj</td>
+									<td class="table_item_td_precision">0.93</td>
+									<td class="table_item_td_trend"></td>
 								</tr>
 							</table>
+							<div class="label_rank_paginator">
+								<div class="label_rank_paginator_prev"></div>
+								<div class="label_rank_paginator_current">1/10</div>
+								<div class="label_rank_paginator_next"></div>
+							</div>
 						</div>
-						<div class="label_rank_paginator">
-							<div class="label_rank_paginator_prev"></div>
-							<div class="label_rank_paginator_current">1/10</div>
-							<div class="label_rank_paginator_next"></div>
-						</div>
+						
 					</div>
 					<div class="label_rankTableRight">
 						<div class="label_nameRankBox">

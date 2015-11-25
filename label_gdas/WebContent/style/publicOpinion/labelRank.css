@@ -145,13 +145,13 @@ div{
 
 #label_main_content .label_rankTableLeft .selected {
 	padding:0px;
-	background-color:#ABE6E5;
+	background-color:#D3F2F3;
 	text-align:center;
 	display:inline-block;
 	color:#292d3e;
 	width:71px;
 	height:40px;
-	font-size:14px;
+	font-size:14px;	
 	line-height:36px;
 	border-top-left-radius:5px;
 	border-top-right-radius:5px;
@@ -224,7 +224,27 @@ div{
 	line-height:30px;
 }
 
-#label_main_content .label_rankTableLeft .table_item_td{
+#label_main_content .label_rankTableLeft .table_item_td_rank{
+	width:198px;
+	display:inline-block;
+	padding:0px;
+	height:30px;
+	font-size:14px;
+	line-height:30px;
+	padding-top:5px;
+}
+
+#label_main_content .label_rankTableLeft .table_item_td_name{
+	width:198px;
+	display:inline-block;
+	padding:0px;
+	height:30px;
+	font-size:14px;
+	line-height:30px;
+	padding-top:5px;
+}
+
+#label_main_content .label_rankTableLeft .table_item_td_precision{
 	width:198px;
 	display:inline-block;
 	padding:0px;
@@ -367,4 +387,46 @@ div{
 	color:#2aceae;
 	text-align:center;
 	padding-top:30px;
+}
+
+#label_main_content .label_rank_paginator{
+	height:18px;
+	width:55px;
+	margin:15px auto;
+}
+
+#label_main_content .label_rank_paginator_prev{
+	background:url("../../image/publicOpinion/prev_page.png");
+	height:12px;
+	width:8px;
+	display:inline-block;
+}
+
+#label_main_content .label_rank_paginator_current{
+	height:14px;
+	font-size:12px;
+	line-height:14px;
+	color:#666666;
+	display:inline-block;
+	vertical-align:top;
+	padding-top:3px;
+}
+
+#label_main_content .label_rank_paginator_next{
+	background:url("../../image/publicOpinion/next_page.png");
+	height:12px;
+	width:8px;
+	display:inline-block;
+}
+
+#label_main_content .table_item_td_trend.up{
+	background:url();
+}
+
+#label_main_content .table_item_td_trend.down{
+	background:url();
+}
+
+#label_main_content .table_item_td_trend.unchanged{
+	
 }
