@@ -241,13 +241,16 @@ div{
 	border:2px solid #2CC1BB;
 	border-radius:5px;
 	margin-bottom:8px;
+	vertical-align:top;
+	margin-top:30px;
 }
 
 #label_main_content .label_nameRankBox{
 	text-align:center;
 	height:50px;
 	padding:35px 50px 35px 50px; 
-	border-bottom-image:url('../../image/publicOpinion/spliter_line.png');
+	border-bottom:1px;
+	border-image:url('../../image/publicOpinion/spliter_line.png') 0 0 1 0 stretch;
 	/*-webkit-gradient(linear,left,right,from(#ffffff),color-stop(0.5,#2cbfbe),to(#ffffff))*/
 }	
 
@@ -286,22 +289,82 @@ div{
 	height:27px;
 	vertical-align:top;
 	line-height:27px;
+	color:#666666;
+	font-size:16px;
 }
 
-#label_main_content .label_myScoreBoard{
-	height:70px;
+
+#label_main_content .label_scoreBoardTable{
+	height:45px;
+	margin:13px auto;
+	padding-left:5px;
+}
+
+#label_main_content .label_myScoreBoard th{
+	color:#666666;
+	font-size:12px;
+	font-weight:normal;
+	padding-left:25px;
+	padding-right:25px;
+}
+
+#label_main_content .label_myScoreBoard td{
+	color:#292d3e;
+	font-size:14px;
+	font-weight:bold;
+	text-align:center;
+
 }
 
 #label_main_content .label_rankBanner{
-	height:25px;
+	background:url("../../image/publicOpinion/small_highlight.png");
+	height:26px;
 	text-align:center;
-	line-height:25px;
+	line-height:26px;
+	color:#2cc1bb;
 }
 
 #label_main_content .label_myRank{
-	height:185px;
 }
 
+#label_main_content .label_myRank table{
+	margin-left:30px;
+	margin-top:25px;
+	margin-right:30px;
+	width:225px;
+}
+
+#label_main_content .label_myRank tr{
+	height:40px;
+}
+#label_main_content .rank_th{
+	font-size:14px;
+	color:#666666;
+	width:70px;
+	font-weight:bold;
+	margin-right:90px;
+}
+
+#label_main_content .rank_td{
+	font-size:14px;
+	color:#666666;
+	font-family:magento;
+	font-weight:bold;
+	width:30px;
+	margin-right:20px;
+}
+
+#label_main_content .rank_trend{
+	width:15px;
+	color:#2cc1bb;
+	font-size:18px;
+	font-weight:bold;
+}
 #label_main_content .label_myRankIndicator{
 	height:15px;
+	font-size:12px;
+	line-height:15px;
+	color:#2aceae;
+	text-align:center;
+	padding-top:30px;
 }

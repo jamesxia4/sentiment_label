@@ -111,6 +111,11 @@
 								</tr>
 							</table>
 						</div>
+						<div class="label_rank_paginator">
+							<div class="label_rank_paginator_prev"></div>
+							<div class="label_rank_paginator_current">1/10</div>
+							<div class="label_rank_paginator_next"></div>
+						</div>
 					</div>
 					<div class="label_rankTableRight">
 						<div class="label_nameRankBox">
@@ -124,38 +129,40 @@
 							</div>
 						</div>
 						<div class="label_myScoreBoard">
-							<table>
-								<tr>
-									<th>总分</th>
-									<th>任务数</th>
-									<th>平均精准度</th>
-								</tr>
-								<tr>
-									<td id="labelMyScore">2000</td>
-									<td id="labelMyTask">2000</td>
-									<td id="labelMyAvgPrecision">0.86</td>
-								</tr>
-							</table>
+							<div class="label_scoreBoardTable">
+								<table>
+									<tr>
+										<th>总分</th>
+										<th>任务数</th>
+										<th>平均精准度</th>
+									</tr>
+									<tr>
+										<td id="labelMyScore">2000</td>
+										<td id="labelMyTask">2000</td>
+										<td id="labelMyAvgPrecision">0.86</td>
+									</tr>
+								</table>
+							</div>
 						</div>
 						<div class="label_rankBanner">我的排名</div>
 						<div class="label_myRank">
 							<table>
 								<tr>
-									<td>总分排名</td>
-									<td>2</td>
-									<td>+</td>
+									<td class="rank_th">总分排名</td>
+									<td class="rank_td">2</td>
+									<td class="rank_trend">&#8595;</td>
 								</tr>
 								
 								<tr>
-									<td>任务数排名</td>
-									<td>1</td>
-									<td>-</td>
+									<td class="rank_th">任务数排名</td>
+									<td class="rank_td">1</td>
+									<td class="rank_trend">-</td>
 								</tr>
 								
 								<tr>
-									<td>精准度排名</td>
-									<td>5</td>
-									<td>-</td>
+									<td class="rank_th">精准度排名</td>
+									<td class="rank_td">5</td>
+									<td class="rank_trend">&#8593;</td>
 								</tr>
 							</table>
 						</div>
