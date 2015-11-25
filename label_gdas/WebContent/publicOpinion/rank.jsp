@@ -71,43 +71,43 @@
 									<td class="table_item_td_rank">4</td>
 									<td class="table_item_td_name">hzzjj</td>
 									<td class="table_item_td_precision">0.93</td>
-									<td class="table_item_td_trend"></td>
+									<td class="table_item_td_trend up"></td>
 								</tr>
 								<tr>
 									<td class="table_item_td_rank">5</td>
 									<td class="table_item_td_name">hzzjj</td>
 									<td class="table_item_td_precision">0.93</td>
-									<td class="table_item_td_trend"></td>
+									<td class="table_item_td_trend down"></td>
 								</tr>
 								<tr>
 									<td class="table_item_td_rank">6</td>
 									<td class="table_item_td_name">hzzjj</td>
 									<td class="table_item_td_precision">0.93</td>
-									<td class="table_item_td_trend"></td>
+									<td class="table_item_td_trend unchanged"></td>
 								</tr>
 								<tr>
 									<td class="table_item_td_rank">7</td>
 									<td class="table_item_td_name">hzzjj</td>
 									<td class="table_item_td_precision">0.93</td>
-									<td class="table_item_td_trend"></td>
+									<td class="table_item_td_trend up"></td>
 								</tr>
 								<tr>
 									<td class="table_item_td_rank">8</td>
 									<td class="table_item_td_name">hzzjj</td>
 									<td class="table_item_td_precision">0.93</td>
-									<td class="table_item_td_trend"></td>
+									<td class="table_item_td_trend down"></td>
 								</tr>
 								<tr>
 									<td class="table_item_td_rank">9</td>
 									<td class="table_item_td_name">hzzjj</td>
 									<td class="table_item_td_precision">0.93</td>
-									<td class="table_item_td_trend"></td>
+									<td class="table_item_td_trend unchanged"></td>
 								</tr>
 								<tr>
 									<td class="table_item_td_rank">10</td>
 									<td class="table_item_td_name">hzzjj</td>
 									<td class="table_item_td_precision">0.93</td>
-									<td class="table_item_td_trend"></td>
+									<td class="table_item_td_trend up"></td>
 								</tr>
 							</table>
 							<div class="label_rank_paginator">
@@ -151,19 +151,19 @@
 								<tr>
 									<td class="rank_th">总分排名</td>
 									<td class="rank_td">2</td>
-									<td class="rank_trend">&#8595;</td>
+									<td class="rank_trend up"></td>
 								</tr>
 								
 								<tr>
 									<td class="rank_th">任务数排名</td>
 									<td class="rank_td">1</td>
-									<td class="rank_trend">-</td>
+									<td class="rank_trend down"></td>
 								</tr>
 								
 								<tr>
 									<td class="rank_th">精准度排名</td>
 									<td class="rank_td">5</td>
-									<td class="rank_trend">&#8593;</td>
+									<td class="rank_trend unchanged"></td>
 								</tr>
 							</table>
 						</div>

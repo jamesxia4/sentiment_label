@@ -375,11 +375,24 @@ div{
 }
 
 #label_main_content .rank_trend{
-	width:15px;
-	color:#2cc1bb;
-	font-size:18px;
-	font-weight:bold;
+	width:17px;
 }
+
+#label_main_content .rank_trend.up{
+	padding-top:5px;
+	background:url("../../image/publicOpinion/trend_up.png") no-repeat center;
+}
+
+#label_main_content .rank_trend.down{
+	padding-top:5px;
+	background:url("../../image/publicOpinion/trend_down.png") no-repeat center;
+}
+
+#label_main_content .rank_trend.unchanged{
+	padding-top:5px;
+	background:url("../../image/publicOpinion/trend_unchanged.png") no-repeat center;
+}
+
 #label_main_content .label_myRankIndicator{
 	height:15px;
 	font-size:12px;
@@ -420,13 +433,16 @@ div{
 }
 
 #label_main_content .table_item_td_trend.up{
-	background:url();
+	padding-top:5px;
+	background:url("../../image/publicOpinion/trend_up.png") no-repeat center;
 }
 
 #label_main_content .table_item_td_trend.down{
-	background:url();
+	padding-top:5px;
+	background:url("../../image/publicOpinion/trend_down.png") no-repeat center;
 }
 
 #label_main_content .table_item_td_trend.unchanged{
-	
+	padding-top:5px;
+	background:url("../../image/publicOpinion/trend_unchanged.png") no-repeat center;
 }
