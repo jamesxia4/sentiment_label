@@ -202,7 +202,5 @@ $(document).ready(function(){
 	listenEvents();
 });
 
-/*//Entry
-reloadRank();*/
 
 
