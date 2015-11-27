@@ -42,73 +42,14 @@
 							<li >精准度</li>
 						</ul>
 						<div class="label_tableBox">
-							<table>
+							<table class="label_rankTable">
 								<tr>
 									<th class="table_item_th">排名</th>
 									<th class="table_item_th">名称</th>
 									<th class="table_item_th">精准度</th>
 									<th>趋势</th>
 								</tr>
-								<tr>
-									<td class="table_item_td_rank">1</td>
-									<td class="table_item_td_name">hzzjj</td>
-									<td class="table_item_td_precision">0.93</td>
-									<td class="table_item_td_trend up"></td>
-								</tr>
-								<tr>
-									<td class="table_item_td_rank">2</td>
-									<td class="table_item_td_name">hzzjj</td>
-									<td class="table_item_td_precision">0.93</td>
-									<td class="table_item_td_trend down"></td>
-								</tr>
-								<tr>
-									<td class="table_item_td_rank">3</td>
-									<td class="table_item_td_name">hzzjj</td>
-									<td class="table_item_td_precision">0.93</td>
-									<td class="table_item_td_trend unchanged"></td>
-								</tr>
-								<tr>
-									<td class="table_item_td_rank">4</td>
-									<td class="table_item_td_name">hzzjj</td>
-									<td class="table_item_td_precision">0.93</td>
-									<td class="table_item_td_trend up"></td>
-								</tr>
-								<tr>
-									<td class="table_item_td_rank">5</td>
-									<td class="table_item_td_name">hzzjj</td>
-									<td class="table_item_td_precision">0.93</td>
-									<td class="table_item_td_trend down"></td>
-								</tr>
-								<tr>
-									<td class="table_item_td_rank">6</td>
-									<td class="table_item_td_name">hzzjj</td>
-									<td class="table_item_td_precision">0.93</td>
-									<td class="table_item_td_trend unchanged"></td>
-								</tr>
-								<tr>
-									<td class="table_item_td_rank">7</td>
-									<td class="table_item_td_name">hzzjj</td>
-									<td class="table_item_td_precision">0.93</td>
-									<td class="table_item_td_trend up"></td>
-								</tr>
-								<tr>
-									<td class="table_item_td_rank">8</td>
-									<td class="table_item_td_name">hzzjj</td>
-									<td class="table_item_td_precision">0.93</td>
-									<td class="table_item_td_trend down"></td>
-								</tr>
-								<tr>
-									<td class="table_item_td_rank">9</td>
-									<td class="table_item_td_name">hzzjj</td>
-									<td class="table_item_td_precision">0.93</td>
-									<td class="table_item_td_trend unchanged"></td>
-								</tr>
-								<tr>
-									<td class="table_item_td_rank">10</td>
-									<td class="table_item_td_name">hzzjj</td>
-									<td class="table_item_td_precision">0.93</td>
-									<td class="table_item_td_trend up"></td>
-								</tr>
+								
 							</table>
 							<div class="label_rank_paginator">
 								<div class="label_rank_paginator_prev"></div>
