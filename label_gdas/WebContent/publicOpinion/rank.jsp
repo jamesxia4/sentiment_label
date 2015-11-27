@@ -43,7 +43,7 @@
 						</ul>
 						<div class="label_tableBox">
 							<table class="label_rankTable">
-								<tr>
+								<tr class="label_rankTableHeader">
 									<th class="table_item_th">排名</th>
 									<th class="table_item_th">名称</th>
 									<th class="table_item_th">精准度</th>
@@ -53,7 +53,7 @@
 							</table>
 							<div class="label_rank_paginator">
 								<div class="label_rank_paginator_prev"></div>
-								<div class="label_rank_paginator_current">1/10</div>
+								<div class="label_rank_paginator_current"></div>
 								<div class="label_rank_paginator_next"></div>
 							</div>
 						</div>

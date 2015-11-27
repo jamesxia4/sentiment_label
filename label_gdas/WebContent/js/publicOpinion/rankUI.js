@@ -29,11 +29,11 @@ var testData={
 		"23":["23","hzzhangjingjing","0.93","-1"],
 		"24":["24","hzzhangjingjing","0.93","-1"],
 		"25":["25","hzzhangjingjing","0.93","-1"],
-}
+} 
 
 var testData1={}
 
-pageNum=1;
+currentPageNum=1;
 
 //用来获取页面url参数
 function getUrlParam(name)
@@ -95,6 +95,11 @@ function renderRankTable(jsonData,pageNum){
 	var totalPages=getPages(jsonData);
 	var lastPageItems=getLastPageOffset(jsonData);
 	
+	var tableHeader=$(".label_rankTableHeader").html();
+	$(".label_rankTable").empty();
+	$("<tr class=\"label_rankTableHeader\"></tr>").appendTo($(".label_rankTable"));
+	$(tableHeader).appendTo($(".label_rankTableHeader"));
+	
 	//渲染最后一页
 	if(pageNum==totalPages){
 		var startIndex=(totalPages-1)*10+1;
@@ -141,6 +146,32 @@ function renderRankTable(jsonData,pageNum){
 	}
 }
 
+function renderPaginator(jsonData,currentPage){
+	var totalPages=getPages(jsonData);
+	var textToOutput=currentPage.toString()+"/"+totalPages.toString();
+	$(".label_rank_paginator_current").text(textToOutput);
+}
+
+function paginator(jsonData){
+	var numOfPages=getPages(jsonData);
+	$(document).ready(function(){
+		$(".label_rank_paginator_prev").click(function(e){
+			if(currentPageNum>1){
+				currentPageNum--;
+				renderRankTable(testData,currentPageNum);
+				renderPaginator(testData,currentPageNum);
+			}
+		});
+		
+		$(".label_rank_paginator_next").click(function(e){
+			if(currentPageNum<numOfPages){
+				currentPageNum++;
+				renderRankTable(testData,currentPageNum);
+				renderPaginator(testData,currentPageNum);
+			}
+		});
+	});
+}
 
 //渲染页面,添加特效
 function addGadgets(){
@@ -160,9 +191,15 @@ function addGadgets(){
 	});
 }
 
+function listenEvents(){
+	paginator(testData);
+}
+
 $(document).ready(function(){
 	addGadgets();
-	renderRankTable(testData,3);
+	renderRankTable(testData,currentPageNum);
+	renderPaginator(testData,currentPageNum);
+	listenEvents();
 });
 
 /*//Entry
