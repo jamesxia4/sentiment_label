@@ -37,9 +37,9 @@
 			<div class="label_rankTableWrapper">
 					<div class="label_rankTableLeft">
 						<ul class="rankTab">
-							<li class="selected">总分</li>
-							<li >任务数</li>
-							<li >精准度</li>
+							<li class="selected" id="#tabSelect1">总分</li>
+							<li id="#tabSelect2">任务数</li>
+							<li id="#tabSelect3">精准度</li>
 						</ul>
 						<div class="label_tableBox">
 							<table class="label_rankTable">
