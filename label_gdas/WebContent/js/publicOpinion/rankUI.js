@@ -172,7 +172,7 @@ function renderRankTable(jsonData,pageNum){
 			}else{
 				itemTrendToRender="<td class=\"table_item_td_trend up\"></td>";
 			}
-			$("<tr></tr>").appendTo($(".label_rankTable")).attr("id","rankTable"+i.toString());
+			$("<tr class=\"tr_selected\"></tr>").appendTo($(".label_rankTable")).attr("id","rankTable"+i.toString());
 			$("<td class=\"table_item_td_rank\"></td>").appendTo($("#rankTable"+i.toString())).text(itemRank);
 			$("<td class=\"table_item_td_name\"></td>").appendTo($("#rankTable"+i.toString())).text(itemUsername);
 			$("<td class=\"table_item_td_precision\"></td>").appendTo($("#rankTable"+i.toString())).text(itemPrecision);
@@ -193,7 +193,7 @@ function renderRankTable(jsonData,pageNum){
 			}else{
 				itemTrendToRender="<td class=\"table_item_td_trend up\"></td>";
 			}
-			$("<tr></tr>").appendTo($(".label_rankTable")).attr("id","rankTable"+i.toString());
+			$("<tr class=\"tr_selected\"></tr>").appendTo($(".label_rankTable")).attr("id","rankTable"+i.toString());
 			$("<td class=\"table_item_td_rank\"></td>").appendTo($("#rankTable"+i.toString())).text(itemRank);
 			$("<td class=\"table_item_td_name\"></td>").appendTo($("#rankTable"+i.toString())).text(itemUsername);
 			$("<td class=\"table_item_td_precision\"></td>").appendTo($("#rankTable"+i.toString())).text(itemPrecision);
@@ -230,16 +230,16 @@ function paginator(jsonData){
 		$(".label_rank_paginator_prev").click(function(e){
 			if(currentPageNum>1){
 				currentPageNum--;
-				renderRankTable(testData,currentPageNum);
-				renderPaginator(testData,currentPageNum);
+				renderRankTable(jsonData,currentPageNum);
+				renderPaginator(jsonData,currentPageNum);
 			}
 		});
 		
 		$(".label_rank_paginator_next").click(function(e){
 			if(currentPageNum<numOfPages){
 				currentPageNum++;
-				renderRankTable(testData,currentPageNum);
-				renderPaginator(testData,currentPageNum);
+				renderRankTable(jsonData,currentPageNum);
+				renderPaginator(jsonData,currentPageNum);
 			}
 		});
 	});

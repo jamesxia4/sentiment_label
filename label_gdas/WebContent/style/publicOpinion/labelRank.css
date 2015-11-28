@@ -192,6 +192,10 @@ div{
 	border-spacing:0px;
 }
 
+#label_main_content .label_rankTableLeft .tr_selected{
+	background:url("../../image/publicOpinion/big_highlight.png") no-repeat center;
+}
+
 #label_main_content .label_rankTableLeft th{
 	display:inline-block;
 	width:100px;
