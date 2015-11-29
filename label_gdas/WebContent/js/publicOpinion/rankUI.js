@@ -47,16 +47,6 @@ var testDataTask={
 		"13":["13","hzzhangjingjing","0.93","-1"],
 		"14":["14","hzzhangjingjing","0.93","0"],
 		"15":["15","hzzhangjingjing","0.93","1"],
-		"16":["16","hzzhangjingjing","0.93","0"],
-		"17":["17","hzzhangjingjing","0.93","-1"],
-		"18":["18","hzzhangjingjing","0.93","-1"],
-		"19":["19","hzzhangjingjing","0.93","-1"],
-		"20":["20","hzzhangjingjing","0.93","-1"],
-		"21":["21","hzzhangjingjing","0.93","-1"],
-		"22":["22","hzzhangjingjing","0.93","-1"],
-		"23":["23","hzzhangjingjing","0.93","-1"],
-		"24":["24","hzzhangjingjing","0.93","-1"],
-		"25":["25","hzzhangjingjing","0.93","-1"]
 } 
 
 var testDataPrecision={
@@ -66,25 +56,6 @@ var testDataPrecision={
 		"4":["4","hzzhangtj","0.93","1"],
 		"5":["5","hzzhangtj","0.93","0"],
 		"6":["6","hzzhangtj","0.93","-1"],
-		"7":["7","hzzhangtj","0.93","1"],
-		"8":["8","hzzhangtj","0.93","1"],
-		"9":["9","hzzhangtj","0.93","1"],
-		"10":["10","hzzhangtj","0.93","0"],
-		"11":["11","hzzhangtj","0.93","-1"],
-		"12":["12","hzzhangtj","0.93","1"],
-		"13":["13","hzzhangtj","0.93","-1"],
-		"14":["14","hzzhangtj","0.93","0"],
-		"15":["15","hzzhangtj","0.93","1"],
-		"16":["16","hzzhangtj","0.93","0"],
-		"17":["17","hzzhangtj","0.93","-1"],
-		"18":["18","hzzhangtj","0.93","-1"],
-		"19":["19","hzzhangtj","0.93","-1"],
-		"20":["20","hzzhangtj","0.93","-1"],
-		"21":["21","hzzhangtj","0.93","-1"],
-		"22":["22","hzzhangtj","0.93","-1"],
-		"23":["23","hzzhangtj","0.93","-1"],
-		"24":["24","hzzhangtj","0.93","-1"],
-		"25":["25","hzzhangtj","0.93","-1"]
 } 
 
 var testData1={}
@@ -99,33 +70,6 @@ function getUrlParam(name)
 	var r = window.location.search.substr(1).match(reg);  //匹配目标参数
 	if (r!=null) return unescape(r[2]); return null; //返回参数值
 } 
-
-//ajax调用servlet接口获取json并渲染页面
-
-/*function reloadRank(){
-	$(document).ready(function(){
-		var url_to_use="/label_gdas/rank?user_id="+getUrlParam('user_id');
-		$.ajax({
-			type:"GET",
-			url:url_to_use,
-			dataType:"json",
-			success: function(data){
-				renderRank(data);
-				addGadgets(data);
-			}
-		});
-	});
-}*/
-
-/*//渲染页面,添加html骨架
-function renderRank(JsonData){
-	$(document).ready(function(){
-		var dataLength=0;
-		for(var item in JsonData){
-			dataLength++;
-		}
-	});
-}*/
 
 function getPages(jsonData){
 	var dataLength=0;
@@ -172,7 +116,8 @@ function renderRankTable(jsonData,pageNum){
 			}else{
 				itemTrendToRender="<td class=\"table_item_td_trend up\"></td>";
 			}
-			$("<tr class=\"tr_selected\"></tr>").appendTo($(".label_rankTable")).attr("id","rankTable"+i.toString());
+			$("<tr></tr>").appendTo($(".label_rankTable")).attr("id","rankTable"+i.toString());
+			//$("<tr class=\"tr_selected\"></tr>").appendTo($(".label_rankTable")).attr("id","rankTable"+i.toString());
 			$("<td class=\"table_item_td_rank\"></td>").appendTo($("#rankTable"+i.toString())).text(itemRank);
 			$("<td class=\"table_item_td_name\"></td>").appendTo($("#rankTable"+i.toString())).text(itemUsername);
 			$("<td class=\"table_item_td_precision\"></td>").appendTo($("#rankTable"+i.toString())).text(itemPrecision);
@@ -193,7 +138,7 @@ function renderRankTable(jsonData,pageNum){
 			}else{
 				itemTrendToRender="<td class=\"table_item_td_trend up\"></td>";
 			}
-			$("<tr class=\"tr_selected\"></tr>").appendTo($(".label_rankTable")).attr("id","rankTable"+i.toString());
+			$("<tr></tr>").appendTo($(".label_rankTable")).attr("id","rankTable"+i.toString());
 			$("<td class=\"table_item_td_rank\"></td>").appendTo($("#rankTable"+i.toString())).text(itemRank);
 			$("<td class=\"table_item_td_name\"></td>").appendTo($("#rankTable"+i.toString())).text(itemUsername);
 			$("<td class=\"table_item_td_precision\"></td>").appendTo($("#rankTable"+i.toString())).text(itemPrecision);
@@ -208,7 +153,32 @@ function renderPaginator(jsonData,currentPage){
 	$(".label_rank_paginator_current").text(textToOutput);
 }
 
-function rankTypeSelector(){
+
+
+function paginator(jsonData){
+	var numOfPages=getPages(jsonData);
+	$(document).ready(function(){
+		$(".label_rank_paginator_prev").click(function(e){
+			if(currentPageNum>1){
+				console.log(jsonData);
+				currentPageNum--;
+				renderRankTable(jsonData,currentPageNum);
+				renderPaginator(jsonData,currentPageNum);
+			}
+		});
+		
+		$(".label_rank_paginator_next").click(function(e){
+			if(currentPageNum<numOfPages){
+				console.log(jsonData);
+				currentPageNum++;
+				renderRankTable(jsonData,currentPageNum);
+				renderPaginator(jsonData,currentPageNum);
+			}
+		});
+	});
+}
+
+function rankTypeSelector(jsonDataAll,jsonDataTask,jsonDataPrecision){
 	$(document).ready(function(){
 		$(".label_rankTableLeft ul li").hover(function(e){
 			currentPageNum=1;
@@ -219,32 +189,39 @@ function rankTypeSelector(){
 				}
 			});
 			$(this).addClass("selected");
-			console.log(selectId);
+			var dataToFeed;
+			if(selectId==1){
+				console.log("card1");
+				dataToFeed=jsonDataAll;
+				currentPageNum=1;
+				renderRankTable(dataToFeed,currentPageNum);
+				renderPaginator(dataToFeed,currentPageNum);
+				$(".label_rank_paginator_prev").unbind();
+				$(".label_rank_paginator_next").unbind();
+				paginator(dataToFeed);
+			}else if(selectId==2){
+				console.log("card2");
+				dataToFeed=jsonDataTask;
+				currentPageNum=1;
+				renderRankTable(dataToFeed,currentPageNum);
+				renderPaginator(dataToFeed,currentPageNum);
+				$(".label_rank_paginator_prev").unbind();
+				$(".label_rank_paginator_next").unbind();
+				paginator(dataToFeed);
+			}else{
+				console.log("card3");
+				dataToFeed=jsonDataPrecision;
+				currentPageNum=1;
+				renderRankTable(dataToFeed,currentPageNum);
+				renderPaginator(dataToFeed,currentPageNum);
+				$(".label_rank_paginator_prev").unbind();
+				$(".label_rank_paginator_next").unbind();
+				paginator(dataToFeed);
+			}
+			
 		});
 	});
 }
-
-function paginator(jsonData){
-	var numOfPages=getPages(jsonData);
-	$(document).ready(function(){
-		$(".label_rank_paginator_prev").click(function(e){
-			if(currentPageNum>1){
-				currentPageNum--;
-				renderRankTable(jsonData,currentPageNum);
-				renderPaginator(jsonData,currentPageNum);
-			}
-		});
-		
-		$(".label_rank_paginator_next").click(function(e){
-			if(currentPageNum<numOfPages){
-				currentPageNum++;
-				renderRankTable(jsonData,currentPageNum);
-				renderPaginator(jsonData,currentPageNum);
-			}
-		});
-	});
-}
-
 //渲染页面,添加特效
 function addGadgets(){
 	$(document).ready(function(){
@@ -263,16 +240,18 @@ function addGadgets(){
 	});
 }
 
-function listenEvents(jsonData){
-	paginator(jsonData);
-	rankTypeSelector();
+function listenEvents(jsonData,jsonData1,jsonData2){
+	rankTypeSelector(jsonData,jsonData1,jsonData2);
 }
 
 $(document).ready(function(){
 	addGadgets();
 	renderRankTable(testDataAll,currentPageNum);
 	renderPaginator(testDataAll,currentPageNum);
-	listenEvents(testDataAll);
+	$(".label_rank_paginator_prev").unbind();
+	$(".label_rank_paginator_next").unbind();
+	paginator(testDataAll);
+	listenEvents(testDataAll,testDataTask,testDataPrecision);
 });
 
 
