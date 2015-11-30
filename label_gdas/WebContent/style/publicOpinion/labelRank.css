@@ -235,7 +235,7 @@ div{
 	height:30px;
 	font-size:14px;
 	line-height:30px;
-	padding-top:5px;
+	padding-top:5px; 
 }
 
 #label_main_content .label_rankTableLeft .table_item_td_name{
@@ -370,10 +370,10 @@ div{
 }
 
 #label_main_content .rank_td{
-	font-size:14px;
+	font-size:16px;
 	color:#666666;
-	font-family:magento;
-	font-weight:bold;
+	font-family:magneto;
+	font-weight:900;
 	width:30px;
 	margin-right:20px;
 }

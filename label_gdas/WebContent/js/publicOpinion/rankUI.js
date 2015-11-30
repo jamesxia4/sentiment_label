@@ -2,14 +2,10 @@
  * 
  */
 
-//TODO 右侧自动渲染
-//TODO 自动高亮
-//TODO 右侧名次
-//TODO 左侧名次
 
 //测试数据，撸完就删
 var testDataAll={
-		"1":["1","gzwanwei","2000","1"],
+		"1":["1","gzwanwei999","2000","1"],
 		"2":["2","gzwanwei1","2001","0"],
 		"3":["3","gzwanwei2","2002","-1"],
 		"4":["4","gzwanwei3","2003","1"],
@@ -23,7 +19,7 @@ var testDataAll={
 		"12":["12","gzwanwei11","2011","1"],
 		"13":["13","gzwanwei12","2012","-1"],
 		"14":["14","gzwanwei13","2013","0"],
-		"15":["15","gzwanwei14","2014","1"],
+		"15":["15","gzwanwei","2014","1"],
 		"16":["16","gzwanwei15","2015","0"],
 		"17":["17","gzwanwei16","2016","-1"],
 		"18":["18","gzwanwei17","2017","-1"],
@@ -92,10 +88,9 @@ var testDataPrecision={
 		"25":["25","gzwanwei24","0.915","-1"]
 } 
 
-var testData1={}
 
+//全局变量:当前页数
 currentPageNum=1;
-currentRankTab=1;
 
 //用来获取页面url参数
 function getUrlParam(name)
@@ -105,6 +100,7 @@ function getUrlParam(name)
 	if (r!=null) return unescape(r[2]); return null; //返回参数值
 } 
 
+//获取json数据对应表格页数
 function getPages(jsonData){
 	var dataLength=0;
 	for(var item in jsonData){
@@ -113,6 +109,7 @@ function getPages(jsonData){
 	return Math.floor(dataLength/10)+1;
 }
 
+//获取排名表格最后一页剩余条目数
 function getLastPageOffset(jsonData){
 	var dataLength=0;
 	for(var item in jsonData){
@@ -121,6 +118,7 @@ function getLastPageOffset(jsonData){
 	return dataLength-(getPages(jsonData)-1)*10;
 }
 
+//渲染排名表格
 function renderRankTable(jsonData,pageNum){
 	var dataLength=0;
 	for(var item in jsonData){
@@ -138,7 +136,7 @@ function renderRankTable(jsonData,pageNum){
 	if(pageNum==totalPages){
 		var startIndex=(totalPages-1)*10+1;
 		for(var i=startIndex;i<dataLength+1;i++){
-			var itemRank=jsonData[i][0];d
+			var itemRank=jsonData[i][0];
 			var itemUsername=jsonData[i][1];
 			var itemPrecision=jsonData[i][2];
 			var itemTrend=parseInt(jsonData[i][3]);
@@ -180,15 +178,15 @@ function renderRankTable(jsonData,pageNum){
 	}
 }
 
+//渲染分页器页数
 function renderPaginator(jsonData,currentPage){
 	var totalPages=getPages(jsonData);
 	var textToOutput=currentPage.toString()+"/"+totalPages.toString();
 	$(".label_rank_paginator_current").text(textToOutput);
 }
 
-
-
-function paginator(jsonData){
+//分页器事件处理
+function paginator(username,jsonData){
 	var numOfPages=getPages(jsonData);
 	$(document).ready(function(){
 		$(".label_rank_paginator_prev").click(function(e){
@@ -197,6 +195,7 @@ function paginator(jsonData){
 				currentPageNum--;
 				renderRankTable(jsonData,currentPageNum);
 				renderPaginator(jsonData,currentPageNum);
+				changeFontAndHighlightUsername(username);
 			}
 		});
 		
@@ -206,12 +205,15 @@ function paginator(jsonData){
 				currentPageNum++;
 				renderRankTable(jsonData,currentPageNum);
 				renderPaginator(jsonData,currentPageNum);
+				changeFontAndHighlightUsername(username);
 			}
 		});
 	});
+	changeFontAndHighlightUsername(username);
 }
 
-function rankTypeSelector(jsonDataAll,jsonDataTask,jsonDataPrecision){
+//排名选项卡hover事件
+function rankTypeSelector(username,jsonDataAll,jsonDataTask,jsonDataPrecision){
 	$(document).ready(function(){
 		$(".label_rankTableLeft ul li").hover(function(e){
 			currentPageNum=1;
@@ -231,7 +233,7 @@ function rankTypeSelector(jsonDataAll,jsonDataTask,jsonDataPrecision){
 				renderPaginator(dataToFeed,currentPageNum);
 				$(".label_rank_paginator_prev").unbind();
 				$(".label_rank_paginator_next").unbind();
-				paginator(dataToFeed);
+				paginator(username,dataToFeed);
 			}else if(selectId==2){
 				console.log("card2");
 				dataToFeed=jsonDataTask;
@@ -240,7 +242,7 @@ function rankTypeSelector(jsonDataAll,jsonDataTask,jsonDataPrecision){
 				renderPaginator(dataToFeed,currentPageNum);
 				$(".label_rank_paginator_prev").unbind();
 				$(".label_rank_paginator_next").unbind();
-				paginator(dataToFeed);
+				paginator(username,dataToFeed);
 			}else{
 				console.log("card3");
 				dataToFeed=jsonDataPrecision;
@@ -249,14 +251,14 @@ function rankTypeSelector(jsonDataAll,jsonDataTask,jsonDataPrecision){
 				renderPaginator(dataToFeed,currentPageNum);
 				$(".label_rank_paginator_prev").unbind();
 				$(".label_rank_paginator_next").unbind();
-				paginator(dataToFeed);
+				paginator(username,dataToFeed);
 			}
 			
 		});
 	});
 }
 
-//TODO
+//渲染右侧排名表格
 function renderRightTable(username,jsonData,jsonData1,jsonData2){
 	var userScore;
 	var userTask;
@@ -272,7 +274,7 @@ function renderRightTable(username,jsonData,jsonData1,jsonData2){
 	
 	for(key in jsonData){
 		if(jsonData[key][1]==username){
-			userScoreRank=jsonData[key][1];
+			userScoreRank=jsonData[key][0];
 			userScore=jsonData[key][2];
 			userScoreTrend=jsonData[key][3];
 		}
@@ -280,7 +282,7 @@ function renderRightTable(username,jsonData,jsonData1,jsonData2){
 	
 	for(key in jsonData1){
 		if(jsonData1[key][1]==username){
-			userTaskRank=jsonData1[key][1];
+			userTaskRank=jsonData1[key][0];
 			userTask=jsonData1[key][2];
 			userTaskTrend=jsonData1[key][3];
 		}
@@ -288,15 +290,60 @@ function renderRightTable(username,jsonData,jsonData1,jsonData2){
 	
 	for(key in jsonData2){
 		if(jsonData2[key][1]==username){
-			userTaskRank=jsonData2[key][1];
-			userTask=jsonData2[key][2];
-			userTaskTrend=jsonData2[key][3];
+			userPrecisionRank=jsonData2[key][0];
+			userPrecision=jsonData2[key][2];
+			userPrecisionTrend=jsonData2[key][3];
 		}
 	}
 	
+	console.log(userScore,userScoreRank,userScoreTrend);
+	console.log(userTask,userTaskRank,userTaskTrend);
+	console.log(userPrecision,userPrecisionRank,userPrecisionTrend);
+	
+	//填写右侧上表
+	$("#labelMyScore").text(userScore);
+	$("#labelMyTask").text(userTask);
+	$("#labelMyAvgPrecision").text(userPrecision);
+	
+	//填写排名
+	$("#labelRankTdAll").text(userScoreRank);
+/*	$("#labelRankTdAllTrend").text(userScoreTrend);*/
+	$("#labelRankTdTask").text(userTaskRank);
+/*	$("#labelRankTdTaskTrend").text(userTaskTrend);*/
+	$("#labelRankTdPrecision").text(userPrecisionRank);
+/*	$("#labelRankTdPrecisionTrend").text(userTaskTrend);*/
+	
+	//填写排名趋势
+	if(parseInt(userScoreTrend)==-1){
+		$("#labelRankTdAllTrend").addClass("up");
+	}else if(parseInt(userScoreTrend)==0){
+		$("#labelRankTdAllTrend").addClass("unchanged");
+	}else{
+		$("#labelRankTdAllTrend").addClass("down");
+	}
+	
+	if(parseInt(userTaskTrend)==-1){
+		$("#labelRankTdTaskTrend").addClass("up");
+	}else if(parseInt(userTaskTrend)==0){
+		$("#labelRankTdTaskTrend").addClass("unchanged");
+	}else{
+		$("#labelRankTdTaskTrend").addClass("down");
+	}
+	
+	if(parseInt(userPrecisionTrend)==-1){
+		$("#labelRankTdPrecisionTrend").addClass("up");
+	}else if(parseInt(userPrecisionTrend)==0){
+		$("#labelRankTdPrecisionTrend").addClass("unchanged");
+	}else{
+		$("#labelRankTdPrecisionTrend").addClass("down");
+	}
+	
+	//填写表头
+	$(".label_userName").text(username);
+	$(".label_rankBonusText").text(userScore);
 }
 
-//TODO
+//高亮当前用户排名背景色
 function usernameHighlighter(username){
 	$(".label_rankTable").find(".table_item_td_name").each(function(i,e){
 		if($(this).text()==username){
@@ -305,12 +352,73 @@ function usernameHighlighter(username){
 	});
 }
 
+
+//渲染排名数字颜色
 function rankHighlighterLeft(){
-	
+	$(".table_item_td_rank").each(function(i,e){
+		if($(this).text()=="1"){
+			$(this).css("font-family","magneto");
+			$(this).css("font-weight","900");
+			$(this).css("font-size","16px");
+			$(this).css("color","#ffc21d");
+		}else if($(this).text()=="2"){
+			$(this).css("font-family","magneto");
+			$(this).css("font-weight","900");
+			$(this).css("font-size","16px");
+			$(this).css("color","#efe66c");
+		}else if($(this).text()=="3"){
+			$(this).css("font-family","magneto");
+			$(this).css("font-weight","900");
+			$(this).css("font-size","16px");
+			$(this).css("color","#9b7210");
+		}else{
+			$(this).css("font-weight","900");
+			$(this).css("color","#292d3e");
+		}
+	});
 }
 
+//渲染右侧排名数字颜色
 function rankHighlighterRight(){
+	var textScoreAll=$("#labelRankTdAll").text();
+	var textScoreTask=$("#labelRankTdTask").text();
+	var textScorePrecision=$("#labelRankTdPrecision").text();
 	
+	if(textScoreAll=="1"){
+		$("#labelRankTdAll").css("color","#ffc21d");
+	}else if(textScoreAll=="2"){
+		$("#labelRankTdAll").css("color","#efe66c");
+	}else if(textScoreAll=="3"){
+		$("#labelRankTdAll").css("color","#9b7210");
+	}else{
+		$("#labelRankTdAll").css("color","#292d3e");
+	}
+	
+	if(textScoreTask=="1"){
+		$("#labelRankTdTask").css("color","#ffc21d");
+	}else if(textScoreTask=="2"){
+		$("#labelRankTdTask").css("color","#efe66c");
+	}else if(textScoreTask=="3"){
+		$("#labelRankTdTask").css("color","#9b7210");
+	}else{
+		$("#labelRankTdTask").css("color","#292d3e");
+	}
+	
+	if(textScorePrecision=="1"){
+		$("#labelRankTdPrecision").css("color","#ffc21d");
+	}else if(textScorePrecision=="2"){
+		$("#labelRankTdPrecision").css("color","#efe66c");
+	}else if(textScorePrecision=="3"){
+		$("#labelRankTdPrecision").css("color","#9b7210");
+	}else{
+		$("#labelRankTdPrecision").css("color","#292d3e");
+	}
+}
+
+function changeFontAndHighlightUsername(username){
+	usernameHighlighter(username);
+	rankHighlighterLeft();
+	rankHighlighterRight();
 }
 
 //渲染页面,添加特效
@@ -331,18 +439,21 @@ function addGadgets(){
 	});
 }
 
-function listenEvents(jsonData,jsonData1,jsonData2){
-	rankTypeSelector(jsonData,jsonData1,jsonData2);
+//绑定事件
+function listenEvents(username,jsonData,jsonData1,jsonData2){
+	rankTypeSelector(username,jsonData,jsonData1,jsonData2);
 }
 
+//Entry
 $(document).ready(function(){
 	addGadgets();
+	renderRightTable("gzwanwei",testDataAll,testDataTask,testDataPrecision);
 	renderRankTable(testDataAll,currentPageNum);
 	renderPaginator(testDataAll,currentPageNum);
 	$(".label_rank_paginator_prev").unbind();
 	$(".label_rank_paginator_next").unbind();
-	paginator(testDataAll);
-	listenEvents(testDataAll,testDataTask,testDataPrecision);
+	paginator("gzwanwei",testDataAll);
+	listenEvents("gzwanwei",testDataAll,testDataTask,testDataPrecision);
 });
 
 

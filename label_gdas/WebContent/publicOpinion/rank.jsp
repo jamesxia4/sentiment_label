@@ -63,11 +63,11 @@
 						<div class="label_nameRankBox">
 							<div class="label_rankNameWrapper">
 								<div class="label_userLogo"></div>
-								<div class="label_userName">hzzhangjingjing</div>
+								<div class="label_userName"></div>
 							</div>
 							<div class="label_rankBonusWrapper">
 								<div class="label_rankBonusLogo"></div>
-								<div class="label_rankBonusText">5000</div>
+								<div class="label_rankBonusText"></div>
 							</div>
 						</div>
 						<div class="label_myScoreBoard">
@@ -79,9 +79,9 @@
 										<th>平均精准度</th>
 									</tr>
 									<tr>
-										<td id="labelMyScore">2000</td>
-										<td id="labelMyTask">2000</td>
-										<td id="labelMyAvgPrecision">0.86</td>
+										<td id="labelMyScore"></td>
+										<td id="labelMyTask"></td>
+										<td id="labelMyAvgPrecision"></td>
 									</tr>
 								</table>
 							</div>
@@ -91,20 +91,20 @@
 							<table>
 								<tr>
 									<td class="rank_th">总分排名</td>
-									<td class="rank_td">2</td>
-									<td class="rank_trend up"></td>
+									<td class="rank_td" id="labelRankTdAll"></td>
+									<td class="rank_trend" id="labelRankTdAllTrend"></td>
 								</tr>
 								
 								<tr>
 									<td class="rank_th">任务数排名</td>
-									<td class="rank_td">1</td>
-									<td class="rank_trend down"></td>
+									<td class="rank_td" id="labelRankTdTask"></td>
+									<td class="rank_trend" id="labelRankTdTaskTrend"></td>
 								</tr>
 								
 								<tr>
 									<td class="rank_th">精准度排名</td>
-									<td class="rank_td">5</td>
-									<td class="rank_trend unchanged"></td>
+									<td class="rank_td" id="labelRankTdPrecision"></td>
+									<td class="rank_trend" id="labelRankTdPrecisionTrend"></td>
 								</tr>
 							</table>
 						</div>
