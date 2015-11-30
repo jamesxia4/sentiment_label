@@ -39,6 +39,13 @@ public class DataLabelTest extends TestCase{
 	public void testGetMyTaskAllinishedTaskInfo(){
 		DataLabel testLogicLayer=new DataLabel("config/dbConfig.cfg");
 		JSONObject testObject=testLogicLayer.getMyTaskAllFinishedTaskInfo("hzxiayuanfang");
+		//System.out.println(testObject.toString());
+	}
+	
+	@Test 
+	public void testGetLabelCorpus(){
+		DataLabel testLogicLayer=new DataLabel("config/dbConfig.cfg");
+		JSONObject testObject=testLogicLayer.getLabelCorpus(1,1);
 		System.out.println(testObject.toString());
 	}
 }

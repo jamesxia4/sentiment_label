@@ -1,7 +1,7 @@
 package com.netease.ux.dataLabel;
 
 import java.io.*;
-import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,7 +35,19 @@ public class LabelServlet extends HttpServlet {
 	 * 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html;charset=utf-8"); 
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        
+        response.setHeader("Pragma","No-Cache");
+		response.setHeader("Cache-Control","No-Cache");
+		response.setDateHeader("Ewindowsxpires", 0);
+		
+        PrintWriter out= response.getWriter();
+        DataLabel labelHandler=new DataLabel("../workspace/sentiment_label/label_gdas/config/dbConfig.cfg");
+        
+		JSONObject labelObject=labelHandler.getLabelCorpus(Integer.parseInt(request.getParameter("task_id")),Integer.parseInt(request.getParameter("task_group")));
+		out.println(labelObject.toString());
 	}
 
 	/**

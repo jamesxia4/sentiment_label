@@ -422,7 +422,7 @@ public class SQLHelper implements java.io.Serializable{
 		} 
 	}
 	
-	
+	//TODO 我的任务：输出已完成的任务名次
 	/**
 	 * 我的任务：输出已完成的任务名次
 	 */
@@ -458,6 +458,44 @@ public class SQLHelper implements java.io.Serializable{
 	/*********************************************************
 	 * 标注页面
 	 *********************************************************/
+	
+	/**
+	 * 标注页面 载入语料
+	 * @param task_id
+	 * @param task_group
+	 * @return
+	 */
+	public List<String[]> getLabelPageAllCorpus(Integer task_id,Integer task_group){
+/*		System.out.println(task_id.toString()+" "+task_group.toString());*/
+		String sqlStmt="select ods_sentence_id,content,src_content,concept_name,source_name,comment_url from  label_ods_src where task_id=%d and task_group=%d;";
+		sqlStmt=String.format(sqlStmt, task_id,task_group);
+		List<String[]>  labelTaskCorpus=new ArrayList<String[]>();
+		try{
+			connect_db();
+			stmt=conn.createStatement();
+			ResultSet rs=stmt.executeQuery(sqlStmt);
+			while(rs.next()){
+				String[] labelItem=new String[6];
+				labelItem[0]=((Integer)rs.getInt(1)).toString(); //评论id
+				labelItem[1]=rs.getString(2); //评论句子
+				labelItem[2]=rs.getString(3); //评论原文
+				labelItem[3]=rs.getString(4); //评论特征
+				labelItem[4]=rs.getString(5); //评论来源
+				labelItem[5]=rs.getString(6); //评论url
+				labelTaskCorpus.add(labelItem); 
+			}
+			rs.close();
+			close();
+/*			System.out.println(labelTaskCorpus.size());
+			System.out.println(labelTaskCorpus.get(1)[0]+labelTaskCorpus.get(1)[1]);*/
+			return labelTaskCorpus;
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			close();
+			return null;
+		} 
+	}
 	
 	/*********************************************************
 	 * 标注一致性计算及排行榜
