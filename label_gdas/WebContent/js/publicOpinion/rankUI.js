@@ -5,87 +5,87 @@
 
 //测试数据，撸完就删
 var testDataAll={
-		"1":["1","gzwanwei999","2000","1"],
-		"2":["2","gzwanwei1","2001","0"],
-		"3":["3","gzwanwei2","2002","-1"],
-		"4":["4","gzwanwei3","2003","1"],
-		"5":["5","gzwanwei4","2004","0"],
-		"6":["6","gzwanwei5","2005","-1"],
-		"7":["7","gzwanwei6","2006","1"],
-		"8":["8","gzwanwei7","2007","1"],
-		"9":["9","gzwanwei8","2008","1"],
-		"10":["10","gzwanwei9","2009","0"],
-		"11":["11","gzwanwei10","2010","-1"],
-		"12":["12","gzwanwei11","2011","1"],
-		"13":["13","gzwanwei12","2012","-1"],
-		"14":["14","gzwanwei13","2013","0"],
-		"15":["15","gzwanwei","2014","1"],
-		"16":["16","gzwanwei15","2015","0"],
-		"17":["17","gzwanwei16","2016","-1"],
-		"18":["18","gzwanwei17","2017","-1"],
-		"19":["19","gzwanwei18","2018","-1"],
-		"20":["20","gzwanwei19","2019","-1"],
-		"21":["21","gzwanwei20","2020","-1"],
-		"22":["22","gzwanwei21","2021","-1"],
-		"23":["23","gzwanwei22","2022","-1"],
-		"24":["24","gzwanwei23","2023","-1"],
-		"25":["25","gzwanwei24","2024","-1"]
+		"1":["1","hzzhangjingjing999","2000","1"],
+		"2":["2","hzzhangjingjing1","2001","0"],
+		"3":["3","hzzhangjingjing2","2002","-1"],
+		"4":["4","hzzhangjingjing3","2003","1"],
+		"5":["5","hzzhangjingjing4","2004","0"],
+		"6":["6","hzzhangjingjing5","2005","-1"],
+		"7":["7","hzzhangjingjing6","2006","1"],
+		"8":["8","hzzhangjingjing7","2007","1"],
+		"9":["9","hzzhangjingjing8","2008","1"],
+		"10":["10","hzzhangjingjing9","2009","0"],
+		"11":["11","hzzhangjingjing10","2010","-1"],
+		"12":["12","hzzhangjingjing11","2011","1"],
+		"13":["13","hzzhangjingjing12","2012","-1"],
+		"14":["14","hzzhangjingjing13","2013","0"],
+		"15":["15","hzzhangjingjing","2014","1"],
+		"16":["16","hzzhangjingjing15","2015","0"],
+		"17":["17","hzzhangjingjing16","2016","-1"],
+		"18":["18","hzzhangjingjing17","2017","-1"],
+		"19":["19","hzzhangjingjing18","2018","-1"],
+		"20":["20","hzzhangjingjing19","2019","-1"],
+		"21":["21","hzzhangjingjing20","2020","-1"],
+		"22":["22","hzzhangjingjing21","2021","-1"],
+		"23":["23","hzzhangjingjing22","2022","-1"],
+		"24":["24","hzzhangjingjing23","2023","-1"],
+		"25":["25","hzzhangjingjing24","2024","-1"]
 } 
 
 var testDataTask={
-		"1":["1","gzwanwei1","100","1"],
-		"2":["2","gzwanwei2","101","0"],
-		"3":["3","gzwanwei","102","-1"],
-		"4":["4","gzwanwei3","103","1"],
-		"5":["5","gzwanwei4","104","0"],
-		"6":["6","gzwanwei5","105","-1"],
-		"7":["7","gzwanwei6","106","1"],
-		"8":["8","gzwanwei7","107","1"],
-		"9":["9","gzwanwei8","108","1"],
-		"10":["10","gzwanwei9","109","0"],
-		"11":["11","gzwanwei10","110","-1"],
-		"12":["12","gzwanwei11","111","1"],
-		"13":["13","gzwanwei12","112","-1"],
-		"14":["14","gzwanwei13","113","0"],
-		"15":["15","gzwanwei14","114","1"],
-		"16":["16","gzwanwei15","115","0"],
-		"17":["17","gzwanwei16","116","-1"],
-		"18":["18","gzwanwei17","117","-1"],
-		"19":["19","gzwanwei18","118","-1"],
-		"20":["20","gzwanwei19","119","-1"],
-		"21":["21","gzwanwei20","120","-1"],
-		"22":["22","gzwanwei21","121","-1"],
-		"23":["23","gzwanwei22","122","-1"],
-		"24":["24","gzwanwei23","123","-1"],
-		"25":["25","gzwanwei24","124","-1"]
+		"1":["1","hzzhangjingjing1","100","1"],
+		"2":["2","hzzhangjingjing2","101","0"],
+		"3":["3","hzzhangjingjing","102","-1"],
+		"4":["4","hzzhangjingjing3","103","1"],
+		"5":["5","hzzhangjingjing4","104","0"],
+		"6":["6","hzzhangjingjing5","105","-1"],
+		"7":["7","hzzhangjingjing6","106","1"],
+		"8":["8","hzzhangjingjing7","107","1"],
+		"9":["9","hzzhangjingjing8","108","1"],
+		"10":["10","hzzhangjingjing9","109","0"],
+		"11":["11","hzzhangjingjing10","110","-1"],
+		"12":["12","hzzhangjingjing11","111","1"],
+		"13":["13","hzzhangjingjing12","112","-1"],
+		"14":["14","hzzhangjingjing13","113","0"],
+		"15":["15","hzzhangjingjing14","114","1"],
+		"16":["16","hzzhangjingjing15","115","0"],
+		"17":["17","hzzhangjingjing16","116","-1"],
+		"18":["18","hzzhangjingjing17","117","-1"],
+		"19":["19","hzzhangjingjing18","118","-1"],
+		"20":["20","hzzhangjingjing19","119","-1"],
+		"21":["21","hzzhangjingjing20","120","-1"],
+		"22":["22","hzzhangjingjing21","121","-1"],
+		"23":["23","hzzhangjingjing22","122","-1"],
+		"24":["24","hzzhangjingjing23","123","-1"],
+		"25":["25","hzzhangjingjing24","124","-1"]
 } 
 
 var testDataPrecision={
-		"1":["1","gzwanwei1","0.939","1"],
-		"2":["2","gzwanwei","0.938","0"],
-		"3":["3","gzwanwei2","0.937","-1"],
-		"4":["4","gzwanwei3","0.936","1"],
-		"5":["5","gzwanwei4","0.935","0"],
-		"6":["6","gzwanwei5","0.934","-1"],
-		"7":["7","gzwanwei6","0.933","1"],
-		"8":["8","gzwanwei7","0.932","1"],
-		"9":["9","gzwanwei8","0.931","1"],
-		"10":["10","gzwanwei9","0.930","0"],
-		"11":["11","gzwanwei10","0.929","-1"],
-		"12":["12","gzwanwei11","0.928","1"],
-		"13":["13","gzwanwei12","0.927","-1"],
-		"14":["14","gzwanwei13","0.926","0"],
-		"15":["15","gzwanwei14","0.925","1"],
-		"16":["16","gzwanwei15","0.924","0"],
-		"17":["17","gzwanwei16","0.923","-1"],
-		"18":["18","gzwanwei17","0.922","-1"],
-		"19":["19","gzwanwei18","0.921","-1"],
-		"20":["20","gzwanwei19","0.920","-1"],
-		"21":["21","gzwanwei20","0.919","-1"],
-		"22":["22","gzwanwei21","0.918","-1"],
-		"23":["23","gzwanwei22","0.917","-1"],
-		"24":["24","gzwanwei23","0.916","-1"],
-		"25":["25","gzwanwei24","0.915","-1"]
+		"1":["1","hzzhangjingjing1","0.939","1"],
+		"2":["2","hzzhangjingjing","0.938","0"],
+		"3":["3","hzzhangjingjing2","0.937","-1"],
+		"4":["4","hzzhangjingjing3","0.936","1"],
+		"5":["5","hzzhangjingjing4","0.935","0"],
+		"6":["6","hzzhangjingjing5","0.934","-1"],
+		"7":["7","hzzhangjingjing6","0.933","1"],
+		"8":["8","hzzhangjingjing7","0.932","1"],
+		"9":["9","hzzhangjingjing8","0.931","1"],
+		"10":["10","hzzhangjingjing9","0.930","0"],
+		"11":["11","hzzhangjingjing10","0.929","-1"],
+		"12":["12","hzzhangjingjing11","0.928","1"],
+		"13":["13","hzzhangjingjing12","0.927","-1"],
+		"14":["14","hzzhangjingjing13","0.926","0"],
+		"15":["15","hzzhangjingjing14","0.925","1"],
+		"16":["16","hzzhangjingjing15","0.924","0"],
+		"17":["17","hzzhangjingjing16","0.923","-1"],
+		"18":["18","hzzhangjingjing17","0.922","-1"],
+		"19":["19","hzzhangjingjing18","0.921","-1"],
+		"20":["20","hzzhangjingjing19","0.920","-1"],
+		"21":["21","hzzhangjingjing20","0.919","-1"],
+		"22":["22","hzzhangjingjing21","0.918","-1"],
+		"23":["23","hzzhangjingjing22","0.917","-1"],
+		"24":["24","hzzhangjingjing23","0.916","-1"],
+		"25":["25","hzzhangjingjing24","0.915","-1"]
 } 
 
 
@@ -447,13 +447,13 @@ function listenEvents(username,jsonData,jsonData1,jsonData2){
 //Entry
 $(document).ready(function(){
 	addGadgets();
-	renderRightTable("gzwanwei",testDataAll,testDataTask,testDataPrecision);
+	renderRightTable("hzzhangjingjing",testDataAll,testDataTask,testDataPrecision);
 	renderRankTable(testDataAll,currentPageNum);
 	renderPaginator(testDataAll,currentPageNum);
 	$(".label_rank_paginator_prev").unbind();
 	$(".label_rank_paginator_next").unbind();
-	paginator("gzwanwei",testDataAll);
-	listenEvents("gzwanwei",testDataAll,testDataTask,testDataPrecision);
+	paginator("hzzhangjingjing",testDataAll);
+	listenEvents("hzzhangjingjing",testDataAll,testDataTask,testDataPrecision);
 });
 
 

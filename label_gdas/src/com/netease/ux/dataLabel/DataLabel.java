@@ -95,6 +95,7 @@ public class DataLabel implements java.io.Serializable{
 	//任务大厅:领取任务
 	public JSONObject setUserNewTask(Integer task_group,Integer task_id,String user_id){
 		dbHelper.setNewTaskToBeTaken(task_id, task_group, user_id);
+		dbHelper.loadLabelItemsFromSrcIntoRst(task_id, task_group, user_id);
 		return getLobbyAllTasksInfo(task_group,user_id);
 	}
 	

@@ -282,6 +282,29 @@ public class SQLHelper implements java.io.Serializable{
 		} 
 	}
 	
+	//TODO 修改领取流程
+	/**
+	 * 任务大厅，领取任务后续,读取label_ods_src并插入label_ods_rst
+	 * @param task_id
+	 * @param task_group
+	 * @param user_id
+	 */
+	public void loadLabelItemsFromSrcIntoRst(Integer task_id,Integer task_group,String user_id){
+		String sqlStmt="insert into label_ods_rst "
+				+ "select ods_sentence_id,task_id,task_group,0,0,'%s' from label_ods_src "
+				+ "where task_id=%d and task_group=%d;";
+		sqlStmt=String.format(sqlStmt, user_id,task_id,task_group);
+		try{
+			connect_db();
+			stmt=conn.createStatement();
+			stmt.executeUpdate(sqlStmt);
+			close();
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			close();
+		} 
+	}
 	
 	/*********************************************************
 	 * 我的任务
