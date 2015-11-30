@@ -59,7 +59,7 @@ function renderCardText(data,semLabel,card1,card2,card3){
 	for(idx in tempArr){
 		var cardId="#label_card"+(parseInt(idx)+1).toString();
 		var label=semLabel[tempArr[idx]-1];
-		console.log(cardId,label);
+/*		console.log(cardId,label);*/
 		if(label!=0){
 			$(cardId).addClass("Done");
 			$(cardId).find(".label_labelItem_comment").css("width","260px");
@@ -332,7 +332,7 @@ $(document).ready(function(){
 		dataType:"json",
 		success: function(data){
 			testData=data;
-		    console.log(data);
+/*		    console.log(data);*/
 			dataLength=0;
 			for(key in testData){
 				sentimentLabel[dataLength]=parseInt(testData[key][5]);
