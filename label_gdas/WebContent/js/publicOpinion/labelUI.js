@@ -1,7 +1,5 @@
-/**
- * 
- */
-testData={
+/** 测试数据
+ testData={
 		"1":["现在活跃人数确实少了1","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区1","画面","百度贴吧","http://www.baidu.com/","1","1"],
 		"2":["现在活跃人数确实少了2","活跃人数实在太少，夜里星星妖王都没人杀，可把我一个人累坏了，做完不知道哪个小号猛放妖王，让我一个人足足杀了一个半小时，现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区2","画面","百度贴吧","http://www.google.com.sg/","0","0"],
 		"3":["现在活跃人数确实少了现在活跃人数确实少了现在活跃人数确实少了现在活跃人数确实少了现在活跃人数确实少了3","活跃人数实在太少夜里星星妖王都没人杀可把我一个人累坏了做完不知道哪个小号猛放妖王让我一个人足足杀了一个半小时现在活跃人数确实少了，五灵也抢不到想要的碎片，六万擂台白天都没什么人，这样冷清让耐不住寂寞的人怎么办，希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3希望白鹤区早日合区3","画面","百度贴吧","http://www.sina.com.cn/","2","1"],
@@ -25,6 +23,10 @@ for(key in testData){
 indexCard1=1;
 indexCard2=2;
 indexCard3=3;
+ */
+
+//TODO 自动翻页(点到最后一个)
+//TODO 评论文字非激活时只显示一部分v			
 
 //用来获取页面url参数
 function getUrlParam(name){
@@ -186,8 +188,6 @@ function renderExtraInfo(jsonData,idx1,idx2,idx3){
 	})
 } 
 
-
-//TODO 自动翻页(点到最后一个)
 function bindingCardEvents(semLabel,irrLabel){
 	$(".label_labelCard").click(function(e){
 		e.preventDefault();
@@ -317,8 +317,38 @@ function listenEvents(jsonData,semLabel,irrLabel){
 	});
 }
 
+//Entry
 $(document).ready(function(){
+	testData={};
+	sentimentLabel=[];
+	irreleventLabel=[];
+	indexCard1=1;
+	indexCard2=2;
+	indexCard3=3;
+	
+	$.ajax({
+		type:"GET",
+		url:"/label_gdas/label?task_id="+getUrlParam('task_id')+"&task_group="+getUrlParam('task_group')+"&user_id="+getUrlParam('user_id'),
+		dataType:"json",
+		success: function(data){
+			testData=data;
+		    console.log(data);
+			dataLength=0;
+			for(key in testData){
+				sentimentLabel[dataLength]=parseInt(testData[key][5]);
+				irreleventLabel[dataLength]=parseInt(testData[key][6]);
+				++dataLength;
+			}
+			renderPage(testData,sentimentLabel,irreleventLabel,indexCard1,indexCard2,indexCard3);
+			listenEvents(testData,sentimentLabel,irreleventLabel);
+		}
+	});
+});
+
+
+/**Entry
+ $(document).ready(function(){
 	renderPage(testData,sentimentLabel,irreleventLabel,indexCard1,indexCard2,indexCard3);
 	listenEvents(testData,sentimentLabel,irreleventLabel);
-	
 });
+ */

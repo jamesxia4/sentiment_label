@@ -57,6 +57,7 @@ public class MyTaskServlet extends HttpServlet {
         	JSONObject labelObject=labelHandler.getMyTaskAllFinishedTaskInfo(request.getParameter("user_id"));
 			out.println(labelObject.toString());
         }
+        out.close();
 	}
 
 	/**

@@ -467,7 +467,7 @@ public class SQLHelper implements java.io.Serializable{
 	 */
 	public List<String[]> getLabelPageAllCorpus(Integer task_id,Integer task_group){
 /*		System.out.println(task_id.toString()+" "+task_group.toString());*/
-		String sqlStmt="select ods_sentence_id,content,src_content,concept_name,source_name,comment_url from  label_ods_src where task_id=%d and task_group=%d;";
+		String sqlStmt="select ods_sentence_id,content,src_content,concept_name,source_name,comment_url from  label_ods_src where task_id=%d and task_group=%d order by ods_sentence_id;";
 		sqlStmt=String.format(sqlStmt, task_id,task_group);
 		List<String[]>  labelTaskCorpus=new ArrayList<String[]>();
 		try{
@@ -489,6 +489,42 @@ public class SQLHelper implements java.io.Serializable{
 /*			System.out.println(labelTaskCorpus.size());
 			System.out.println(labelTaskCorpus.get(1)[0]+labelTaskCorpus.get(1)[1]);*/
 			return labelTaskCorpus;
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			close();
+			return null;
+		} 
+	}
+	
+	
+	/**
+	 * 标注页面 载入语料标注结果
+	 * @param task_id
+	 * @param task_group
+	 * @return
+	 */
+	public List<String[]> getLabelPageAllCorpusLabel(Integer task_id,Integer task_group,String user_id){
+/*		System.out.println(task_id.toString()+" "+task_group.toString());*/
+		String sqlStmt="select ods_sentence_id,sentiment,is_relevent from label_ods_rst where task_id=%d and task_group=%d and user_id='%s' order by ods_sentence_id;";
+		sqlStmt=String.format(sqlStmt, task_id,task_group,user_id);
+		List<String[]>  labelTaskCorpusLabel=new ArrayList<String[]>();
+		try{
+			connect_db();
+			stmt=conn.createStatement();
+			ResultSet rs=stmt.executeQuery(sqlStmt);
+			while(rs.next()){
+				String[] labelItem=new String[3];
+				labelItem[0]=((Integer)rs.getInt(1)).toString(); //评论id
+				labelItem[1]=((Integer)rs.getInt(2)).toString();  //评论情感
+				labelItem[2]=((Integer)rs.getInt(3)).toString();  //评论与特征是否相关
+				labelTaskCorpusLabel.add(labelItem); 
+			}
+			rs.close();
+			close();
+/*			System.out.println(labelTaskCorpus.size());
+			System.out.println(labelTaskCorpus.get(1)[0]+labelTaskCorpus.get(1)[1]);*/
+			return labelTaskCorpusLabel;
 		}catch(SQLException e){
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();

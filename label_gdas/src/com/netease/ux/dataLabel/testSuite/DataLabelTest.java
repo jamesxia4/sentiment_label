@@ -45,7 +45,7 @@ public class DataLabelTest extends TestCase{
 	@Test 
 	public void testGetLabelCorpus(){
 		DataLabel testLogicLayer=new DataLabel("config/dbConfig.cfg");
-		JSONObject testObject=testLogicLayer.getLabelCorpus(1,1);
+		JSONObject testObject=testLogicLayer.getLabelCorpus(1,1,"gzwanwei");
 		System.out.println(testObject.toString());
 	}
 }

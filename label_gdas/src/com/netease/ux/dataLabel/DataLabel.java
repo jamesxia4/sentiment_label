@@ -152,20 +152,22 @@ public class DataLabel implements java.io.Serializable{
 		return JSONObject.fromObject(myFinishedTaskInfo);
 	}
 	
-	public JSONObject getLabelCorpus(Integer task_id,Integer task_group){
+	public JSONObject getLabelCorpus(Integer task_id,Integer task_group,String user_id){
 		HashMap<String,String[]> labelCorpus=new LinkedHashMap<String,String[]>();
 		List<String[]> rsCorpus=dbHelper.getLabelPageAllCorpus(task_id,task_group);
+		List<String[]> rsCorpusLabel=dbHelper.getLabelPageAllCorpusLabel(task_id,task_group,user_id);
 		
 		for(int i=0;i<rsCorpus.size();i++){
-			String[] label_corpus_item=new String[6];
+			String[] label_corpus_item=new String[7];
 			
 			String item_id=rsCorpus.get(i)[0];
-			label_corpus_item[0]=rsCorpus.get(i)[0];	//评论id
-			label_corpus_item[1]=rsCorpus.get(i)[1];	//评论句子
-			label_corpus_item[2]=rsCorpus.get(i)[2];	//评论原文
-			label_corpus_item[3]=rsCorpus.get(i)[3];  //评论特征
-			label_corpus_item[4]=rsCorpus.get(i)[4];  //评论来源
-			label_corpus_item[5]=rsCorpus.get(i)[5];  //评论url
+			label_corpus_item[0]=rsCorpus.get(i)[1];	//评论句子
+			label_corpus_item[1]=rsCorpus.get(i)[2];	//评论原文
+			label_corpus_item[2]=rsCorpus.get(i)[3];	//评论特征
+			label_corpus_item[3]=rsCorpus.get(i)[4];  //评论来源
+			label_corpus_item[4]=rsCorpus.get(i)[5];  //评论url
+			label_corpus_item[5]=rsCorpusLabel.get(i)[1];   //评论情感
+			label_corpus_item[6]=rsCorpusLabel.get(i)[2];   //评论是否相关
 			
 			labelCorpus.put(item_id, label_corpus_item);
 		}
