@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-11-30 13:27:26
+-- Generation Time: 2015-12-01 13:23:52
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -41,8 +41,8 @@ CREATE TABLE IF NOT EXISTS `label_ods_rst` (
 --
 
 INSERT INTO `label_ods_rst` (`ods_sentence_id`, `task_id`, `task_group`, `sentiment`, `is_relevent`, `user_id`) VALUES
-(1, 1, 1, 0, 0, 'gzwanwei'),
-(2, 1, 1, 0, 0, 'gzwanwei'),
+(1, 1, 1, 1, 0, 'gzwanwei'),
+(2, 1, 1, 1, 0, 'gzwanwei'),
 (3, 1, 1, 0, 0, 'gzwanwei'),
 (4, 1, 1, 0, 0, 'gzwanwei'),
 (5, 1, 1, 0, 0, 'gzwanwei'),
@@ -140,7 +140,7 @@ INSERT INTO `label_ods_rst` (`ods_sentence_id`, `task_id`, `task_group`, `sentim
 (97, 1, 1, 0, 0, 'gzwanwei'),
 (98, 1, 1, 0, 0, 'gzwanwei'),
 (99, 1, 1, 0, 0, 'gzwanwei'),
-(100, 1, 1, 0, 0, 'gzwanwei');
+(100, 1, 1, 3, 1, 'gzwanwei');
 
 -- --------------------------------------------------------
 
@@ -313,7 +313,7 @@ INSERT INTO `label_task` (`task_id`, `task_group`, `start_time`, `end_time`, `ta
 
 CREATE TABLE IF NOT EXISTS `label_user` (
   `user_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `total_labeled` bigint(11) NOT NULL,
+  `score` bigint(11) NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -321,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `label_user` (
 -- 转存表中的数据 `label_user`
 --
 
-INSERT INTO `label_user` (`user_id`, `total_labeled`) VALUES
+INSERT INTO `label_user` (`user_id`, `score`) VALUES
 ('gzwanwei', 0),
 ('hzjiangdapeng', 100),
 ('hzmazewu', 406),
@@ -350,16 +350,16 @@ CREATE TABLE IF NOT EXISTS `label_user_task` (
 --
 
 INSERT INTO `label_user_task` (`task_id`, `user_id`, `task_group`, `kappa`, `num_effective`, `progress`, `is_finished`) VALUES
-(1, 'gzwanwei', 1, 0, 0, 0, 0),
+(1, 'gzwanwei', 1, 0.3, 0, 100, 1),
 (1, 'hzxiayuanfang', 1, 0, 0, 0, 0),
-(1, 'hzzhangtengji', 1, 0, 0, 0, 0),
-(2, 'gzwanwei', 1, 0.8, 0, 0, 1),
+(1, 'hzzhangtengji', 1, 0.7, 0, 50, 1),
+(2, 'gzwanwei', 1, 0.8, 0, 50, 1),
 (2, 'hzxiayuanfang', 1, 0, 0, 0, 0),
-(3, 'gzwanwei', 1, 0.7, 0, 0, 1),
+(3, 'gzwanwei', 1, 0.7, 0, 5, 1),
 (3, 'hzxiayuanfang', 1, 0, 0, 0, 0),
-(4, 'gzwanwei', 1, 0.6, 0, 0, 1),
-(4, 'hzxiayuanfang', 1, 0.7, 0, 0, 1),
-(5, 'gzwanwei', 1, 0.5, 0, 0, 1),
+(4, 'gzwanwei', 1, 0.6, 0, 5, 1),
+(4, 'hzxiayuanfang', 1, 0.7, 0, 100, 1),
+(5, 'gzwanwei', 1, 0.5, 0, 5, 1),
 (5, 'hzxiayuanfang', 1, 0, 0, 0, 0),
 (10, 'hzxiayuanfang', 1, 0, 0, 0, 0);
 
