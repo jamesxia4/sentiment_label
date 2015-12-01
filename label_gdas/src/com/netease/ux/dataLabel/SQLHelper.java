@@ -617,7 +617,27 @@ public class SQLHelper implements java.io.Serializable{
 	public List<String[]> getAllScoreRankList(Integer task_group){
 		String sqlStmt="select user_id,sum(progress*kappa) from label_user_task where task_group=%d and is_finished=1 group by user_id order by sum(progress*kappa) desc;";
 		sqlStmt=String.format(sqlStmt, task_group);
-		
+		List<String[]>  allScoreRankList=new ArrayList<String[]>();
+		try{
+			connect_db();
+			stmt=conn.createStatement();
+			ResultSet rs=stmt.executeQuery(sqlStmt);
+			while(rs.next()){
+				String[] rankItem=new String[3];
+				rankItem[0]=((Integer)rs.getRow()).toString(); //排名编号
+				rankItem[1]=rs.getString(1);  //用户名
+				rankItem[2]=((Integer)Math.round(rs.getFloat(2))).toString();  //总分
+				allScoreRankList.add(rankItem); 
+			}
+			rs.close();
+			close();
+			return allScoreRankList;
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			close();
+			return null;
+		} 
 	}
 	
 	/**
@@ -625,9 +645,30 @@ public class SQLHelper implements java.io.Serializable{
 	 * @param task_group
 	 * @return
 	 */
-	public List<String[]> getAllScoreRankList(Integer task_group){
+	public List<String[]> getAllTaskRankList(Integer task_group){
 		String sqlStmt="select user_id,count(*) from label_user_task where task_group=%d and is_finished=1 group by user_id order by count(*) desc;";
 		sqlStmt=String.format(sqlStmt, task_group);
+		List<String[]>  allTaskRankList=new ArrayList<String[]>();
+		try{
+			connect_db();
+			stmt=conn.createStatement();
+			ResultSet rs=stmt.executeQuery(sqlStmt);
+			while(rs.next()){
+				String[] rankItem=new String[3];
+				rankItem[0]=((Integer)rs.getRow()).toString(); //排名编号
+				rankItem[1]=rs.getString(1);  //用户名
+				rankItem[2]=((Integer)rs.getInt(2)).toString();  //总任务数
+				allTaskRankList.add(rankItem); 
+			}
+			rs.close();
+			close();
+			return allTaskRankList;
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			close();
+			return null;
+		} 
 	}
 	
 	/**
@@ -635,9 +676,30 @@ public class SQLHelper implements java.io.Serializable{
 	 * @param task_group
 	 * @return
 	 */
-	public List<String[]> getAllScoreRankList(Integer task_group){
+	public List<String[]> getAllPrecisionRankList(Integer task_group){
 		String sqlStmt="select user_id,avg(kappa) from label_user_task where task_group=%d and is_finished=1 group by user_id order by count(*) desc;";
 		sqlStmt=String.format(sqlStmt, task_group);
+		List<String[]>  allPrecisionRankList=new ArrayList<String[]>();
+		try{
+			connect_db();
+			stmt=conn.createStatement();
+			ResultSet rs=stmt.executeQuery(sqlStmt);
+			while(rs.next()){
+				String[] rankItem=new String[3];
+				rankItem[0]=((Integer)rs.getRow()).toString(); //排名编号
+				rankItem[1]=rs.getString(1);  //用户名
+				rankItem[2]=((Float)rs.getFloat(2)).toString();  //精准度
+				allPrecisionRankList.add(rankItem); 
+			}
+			rs.close();
+			close();
+			return allPrecisionRankList;
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			close();
+			return null;
+		} 
 	}
 	
 /*	*//**
