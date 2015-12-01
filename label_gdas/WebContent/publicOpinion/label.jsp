@@ -22,7 +22,8 @@
 				<div class="label_label_header_spliter"></div>
 				<div class="label_label_headerAndSubmit">
 					<div class="label_label_smallHeader">2015第一期 玩家评论情感倾向任务 001</div>
-					<div class="label_label_sumbit">提交</div>
+					<div class="label_label_submit" id="btn_save">保存</div>
+					<div class="label_label_submit" id="btn_submit">提交</div>
 				</div>
 				<div class="label_progressBarWrapper">
 					<div class="label_label_progressBar">

@@ -50,6 +50,7 @@ public class LobbyServlet extends HttpServlet {
         Integer task_group_from_url=Integer.parseInt(request.getParameter("task_group"));
 		JSONObject labelObject=labelHandler.getLobbyAllTasksInfo(task_group_from_url,request.getParameter("user_id"));
 		out.println(labelObject.toString());
+		out.flush();
 		out.close();
     }
 

@@ -191,7 +191,7 @@ function renderExtraInfo(jsonData,idx1,idx2,idx3){
 function bindingCardEvents(semLabel,irrLabel){
 	$(".label_labelCard").click(function(e){
 		e.preventDefault();
-		console.log(semLabel,irrLabel);
+/*		console.log(semLabel,irrLabel);*/
 		if(!$(this).hasClass("Doing")){
 			renderProgressBar(parseInt($(this).attr("dataid")));
 			$(this).removeClass("ToDo").removeClass("Done").addClass("Doing");
@@ -313,6 +313,46 @@ function listenEvents(jsonData,semLabel,irrLabel){
 				$("input[name='semSelect']:checked").prop('checked',false);
 				$(".semCheck").prop('checked',false);
 			}
+		});
+		
+		//点击保存时进行暂存
+		$("#btn_save").click(function(e){
+			$.post(
+				"/label_gdas/label?",
+				{
+					task_id:getUrlParam('task_group'),
+					task_group:getUrlParam('task_group'),
+					user_id:getUrlParam('user_id'),
+					semLabelData:JSON.stringify(semLabel),
+					irrLabelData:JSON.stringify(irrLabel),
+					reqType:"save",
+				},
+				function(data,status){
+					console.log(data);
+				    alert(data);
+				}
+			);
+		});
+		
+		//点击提交时进行提交
+		$("#btn_submit").click(function(e){
+			$.post(
+				"/label_gdas/label?",
+				{
+					task_id:getUrlParam('task_group'),
+					task_group:getUrlParam('task_group'),
+					user_id:getUrlParam('user_id'),
+					semLabelData:JSON.stringify(semLabel),
+					irrLabelData:JSON.stringify(irrLabel),
+					reqType:"submit",
+				},
+				function(data,status){
+					console.log(data);
+				    alert(data);
+				    $(".label_label_submit").removeClass("label_label_submit").addClass("label_label_submit_disable");
+				    $(".label_label_submit_disable").unbind();
+				}
+			);
 		});
 	});
 }

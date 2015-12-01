@@ -105,7 +105,7 @@ div{
 	display:inline-block;
 }
 
-#label_main_content .label_label_sumbit{
+#label_main_content .label_label_submit{
     line-height:26px;
     height: 26px;
     border-radius: 20px;
@@ -118,9 +118,26 @@ div{
     display: inline-block;
     float: right;
     vertical-align: top;
+    margin-left:10px;
 }
 
-#label_main_content .label_label_sumbit:hover{
+#label_main_content .label_label_submit_disable{
+    line-height:26px;
+    height: 26px;
+    border-radius: 20px;
+    color: #666666;
+    background-color: #61A1A1;
+    text-align: center;
+    font-size: 14px;
+    padding-left:21px;
+    padding-right:21px;
+    display: inline-block;
+    float: right;
+    vertical-align: top;
+    margin-left:10px;
+}
+
+#label_main_content .label_label_submit:hover{
     line-height:24px;
     height: 24px;
     border-radius: 20px;
@@ -136,7 +153,7 @@ div{
     vertical-align: top;
 }
 
-#label_main_content .label_label_sumbit:active{
+#label_main_content .label_label_submit:active{
     line-height:24px;
     height: 24px;
     border-radius: 20px;

@@ -152,6 +152,7 @@ public class DataLabel implements java.io.Serializable{
 		return JSONObject.fromObject(myFinishedTaskInfo);
 	}
 	
+	//标注页:获取标注条目信息
 	public JSONObject getLabelCorpus(Integer task_id,Integer task_group,String user_id){
 		HashMap<String,String[]> labelCorpus=new LinkedHashMap<String,String[]>();
 		List<String[]> rsCorpus=dbHelper.getLabelPageAllCorpus(task_id,task_group);
@@ -175,5 +176,34 @@ public class DataLabel implements java.io.Serializable{
 		System.out.println(corpus);
 		System.out.println("pause");*/
 		return JSONObject.fromObject(labelCorpus);
+	}
+	
+	//标注页:暂存标注结果
+	public void saveLabelData(Integer task_id,Integer task_group,String user_id,JSONArray jsonSemData,JSONArray jsonIrrData){
+		Integer unfinishedCount=0;
+		int[] semDataVal=new int[100];
+		int[] irrDataVal=new int[100];
+		for(int i=0;i<jsonSemData.size();i++){
+			semDataVal[i]=(int)jsonSemData.get(i);
+			if(semDataVal[i]!=0){
+				++unfinishedCount;
+			}
+			irrDataVal[i]=(int)jsonIrrData.get(i);
+		}
+		dbHelper.saveLabelData(task_id, task_group, user_id, semDataVal, irrDataVal);
+		dbHelper.setTaskProgress(task_id,task_group,user_id,unfinishedCount);
+	}
+	
+	//暂存页:提交标注结果
+	//TODO 暂且设定进度为100吧 
+	public void submitLabelData(Integer task_id,Integer task_group,String user_id,JSONArray jsonSemData,JSONArray jsonIrrData){
+		int[] semDataVal=new int[100];
+		int[] irrDataVal=new int[100];
+		for(int i=0;i<jsonSemData.size();i++){
+			semDataVal[i]=(int)jsonSemData.get(i);
+			irrDataVal[i]=(int)jsonIrrData.get(i);
+		}
+		dbHelper.saveLabelData(task_id, task_group, user_id, semDataVal, irrDataVal);
+		dbHelper.setTaskFinished(task_id,task_group,user_id);
 	}
 }

@@ -533,8 +533,80 @@ public class SQLHelper implements java.io.Serializable{
 		} 
 	}
 	
+	
+	/**
+	 * 标注页面:暂存、提交标注结果
+	 * @param task_id
+	 * @param task_group
+	 * @param user_id
+	 * @param semData
+	 * @param irrData
+	 */
+	public void saveLabelData(Integer task_id,Integer task_group,String user_id,int[] semData,int[] irrData){
+		String sqlStmtTemplate="update label_ods_rst set sentiment=%d ,is_relevent=%d "
+				+ "where ods_sentence_id=%d and task_id=%d and task_group=%d and user_id='%s';";
+		for(int i=0;i<semData.length;i++){
+			String sqlStmt=String.format(sqlStmtTemplate,semData[i],irrData[i],i+1,task_id,task_group,user_id);
+			try{
+				connect_db();
+				stmt=conn.createStatement();
+				stmt.executeUpdate(sqlStmt);
+				close();
+			}catch(SQLException e){
+				logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+				e.printStackTrace();
+				close();
+			} 
+		}
+	}
+	
+	/**
+	 * 标注页面:暂存标注结果后设置任务进度
+	 * @param task_id
+	 * @param task_group
+	 * @param user_id
+	 * @param task_progress
+	 */
+	public void setTaskProgress(Integer task_id,Integer task_group,String user_id,Integer task_progress){
+		String sqlStmt="update label_user_task set progress=%d "
+				+ "where task_id=%d and task_group=%d and user_id='%s';";
+		sqlStmt=String.format(sqlStmt,task_progress,task_id,task_group,user_id);
+		try{
+			connect_db();
+			stmt=conn.createStatement();
+			stmt.executeUpdate(sqlStmt);
+			close();
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			close();
+		} 
+	}
+	
+	/**
+	 * 标注页面:提交标注结果后设置任务为已完成
+	 * @param task_id
+	 * @param task_group 
+	 * @param user_id
+	 */
+	//TODO 暂且设定进度为100吧
+	public void setTaskFinished(Integer task_id,Integer task_group,String user_id){
+		String sqlStmt="update label_user_task set is_finished=1,progress=100 "
+				+ "where task_id=%d and task_group=%d and user_id='%s';";
+		sqlStmt=String.format(sqlStmt,task_id,task_group,user_id);
+		try{
+			connect_db();
+			stmt=conn.createStatement();
+			stmt.executeUpdate(sqlStmt);
+			close();
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			close();
+		} 
+	}
 	/*********************************************************
-	 * 标注一致性计算及排行榜
+	 * 排行榜
 	 *********************************************************/
 	
 /*	*//**
