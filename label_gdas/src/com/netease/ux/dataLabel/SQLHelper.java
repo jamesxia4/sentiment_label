@@ -609,6 +609,37 @@ public class SQLHelper implements java.io.Serializable{
 	 * 排行榜
 	 *********************************************************/
 	
+	/**
+	 * 排行榜:获取当期总分排名(左侧)
+	 * @param task_group
+	 * @return
+	 */
+	public List<String[]> getAllScoreRankList(Integer task_group){
+		String sqlStmt="select user_id,sum(progress*kappa) from label_user_task where task_group=%d and is_finished=1 group by user_id order by sum(progress*kappa) desc;";
+		sqlStmt=String.format(sqlStmt, task_group);
+		
+	}
+	
+	/**
+	 * 排行榜:获取当期任务数排名(左侧)
+	 * @param task_group
+	 * @return
+	 */
+	public List<String[]> getAllScoreRankList(Integer task_group){
+		String sqlStmt="select user_id,count(*) from label_user_task where task_group=%d and is_finished=1 group by user_id order by count(*) desc;";
+		sqlStmt=String.format(sqlStmt, task_group);
+	}
+	
+	/**
+	 * 排行榜:获取当期精准度排名(左侧)
+	 * @param task_group
+	 * @return
+	 */
+	public List<String[]> getAllScoreRankList(Integer task_group){
+		String sqlStmt="select user_id,avg(kappa) from label_user_task where task_group=%d and is_finished=1 group by user_id order by count(*) desc;";
+		sqlStmt=String.format(sqlStmt, task_group);
+	}
+	
 /*	*//**
 	 * 计算一对标注员之间在某个任务上标注结果一致的个数
 	 * select count(*) from 
