@@ -396,6 +396,9 @@ public class SQLHelper implements java.io.Serializable{
 				+ "(select * from label_user_task where user_id='%s' and is_finished=1) as finished_task "
 				+ "on label_task.task_id=finished_task.task_id and label_task.task_group=finished_task.task_group "
 				+ "order by label_task.task_id;";
+		String sqlStmtRankTemplate="select tmpHighKappa.cnt+1 from (select count(*) as cnt from label_user_task "
+				+ "where kappa> (select kappa from label_user_task where task_id=%d and task_group=%d and user_id='%s') "
+				+ "and task_id=%d and task_group=%d) as tmpHighKappa;";
 		sqlStmt=String.format(sqlStmt, user_id);
 		List<String[]> unfinishedTaskInfo=new ArrayList<String[]>();
 		try{
@@ -403,44 +406,19 @@ public class SQLHelper implements java.io.Serializable{
 			stmt=conn.createStatement();
 			ResultSet rs=stmt.executeQuery(sqlStmt);
 			while(rs.next()){
-				String[] taskItem=new String[5];
+				String sqlStmtRank=String.format(sqlStmtRankTemplate,rs.getInt(1),rs.getInt(2),user_id,rs.getInt(1),rs.getInt(2));
+				Statement stmt1=conn.createStatement();
+				ResultSet rsRank=stmt1.executeQuery(sqlStmtRank);
+				rsRank.last();
+				String[] taskItem=new String[6];
 				taskItem[0]=((Integer)rs.getInt(1)).toString();	//任务id
 				taskItem[1]=((Integer)rs.getInt(2)).toString(); //任务组
 				taskItem[2]=rs.getString(3);					//任务名
 				taskItem[3]=((Integer)rs.getInt(4)).toString(); //任务大小
 				taskItem[4]=((Float)rs.getFloat(5)).toString();	//任务精度
-				unfinishedTaskInfo.add(taskItem);
-			}
-			rs.close();
-			close();
-			return unfinishedTaskInfo;
-		}catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			close();
-			return null;
-		} 
-	}
-	
-	//TODO 我的任务：输出已完成的任务名次
-	/**
-	 * 我的任务：输出已完成的任务名次
-	 */
-	public List<String[]> getMyTaskAllFinishedTaskRank(String user_id){
-		String sqlStmt="";
-		sqlStmt=String.format(sqlStmt, user_id);
-		List<String[]> unfinishedTaskInfo=new ArrayList<String[]>();
-		try{
-			connect_db();
-			stmt=conn.createStatement();
-			ResultSet rs=stmt.executeQuery(sqlStmt);
-			while(rs.next()){
-				String[] taskItem=new String[5];
-				taskItem[0]=((Integer)rs.getInt(1)).toString();	//任务id
-				taskItem[1]=((Integer)rs.getInt(2)).toString(); //任务组
-				taskItem[2]=rs.getString(3);					//任务名
-				taskItem[3]=((Integer)rs.getInt(4)).toString(); //任务大小
-				taskItem[4]=((Float)rs.getFloat(5)).toString();	//任务精度
+				taskItem[5]=((Integer)rsRank.getInt(1)).toString(); //任务排名
+				rsRank.close();
+				stmt1.close();
 				unfinishedTaskInfo.add(taskItem);
 			}
 			rs.close();
@@ -609,11 +587,11 @@ public class SQLHelper implements java.io.Serializable{
 	 * 排行榜
 	 *********************************************************/
 	
-	/**
+/*	*//**
 	 * 排行榜:获取当期总分排名(左侧)
 	 * @param task_group
 	 * @return
-	 */
+	 *//*
 	public List<String[]> getAllScoreRankList(Integer task_group){
 		String sqlStmt="select user_id,sum(progress*kappa) from label_user_task where task_group=%d and is_finished=1 group by user_id order by sum(progress*kappa) desc;";
 		sqlStmt=String.format(sqlStmt, task_group);
@@ -640,11 +618,11 @@ public class SQLHelper implements java.io.Serializable{
 		} 
 	}
 	
-	/**
+	*//**
 	 * 排行榜:获取当期任务数排名(左侧)
 	 * @param task_group
 	 * @return
-	 */
+	 *//*
 	public List<String[]> getAllTaskRankList(Integer task_group){
 		String sqlStmt="select user_id,count(*) from label_user_task where task_group=%d and is_finished=1 group by user_id order by count(*) desc;";
 		sqlStmt=String.format(sqlStmt, task_group);
@@ -671,11 +649,11 @@ public class SQLHelper implements java.io.Serializable{
 		} 
 	}
 	
-	/**
+	*//**
 	 * 排行榜:获取当期精准度排名(左侧)
 	 * @param task_group
 	 * @return
-	 */
+	 *//*
 	public List<String[]> getAllPrecisionRankList(Integer task_group){
 		String sqlStmt="select user_id,avg(kappa) from label_user_task where task_group=%d and is_finished=1 group by user_id order by count(*) desc;";
 		sqlStmt=String.format(sqlStmt, task_group);
@@ -700,7 +678,7 @@ public class SQLHelper implements java.io.Serializable{
 			close();
 			return null;
 		} 
-	}
+	}*/
 	
 /*	*//**
 	 * 计算一对标注员之间在某个任务上标注结果一致的个数

@@ -144,7 +144,8 @@ public class DataLabel implements java.io.Serializable{
 			task_info[3]=rsInfo.get(i)[3];  //任务大小
 			task_info[4]=rsInfo.get(i)[4];  //任务精确度
 			//TODO 等排名弄好了再改这里
-			task_info[5]="2";  //任务排名
+			task_info[5]=rsInfo.get(i)[5];  //任务排名
+/*			System.out.println(task_info[5]);*/
 
 			myFinishedTaskInfo.put(str_task_id, task_info);
 		}
