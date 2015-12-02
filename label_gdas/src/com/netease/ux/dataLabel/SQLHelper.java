@@ -484,7 +484,7 @@ public class SQLHelper implements java.io.Serializable{
 	 */
 	public List<String[]> getLabelPageAllCorpusLabel(Integer task_id,Integer task_group,String user_id){
 /*		System.out.println(task_id.toString()+" "+task_group.toString());*/
-		String sqlStmt="select ods_sentence_id,sentiment,is_relevent from label_ods_rst where task_id=%d and task_group=%d and user_id='%s' order by ods_sentence_id;";
+		String sqlStmt="select ods_sentence_id,sentiment,is_irrelevent from label_ods_rst where task_id=%d and task_group=%d and user_id='%s' order by ods_sentence_id;";
 		sqlStmt=String.format(sqlStmt, task_id,task_group,user_id);
 		List<String[]>  labelTaskCorpusLabel=new ArrayList<String[]>();
 		try{
@@ -521,7 +521,7 @@ public class SQLHelper implements java.io.Serializable{
 	 * @param irrData
 	 */
 	public void saveLabelData(Integer task_id,Integer task_group,String user_id,int[] semData,int[] irrData){
-		String sqlStmtTemplate="update label_ods_rst set sentiment=%d ,is_relevent=%d "
+		String sqlStmtTemplate="update label_ods_rst set sentiment=%d ,is_irrelevent=%d "
 				+ "where ods_sentence_id=%d and task_id=%d and task_group=%d and user_id='%s';";
 		for(int i=0;i<semData.length;i++){
 			String sqlStmt=String.format(sqlStmtTemplate,semData[i],irrData[i],i+1,task_id,task_group,user_id);
@@ -567,7 +567,7 @@ public class SQLHelper implements java.io.Serializable{
 	 * @param task_group 
 	 * @param user_id
 	 */
-	//TODO 暂且设定进度为100吧
+	//TODO 暂且设定已完成任务进度为100吧，如果标注的偷懒暂时先不管
 	public void setTaskFinished(Integer task_id,Integer task_group,String user_id){
 		String sqlStmt="update label_user_task set is_finished=1,progress=100 "
 				+ "where task_id=%d and task_group=%d and user_id='%s';";
@@ -582,6 +582,45 @@ public class SQLHelper implements java.io.Serializable{
 			e.printStackTrace();
 			close();
 		} 
+	}
+	
+	//TODO 标注页:提交同时判断领取任务的三个人是否都已完成
+	public boolean isTaskFinishedByAllLabeler(Integer task_id,Integer task_group){
+		String sqlStmt="select count(*) from label_user_task where task_id=%d and task_group=%d and is_finished=1;";
+		sqlStmt=String.format(sqlStmt, task_id,task_group);
+		try{
+			connect_db();
+			stmt=conn.createStatement();
+			ResultSet rs=stmt.executeQuery(sqlStmt);
+			rs.last();
+			if(rs.getInt(1)==3){
+				rs.close();
+				close();
+				return true;
+			}else{
+				rs.close();
+				close();
+				return false;
+			}
+			
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			close();
+			return false;
+		} 
+	}
+	
+	//TODO 标注页:对于三个人都已完成的任务 计算给定用户当前任务的标注一致度Kappa
+	//TODO 所以要算三次
+	public Float getKappaOfGivenTaskAndUser(Integer task_id,Integer task_group,String user_id){
+		String sqlStmt="";
+		return (Float)(float)0.0;
+	}
+	
+	//TODO 标注页:更新给定用户给定任务的一致度Kappa
+	public void updateKappaByTaskIdAndUserId(Integer task_id,Integer task_group,String user_id){
+		
 	}
 	/*********************************************************
 	 * 排行榜
@@ -680,6 +719,8 @@ public class SQLHelper implements java.io.Serializable{
 		} 
 	}*/
 	
+	
+	//@depreacted
 /*	*//**
 	 * 计算一对标注员之间在某个任务上标注结果一致的个数
 	 * select count(*) from 
