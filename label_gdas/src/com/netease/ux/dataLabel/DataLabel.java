@@ -206,5 +206,28 @@ public class DataLabel implements java.io.Serializable{
 		}
 		dbHelper.saveLabelData(task_id, task_group, user_id, semDataVal, irrDataVal);
 		dbHelper.setTaskFinished(task_id,task_group,user_id);
+		
+		//如果三个人都提交，计算Kappa，更新label_rank表，计算分数变化趋势
+		if(dbHelper.isTaskFinishedByAllLabeler(task_id, task_group)){
+			//计算一致性
+			List<String> userList=dbHelper.getUserIdOfFinishedTask(task_id,task_group);
+			float kappa_u1_u2=dbHelper.getKappaOfGivenTaskAndUser(task_id, task_group, userList.get(0), userList.get(1));
+			float kappa_u1_u3=dbHelper.getKappaOfGivenTaskAndUser(task_id, task_group, userList.get(0), userList.get(2));
+			float kappa_u2_u3=dbHelper.getKappaOfGivenTaskAndUser(task_id, task_group, userList.get(1), userList.get(2));
+			
+			float kappa_u1=(kappa_u1_u2+kappa_u1_u3)/2;
+			float kappa_u2=(kappa_u1_u2+kappa_u2_u3)/2;
+			float kappa_u3=(kappa_u1_u3+kappa_u2_u3)/2;
+			
+			//更新label_user_task里的kappa值
+			dbHelper.updateKappaByTaskIdAndUserId(task_id, task_group, userList.get(0), kappa_u1);
+			dbHelper.updateKappaByTaskIdAndUserId(task_id, task_group, userList.get(1), kappa_u2);
+			dbHelper.updateKappaByTaskIdAndUserId(task_id, task_group, userList.get(2), kappa_u3);
+/*			System.out.println("user1:"+userList.get(0)+"="+kappa_u1);
+			System.out.println("user2:"+userList.get(1)+"="+kappa_u2);
+			System.out.println("user3:"+userList.get(2)+"="+kappa_u3);*/
+			
+			//计算
+		}
 	}
 }

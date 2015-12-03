@@ -7,7 +7,7 @@
 <link href="../style/publicOpinion/labelRank.css" rel="stylesheet">
 <script src="../js/jquery-1.8.3.js"></script>
 <script src="../js/publicOpinion/rankUI.js"></script>
-<title>终于快做完啦(╯‵□′)╯︵┻━┻</title>
+<title>排行榜</title>
 </head>
 <body>
 	<div id="label_main_content">

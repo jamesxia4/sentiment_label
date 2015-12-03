@@ -7,7 +7,7 @@
 <link href="../style/publicOpinion/labelLabel.css" rel="stylesheet">
 <script src="../js/jquery-1.8.3.js"></script>
 <script src="../js/publicOpinion/labelUI.js"></script>
-<title>肚子又饿啦(╯‵□′)╯︵┻━┻</title>
+<title>任务标注</title>
 </head>
 <body>
 	<div id="label_main_content">

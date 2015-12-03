@@ -7,7 +7,7 @@
 <link href="../style/publicOpinion/labelLobby.css" rel="stylesheet">
 <script src="../js/jquery-1.8.3.js"></script>
 <script src="../js/publicOpinion/lobbyUI.js"></script>
-<title>简单粗暴有力量</title>
+<title>任务大厅</title>
 </head>
 <body>
 	<div id="label_main_content">

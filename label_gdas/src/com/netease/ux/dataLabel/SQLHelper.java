@@ -567,7 +567,7 @@ public class SQLHelper implements java.io.Serializable{
 	 * @param task_group 
 	 * @param user_id
 	 */
-	//TODO 暂且设定已完成任务进度为100吧，如果标注的偷懒暂时先不管
+	//TODO 暂且设定已完成任务进度为100吧，如果标注偷懒没标完这种情况暂时先不管
 	public void setTaskFinished(Integer task_id,Integer task_group,String user_id){
 		String sqlStmt="update label_user_task set is_finished=1,progress=100 "
 				+ "where task_id=%d and task_group=%d and user_id='%s';";
@@ -584,7 +584,12 @@ public class SQLHelper implements java.io.Serializable{
 		} 
 	}
 	
-	//TODO 标注页:提交同时判断领取任务的三个人是否都已完成
+	/**
+	 * 标注页:提交同时判断领取任务的三个人是否都已完成
+	 * @param task_id
+	 * @param task_group
+	 * @return
+	 */
 	public boolean isTaskFinishedByAllLabeler(Integer task_id,Integer task_group){
 		String sqlStmt="select count(*) from label_user_task where task_id=%d and task_group=%d and is_finished=1;";
 		sqlStmt=String.format(sqlStmt, task_id,task_group);
@@ -611,28 +616,104 @@ public class SQLHelper implements java.io.Serializable{
 		} 
 	}
 	
-	//TODO 标注页:对于三个人都已完成的任务 计算给定用户当前任务的标注一致度Kappa
-	//TODO 所以要算三次
-	public Float getKappaOfGivenTaskAndUser(Integer task_id,Integer task_group,String user_id){
-		String sqlStmt="";
-		return (Float)(float)0.0;
+	/**
+	 * 标注页:获取已完成任务的参与用户名，辅助后续kappa计算
+	 * @param task_id
+	 * @param task_group
+	 * @return
+	 */
+	public List<String> getUserIdOfFinishedTask(Integer task_id,Integer task_group){
+		String sqlStmt="select user_id from label_user_task where task_id=%d and task_group=%d;";
+		sqlStmt=String.format(sqlStmt,task_id, task_group);
+		List<String> finishedTaskUserId=new ArrayList<String>();
+		try{
+			connect_db();
+			stmt=conn.createStatement();
+			ResultSet rs=stmt.executeQuery(sqlStmt);
+			while(rs.next()){
+				finishedTaskUserId.add(rs.getString(1));
+			}
+			rs.close();
+			close();
+			return finishedTaskUserId;
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			close();
+			return null;
+		}
 	}
 	
-	//TODO 标注页:更新给定用户给定任务的一致度Kappa
-	public void updateKappaByTaskIdAndUserId(Integer task_id,Integer task_group,String user_id){
-		
+	/**
+	 * 标注页:对于三个人都已完成的任务 计算给定用户当前任务的标注一致度Kappa
+	 * @param task_id
+	 * @param task_group
+	 * @param user_id_1
+	 * @param user_id_2
+	 * @return
+	 */
+	public Float getKappaOfGivenTaskAndUser(Integer task_id,Integer task_group,String user_id_1,String user_id_2){
+		String sqlStmt="select count(*) from "
+				+ "(select * from label_ods_rst where task_id=%d and task_group=%d and user_id='%s') as lblAnsUsr1 "
+				+ "inner join "
+				+ "(select * from label_ods_rst where task_id=%d and task_group=%d and user_id='%s') as lblAnsUsr2 "
+				+ "on lblAnsUsr1.ods_sentence_id=lblAnsUsr2.ods_sentence_id and "
+				+ "lblAnsUsr1.sentiment=lblAnsUsr2.sentiment and lblAnsUsr1.is_irrelevent=lblAnsUsr2.is_irrelevent;";
+		sqlStmt=String.format(sqlStmt,task_id,task_group,user_id_1,task_id,task_group,user_id_2);
+		try{
+			connect_db();
+			stmt=conn.createStatement();
+			ResultSet rs=stmt.executeQuery(sqlStmt);
+			rs.last();
+			Integer numOfAgreement=rs.getInt(1);
+			float kappa=(float)numOfAgreement/100;
+			return kappa;
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			close();
+			return null;
+		}
 	}
+	
+	/**
+	 * 标注页:更新给定用户给定任务的一致度Kappa
+	 * @param task_id
+	 * @param task_group
+	 * @param user_id
+	 * @param kappa
+	 */
+	public void updateKappaByTaskIdAndUserId(Integer task_id,Integer task_group,String user_id,Float kappa){
+		String sqlStmt="update label_user_task set kappa=%f where task_id=%d and task_group=%d and user_id='%s';";
+		sqlStmt=String.format(sqlStmt, kappa,task_id,task_group,user_id);
+		try{
+			connect_db();
+			stmt=conn.createStatement();
+			stmt.executeUpdate(sqlStmt);
+			close();
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			close();
+		}
+	}
+	
 	/*********************************************************
 	 * 排行榜
 	 *********************************************************/
 	
-/*	*//**
-	 * 排行榜:获取当期总分排名(左侧)
+	/**
+	 * 排行榜:计算当期总分排名
 	 * @param task_group
 	 * @return
-	 *//*
+	 */
 	public List<String[]> getAllScoreRankList(Integer task_group){
-		String sqlStmt="select user_id,sum(progress*kappa) from label_user_task where task_group=%d and is_finished=1 group by user_id order by sum(progress*kappa) desc;";
+		String sqlStmt="select tblA.uid, COALESCE(tblB.nScore,0) from ("
+				+ "(select user_id as uid from label_user_task group by user_id) as tblA "
+				+ "left join "
+				+ "(select user_id as uid,sum(progress*kappa) as nScore from label_user_task where task_group=%d and is_finished=1 group by user_id order by sum(progress*kappa) desc) as tblB "
+				+ "on tblA.uid=tblB.uid"
+				+ ") order by tblB.nScore desc;";
 		sqlStmt=String.format(sqlStmt, task_group);
 		List<String[]>  allScoreRankList=new ArrayList<String[]>();
 		try{
@@ -657,13 +738,19 @@ public class SQLHelper implements java.io.Serializable{
 		} 
 	}
 	
-	*//**
-	 * 排行榜:获取当期任务数排名(左侧)
+	/**
+	 * 排行榜:计算当期任务数排名
 	 * @param task_group
 	 * @return
-	 *//*
+	 */
 	public List<String[]> getAllTaskRankList(Integer task_group){
-		String sqlStmt="select user_id,count(*) from label_user_task where task_group=%d and is_finished=1 group by user_id order by count(*) desc;";
+		String sqlStmt="select tblA.uid, COALESCE(tblB.nTask,0) from ("
+				+ "(select user_id as uid from label_user_task group by user_id) as tblA "
+				+ "left join "
+				+ "(select user_id as uid,count(*) as nTask from label_user_task "
+				+ "where task_group=%d and is_finished=1 group by user_id order by count(*) desc) as tblB "
+				+ "on tblA.uid=tblB.uid"
+				+ ") order by tblB.nTask desc;";
 		sqlStmt=String.format(sqlStmt, task_group);
 		List<String[]>  allTaskRankList=new ArrayList<String[]>();
 		try{
@@ -688,13 +775,19 @@ public class SQLHelper implements java.io.Serializable{
 		} 
 	}
 	
-	*//**
-	 * 排行榜:获取当期精准度排名(左侧)
+	/**
+	 * 排行榜:计算当期精准度排名
 	 * @param task_group
 	 * @return
-	 *//*
+	 */
 	public List<String[]> getAllPrecisionRankList(Integer task_group){
-		String sqlStmt="select user_id,avg(kappa) from label_user_task where task_group=%d and is_finished=1 group by user_id order by count(*) desc;";
+		String sqlStmt="select tblA.uid, COALESCE(tblB.nPrecision,0) from ("
+				+ "(select user_id as uid from label_user_task group by user_id) as tblA "
+				+ "left join "
+				+ "(select user_id as uid,avg(kappa) as nPrecision from label_user_task "
+				+ "where task_group=%d and is_finished=1 group by user_id order by avg(kappa) desc) as tblB "
+				+ "on tblA.uid=tblB.uid"
+				+ ") order by tblB.nPrecision desc;";
 		sqlStmt=String.format(sqlStmt, task_group);
 		List<String[]>  allPrecisionRankList=new ArrayList<String[]>();
 		try{
@@ -717,58 +810,6 @@ public class SQLHelper implements java.io.Serializable{
 			close();
 			return null;
 		} 
-	}*/
-	
-	
-	//@depreacted
-/*	*//**
-	 * 计算一对标注员之间在某个任务上标注结果一致的个数
-	 * select count(*) from 
-	 * ((select * from label_ods where task_id=%d and user_id = '%s') as task_1_1) 
-	 * inner join 
-	 * ((select * from label_ods where task_id=%d and user_id = '%s') as task_1_2)  
-	 * on task_1_1.sentiment=task_1_2.sentiment and task_1_1.ods_sentence_id=task_1_2.ods_sentence_id;
-	 * @param task_id,user_id_1,user_id_2
-	 * @return ResultSet rs:[count]
-	 *//*
-	public ResultSet getNumberOfAgreementBetweenTwoUserOnTask(Integer task_id, String user_id_1,String user_id_2){
-		String sqlStmt=
-				"select count(*) from "+
-		"((select * from label_ods_rst where task_id=%d and user_id = '%s') as task_1_1) "+
-	    "inner join "+
-		"((select * from label_ods_rst where task_id=%d and user_id = '%s') as task_1_2) "+
-	    "on task_1_1.sentiment=task_1_2.sentiment and task_1_1.ods_sentence_id=task_1_2.ods_sentence_id;";
-		
-		sqlStmt=String.format(sqlStmt,task_id,user_id_1,task_id,user_id_2);
-		try{
-			ResultSet rs=queryExecutor(sqlStmt);
-			return rs;
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return null;
-		}
-	}*/
-	
-	
-/*	*//**
-	 * 更新某个标注员指定任务的一致性参数
-	 * @param task_id, 任务id
-	 * @return rowCount, -1为异常
-	 *//*
-	public int updateKappaByTaskId(Integer task_id, String user_id, Float kappa){
-		String sqlStmt="update label_user_task set kappa=%f where task_id=%d and user_id='%s';";
-		sqlStmt=String.format(sqlStmt, kappa, task_id, user_id);
-		try{
-			int rowCount=updateExecutor(sqlStmt);
-			return rowCount;
-		}
-		catch(SQLException e){
-			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
-			e.printStackTrace();
-			return -1;
-		}
-	}*/
+	}
 
 }

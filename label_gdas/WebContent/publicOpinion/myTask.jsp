@@ -7,7 +7,7 @@
 <link href="../style/publicOpinion/labelMyTask.css" rel="stylesheet">
 <script src="../js/jquery-1.8.3.js"></script>
 <script src="../js/publicOpinion/myTaskUI.js"></script>
-<title>我要徒手拆高达</title>
+<title>我的任务</title>
 </head>
 <body>
 	<div id="label_main_content">
