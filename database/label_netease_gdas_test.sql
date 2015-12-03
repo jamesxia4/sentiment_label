@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-12-02 11:12:15
+-- Generation Time: 2015-12-03 13:38:41
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -533,7 +533,6 @@ CREATE TABLE IF NOT EXISTS `label_user_task` (
   `user_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `task_group` bigint(11) NOT NULL,
   `kappa` float DEFAULT NULL,
-  `num_effective` int(11) DEFAULT NULL,
   `progress` int(11) NOT NULL,
   `is_finished` int(11) DEFAULT NULL,
   PRIMARY KEY (`task_id`,`task_group`,`user_id`)
@@ -543,19 +542,20 @@ CREATE TABLE IF NOT EXISTS `label_user_task` (
 -- 转存表中的数据 `label_user_task`
 --
 
-INSERT INTO `label_user_task` (`task_id`, `user_id`, `task_group`, `kappa`, `num_effective`, `progress`, `is_finished`) VALUES
-(1, 'gzwanwei', 1, 0, 0, 100, 0),
-(1, 'hzxiayuanfang', 1, 0, 0, 100, 0),
-(1, 'hzzhangtengji', 1, 0, 0, 100, 0),
-(2, 'gzwanwei', 1, 0.8, 0, 50, 1),
-(2, 'hzxiayuanfang', 1, 0, 0, 0, 0),
-(3, 'gzwanwei', 1, 0.7, 0, 5, 1),
-(3, 'hzxiayuanfang', 1, 0, 0, 0, 0),
-(4, 'gzwanwei', 1, 0.6, 0, 5, 1),
-(4, 'hzxiayuanfang', 1, 0.7, 0, 100, 1),
-(5, 'gzwanwei', 1, 0.5, 0, 5, 1),
-(5, 'hzxiayuanfang', 1, 0, 0, 0, 0),
-(10, 'hzxiayuanfang', 1, 0, 0, 0, 0);
+INSERT INTO `label_user_task` (`task_id`, `user_id`, `task_group`, `kappa`, `progress`, `is_finished`) VALUES
+(1, 'gzwanwei', 1, 0.29, 100, 1),
+(1, 'hzxiayuanfang', 1, 0.255, 100, 1),
+(1, 'hzzhangtengji', 1, 0.295, 100, 1),
+(2, 'gzwanwei', 1, 0.8, 50, 1),
+(2, 'hzxiayuanfang', 1, 0, 0, 0),
+(3, 'gzwanwei', 1, 0.7, 5, 1),
+(3, 'hzxiayuanfang', 1, 0, 0, 0),
+(4, 'gzwanwei', 1, 0.6, 5, 1),
+(4, 'hzxiayuanfang', 1, 0.7, 100, 1),
+(5, 'gzwanwei', 1, 0.5, 5, 1),
+(5, 'hzxiayuanfang', 1, 0, 0, 0),
+(8, 'hzmazewu', 1, 0, 0, 0),
+(10, 'hzxiayuanfang', 1, 0, 0, 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
