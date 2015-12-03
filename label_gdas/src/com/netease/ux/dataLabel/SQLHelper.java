@@ -811,5 +811,26 @@ public class SQLHelper implements java.io.Serializable{
 			return null;
 		} 
 	}
-
+	
+    /**
+     * 排行榜：更新label_user表
+     * @param user_id
+     * @param score
+     * @param nTask
+     * @param precision
+     */
+	public void updateLabelUserByUserId(String user_id,Integer score,Integer nTask,Float precision){
+		String sqlStmt="update label_user set score=%d and nTask=%d and precision=%f where user_id='%s'";
+		String.format(sqlStmt, score,nTask,precision,user_id);
+		try{
+			connect_db();
+			stmt=conn.createStatement();
+			stmt.executeUpdate(sqlStmt);
+			close();
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			close();
+		}
+	}
 }

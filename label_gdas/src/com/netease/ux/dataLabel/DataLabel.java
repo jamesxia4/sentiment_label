@@ -227,7 +227,49 @@ public class DataLabel implements java.io.Serializable{
 			System.out.println("user2:"+userList.get(1)+"="+kappa_u2);
 			System.out.println("user3:"+userList.get(2)+"="+kappa_u3);*/
 			
-			//计算
+			//计算新的总积分、总任务数、总精度排名
+			List<String[]> rankListScore=dbHelper.getAllScoreRankList(task_group);
+			List<String[]> rankListTask=dbHelper.getAllTaskRankList(task_group);
+			List<String[]> rankListPrecision=dbHelper.getAllPrecisionRankList(task_group);
+			
+			//TODO 把总积分总任务数总进度排名写回label_user
+			
+
 		}
+	}
+	
+	
+	//TODO 定时根据新的总分任务数和总精度与label_rank中每一个user_id的oldrank求差，得出趋势
+	//TODO 定时把趋势写回label_user
+	//TODO 定时用最新的rank更新label_rank
+	
+	//TODO 排行榜显示逻辑
+	/**
+	 * 读取label_user 获得当前总分排名、对应ID、总分、趋势
+	 * @param task_group
+	 * @return
+	 */
+	public JSONObject getRankListScore(Integer task_group){
+		return null;
+	}
+	
+	//TODO 排行榜显示逻辑
+	/**
+	 * 读取label_user 获得当前任务数排名、对应ID、总分、趋势
+	 * @param task_group
+	 * @return
+	 */
+	public JSONObject getRankListTask(Integer task_group){
+		return null;
+	}
+	
+	//TODO 排行榜显示逻辑
+	/**
+	 * 读取label_user 获得当前精准度排名、对应ID、总分、趋势
+	 * @param task_group
+	 * @return
+	 */
+	public JSONObject getRankLisPrecision(Integer task_group){
+		return null;
 	}
 }
