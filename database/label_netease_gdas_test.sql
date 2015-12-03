@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-12-03 13:38:41
+-- Generation Time: 2015-12-03 18:43:03
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -476,14 +476,21 @@ INSERT INTO `label_ods_src` (`ods_sentence_id`, `task_id`, `task_group`, `conten
 
 CREATE TABLE IF NOT EXISTS `label_rank` (
   `user_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `rankScore` bigint(11) NOT NULL,
-  `rankTask` bigint(11) NOT NULL,
-  `rankPrecision` bigint(11) NOT NULL,
-  `trendScore` int(11) NOT NULL,
-  `trendTask` int(11) NOT NULL,
-  `trendPrecision` int(11) NOT NULL,
+  `rankScoreOld` bigint(11) NOT NULL,
+  `rankTaskOld` bigint(11) NOT NULL,
+  `rankPrecisionOld` bigint(11) NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 转存表中的数据 `label_rank`
+--
+
+INSERT INTO `label_rank` (`user_id`, `rankScoreOld`, `rankTaskOld`, `rankPrecisionOld`) VALUES
+('gzwanwei', 50, 50, 50),
+('hzmazewu', 50, 50, 50),
+('hzxiayuanfang', 50, 50, 50),
+('hzzhangtengji', 50, 50, 50);
 
 -- --------------------------------------------------------
 
@@ -521,6 +528,33 @@ INSERT INTO `label_task` (`task_id`, `task_group`, `start_time`, `end_time`, `ta
 (8, 1, '2015-10-13 22:00:00', '2015-11-05 22:00:00', '2015第1期 玩家评论情感倾向任务 008', '炉石传说', '百度贴吧', '2015.10.1~2015.12.1', 100, '情感倾向任务 文字类', '该任务数据来源于“UXData-舆情监控系统”从网上抓取的用户评论。任务目的是标注相关评论语句的情感倾向以及与游戏特征的关系，标注结果将用于评估舆情监控系统中情感分类算法的准确率，以便进行算法迭代和后续通用指数的设计'),
 (9, 1, '2015-10-13 22:00:00', '2015-11-05 22:00:00', '2015第1期 玩家评论情感倾向任务 009', '炉石传说', '百度贴吧', '2015.10.1~2015.12.1', 100, '情感倾向任务 文字类', '该任务数据来源于“UXData-舆情监控系统”从网上抓取的用户评论。任务目的是标注相关评论语句的情感倾向以及与游戏特征的关系，标注结果将用于评估舆情监控系统中情感分类算法的准确率，以便进行算法迭代和后续通用指数的设计'),
 (10, 1, '2015-10-13 22:00:00', '2015-11-05 22:00:00', '2015第1期 玩家评论情感倾向任务 010', '炉石传说', '百度贴吧', '2015.10.1~2015.12.1', 100, '情感倾向任务 文字类', '该任务数据来源于“UXData-舆情监控系统”从网上抓取的用户评论。任务目的是标注相关评论语句的情感倾向以及与游戏特征的关系，标注结果将用于评估舆情监控系统中情感分类算法的准确率，以便进行算法迭代和后续通用指数的设计');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `label_user`
+--
+
+CREATE TABLE IF NOT EXISTS `label_user` (
+  `user_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `score` bigint(11) NOT NULL,
+  `nTask` bigint(11) NOT NULL,
+  `precision` float NOT NULL,
+  `trendScore` int(11) NOT NULL,
+  `trendTask` int(11) NOT NULL,
+  `trendPrecision` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 转存表中的数据 `label_user`
+--
+
+INSERT INTO `label_user` (`user_id`, `score`, `nTask`, `precision`, `trendScore`, `trendTask`, `trendPrecision`) VALUES
+('gzwanwei', 0, 0, 0, 0, 0, 0),
+('hzmazewu', 0, 0, 0, 0, 0, 0),
+('hzxiayuanfang', 0, 0, 0, 0, 0, 0),
+('hzzhangtengji', 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
