@@ -46,7 +46,7 @@
 								<tr class="label_rankTableHeader">
 									<th class="table_item_th">排名</th>
 									<th class="table_item_th">名称</th>
-									<th class="table_item_th">精准度</th>
+									<th class="table_item_th" id="label_table_item_th_index"></th>
 									<th>趋势</th>
 								</tr>
 								

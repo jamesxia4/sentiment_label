@@ -223,6 +223,7 @@ public class DataLabel implements java.io.Serializable{
 			dbHelper.updateKappaByTaskIdAndUserId(task_id, task_group, userList.get(0), kappa_u1);
 			dbHelper.updateKappaByTaskIdAndUserId(task_id, task_group, userList.get(1), kappa_u2);
 			dbHelper.updateKappaByTaskIdAndUserId(task_id, task_group, userList.get(2), kappa_u3);
+			
 /*			System.out.println("user1:"+userList.get(0)+"="+kappa_u1);
 			System.out.println("user2:"+userList.get(1)+"="+kappa_u2);
 			System.out.println("user3:"+userList.get(2)+"="+kappa_u3);*/
@@ -232,9 +233,23 @@ public class DataLabel implements java.io.Serializable{
 			List<String[]> rankListTask=dbHelper.getAllTaskRankList(task_group);
 			List<String[]> rankListPrecision=dbHelper.getAllPrecisionRankList(task_group);
 			
-			//TODO 把总积分总任务数总进度排名写回label_user
+			for(int i=0;i<rankListScore.size();i++){
+				String userName=rankListScore.get(i)[1];
+				Integer score=Integer.parseInt(rankListScore.get(i)[2]);
+				dbHelper.updateLabelUserScoreByUserId(userName, score);
+			}
 			
-
+			for(int i=0;i<rankListTask.size();i++){
+				String userName=rankListTask.get(i)[1];
+				Integer nTask=Integer.parseInt(rankListTask.get(i)[2]);
+				dbHelper.updateLabelUserTaskNumByUserId(userName, nTask);
+			}
+			
+			for(int i=0;i<rankListPrecision.size();i++){
+				String userName=rankListPrecision.get(i)[1];
+				Float precision=Float.parseFloat(rankListPrecision.get(i)[2]);
+				dbHelper.updateLabelUserPrecisionByUserId(userName, precision);
+			}
 		}
 	}
 	
@@ -243,7 +258,7 @@ public class DataLabel implements java.io.Serializable{
 	//TODO 定时把趋势写回label_user
 	//TODO 定时用最新的rank更新label_rank
 	
-	//TODO 排行榜显示逻辑
+	//TODO 排行榜显示逻辑:总分
 	/**
 	 * 读取label_user 获得当前总分排名、对应ID、总分、趋势
 	 * @param task_group
@@ -253,7 +268,7 @@ public class DataLabel implements java.io.Serializable{
 		return null;
 	}
 	
-	//TODO 排行榜显示逻辑
+	//TODO 排行榜显示逻辑:任务数
 	/**
 	 * 读取label_user 获得当前任务数排名、对应ID、总分、趋势
 	 * @param task_group
@@ -263,7 +278,7 @@ public class DataLabel implements java.io.Serializable{
 		return null;
 	}
 	
-	//TODO 排行榜显示逻辑
+	//TODO 排行榜显示逻辑:趋势
 	/**
 	 * 读取label_user 获得当前精准度排名、对应ID、总分、趋势
 	 * @param task_group

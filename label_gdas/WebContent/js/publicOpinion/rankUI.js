@@ -185,6 +185,11 @@ function renderPaginator(jsonData,currentPage){
 	$(".label_rank_paginator_current").text(textToOutput);
 }
 
+//调整排名表格抬头
+function renderTableHeader(headerText){
+	$("#label_table_item_th_index").text(headerText);
+}
+
 //分页器事件处理
 function paginator(username,jsonData){
 	var numOfPages=getPages(jsonData);
@@ -229,6 +234,7 @@ function rankTypeSelector(username,jsonDataAll,jsonDataTask,jsonDataPrecision){
 				console.log("card1");
 				dataToFeed=jsonDataAll;
 				currentPageNum=1;
+				renderTableHeader("总分");
 				renderRankTable(dataToFeed,currentPageNum);
 				renderPaginator(dataToFeed,currentPageNum);
 				$(".label_rank_paginator_prev").unbind();
@@ -238,6 +244,7 @@ function rankTypeSelector(username,jsonDataAll,jsonDataTask,jsonDataPrecision){
 				console.log("card2");
 				dataToFeed=jsonDataTask;
 				currentPageNum=1;
+				renderTableHeader("任务数");
 				renderRankTable(dataToFeed,currentPageNum);
 				renderPaginator(dataToFeed,currentPageNum);
 				$(".label_rank_paginator_prev").unbind();
@@ -247,6 +254,7 @@ function rankTypeSelector(username,jsonDataAll,jsonDataTask,jsonDataPrecision){
 				console.log("card3");
 				dataToFeed=jsonDataPrecision;
 				currentPageNum=1;
+				renderTableHeader("精准度");
 				renderRankTable(dataToFeed,currentPageNum);
 				renderPaginator(dataToFeed,currentPageNum);
 				$(".label_rank_paginator_prev").unbind();
@@ -448,6 +456,7 @@ function listenEvents(username,jsonData,jsonData1,jsonData2){
 $(document).ready(function(){
 	addGadgets();
 	renderRightTable("hzzhangjingjing",testDataAll,testDataTask,testDataPrecision);
+	renderTableHeader("总分");
 	renderRankTable(testDataAll,currentPageNum);
 	renderPaginator(testDataAll,currentPageNum);
 	$(".label_rank_paginator_prev").unbind();

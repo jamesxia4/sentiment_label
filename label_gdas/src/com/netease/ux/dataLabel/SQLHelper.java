@@ -813,15 +813,53 @@ public class SQLHelper implements java.io.Serializable{
 	}
 	
     /**
-     * 排行榜：更新label_user表
+     * 排行榜：更新label_user表某个用户的总分
      * @param user_id
      * @param score
-     * @param nTask
-     * @param precision
      */
-	public void updateLabelUserByUserId(String user_id,Integer score,Integer nTask,Float precision){
-		String sqlStmt="update label_user set score=%d and nTask=%d and precision=%f where user_id='%s'";
-		String.format(sqlStmt, score,nTask,precision,user_id);
+	public void updateLabelUserScoreByUserId(String user_id,Integer score){
+		String sqlStmt="update label_user set score=%d where user_id='%s';";
+		sqlStmt=String.format(sqlStmt,score,user_id);
+		try{
+			connect_db();
+			stmt=conn.createStatement();
+			stmt.executeUpdate(sqlStmt);
+			close();
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			close();
+		}
+	}
+	
+    /**
+     * 排行榜：更新label_user表某个用户的任务数
+     * @param user_id
+     * @param score
+     */
+	public void updateLabelUserTaskNumByUserId(String user_id,Integer nTask){
+		String sqlStmt="update label_user set nTask=%d where user_id='%s';";
+		sqlStmt=String.format(sqlStmt,nTask,user_id);
+		try{
+			connect_db();
+			stmt=conn.createStatement();
+			stmt.executeUpdate(sqlStmt);
+			close();
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			close();
+		}
+	}
+	
+    /**
+     * 排行榜：更新label_user表某个用户的标注精准度
+     * @param user_id
+     * @param score
+     */
+	public void updateLabelUserPrecisionByUserId(String user_id,Float precision){
+		String sqlStmt="update label_user set label_precision=%f where user_id='%s';";
+		sqlStmt=String.format(sqlStmt,precision,user_id);
 		try{
 			connect_db();
 			stmt=conn.createStatement();
