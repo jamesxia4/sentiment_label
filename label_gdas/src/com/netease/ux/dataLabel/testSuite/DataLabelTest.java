@@ -46,6 +46,27 @@ public class DataLabelTest extends TestCase{
 	public void testGetLabelCorpus(){
 		DataLabel testLogicLayer=new DataLabel("config/dbConfig.cfg");
 		JSONObject testObject=testLogicLayer.getLabelCorpus(1,1,"gzwanwei");
+/*		System.out.println(testObject.toString());*/
+	}
+	
+	@Test 
+	public void testGetRankScore(){
+		DataLabel testLogicLayer=new DataLabel("config/dbConfig.cfg");
+		JSONObject testObject=testLogicLayer.getRankListScore(1);
+		System.out.println(testObject.toString());
+	}
+	
+	@Test 
+	public void testGetRankTask(){
+		DataLabel testLogicLayer=new DataLabel("config/dbConfig.cfg");
+		JSONObject testObject=testLogicLayer.getRankListTask(1);
+		System.out.println(testObject.toString());
+	}
+	
+	@Test 
+	public void testGetRankPrecision(){
+		DataLabel testLogicLayer=new DataLabel("config/dbConfig.cfg");
+		JSONObject testObject=testLogicLayer.getRankListPrecision(1);
 		System.out.println(testObject.toString());
 	}
 }

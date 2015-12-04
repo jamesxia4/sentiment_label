@@ -817,9 +817,9 @@ public class SQLHelper implements java.io.Serializable{
      * @param user_id
      * @param score
      */
-	public void updateLabelUserScoreByUserId(String user_id,Integer score){
-		String sqlStmt="update label_user set score=%d where user_id='%s';";
-		sqlStmt=String.format(sqlStmt,score,user_id);
+	public void updateLabelUserScoreByUserId(String user_id,Integer task_group,Integer score){
+		String sqlStmt="update label_user set score=%d where user_id='%s' and task_group=%d;";
+		sqlStmt=String.format(sqlStmt,score,user_id,task_group);
 		try{
 			connect_db();
 			stmt=conn.createStatement();
@@ -837,9 +837,9 @@ public class SQLHelper implements java.io.Serializable{
      * @param user_id
      * @param score
      */
-	public void updateLabelUserTaskNumByUserId(String user_id,Integer nTask){
-		String sqlStmt="update label_user set nTask=%d where user_id='%s';";
-		sqlStmt=String.format(sqlStmt,nTask,user_id);
+	public void updateLabelUserTaskNumByUserId(String user_id,Integer task_group,Integer nTask){
+		String sqlStmt="update label_user set nTask=%d where user_id='%s' and task_group=%d;";
+		sqlStmt=String.format(sqlStmt,nTask,user_id,task_group);
 		try{
 			connect_db();
 			stmt=conn.createStatement();
@@ -857,9 +857,9 @@ public class SQLHelper implements java.io.Serializable{
      * @param user_id
      * @param score
      */
-	public void updateLabelUserPrecisionByUserId(String user_id,Float precision){
-		String sqlStmt="update label_user set label_precision=%f where user_id='%s';";
-		sqlStmt=String.format(sqlStmt,precision,user_id);
+	public void updateLabelUserPrecisionByUserId(String user_id,Integer task_group,Float Precision){
+		String sqlStmt="update label_user set label_Precision=%f where user_id='%s' and task_group=%d;";
+		sqlStmt=String.format(sqlStmt,Precision,user_id,task_group);
 		try{
 			connect_db();
 			stmt=conn.createStatement();
@@ -869,6 +869,156 @@ public class SQLHelper implements java.io.Serializable{
 			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
 			e.printStackTrace();
 			close();
+		}
+	}
+	
+	/**
+	 * 
+	 * @param task_group
+	 * @return
+	 */
+	public List<String[]> getScoreTrend(Integer task_group){
+		String sqlStmtCurrentRank="select user_id,score from label_user where task_group=%d order by score desc;";
+		String sqlStmtOldScoreRank="select user_id,rankScoreOld from label_rank where task_group=%d and user_id='%s';";
+		sqlStmtCurrentRank=String.format(sqlStmtCurrentRank,task_group);
+		List<String[]> userNameAndScoreTrend=new ArrayList<String[]>();
+		try{
+			connect_db();
+			stmt=conn.createStatement();
+			ResultSet rs=stmt.executeQuery(sqlStmtCurrentRank);
+			while(rs.next()){
+				String[] rankItem=new String[4];
+				int currentRank=rs.getRow();
+				String userName=rs.getString(1);
+				int userScore=rs.getInt(2);
+				rankItem[0]=((Integer)currentRank).toString(); //排名
+				rankItem[1]=userName; //用户名
+				rankItem[2]=((Integer)userScore).toString(); //用户当期总分
+				sqlStmtOldScoreRank=String.format(sqlStmtOldScoreRank, task_group,userName);
+				Statement stmt1=conn.createStatement();
+				ResultSet oldScoreRankRs=stmt1.executeQuery(sqlStmtOldScoreRank);
+				oldScoreRankRs.last();
+				int oldRank=oldScoreRankRs.getInt(2);
+				if(currentRank==oldRank){
+					rankItem[3]="0";
+				}else if(oldRank>currentRank){
+					rankItem[3]="1";
+				}else{
+					rankItem[3]="-1";
+				}
+				userNameAndScoreTrend.add(rankItem);
+				oldScoreRankRs.close();
+				stmt1.close();
+				
+			}
+			rs.close();
+			close();
+			return userNameAndScoreTrend;
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			close();
+			return null;
+		}
+	}
+	
+	/**
+	 * 
+	 * @param task_group
+	 * @return
+	 */
+	public List<String[]> getTaskTrend(Integer task_group){
+		String sqlStmtCurrentRank="select user_id,nTask from label_user where task_group=%d order by nTask desc;";
+		String sqlStmtOldTaskRank="select user_id,rankTaskOld from label_rank where task_group=%d and user_id='%s';";
+		sqlStmtCurrentRank=String.format(sqlStmtCurrentRank,task_group);
+		List<String[]> userNameAndTaskTrend=new ArrayList<String[]>();
+		try{
+			connect_db();
+			stmt=conn.createStatement();
+			ResultSet rs=stmt.executeQuery(sqlStmtCurrentRank);
+			while(rs.next()){
+				String[] rankItem=new String[4];
+				int currentRank=rs.getRow();
+				String userName=rs.getString(1);
+				int userTask=rs.getInt(2);
+				rankItem[0]=((Integer)currentRank).toString(); //排名
+				rankItem[1]=userName; //用户名
+				rankItem[2]=((Integer)userTask).toString(); //用户当期总任务数
+				sqlStmtOldTaskRank=String.format(sqlStmtOldTaskRank, task_group,userName);
+				Statement stmt1=conn.createStatement();
+				ResultSet oldTaskRankRs=stmt1.executeQuery(sqlStmtOldTaskRank);
+				oldTaskRankRs.last();
+				int oldRank=oldTaskRankRs.getInt(2);
+/*				System.out.println("userName:old="+oldRank+" new="+currentRank);*/
+				if(currentRank==oldRank){
+					rankItem[3]="0";
+				}else if(oldRank>currentRank){
+					rankItem[3]="1";
+				}else{
+					rankItem[3]="-1";
+				}
+				userNameAndTaskTrend.add(rankItem);
+				oldTaskRankRs.close();
+				stmt1.close();
+			}
+			rs.close();
+			close();
+			return userNameAndTaskTrend;
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			close();
+			return null;
+		}
+	}
+	
+	/**
+	 * 
+	 * @param task_group
+	 * @return
+	 */
+	public List<String[]> getPrecisionTrend(Integer task_group){
+		String sqlStmtCurrentRank="select user_id,label_precision from label_user where task_group=%d order by label_precision desc;";
+		String sqlStmtOldPrecisionRank="select user_id,rankPrecisionOld from label_rank where task_group=%d and user_id='%s';";
+		sqlStmtCurrentRank=String.format(sqlStmtCurrentRank,task_group);
+		List<String[]> userNameAndPrecisionTrend=new ArrayList<String[]>();
+		try{
+			connect_db();
+			stmt=conn.createStatement();
+
+			ResultSet rs=stmt.executeQuery(sqlStmtCurrentRank);
+			while(rs.next()){
+				String[] rankItem=new String[4];
+				int currentRank=rs.getRow();
+				String userName=rs.getString(1);
+				float userPrecision=rs.getFloat(2);
+				rankItem[0]=((Integer)currentRank).toString(); //排名
+				rankItem[1]=userName; //用户名
+				rankItem[2]=((Float)userPrecision).toString(); //用户当期精度
+				sqlStmtOldPrecisionRank=String.format(sqlStmtOldPrecisionRank, task_group,userName);
+				Statement stmt1=conn.createStatement();
+				ResultSet oldPrecisionRankRs=stmt1.executeQuery(sqlStmtOldPrecisionRank);
+				oldPrecisionRankRs.last();
+				int oldRank=oldPrecisionRankRs.getInt(2);
+				if(currentRank==oldRank){
+					rankItem[3]="0";
+				}else if(oldRank>currentRank){
+					rankItem[3]="1";
+				}else{
+					rankItem[3]="-1";
+				}
+				userNameAndPrecisionTrend.add(rankItem);
+				oldPrecisionRankRs.close();
+				stmt1.close();
+			}
+			rs.close();
+			close();
+			return userNameAndPrecisionTrend;
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			close();
+			return null;
 		}
 	}
 }

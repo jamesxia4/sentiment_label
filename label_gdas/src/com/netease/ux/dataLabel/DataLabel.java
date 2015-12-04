@@ -28,7 +28,7 @@ public class DataLabel implements java.io.Serializable{
 	}
 	
 	//任务大厅:显示所有任务
-	//TODO 与期数联调
+	//TODO 与期数联动
 	public JSONObject getLobbyAllTasksInfo(Integer task_group,String user_id){
 		//用了LinkedHashMap就解决了Json无序的问题啦.
 		HashMap<String,String[]> taskIdAndInfo=new LinkedHashMap<String,String[]>();
@@ -236,19 +236,19 @@ public class DataLabel implements java.io.Serializable{
 			for(int i=0;i<rankListScore.size();i++){
 				String userName=rankListScore.get(i)[1];
 				Integer score=Integer.parseInt(rankListScore.get(i)[2]);
-				dbHelper.updateLabelUserScoreByUserId(userName, score);
+				dbHelper.updateLabelUserScoreByUserId(userName,task_group,score);
 			}
 			
 			for(int i=0;i<rankListTask.size();i++){
 				String userName=rankListTask.get(i)[1];
 				Integer nTask=Integer.parseInt(rankListTask.get(i)[2]);
-				dbHelper.updateLabelUserTaskNumByUserId(userName, nTask);
+				dbHelper.updateLabelUserTaskNumByUserId(userName,task_group,nTask);
 			}
 			
 			for(int i=0;i<rankListPrecision.size();i++){
 				String userName=rankListPrecision.get(i)[1];
 				Float precision=Float.parseFloat(rankListPrecision.get(i)[2]);
-				dbHelper.updateLabelUserPrecisionByUserId(userName, precision);
+				dbHelper.updateLabelUserPrecisionByUserId(userName,task_group,precision);
 			}
 		}
 	}
@@ -265,7 +265,14 @@ public class DataLabel implements java.io.Serializable{
 	 * @return
 	 */
 	public JSONObject getRankListScore(Integer task_group){
-		return null;
+		HashMap<String,String[]> scoreList=new LinkedHashMap<String,String[]>();
+		List<String[]> rawScoreList=dbHelper.getScoreTrend(task_group);
+		for(int i=0;i<rawScoreList.size();i++){
+			String scoreId=rawScoreList.get(i)[0];
+			String[] scoreDataItem=rawScoreList.get(i);
+			scoreList.put(scoreId, scoreDataItem);
+		}
+		return JSONObject.fromObject(scoreList);
 	}
 	
 	//TODO 排行榜显示逻辑:任务数
@@ -275,16 +282,30 @@ public class DataLabel implements java.io.Serializable{
 	 * @return
 	 */
 	public JSONObject getRankListTask(Integer task_group){
-		return null;
+		HashMap<String,String[]> scoreList=new LinkedHashMap<String,String[]>();
+		List<String[]> rawScoreList=dbHelper.getTaskTrend(task_group);
+		for(int i=0;i<rawScoreList.size();i++){
+			String scoreId=rawScoreList.get(i)[0];
+			String[] scoreDataItem=rawScoreList.get(i);
+			scoreList.put(scoreId, scoreDataItem);
+		}
+		return JSONObject.fromObject(scoreList);
 	}
 	
-	//TODO 排行榜显示逻辑:趋势
+	//TODO 排行榜显示逻辑:精度
 	/**
 	 * 读取label_user 获得当前精准度排名、对应ID、总分、趋势
 	 * @param task_group
 	 * @return
 	 */
-	public JSONObject getRankLisPrecision(Integer task_group){
-		return null;
+	public JSONObject getRankListPrecision(Integer task_group){
+		HashMap<String,String[]> scoreList=new LinkedHashMap<String,String[]>();
+		List<String[]> rawScoreList=dbHelper.getPrecisionTrend(task_group);
+		for(int i=0;i<rawScoreList.size();i++){
+			String scoreId=rawScoreList.get(i)[0];
+			String[] scoreDataItem=rawScoreList.get(i);
+			scoreList.put(scoreId, scoreDataItem);
+		}
+		return JSONObject.fromObject(scoreList);
 	}
 }
