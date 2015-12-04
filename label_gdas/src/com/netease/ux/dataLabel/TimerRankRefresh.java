@@ -3,6 +3,8 @@
  */
 package com.netease.ux.dataLabel;
 
+import com.netease.ux.dataLabel.*;
+
 import java.util.Date;
 import java.util.TimerTask;
 import java.util.Collection;

@@ -5,6 +5,7 @@
  */
 package com.netease.ux.dataLabel;
 
+import com.netease.ux.dataLabel.*;
 import com.netease.ux.dataLabel.Config;
 
 import java.io.*;
