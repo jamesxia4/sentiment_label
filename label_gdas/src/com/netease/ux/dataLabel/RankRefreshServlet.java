@@ -1,21 +1,17 @@
 package com.netease.ux.dataLabel;
 
-import java.io.*;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.io.PrintWriter;
+import java.io.IOException;
 import java.util.Timer;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 
 
