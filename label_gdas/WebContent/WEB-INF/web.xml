@@ -43,6 +43,7 @@
   </servlet-mapping>
   
   <listener>
-　　<listener-class>com.netease.ux.dataLabel.RankRefreshServlet</listener-class>
-　</listener>
+    <listener-class>com.netease.ux.dataLabel.RankRefreshServlet</listener-class>
+  </listener>
+
 </web-app>
