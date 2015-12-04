@@ -254,12 +254,11 @@ public class DataLabel implements java.io.Serializable{
 	}
 	
 	
-	//TODO 定时根据新的总分任务数和总精度与label_rank中每一个user_id的oldrank求差，得出趋势
 	//TODO 定时把趋势写回label_user
 	//TODO 定时用最新的rank更新label_rank
 	
-	//TODO 排行榜显示逻辑:总分
 	/**
+	 * 排行榜显示逻辑:总分
 	 * 读取label_user 获得当前总分排名、对应ID、总分、趋势
 	 * @param task_group
 	 * @return
@@ -275,8 +274,8 @@ public class DataLabel implements java.io.Serializable{
 		return JSONObject.fromObject(scoreList);
 	}
 	
-	//TODO 排行榜显示逻辑:任务数
 	/**
+	 * 排行榜显示逻辑:任务数
 	 * 读取label_user 获得当前任务数排名、对应ID、总分、趋势
 	 * @param task_group
 	 * @return
@@ -292,8 +291,8 @@ public class DataLabel implements java.io.Serializable{
 		return JSONObject.fromObject(scoreList);
 	}
 	
-	//TODO 排行榜显示逻辑:精度
 	/**
+	 * 排行榜显示逻辑:精度
 	 * 读取label_user 获得当前精准度排名、对应ID、总分、趋势
 	 * @param task_group
 	 * @return
@@ -308,4 +307,5 @@ public class DataLabel implements java.io.Serializable{
 		}
 		return JSONObject.fromObject(scoreList);
 	}
+	
 }

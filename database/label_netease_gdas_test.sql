@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-12-03 18:43:03
+-- Generation Time: 2015-12-04 09:54:05
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -476,21 +476,22 @@ INSERT INTO `label_ods_src` (`ods_sentence_id`, `task_id`, `task_group`, `conten
 
 CREATE TABLE IF NOT EXISTS `label_rank` (
   `user_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `task_group` bigint(11) NOT NULL,
   `rankScoreOld` bigint(11) NOT NULL,
   `rankTaskOld` bigint(11) NOT NULL,
   `rankPrecisionOld` bigint(11) NOT NULL,
-  PRIMARY KEY (`user_id`)
+  PRIMARY KEY (`user_id`,`task_group`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- 转存表中的数据 `label_rank`
 --
 
-INSERT INTO `label_rank` (`user_id`, `rankScoreOld`, `rankTaskOld`, `rankPrecisionOld`) VALUES
-('gzwanwei', 50, 50, 50),
-('hzmazewu', 50, 50, 50),
-('hzxiayuanfang', 50, 50, 50),
-('hzzhangtengji', 50, 50, 50);
+INSERT INTO `label_rank` (`user_id`, `task_group`, `rankScoreOld`, `rankTaskOld`, `rankPrecisionOld`) VALUES
+('gzwanwei', 1, 50, 50, 50),
+('hzmazewu', 1, 50, 50, 50),
+('hzxiayuanfang', 1, 50, 50, 50),
+('hzzhangtengji', 1, 50, 50, 50);
 
 -- --------------------------------------------------------
 
@@ -537,24 +538,25 @@ INSERT INTO `label_task` (`task_id`, `task_group`, `start_time`, `end_time`, `ta
 
 CREATE TABLE IF NOT EXISTS `label_user` (
   `user_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `task_group` bigint(11) NOT NULL,
   `score` bigint(11) NOT NULL,
   `nTask` bigint(11) NOT NULL,
-  `precision` float NOT NULL,
+  `label_precision` float NOT NULL,
   `trendScore` int(11) NOT NULL,
   `trendTask` int(11) NOT NULL,
   `trendPrecision` int(11) NOT NULL,
-  PRIMARY KEY (`user_id`)
+  PRIMARY KEY (`user_id`,`task_group`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- 转存表中的数据 `label_user`
 --
 
-INSERT INTO `label_user` (`user_id`, `score`, `nTask`, `precision`, `trendScore`, `trendTask`, `trendPrecision`) VALUES
-('gzwanwei', 0, 0, 0, 0, 0, 0),
-('hzmazewu', 0, 0, 0, 0, 0, 0),
-('hzxiayuanfang', 0, 0, 0, 0, 0, 0),
-('hzzhangtengji', 0, 0, 0, 0, 0, 0);
+INSERT INTO `label_user` (`user_id`, `task_group`, `score`, `nTask`, `label_precision`, `trendScore`, `trendTask`, `trendPrecision`) VALUES
+('gzwanwei', 1, 0, 0, 0, 0, 0, 0),
+('hzmazewu', 1, 0, 0, 0, 0, 0, 0),
+('hzxiayuanfang', 1, 0, 0, 0, 0, 0, 0),
+('hzzhangtengji', 1, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -577,9 +579,9 @@ CREATE TABLE IF NOT EXISTS `label_user_task` (
 --
 
 INSERT INTO `label_user_task` (`task_id`, `user_id`, `task_group`, `kappa`, `progress`, `is_finished`) VALUES
-(1, 'gzwanwei', 1, 0.29, 100, 1),
-(1, 'hzxiayuanfang', 1, 0.255, 100, 1),
-(1, 'hzzhangtengji', 1, 0.295, 100, 1),
+(1, 'gzwanwei', 1, 0.29, 100, 0),
+(1, 'hzxiayuanfang', 1, 0.255, 100, 0),
+(1, 'hzzhangtengji', 1, 0.295, 100, 0),
 (2, 'gzwanwei', 1, 0.8, 50, 1),
 (2, 'hzxiayuanfang', 1, 0, 0, 0),
 (3, 'gzwanwei', 1, 0.7, 5, 1),
