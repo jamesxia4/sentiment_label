@@ -34,7 +34,7 @@ public class LabelServlet extends HttpServlet {
 		
         PrintWriter out= response.getWriter();
         DataLabel labelHandler=new DataLabel("../workspace/sentiment_label/label_gdas/config/dbConfig.cfg");
-/*        System.out.println( Integer.parseInt(request.getParameter("task_id")) );
+/*      System.out.println( Integer.parseInt(request.getParameter("task_id")) );
         System.out.println( Integer.parseInt(request.getParameter("task_group")) );
         System.out.println( request.getParameter("user_id") );*/
 		JSONObject labelObject=labelHandler.getLabelCorpus(Integer.parseInt(request.getParameter("task_id")),Integer.parseInt(request.getParameter("task_group")),request.getParameter("user_id"));
