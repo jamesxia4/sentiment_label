@@ -41,4 +41,8 @@
     <servlet-name>LabelRank</servlet-name>
     <url-pattern>/rank</url-pattern>
   </servlet-mapping>
+  
+  <listener>
+　　<listener-class>com.netease.ux.dataLabel.RankRefreshServlet</listener-class>
+　</listener>
 </web-app>
