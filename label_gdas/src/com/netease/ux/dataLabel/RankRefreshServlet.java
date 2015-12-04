@@ -1,7 +1,6 @@
 package com.netease.ux.dataLabel;
 
 import java.io.*;
-import com.netease.ux.dataLabel.*;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
