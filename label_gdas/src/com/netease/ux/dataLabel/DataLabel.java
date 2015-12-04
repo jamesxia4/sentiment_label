@@ -308,4 +308,21 @@ public class DataLabel implements java.io.Serializable{
 		return JSONObject.fromObject(scoreList);
 	}
 	
+	/**
+	 * 排行榜排名数据整合
+	 * @param task_group
+	 * @return
+	 */
+	public JSONArray getRankListAllData(Integer task_group){
+		JSONArray rankData=new JSONArray();
+		JSONObject rankScore=getRankListScore(task_group);
+		JSONObject rankTask=getRankListTask(task_group);
+		JSONObject rankPrecision=getRankListPrecision(task_group);
+		rankData.add(0,rankScore);
+		rankData.add(1,rankTask);
+		rankData.add(2,rankPrecision);
+		
+		return rankData;
+	}
+	
 }

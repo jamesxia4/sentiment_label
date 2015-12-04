@@ -1,10 +1,5 @@
-/**
- * 
- */
-
-
 //测试数据，撸完就删
-var testDataAll={
+/*var testDataAll={
 		"1":["1","hzzhangjingjing999","2000","1"],
 		"2":["2","hzzhangjingjing1","2001","0"],
 		"3":["3","hzzhangjingjing2","2002","-1"],
@@ -90,7 +85,7 @@ var testDataPrecision={
 
 
 //全局变量:当前页数
-currentPageNum=1;
+currentPageNum=1;*/
 
 //用来获取页面url参数
 function getUrlParam(name)
@@ -454,6 +449,38 @@ function listenEvents(username,jsonData,jsonData1,jsonData2){
 
 //Entry
 $(document).ready(function(){
+	
+	testDataAll={};
+	testDataTask={};
+	testDataPrecision={};
+	currentPageNum=1;
+	
+	$.ajax({
+		type:"GET",
+		url:"/label_gdas/rank?task_group="+getUrlParam('task_group')+"&user_id="+getUrlParam('user_id'),
+		dataType:"json",
+		success: function(data){
+			testDataAll=data[0];
+			testDataTask=data[1];
+			testDataPrecision=data[2];
+			console.log(testDataAll);
+			console.log(testDataTask);
+			console.log(testDataPrecision);
+			
+			addGadgets();
+			renderRightTable(getUrlParam('user_id'),testDataAll,testDataTask,testDataPrecision);
+			renderTableHeader("总分");
+			renderRankTable(testDataAll,currentPageNum);
+			renderPaginator(testDataAll,currentPageNum);
+			$(".label_rank_paginator_prev").unbind();
+			$(".label_rank_paginator_next").unbind();
+			paginator(getUrlParam('user_id'),testDataAll);
+			listenEvents(getUrlParam('user_id'),testDataAll,testDataTask,testDataPrecision);
+		}
+	});
+});
+
+/*$(document).ready(function(){
 	addGadgets();
 	renderRightTable("hzzhangjingjing",testDataAll,testDataTask,testDataPrecision);
 	renderTableHeader("总分");
@@ -463,7 +490,7 @@ $(document).ready(function(){
 	$(".label_rank_paginator_next").unbind();
 	paginator("hzzhangjingjing",testDataAll);
 	listenEvents("hzzhangjingjing",testDataAll,testDataTask,testDataPrecision);
-});
+});*/
 
 
 
