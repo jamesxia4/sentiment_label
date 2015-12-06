@@ -307,6 +307,25 @@ public class SQLHelper implements java.io.Serializable{
 		} 
 	}
 	
+	public Integer getNumberOfTaskFinishedByUser(Integer task_group,String user_id){
+		String sqlStmt="select count(*) from label_user_task where task_group=%d and user_id='%s' and is_finished=1;";
+		sqlStmt=String.format(sqlStmt, task_group);
+		try{
+			ResultSet rs=stmt.executeQuery(sqlStmt);
+			Integer finishedCount=0;
+			rs.last();
+			finishedCount=rs.getInt(1);
+			rs.close();
+			close();
+			return finishedCount;
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			close();
+			return null;
+		} 
+	}
+	
 	/*********************************************************
 	 * 我的任务
 	 *********************************************************/

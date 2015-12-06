@@ -53,6 +53,9 @@ public class DataLabel implements java.io.Serializable{
 			//是否已被领取
 			Integer isTakenByUser=dbHelper.getLobbyTaskIsTakenByUser(task_group,task_id,user_id);
 			
+			//已完成任务数
+			Integer cntFinishedByUser=dbHelper.getNumberOfTaskFinishedByUser(task_group,user_id);
+			
 			//未完成任务数<=4可以继续接活
 			if(numUnfinished<=4){
 				if(numTaken<3 && isTakenByUser==0){
