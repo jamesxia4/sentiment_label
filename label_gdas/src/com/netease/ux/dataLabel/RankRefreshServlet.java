@@ -21,7 +21,7 @@ public class RankRefreshServlet implements ServletContextListener {
 	
 	public void contextInitialized(ServletContextEvent arg0) {
 		timer=new Timer(true);
-		timer.schedule(new TimerRankRefresh(),0,1000*20);//延迟0秒，每20秒执行一次TimerRankRefresh()
+		timer.schedule(new TimerRankRefresh(1),0,1000*600);//延迟0秒，每600秒执行一次TimerRankRefresh()
 	}
 	
 	public void contextDestroyed(ServletContextEvent arg0) {

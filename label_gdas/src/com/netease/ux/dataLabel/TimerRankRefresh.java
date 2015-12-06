@@ -21,10 +21,18 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 public class TimerRankRefresh extends TimerTask{
+	public Integer task_group;
+	public DataLabel labelHandler=new DataLabel("../workspace/sentiment_label/label_gdas/config/dbConfig.cfg");
+	
+
+	public TimerRankRefresh(Integer taskGroup){
+		task_group=taskGroup;
+	}
 	@Override
 	public void run(){
 		try {
 			System.out.println(new Date());
+			labelHandler.updateNewRank(task_group);
 		}catch(Exception e){
 			e.printStackTrace();
 		}

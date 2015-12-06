@@ -318,4 +318,21 @@ public class DataLabel implements java.io.Serializable{
 		return rankData;
 	}
 	
+	public void updateNewRank(Integer task_group){
+		List<String[]> newScoreRank=dbHelper.getScoreTrend(task_group);
+		List<String[]> newTaskRank=dbHelper.getTaskTrend(task_group);
+		List<String[]> newPrecisionRank=dbHelper.getPrecisionTrend(task_group);
+		
+		for(int i=0;i<newScoreRank.size();i++){
+/*			System.out.println(newScoreRank.get(i)[1]+Integer.parseInt(newScoreRank.get(i)[0]));*/
+			dbHelper.updateOldRankScore(newScoreRank.get(i)[1], task_group, Integer.parseInt(newScoreRank.get(i)[0]));
+		}
+		for(int i=0;i<newScoreRank.size();i++){
+			dbHelper.updateOldRankTask(newTaskRank.get(i)[1], task_group,  Integer.parseInt(newTaskRank.get(i)[0]));
+		}
+		for(int i=0;i<newScoreRank.size();i++){
+			dbHelper.updateOldRankPrecision(newPrecisionRank.get(i)[1], task_group,  Integer.parseInt(newPrecisionRank.get(i)[0]));
+		}
+	}
+	
 }

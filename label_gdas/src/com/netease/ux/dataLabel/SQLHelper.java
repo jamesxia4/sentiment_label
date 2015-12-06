@@ -880,7 +880,7 @@ public class SQLHelper implements java.io.Serializable{
 	 */
 	public List<String[]> getScoreTrend(Integer task_group){
 		String sqlStmtCurrentRank="select user_id,score from label_user where task_group=%d order by score desc;";
-		String sqlStmtOldScoreRank="select user_id,rankScoreOld from label_rank where task_group=%d and user_id='%s';";
+		
 		sqlStmtCurrentRank=String.format(sqlStmtCurrentRank,task_group);
 		List<String[]> userNameAndScoreTrend=new ArrayList<String[]>();
 		try{
@@ -895,11 +895,14 @@ public class SQLHelper implements java.io.Serializable{
 				rankItem[0]=((Integer)currentRank).toString(); //排名
 				rankItem[1]=userName; //用户名
 				rankItem[2]=((Integer)userScore).toString(); //用户当期总分
+				String sqlStmtOldScoreRank="select user_id,rankScoreOld from label_rank where task_group=%d and user_id='%s';";
 				sqlStmtOldScoreRank=String.format(sqlStmtOldScoreRank, task_group,userName);
+/*				System.out.println(sqlStmtOldScoreRank);*/
 				Statement stmt1=conn.createStatement();
 				ResultSet oldScoreRankRs=stmt1.executeQuery(sqlStmtOldScoreRank);
 				oldScoreRankRs.last();
 				int oldRank=oldScoreRankRs.getInt(2);
+			    System.out.println("userName:old="+oldRank+" new="+currentRank);
 				if(currentRank==oldRank){
 					rankItem[3]="0";
 				}else if(oldRank>currentRank){
@@ -930,7 +933,7 @@ public class SQLHelper implements java.io.Serializable{
 	 */
 	public List<String[]> getTaskTrend(Integer task_group){
 		String sqlStmtCurrentRank="select user_id,nTask from label_user where task_group=%d order by nTask desc;";
-		String sqlStmtOldTaskRank="select user_id,rankTaskOld from label_rank where task_group=%d and user_id='%s';";
+		
 		sqlStmtCurrentRank=String.format(sqlStmtCurrentRank,task_group);
 		List<String[]> userNameAndTaskTrend=new ArrayList<String[]>();
 		try{
@@ -945,6 +948,7 @@ public class SQLHelper implements java.io.Serializable{
 				rankItem[0]=((Integer)currentRank).toString(); //排名
 				rankItem[1]=userName; //用户名
 				rankItem[2]=((Integer)userTask).toString(); //用户当期总任务数
+				String sqlStmtOldTaskRank="select user_id,rankTaskOld from label_rank where task_group=%d and user_id='%s';";
 				sqlStmtOldTaskRank=String.format(sqlStmtOldTaskRank, task_group,userName);
 				Statement stmt1=conn.createStatement();
 				ResultSet oldTaskRankRs=stmt1.executeQuery(sqlStmtOldTaskRank);
@@ -980,7 +984,7 @@ public class SQLHelper implements java.io.Serializable{
 	 */
 	public List<String[]> getPrecisionTrend(Integer task_group){
 		String sqlStmtCurrentRank="select user_id,label_precision from label_user where task_group=%d order by label_precision desc;";
-		String sqlStmtOldPrecisionRank="select user_id,rankPrecisionOld from label_rank where task_group=%d and user_id='%s';";
+		
 		sqlStmtCurrentRank=String.format(sqlStmtCurrentRank,task_group);
 		List<String[]> userNameAndPrecisionTrend=new ArrayList<String[]>();
 		try{
@@ -996,11 +1000,13 @@ public class SQLHelper implements java.io.Serializable{
 				rankItem[0]=((Integer)currentRank).toString(); //排名
 				rankItem[1]=userName; //用户名
 				rankItem[2]=((Float)userPrecision).toString(); //用户当期精度
+				String sqlStmtOldPrecisionRank="select user_id,rankPrecisionOld from label_rank where task_group=%d and user_id='%s';";
 				sqlStmtOldPrecisionRank=String.format(sqlStmtOldPrecisionRank, task_group,userName);
 				Statement stmt1=conn.createStatement();
 				ResultSet oldPrecisionRankRs=stmt1.executeQuery(sqlStmtOldPrecisionRank);
 				oldPrecisionRankRs.last();
 				int oldRank=oldPrecisionRankRs.getInt(2);
+/*				System.out.println(userName+oldRank+currentRank);*/
 				if(currentRank==oldRank){
 					rankItem[3]="0";
 				}else if(oldRank>currentRank){
@@ -1020,6 +1026,51 @@ public class SQLHelper implements java.io.Serializable{
 			e.printStackTrace();
 			close();
 			return null;
+		}
+	}
+	
+	public void updateOldRankScore(String user_id,Integer task_group,Integer new_rank){
+		String sqlStmt="update label_rank set rankScoreOld=%d where user_id='%s' and task_group=%d;";
+		sqlStmt=String.format(sqlStmt,new_rank,user_id,task_group);
+		try{
+			connect_db();
+			stmt=conn.createStatement();
+			stmt.executeUpdate(sqlStmt);
+			close();
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			close();
+		}
+	}
+	
+	public void updateOldRankTask(String user_id,Integer task_group,Integer new_rank){
+		String sqlStmt="update label_rank set rankTaskOld=%d where user_id='%s' and task_group=%d;";
+		sqlStmt=String.format(sqlStmt,new_rank,user_id,task_group);
+		try{
+			connect_db();
+			stmt=conn.createStatement();
+			stmt.executeUpdate(sqlStmt);
+			close();
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			close();
+		}
+	}
+	
+	public void updateOldRankPrecision(String user_id,Integer task_group,Integer new_rank){
+		String sqlStmt="update label_rank set rankPrecisionOld=%d where user_id='%s' and task_group=%d;";
+		sqlStmt=String.format(sqlStmt,new_rank,user_id,task_group);
+		try{
+			connect_db();
+			stmt=conn.createStatement();
+			stmt.executeUpdate(sqlStmt);
+			close();
+		}catch(SQLException e){
+			logger.error("[group:" + this.getClass().getName() + "][message: exception][" + e.toString() +"]");
+			e.printStackTrace();
+			close();
 		}
 	}
 }
