@@ -175,7 +175,7 @@ function renderFinished(JsonData){
 		//添加每项已完成任务的bonus
 		$(".label_finished_right_wrapper").each(function(i,e){
 			var idx=$(this).parents(".label_myTask_finished_item").attr("jsondataid");
-			var bonus=(parseInt(JsonData[idx][3])*parseFloat(JsonData[idx][4])).toString();
+			var bonus=Math.round((parseInt(JsonData[idx][3])*parseFloat(JsonData[idx][4]))).toString();
 			$("<div class=\"label_bonus_wrapper\"></div>").appendTo($(this));
 			$("<div class=\"label_bonus_bonusLogo\"></div>").appendTo($(this).children(".label_bonus_wrapper"));
 			$("<div class=\"label_bonus_bonusText\"></div>").appendTo($(this).children(".label_bonus_wrapper")).text(bonus);
