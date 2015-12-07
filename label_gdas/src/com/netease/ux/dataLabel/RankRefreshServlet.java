@@ -13,8 +13,6 @@ import javax.servlet.ServletContextListener;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import com.netease.ux.dataLabel.*;
-
 
 public class RankRefreshServlet implements ServletContextListener {
 	private Timer timer = null;
