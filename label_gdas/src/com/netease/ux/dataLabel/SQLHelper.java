@@ -921,7 +921,7 @@ public class SQLHelper implements java.io.Serializable{
 				ResultSet oldScoreRankRs=stmt1.executeQuery(sqlStmtOldScoreRank);
 				oldScoreRankRs.last();
 				int oldRank=oldScoreRankRs.getInt(2);
-			    System.out.println("userName:old="+oldRank+" new="+currentRank);
+/*			    System.out.println("userName:old="+oldRank+" new="+currentRank);*/
 				if(currentRank==oldRank){
 					rankItem[3]="0";
 				}else if(oldRank>currentRank){
