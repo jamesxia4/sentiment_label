@@ -6,7 +6,6 @@
 
 package com.netease.ux.dataLabel;
 
-import com.netease.ux.dataLabel.*;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
