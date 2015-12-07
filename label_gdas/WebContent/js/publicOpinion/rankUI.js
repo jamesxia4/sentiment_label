@@ -457,7 +457,8 @@ $(document).ready(function(){
 	
 	$.ajax({
 		type:"GET",
-		url:"/label_gdas/rank?task_group="+getUrlParam('task_group')+"&user_id="+getUrlParam('user_id'),
+/*		url:"/label_gdas/rank?task_group="+getUrlParam('task_group')+"&user_id="+getUrlParam('user_id'),*/
+		url:"/label_gdas/rank?task_group=1"+"&user_id="+getUrlParam('user_id'),
 		dataType:"json",
 		success: function(data){
 			testDataAll=data[0];

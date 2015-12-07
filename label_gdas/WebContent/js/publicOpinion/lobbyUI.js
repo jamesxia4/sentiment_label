@@ -19,7 +19,8 @@ function getUrlParam(name)
 
 function reloadLobby(){
 	$(document).ready(function(){
-		var url_to_use="/label_gdas/lobby?user_id="+getUrlParam('user_id')+"&task_group="+getUrlParam('task_group');
+		var url_to_use="/label_gdas/lobby?user_id="+getUrlParam('user_id')+"&task_group=1";
+		//var url_to_use="/label_gdas/lobby?user_id="+getUrlParam('user_id')+"&task_group=1"+getUrlParam('task_group');
 		$.ajax({
 			type:"GET",
 			url:url_to_use,
@@ -225,10 +226,16 @@ function listenEvents(jsonData){
 		$(".label_userBtn_available").click(function(){
 			var jsonId=$(this).parents(".label_lobby_tasks_item").attr("jsondataid");
 			$.post(
-				"/label_gdas/lobby?",
+				/*"/label_gdas/lobby?",
 				{
 					task_id:jsonId,
 					task_group:getUrlParam('task_group'),
+					user_id:getUrlParam('user_id'),
+				},*/
+				"/label_gdas/lobby?",
+				{
+					task_id:jsonId,
+					task_group:"1",
 					user_id:getUrlParam('user_id'),
 				},
 				function(data,status){
