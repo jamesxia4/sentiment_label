@@ -66,10 +66,14 @@ function renderCardText(data,semLabel,card1,card2,card3){
 			$(cardId).find(".label_labelItem_tick").css("display","inline-block");
 			$(cardId).find(".label_card_comment").removeClass("doing").removeClass("todo").addClass("done");
 			$(cardId).find(".label_card_source").removeClass("doing").removeClass("todo").addClass("done");
+			//New
+			$(cardId).find(".label_labelItem_spliter").children().addClass("done");
 		}else{
 			$(cardId).addClass("ToDo");
 			$(cardId).find(".label_card_comment").removeClass("doing").removeClass("done").addClass("todo");
 			$(cardId).find(".label_card_source").removeClass("doing").removeClass("done").addClass("todo");
+			//New
+			$(cardId).find(".label_labelItem_spliter").children().removeClass("done");
 		}
 	}
 }
@@ -155,6 +159,8 @@ function renderSingleCard(jsonData,idx,semLabel,cardId){
 	$(cardId).find(".label_labelItem_comment").removeAttr("style");
 	$(cardId).find(".label_labelItem_tick").css("display","none");
 	$(cardId).removeClass("ToDo").removeClass("Doing").removeClass("Done");
+	//New
+	$(cardId).find(".label_labelItem_spliter").children().removeClass("done");
 	var label=semLabel[idx-1];
 	if(label!=0){
 		$(cardId).addClass("Done");
@@ -162,6 +168,7 @@ function renderSingleCard(jsonData,idx,semLabel,cardId){
 		$(cardId).find(".label_card_source").addClass("done");
 		$(cardId).find(".label_labelItem_comment").css("width","260px");
 		$(cardId).find(".label_labelItem_tick").css("display","inline-block");
+		$(cardId).find(".label_labelItem_spliter").children().addClass("done");
 	}else{
 		$(cardId).addClass("ToDo");
 		$(cardId).find(".label_card_comment").addClass("todo");
@@ -197,6 +204,8 @@ function bindingCardEvents(semLabel,irrLabel){
 			$(this).removeClass("ToDo").removeClass("Done").addClass("Doing");
 			$(this).find(".label_card_source").removeClass("done").removeClass("todo").addClass("doing");
 			$(this).find(".label_card_comment").removeClass("done").removeClass("todo").addClass("doing");
+			//New
+			$(this).find(".label_labelItem_spliter").children().removeClass("done");
 			$(this).find(".label_labelItem_comment").removeAttr("style");
 			$(this).find(".label_labelItem_tick").css("display","none");
 			$(this).siblings(".label_labelCard").each(function(i,e){
@@ -208,11 +217,14 @@ function bindingCardEvents(semLabel,irrLabel){
 						$(e).find(".label_labelItem_tick").css("display","inline-block");
 						$(e).find(".label_card_source.doing").removeClass("doing").addClass("done");
 						$(e).find(".label_card_comment.doing").removeClass("doing").addClass("done");
+						//New
+						$(e).find(".label_labelItem_spliter").children().addClass("done");
+						
 					}else{
-						$(e).removeClass("Doing");
-						$(e).addClass("ToDo");
+						$(e).removeClass("Doing").addClass("ToDo");
 						$(e).find(".label_card_source.doing").removeClass("doing").addClass("todo");
-						$(e).find(".label_card_comment.doing").removeClass("doing").addClass("todo");;
+						$(e).find(".label_card_comment.doing").removeClass("doing").addClass("todo");
+						$(e).find(".label_labelItem_spliter").children().removeClass("done");
 					}
 				}
 			});

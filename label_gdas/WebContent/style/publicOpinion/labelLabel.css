@@ -383,6 +383,31 @@ div{
 	margin-right:33px;
 }
 
+#label_main_content .label_labelItem_spliter.done{
+	height:15px;
+	width:307px;
+	font-size:12px;
+	color:#292d3e;
+	margin:3px 3px 0px 7px;
+	opacity:0.8;
+}
+
+#label_main_content .label_spliter_hyphen.done{
+	display:inline-block;
+	font-size:12px;
+	line-height:15px;
+	opacity:0.8;	
+}
+
+#label_main_content .label_spliter_text.done{
+	display:inline-block;
+	font-size:10px;
+	line-height:15px;
+	margin-left:33px;
+	margin-right:33px;
+	opacity:0.8;
+}
+
 
 #label_main_content .label_card_source.done{
 	overflow:hidden;
@@ -396,6 +421,7 @@ div{
     padding:0px;
     color:#3d4256;
     line-height:20px;
+    opacity:0.8;
 }
 
 #label_main_content .label_card_comment.done{
@@ -410,6 +436,7 @@ div{
     padding:0px;
     color:#3d4256;
     line-height:40px;
+    opacity:0.8;
 }
 
 #label_main_content .label_labelItem_tick{
